@@ -46,4 +46,9 @@ Pod::Spec.new do |s|
   s.dependency "React-jsi", version
   s.dependency "React-Core/RCTImageHeaders", version
   s.dependency "React-RCTNetwork", version
+  s.dependency 'SDWebImage'
+  s.dependency 'SDWebImageWebPCoder'
+  s.dependency 'SDWebImageAVIFCoder'
+  s.dependency 'libavif/libdav1d'
+  s.dependency 'SDWebImagePhotosPlugin'
 end
