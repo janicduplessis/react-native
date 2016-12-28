@@ -43,4 +43,7 @@ Pod::Spec.new do |s|
   s.dependency "FBReactNativeSpec", version
   s.dependency "React-Core/RCTImageHeaders", version
   s.dependency "React-RCTNetwork", version
+  s.dependency 'SDWebImage'
+  s.dependency 'SDWebImageWebPCoder'
+  s.dependency 'SDWebImagePhotosPlugin'
 end
