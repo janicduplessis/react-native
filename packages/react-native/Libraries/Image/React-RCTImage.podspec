@@ -56,4 +56,10 @@ Pod::Spec.new do |s|
   add_dependency(s, "ReactCommon", :subspec => "turbomodule/core", :additional_framework_paths => ["react/nativemodule/core"])
   add_dependency(s, "React-NativeModulesApple")
 
+  s.dependency 'SDWebImage'
+  s.dependency 'SDWebImageWebPCoder'
+  s.dependency 'SDWebImageAVIFCoder'
+  s.dependency 'libavif/libdav1d'
+  s.dependency 'SDWebImagePhotosPlugin'
+
 end
