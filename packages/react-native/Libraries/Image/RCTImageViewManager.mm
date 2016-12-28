@@ -11,6 +11,10 @@
 
 #import <React/RCTConvert.h>
 #import <React/RCTImageSource.h>
+#import <SDWebImageAVIFCoder/SDImageAVIFCoder.h>
+#import <SDWebImageWebPCoder/SDWebImageWebPCoder.h>
+#import <SDWebImagePhotosPlugin/SDWebImagePhotosPlugin.h>
+#import <SDWebImage/SDWebImage.h>
 
 #import <React/RCTImageLoaderProtocol.h>
 #import <React/RCTImageShadowView.h>
@@ -30,9 +34,24 @@ RCT_EXPORT_MODULE()
   return [[RCTImageView alloc] initWithBridge:self.bridge];
 }
 
+- (void)setBridge:(RCTBridge *)bridge
+{
+  [super setBridge:bridge];
+
+  SDImageAVIFCoder *AVIFCoder = [SDImageAVIFCoder sharedCoder];
+  [SDImageCodersManager.sharedManager addCoder:AVIFCoder];
+  SDImageWebPCoder *webPCoder = [SDImageWebPCoder sharedCoder];
+  [SDImageCodersManager.sharedManager addCoder:webPCoder];
+  // Supports HTTP URL as well as Photos URL globally
+  SDImageLoadersManager.sharedManager.loaders = @[SDWebImageDownloader.sharedDownloader, SDImagePhotosLoader.sharedLoader];
+  // Replace default manager's loader implementation
+  SDWebImageManager.defaultImageLoader = SDImageLoadersManager.sharedManager;
+}
+
 RCT_EXPORT_VIEW_PROPERTY(blurRadius, CGFloat)
 RCT_EXPORT_VIEW_PROPERTY(capInsets, UIEdgeInsets)
 RCT_REMAP_VIEW_PROPERTY(defaultSource, defaultImage, UIImage)
+RCT_EXPORT_VIEW_PROPERTY(fadeDuration, NSInteger)
 RCT_EXPORT_VIEW_PROPERTY(onLoadStart, RCTDirectEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onProgress, RCTDirectEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onError, RCTDirectEventBlock)
