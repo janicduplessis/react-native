@@ -8,11 +8,12 @@
 #import <UIKit/UIKit.h>
 #import <React/RCTView.h>
 #import <React/RCTResizeMode.h>
+#import <SDWebImage/SDWebImage.h>
 
 @class RCTBridge;
 @class RCTImageSource;
 
-@interface RCTImageView : RCTView
+@interface RCTImageView : SDAnimatedImageView
 
 - (instancetype)initWithBridge:(RCTBridge *)bridge NS_DESIGNATED_INITIALIZER;
 

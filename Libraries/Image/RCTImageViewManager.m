@@ -11,6 +11,9 @@
 
 #import <React/RCTConvert.h>
 #import <React/RCTImageSource.h>
+#import <SDWebImageWebPCoder/SDWebImageWebPCoder.h>
+#import <SDWebImagePhotosPlugin/SDWebImagePhotosPlugin.h>
+#import <SDWebImage/SDWebImage.h>
 
 #import "RCTImageLoader.h"
 #import "RCTImageShadowView.h"
@@ -28,6 +31,18 @@ RCT_EXPORT_MODULE()
 - (UIView *)view
 {
   return [[RCTImageView alloc] initWithBridge:self.bridge];
+}
+
+- (void)setBridge:(RCTBridge *)bridge
+{
+  [super setBridge:bridge];
+
+  SDImageWebPCoder *webPCoder = [SDImageWebPCoder sharedCoder];
+  [SDImageCodersManager.sharedManager addCoder:webPCoder];
+  // Supports HTTP URL as well as Photos URL globally
+  SDImageLoadersManager.sharedManager.loaders = @[SDWebImageDownloader.sharedDownloader, SDWebImagePhotosLoader.sharedLoader];
+  // Replace default manager's loader implementation
+  SDWebImageManager.defaultImageLoader = SDImageLoadersManager.sharedManager;
 }
 
 RCT_EXPORT_VIEW_PROPERTY(blurRadius, CGFloat)
