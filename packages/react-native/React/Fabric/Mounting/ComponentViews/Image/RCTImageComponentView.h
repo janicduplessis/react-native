@@ -6,17 +6,17 @@
  */
 
 #import <React/RCTImageResponseDelegate.h>
-#import <React/RCTUIImageViewAnimated.h>
 #import <React/RCTViewComponentView.h>
+#import <SDWebImage/SDWebImage.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
 /**
  * UIView class for root <Image> component.
  */
-@interface RCTImageComponentView : RCTViewComponentView <RCTImageResponseDelegate> {
+@interface RCTImageComponentView : RCTViewComponentView {
  @protected
-  RCTUIImageViewAnimated *_imageView;
+  SDAnimatedImageView *_imageView;
 }
 
 @end
