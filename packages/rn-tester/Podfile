@@ -11,6 +11,8 @@ end
 def pods()
   project 'RNTesterPods.xcodeproj'
 
+  pod 'SDWebImagePhotosPlugin', '~> 0.2.1'
+
   # Enable TurboModule
   prefix_path = "../.."
   use_react_native!(path:prefix_path)
