@@ -10,6 +10,8 @@ end
 def pods()
   project 'RNTesterPods.xcodeproj'
 
+  pod 'SDWebImagePhotosPlugin', '~> 0.2.1'
+
   # Enable TurboModule
   use_react_native!(path: "..")
   pod 'ReactCommon/turbomodule/samples', :path => '../ReactCommon'
