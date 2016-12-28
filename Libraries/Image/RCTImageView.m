@@ -13,6 +13,7 @@
 #import <React/RCTImageSource.h>
 #import <React/RCTUtils.h>
 #import <React/UIView+React.h>
+#import <SDWebImage/UIImageView+WebCache.h>
 
 #import "RCTImageBlurUtils.h"
 #import "RCTImageLoader.h"
@@ -31,7 +32,7 @@ static BOOL RCTShouldReloadImageForSizeChange(CGSize currentSize, CGSize idealSi
   CGFloat heightMultiplier = idealSize.height / currentSize.height;
 
   return widthMultiplier > upscaleThreshold || widthMultiplier < downscaleThreshold ||
-    heightMultiplier > upscaleThreshold || heightMultiplier < downscaleThreshold;
+  heightMultiplier > upscaleThreshold || heightMultiplier < downscaleThreshold;
 }
 
 /**
@@ -41,10 +42,10 @@ static BOOL RCTShouldReloadImageForSizeChange(CGSize currentSize, CGSize idealSi
 static NSDictionary *onLoadParamsForSource(RCTImageSource *source)
 {
   NSDictionary *dict = @{
-    @"width": @(source.size.width),
-    @"height": @(source.size.height),
-    @"url": source.request.URL.absoluteString,
-  };
+                         @"width": @(source.size.width),
+                         @"height": @(source.size.height),
+                         @"url": source.request.URL.absoluteString,
+                         };
   return @{ @"source": dict };
 }
 
@@ -247,7 +248,7 @@ RCT_NOT_IMPLEMENTED(- (instancetype)init)
   for (RCTImageSource *source in _imageSources) {
     CGSize imgSize = source.size;
     const CGFloat imagePixels =
-      imgSize.width * imgSize.height * source.scale * source.scale;
+    imgSize.width * imgSize.height * source.scale * source.scale;
     const CGFloat fit = ABS(1 - (imagePixels / targetImagePixels));
 
     if (fit < bestFit) {
@@ -270,7 +271,7 @@ RCT_NOT_IMPLEMENTED(- (instancetype)init)
   // source AND the image load that's pending
   RCTImageSource *desiredImageSource = [self imageSourceForSize:self.frame.size];
   return ![desiredImageSource isEqual:_imageSource] &&
-         ![desiredImageSource isEqual:_pendingImageSource];
+  ![desiredImageSource isEqual:_pendingImageSource];
 }
 
 - (void)reloadImage
@@ -286,42 +287,73 @@ RCT_NOT_IMPLEMENTED(- (instancetype)init)
       _onLoadStart(nil);
     }
 
-    RCTImageLoaderProgressBlock progressHandler = nil;
-    if (_onProgress) {
-      progressHandler = ^(int64_t loaded, int64_t total) {
-        self->_onProgress(@{
-          @"loaded": @((double)loaded),
-          @"total": @((double)total),
-        });
-      };
-    }
-
     __weak RCTImageView *weakSelf = self;
-    RCTImageLoaderPartialLoadBlock partialLoadHandler = ^(UIImage *image) {
-      [weakSelf imageLoaderLoadedImage:image error:nil forImageSource:source partial:YES];
-    };
+    if (RCTIsLocalAssetURL(source.request.URL) ||
+        [source.request.URL.pathExtension isEqualToString:@"gif"] ||
+        [source.request.URL.scheme isEqualToString: @"assets-library"] ||
+        [source.request.URL.scheme isEqualToString: @"ph"]) {
+      RCTImageLoaderProgressBlock progressHandler = nil;
+      if (_onProgress) {
+        progressHandler = ^(int64_t loaded, int64_t total) {
+          self->_onProgress(@{
+                              @"loaded": @((double)loaded),
+                              @"total": @((double)total),
+                              });
+        };
+      }
 
-    CGSize imageSize = self.bounds.size;
-    CGFloat imageScale = RCTScreenScale();
-    if (!UIEdgeInsetsEqualToEdgeInsets(_capInsets, UIEdgeInsetsZero)) {
-      // Don't resize images that use capInsets
-      imageSize = CGSizeZero;
-      imageScale = source.scale;
+      RCTImageLoaderPartialLoadBlock partialLoadHandler = ^(UIImage *image) {
+        [weakSelf imageLoaderLoadedImage:image error:nil forImageSource:source partial:YES];
+      };
+
+      CGSize imageSize = self.bounds.size;
+      CGFloat imageScale = RCTScreenScale();
+      if (!UIEdgeInsetsEqualToEdgeInsets(_capInsets, UIEdgeInsetsZero)) {
+        // Don't resize images that use capInsets
+        imageSize = CGSizeZero;
+        imageScale = source.scale;
+      }
+
+      RCTImageLoaderCompletionBlock completionHandler = ^(NSError *error, UIImage *loadedImage) {
+        [weakSelf imageLoaderLoadedImage:loadedImage error:error forImageSource:source partial:NO];
+      };
+
+      _reloadImageCancellationBlock =
+      [_bridge.imageLoader loadImageWithURLRequest:source.request
+                                              size:imageSize
+                                             scale:imageScale
+                                           clipped:NO
+                                        resizeMode:_resizeMode
+                                     progressBlock:progressHandler
+                                  partialLoadBlock:partialLoadHandler
+                                   completionBlock:completionHandler];
+    } else {
+      SDWebImageDownloaderProgressBlock progressHandler = nil;
+      if (_onProgress) {
+        progressHandler = ^(NSInteger receivedSize, NSInteger expectedSize, NSURL * _Nullable targetURL) {
+          self->_onProgress(@{
+                              @"loaded": @((double)receivedSize),
+                              @"total": @((double)expectedSize),
+                              });
+        };
+      }
+      SDExternalCompletionBlock completionHandler = ^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+        if (image && cacheType != SDImageCacheTypeMemory) {
+          // TODO: Make this a prop.
+          weakSelf.alpha = 0;
+          [UIView animateWithDuration:0.3 animations:^{
+            weakSelf.alpha = 1;
+          }];
+        }
+        [weakSelf imageLoaderLoadedImage:image error:error forImageSource:source partial:NO];
+      };
+
+      [self sd_setImageWithURL:source.request.URL
+              placeholderImage:_defaultImage
+                       options:0
+                      progress:progressHandler
+                     completed:completionHandler];
     }
-
-    RCTImageLoaderCompletionBlock completionHandler = ^(NSError *error, UIImage *loadedImage) {
-      [weakSelf imageLoaderLoadedImage:loadedImage error:error forImageSource:source partial:NO];
-    };
-
-    _reloadImageCancellationBlock =
-    [_bridge.imageLoader loadImageWithURLRequest:source.request
-                                            size:imageSize
-                                           scale:imageScale
-                                         clipped:NO
-                                      resizeMode:_resizeMode
-                                   progressBlock:progressHandler
-                                partialLoadBlock:partialLoadHandler
-                                 completionBlock:completionHandler];
   } else {
     [self clearImage];
   }
