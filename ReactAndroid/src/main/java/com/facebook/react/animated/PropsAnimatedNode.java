@@ -66,6 +66,10 @@ import javax.annotation.Nullable;
         "not been connected with the given animated node");
     }
 
+    mConnectedViewTag = -1;
+  }
+
+  public void restoreDefaultValues() {
     ReadableMapKeySetIterator it = mPropMap.keySetIterator();
     while(it.hasNextKey()) {
       mPropMap.putNull(it.nextKey());
@@ -74,8 +78,6 @@ import javax.annotation.Nullable;
     mUIImplementation.synchronouslyUpdateViewOnUIThread(
       mConnectedViewTag,
       mDiffMap);
-
-    mConnectedViewTag = -1;
   }
 
   public final void updateView() {

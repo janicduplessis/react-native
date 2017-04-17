@@ -307,6 +307,23 @@ import javax.annotation.Nullable;
     propsAnimatedNode.disconnectFromView(viewTag);
   }
 
+  public void restoreDefaultValues(int animatedNodeTag, int viewTag) {
+    AnimatedNode node = mAnimatedNodes.get(animatedNodeTag);
+    // Restoring default values needs to happen before UIManager operations so it is
+    // possible the node hasn't been created yet if it is being connected and
+    // disconnected in the same batch. In that case we don't need to restore
+    // default values since it will never actually update the view.
+    if (node == null) {
+      return;
+    }
+    if (!(node instanceof PropsAnimatedNode)) {
+      throw new JSApplicationIllegalArgumentException("Animated node connected to view should be" +
+        "of type " + PropsAnimatedNode.class.getName());
+    }
+    PropsAnimatedNode propsAnimatedNode = (PropsAnimatedNode) node;
+    propsAnimatedNode.restoreDefaultValues();
+  }
+
   public void addAnimatedEventToView(int viewTag, String eventName, ReadableMap eventMapping) {
     int nodeTag = eventMapping.getInt("animatedValueTag");
     AnimatedNode node = mAnimatedNodes.get(nodeTag);

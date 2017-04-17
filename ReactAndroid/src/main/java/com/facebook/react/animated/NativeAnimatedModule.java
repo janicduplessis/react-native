@@ -334,10 +334,13 @@ public class NativeAnimatedModule extends ReactContextBaseJavaModule implements
 
   @ReactMethod
   public void disconnectAnimatedNodeFromView(final int animatedNodeTag, final int viewTag) {
-    // Disconnecting a view also restores its default values so we have to make
-    // sure this happens before views get updated with their new props. This is
-    // why we enqueue this on the pre-operations queue.
     mPreOperations.add(new UIThreadOperation() {
+      @Override
+      public void execute(NativeAnimatedNodesManager animatedNodesManager) {
+        animatedNodesManager.restoreDefaultValues(animatedNodeTag, viewTag);
+      }
+    });
+    mOperations.add(new UIThreadOperation() {
       @Override
       public void execute(NativeAnimatedNodesManager animatedNodesManager) {
         animatedNodesManager.disconnectAnimatedNodeFromView(animatedNodeTag, viewTag);
