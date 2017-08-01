@@ -305,20 +305,8 @@ RCT_NOT_IMPLEMENTED(- (instancetype)init)
 {
   // Preserving and revalidating `contentOffset`.
   CGPoint originalOffset = self.contentOffset;
-
   [super setFrame:frame];
-
-  UIEdgeInsets contentInset = self.contentInset;
-  CGSize contentSize = self.contentSize;
-  CGSize fullContentSize = CGSizeMake(
-    contentSize.width + contentInset.left + contentInset.right,
-    contentSize.height + contentInset.top + contentInset.bottom);
-
-  CGSize boundsSize = self.bounds.size;
-
-  self.contentOffset = CGPointMake(
-    MAX(0, MIN(originalOffset.x, fullContentSize.width - boundsSize.width)),
-    MAX(0, MIN(originalOffset.y, fullContentSize.height - boundsSize.height)));
+  self.contentOffset = originalOffset;
 }
 
 #if !TARGET_OS_TV
