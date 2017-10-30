@@ -103,6 +103,15 @@ static void ensureAssetsLibLoaded(void)
   return filter ?: [_ALAssetsFilter allPhotos];
 }
 
+RCT_ENUM_CONVERTER(PHAssetMediaType, (@{
+  @"photos": @(PHAssetMediaTypeImage),
+  @"videos": @(PHAssetMediaTypeVideo),
+  @"audio": @(PHAssetMediaTypeAudio),
+  // PHAssetMediaType doesn't have a value to represent 'all' so use PHAssetMediaTypeUnknown
+  // since it isn't used for anything else.
+  @"all": @(PHAssetMediaTypeUnknown),
+}), PHAssetMediaTypeImage, integerValue)
+
 @end
 
 @implementation RCTCameraRollManager
@@ -184,86 +193,129 @@ RCT_EXPORT_METHOD(getPhotos:(NSDictionary *)params
   ensureAssetsLibLoaded();
   NSUInteger first = [RCTConvert NSInteger:params[@"first"]];
   NSString *afterCursor = [RCTConvert NSString:params[@"after"]];
-  NSString *groupName = [RCTConvert NSString:params[@"groupName"]];
-  ALAssetsFilter *assetType = [RCTConvert ALAssetsFilter:params[@"assetType"]];
-  ALAssetsGroupType groupTypes = [RCTConvert ALAssetsGroupType:params[@"groupTypes"]];
+  PHAssetMediaType assetType = [RCTConvert PHAssetMediaType:params[@"assetType"]];
+  NSString *collectionLocalIdentifier = [RCTConvert NSString:params[@"collection"]];
+
+  PHAssetCollection *collection =
+    [PHAssetCollection fetchAssetCollectionsWithLocalIdentifiers:@[collectionLocalIdentifier]
+                                                         options:nil].firstObject;
+  if (collection == nil) {
+    reject(
+      kErrorUnableToLoad,
+      [NSString stringWithFormat:@"Cannot find asset collection with id '%@'.", collectionLocalIdentifier],
+      nil
+    );
+    return;
+  }
+
+  PHFetchOptions *options = [PHFetchOptions new];
+  // PHAssetMediaTypeUnknown means no media type filter.
+  if (assetType != PHAssetMediaTypeUnknown) {
+    options.predicate = [NSPredicate predicateWithFormat:@"mediaType = %d", assetType];
+  }
+  PHFetchResult<PHAsset *> *assets = [PHAsset fetchAssetsInAssetCollection:collection options:options];
 
   BOOL __block foundAfter = NO;
   BOOL __block hasNextPage = NO;
   BOOL __block resolvedPromise = NO;
-  NSMutableArray<NSDictionary<NSString *, id> *> *assets = [NSMutableArray new];
+  NSMutableArray<NSDictionary<NSString *, id> *> *results = [NSMutableArray new];
 
-  [_bridge.assetsLibrary enumerateGroupsWithTypes:groupTypes usingBlock:^(ALAssetsGroup *group, BOOL *stopGroups) {
-    if (group && (groupName == nil || [groupName isEqualToString:[group valueForProperty:_ALAssetsGroupPropertyName]])) {
-
-      [group setAssetsFilter:assetType];
-      [group enumerateAssetsWithOptions:NSEnumerationReverse usingBlock:^(ALAsset *result, NSUInteger index, BOOL *stopAssets) {
-        if (result) {
-          NSString *uri = ((NSURL *)[result valueForProperty:_ALAssetPropertyAssetURL]).absoluteString;
-          if (afterCursor && !foundAfter) {
-            if ([afterCursor isEqualToString:uri]) {
-              foundAfter = YES;
-            }
-            return; // Skip until we get to the first one
-          }
-          if (first == assets.count) {
-            *stopAssets = YES;
-            *stopGroups = YES;
-            hasNextPage = YES;
-            RCTAssert(resolvedPromise == NO, @"Resolved the promise before we finished processing the results.");
-            RCTResolvePromise(resolve, assets, hasNextPage);
-            resolvedPromise = YES;
-            return;
-          }
-          CGSize dimensions = [result defaultRepresentation].dimensions;
-          CLLocation *loc = [result valueForProperty:_ALAssetPropertyLocation];
-          NSDate *date = [result valueForProperty:_ALAssetPropertyDate];
-          NSString *filename = [result defaultRepresentation].filename;
-          int64_t duration = 0;
-          if ([[result valueForProperty:_ALAssetPropertyType] isEqualToString:_ALAssetTypeVideo]) {
-            duration = [[result valueForProperty:_ALAssetPropertyDuration] intValue];
-          }
-
-          [assets addObject:@{
-            @"node": @{
-              @"type": [result valueForProperty:_ALAssetPropertyType],
-              @"group_name": [group valueForProperty:_ALAssetsGroupPropertyName],
-              @"image": @{
-                @"uri": uri,
-                @"filename" : filename ?: [NSNull null],
-                @"height": @(dimensions.height),
-                @"width": @(dimensions.width),
-                @"isStored": @YES,
-                @"playableDuration": @(duration),
-              },
-              @"timestamp": @(date.timeIntervalSince1970),
-              @"location": loc ? @{
-                @"latitude": @(loc.coordinate.latitude),
-                @"longitude": @(loc.coordinate.longitude),
-                @"altitude": @(loc.altitude),
-                @"heading": @(loc.course),
-                @"speed": @(loc.speed),
-              } : @{},
-            }
-          }];
-        }
-      }];
-    }
-
-    if (!group) {
-      // Sometimes the enumeration continues even if we set stop above, so we guard against resolving the promise
-      // multiple times here.
-      if (!resolvedPromise) {
-        RCTResolvePromise(resolve, assets, hasNextPage);
-        resolvedPromise = YES;
+  [assets enumerateObjectsWithOptions:NSEnumerationReverse usingBlock:^(PHAsset * _Nonnull asset, NSUInteger idx, BOOL * _Nonnull stop) {
+    NSString *uri = [NSString stringWithFormat:@"ph://%@", asset.localIdentifier];
+    if (afterCursor && !foundAfter) {
+      if ([afterCursor isEqualToString:uri]) {
+        foundAfter = YES;
       }
+      return; // Skip until we get to the first one
     }
-  } failureBlock:^(NSError *error) {
-    if (error.code != ALAssetsLibraryAccessUserDeniedError) {
-      RCTLogError(@"Failure while iterating through asset groups %@", error);
+    if (first == results.count) {
+      hasNextPage = YES;
+      RCTAssert(resolvedPromise == NO, @"Resolved the promise before we finished processing the results.");
+      RCTResolvePromise(resolve, results, hasNextPage);
+      resolvedPromise = YES;
+      *stop = YES;
+      return;
     }
-    reject(kErrorUnableToLoad, nil, error);
+    CGSize dimensions = (CGSize){asset.pixelWidth, asset.pixelHeight};
+    CLLocation *loc = asset.location;
+    NSDate *date = asset.creationDate;
+    // NSString *filename = [result defaultRepresentation].filename;
+    int64_t duration = asset.duration;
+
+    [results addObject:@{
+      @"node": @{
+        @"type": @(asset.mediaType),
+        @"group_name": collection.localizedTitle,
+        @"image": @{
+            @"uri": uri,
+            // @"filename" : filename,
+            @"height": @(dimensions.height),
+            @"width": @(dimensions.width),
+            @"isStored": @YES,
+            @"playableDuration": @(duration),
+            },
+        @"timestamp": @(date.timeIntervalSince1970),
+        @"location": loc ? @{
+          @"latitude": @(loc.coordinate.latitude),
+          @"longitude": @(loc.coordinate.longitude),
+          @"altitude": @(loc.altitude),
+          @"heading": @(loc.course),
+          @"speed": @(loc.speed),
+        } : @{},
+      }
+    }];
   }];
+
+  if (!resolvedPromise) {
+    RCTResolvePromise(resolve, results, hasNextPage);
+  }
+}
+
+RCT_EXPORT_METHOD(getCollections:(NSDictionary *)params
+                         resolve:(RCTPromiseResolveBlock)resolve
+                          reject:(RCTPromiseRejectBlock)reject)
+{
+  checkPhotoLibraryConfig();
+
+  PHAssetMediaType assetType = [RCTConvert PHAssetMediaType:params[@"assetType"]];
+  PHFetchOptions *options = [PHFetchOptions new];
+  // PHAssetMediaTypeUnknown means no media type filter.
+  if (assetType != PHAssetMediaTypeUnknown) {
+    options.predicate = [NSPredicate predicateWithFormat:@"mediaType = %d", assetType];
+  }
+
+  PHFetchResult<PHAssetCollection *> *smartAlbumCollections =
+    [PHAssetCollection fetchAssetCollectionsWithType:PHAssetCollectionTypeSmartAlbum
+                                             subtype:PHAssetCollectionSubtypeAlbumRegular
+                                             options:nil];
+  PHFetchResult<PHCollection *> *userCollections =
+    [PHAssetCollection fetchTopLevelUserCollectionsWithOptions:nil];
+
+  NSMutableArray *results = [NSMutableArray new];
+  void (^addToResultsBlock)(PHCollection * _Nonnull, NSUInteger, BOOL * _Nonnull) =
+    ^(PHCollection * _Nonnull collection, NSUInteger idx, BOOL * _Nonnull stop) {
+      if ([collection isKindOfClass:[PHAssetCollection class]]) {
+        PHAssetCollection *assetCollection = (PHAssetCollection *)collection;
+        NSUInteger estimatedAssetCount = assetCollection.estimatedAssetCount;
+        // If we filter by asset type we can't rely on estimatedAssetCount since it includes
+        // assets of all types.
+        if (estimatedAssetCount == NSNotFound || assetType != PHAssetMediaTypeUnknown) {
+          PHFetchResult<PHAsset *> *assets =
+            [PHAsset fetchAssetsInAssetCollection:assetCollection options:options];
+          estimatedAssetCount = assets.count;
+        }
+        [results addObject:@{
+          @"id": assetCollection.localIdentifier,
+          @"title": assetCollection.localizedTitle,
+          @"estimatedAssetCount": @(estimatedAssetCount),
+        }];
+      }
+  };
+
+  [smartAlbumCollections enumerateObjectsUsingBlock:addToResultsBlock];
+  [userCollections enumerateObjectsUsingBlock:addToResultsBlock];
+
+  resolve(results);
 }
 
 RCT_EXPORT_METHOD(deletePhotos:(NSArray<NSString *>*)assets
