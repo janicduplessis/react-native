@@ -41,6 +41,12 @@ type GetPhotosParams = {
   mimeTypes?: Array<string>,
 };
 
+export type Collection = {
+  title: string,
+  id: string,
+  estimatedAssetCount: number,
+};
+
 /**
  * Shape of the param arg for the `getPhotos` function.
  */
@@ -77,6 +83,7 @@ const getPhotosParamChecker = createStrictShapeTypeChecker({
    * Filter by mimetype (e.g. image/jpeg).
    */
   mimeTypes: PropTypes.arrayOf(PropTypes.string),
+  collection: PropTypes.string,
 });
 
 type GetPhotosReturn = Promise<{
@@ -238,6 +245,10 @@ class CameraRoll {
     }
     // TODO: Add the __DEV__ check back in to verify the Promise result
     return RCTCameraRollManager.getPhotos(params);
+  }
+
+  static getCollections(params): Promise<Array<Collection>> {
+    return RCTCameraRollManager.getCollections(params);
   }
 }
 
