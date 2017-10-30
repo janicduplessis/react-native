@@ -6,6 +6,7 @@
  */
 
 #import <AssetsLibrary/AssetsLibrary.h>
+#import <Photos/Photos.h>
 
 #import <React/RCTBridgeModule.h>
 #import <React/RCTConvert.h>
@@ -14,6 +15,7 @@
 
 + (ALAssetsGroupType)ALAssetsGroupType:(id)json;
 + (ALAssetsFilter *)ALAssetsFilter:(id)json;
++ (PHAssetMediaType)PHAssetMediaType:(id)json;
 
 @end
 
