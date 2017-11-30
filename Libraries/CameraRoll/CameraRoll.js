@@ -247,8 +247,8 @@ class CameraRoll {
     return RCTCameraRollManager.getPhotos(params);
   }
 
-  static getCollections(params): Promise<Array<Collection>> {
-    return RCTCameraRollManager.getCollections(params);
+  static getCollections(): Promise<Array<Collection>> {
+    return RCTCameraRollManager.getCollections({});
   }
 }
 
