@@ -63,6 +63,8 @@ function processEventTypes(
   }
 }
 
+exports.processEventTypes = processEventTypes;
+
 /**
  * Registers a native view/component by name.
  * A callback is provided to load the view config from UIManager.
