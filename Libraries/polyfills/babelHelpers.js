@@ -12,7 +12,7 @@
 /* eslint-disable quotes, curly, no-proto, no-undef-init, dot-notation */
 
 // Created by running:
-// require('fs').writeFileSync('babelExternalHelpers.js', require('@babel/core').buildExternalHelpers('_extends classCallCheck createClass createRawReactElement defineProperty getPrototypeOf setPrototypeOf get inherits  interopRequireDefault interopRequireWildcard objectWithoutProperties objectSpread possibleConstructorReturn slicedToArray arrayWithHoles arrayWithoutHoles taggedTemplateLiteral toArray toConsumableArray wrapNativeSuper assertThisInitialized taggedTemplateLiteralLoose applyDecoratedDescriptor'.split(' ')))// then replacing the `global` reference in the last line to also use `this`.
+// require('fs').writeFileSync('babelExternalHelpers.js', require('@babel/core').buildExternalHelpers('_extends classCallCheck createClass createRawReactElement defineProperty getPrototypeOf setPrototypeOf get inherits superPropBase interopRequireDefault interopRequireWildcard objectWithoutProperties objectSpread possibleConstructorReturn slicedToArray arrayWithHoles arrayWithoutHoles taggedTemplateLiteral toArray toConsumableArray wrapNativeSuper assertThisInitialized taggedTemplateLiteralLoose applyDecoratedDescriptor'.split(' ')))// then replacing the `global` reference in the last line to also use `this`.
 //
 // Actually, that's a lie, because babel omits _extends and
 // createRawReactElement. the file is also cleaned up a bit.
@@ -115,6 +115,15 @@ babelHelpers.setPrototypeOf = function(o, p) {
       return o;
     };
   return _setPrototypeOf(o, p);
+};
+
+babelHelpers.superPropBase = function(object, property) {
+  // Yes, this throws if object is null to being with, that's on purpose.
+  while (!Object.prototype.hasOwnProperty.call(object, property)) {
+    object = babelHelpers.getPrototypeOf(object);
+    if (object === null) break;
+  }
+  return object;
 };
 
 function _inherits(subClass, superClass) {
