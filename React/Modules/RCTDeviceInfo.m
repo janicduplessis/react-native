@@ -133,11 +133,18 @@ static NSDictionary *RCTExportedDimensions(RCTBridge *bridge)
 
 - (void)applicationDidChangeStatusBarFrame
 {
+  RCTBridge *bridge = _bridge;
+  // HACK: We need to force async dispatch here otherwise safeAreaInsets are not yet
+  // updated. There is no way to listen for safeAreaInsets changes without extending
+  // the root view but this is not reliable since the RN root view might not cover the
+  // screen in hybrid apps.
+  dispatch_async(dispatch_get_main_queue(), ^{
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
-  [_bridge.eventDispatcher sendDeviceEventWithName:@"didUpdateDimensions"
-                                              body:RCTExportedDimensions(_bridge)];
+    [bridge.eventDispatcher sendDeviceEventWithName:@"didUpdateDimensions"
+                                                      body:RCTExportedDimensions(bridge)];
 #pragma clang diagnostic pop
+  });
 }
 
 #endif // TARGET_OS_TV
