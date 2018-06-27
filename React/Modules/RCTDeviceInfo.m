@@ -78,9 +78,16 @@ static NSDictionary *RCTExportedDimensions(RCTBridge *bridge)
     @"scale": @(dimensions.window.scale),
     @"fontScale": @(dimensions.window.fontScale),
   };
+  NSDictionary<NSString *, NSNumber *> *safeAreaInsets = @{
+    @"left": @(dimensions.safeAreaInsets.left),
+    @"top": @(dimensions.safeAreaInsets.top),
+    @"right": @(dimensions.safeAreaInsets.right),
+    @"bottom": @(dimensions.safeAreaInsets.bottom),
+  };
   return @{
     @"screen": screen,
     @"window": window,
+    @"safeAreaInsets": safeAreaInsets,
   };
 }
 
