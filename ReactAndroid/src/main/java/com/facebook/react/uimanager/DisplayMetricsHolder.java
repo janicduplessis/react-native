@@ -113,6 +113,12 @@ public class DisplayMetricsHolder {
     final Map<String, Map<String, Object>> result = new HashMap<>();
     result.put("windowPhysicalPixels", getPhysicalPixelsMap(sWindowDisplayMetrics, fontScale));
     result.put("screenPhysicalPixels", getPhysicalPixelsMap(sScreenDisplayMetrics, fontScale));
+    final Map<String, Object> safeAreaInsets = new HashMap<>();
+    safeAreaInsets.put("top", 24);
+    safeAreaInsets.put("right", 0);
+    safeAreaInsets.put("bottom", 0);
+    safeAreaInsets.put("left", 0);
+    result.put("safeAreaInsets", safeAreaInsets);
     return result;
   }
 
@@ -123,6 +129,12 @@ public class DisplayMetricsHolder {
     final WritableNativeMap result = new WritableNativeMap();
     result.putMap("windowPhysicalPixels", getPhysicalPixelsNativeMap(sWindowDisplayMetrics, fontScale));
     result.putMap("screenPhysicalPixels", getPhysicalPixelsNativeMap(sScreenDisplayMetrics, fontScale));
+    final WritableNativeMap safeAreaInsets = new WritableNativeMap();
+    safeAreaInsets.putInt("top", 24);
+    safeAreaInsets.putInt("right", 0);
+    safeAreaInsets.putInt("bottom", 0);
+    safeAreaInsets.putInt("left", 0);
+    result.putMap("safeAreaInsets", safeAreaInsets);
     return result;
   }
 
