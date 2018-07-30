@@ -68,7 +68,7 @@ const Config = {
   DEFAULT: {
     resolver: {
       resolverMainFields: ['react-native', 'browser', 'main'],
-      blacklistRE: getBlacklistRE(),
+      // blacklistRE: getBlacklistRE(),
     },
     serializer: {
       getModulesRunBeforeMainModule: () => [
@@ -77,7 +77,7 @@ const Config = {
       getPolyfills,
     },
 
-    watchFolders: [getProjectPath(), ...getProjectRoots()],
+    // watchFolders: [getProjectPath(), ...getProjectRoots()],
     transformModulePath: require.resolve('metro/src/reactNativeTransformer'),
   },
 
