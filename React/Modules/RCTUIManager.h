@@ -106,14 +106,16 @@ RCT_EXTERN NSString *const RCTUIManagerWillUpdateViewsDueToContentSizeMultiplier
 - (void)prependUIBlock:(RCTViewManagerUIBlock)block;
 
 /**
- * Used by native animated module to bypass the process of updating the values through the shadow
- * view hierarchy. This method will directly update native views, which means that updates for
- * layout-related propertied won't be handled properly.
- * Make sure you know what you're doing before calling this method :)
+ * Update a view synchronously from the UI thread.
  */
 - (void)synchronouslyUpdateViewOnUIThread:(NSNumber *)reactTag
                                  viewName:(NSString *)viewName
                                     props:(NSDictionary *)props;
+
+/**
+ * Perform layout synchronously from the UI thread.
+ */
+- (void)synchronouslyLayoutOnUIThread;
 
 /**
  * Given a reactTag from a component, find its root view, if possible.

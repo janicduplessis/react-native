@@ -437,6 +437,8 @@
       [node updateNodeIfNecessary];
     }
   }];
+
+  [_uiManager synchronouslyLayoutOnUIThread];
 }
 
 @end
