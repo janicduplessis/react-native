@@ -55,9 +55,9 @@
   }
 
   if (_propsDictionary.count) {
-    [_uiManager synchronouslyUpdateViewOnUIThread:_connectedViewTag
-                                         viewName:_connectedViewName
-                                            props:_propsDictionary];
+    [_uiManager synchronouslyUpdateViewOnPseudoUIManagerThread:_connectedViewTag
+                                                      viewName:_connectedViewName
+                                                         props:_propsDictionary];
   }
 }
 
@@ -97,9 +97,9 @@
   }
 
   if (_propsDictionary.count) {
-    [_uiManager synchronouslyUpdateViewOnUIThread:_connectedViewTag
-                                         viewName:_connectedViewName
-                                            props:_propsDictionary];
+    [_uiManager synchronouslyUpdateViewOnPseudoUIManagerThread:_connectedViewTag
+                                                      viewName:_connectedViewName
+                                                         props:_propsDictionary];
   }
 }
 
