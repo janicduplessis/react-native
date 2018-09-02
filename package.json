@@ -1,7 +1,6 @@
 {
   "name": "react-native",
-  "version": "1000.0.0",
-  "bin": "./cli.js",
+  "version": "0.60.3",
   "description": "A framework for building native apps using React",
   "license": "MIT",
   "repository": {
