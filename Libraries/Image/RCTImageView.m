@@ -350,7 +350,7 @@ RCT_NOT_IMPLEMENTED(- (instancetype)init)
 
       [self sd_setImageWithURL:source.request.URL
               placeholderImage:_defaultImage
-                       options:0
+                       options:SDWebImageRetryFailed
                       progress:progressHandler
                      completed:completionHandler];
     }
