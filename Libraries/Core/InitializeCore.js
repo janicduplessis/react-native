@@ -33,7 +33,6 @@ require('./setUpPerformance');
 require('./setUpSystrace');
 require('./setUpErrorHandling');
 require('./polyfillPromise');
-require('./setUpRegeneratorRuntime');
 require('./setUpTimers');
 require('./setUpXHR');
 require('./setUpAlert');
