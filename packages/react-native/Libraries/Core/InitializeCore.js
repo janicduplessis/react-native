@@ -33,7 +33,6 @@ require('../../src/private/setup/setUpDOM').default();
 require('./setUpPerformance');
 require('./setUpErrorHandling');
 require('./polyfillPromise');
-require('./setUpRegeneratorRuntime');
 require('./setUpTimers');
 require('./setUpXHR');
 require('./setUpAlert');
