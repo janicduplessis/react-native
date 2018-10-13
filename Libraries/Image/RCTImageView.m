@@ -338,7 +338,7 @@ RCT_NOT_IMPLEMENTED(- (instancetype)init)
         };
       }
       SDExternalCompletionBlock completionHandler = ^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
-        if (image && cacheType != SDImageCacheTypeMemory) {
+        if (image && cacheType == SDImageCacheTypeNone) {
           // TODO: Make this a prop.
           weakSelf.alpha = 0;
           [UIView animateWithDuration:0.3 animations:^{
