@@ -85,17 +85,25 @@ public abstract class ReactBaseTextShadowNode extends LayoutShadowNode {
   private static void buildSpannedFromShadowNode(
       ReactBaseTextShadowNode textShadowNode,
       SpannableStringBuilder sb,
-      List<SetSpanOperation> ops) {
+      List<SetSpanOperation> ops,
+      TextTransform inheritedTextTransform) {
 
     int start = sb.length();
+
+    if (textShadowNode.mTextTransform != TextTransform.UNSET) {
+      inheritedTextTransform = textShadowNode.mTextTransform;
+    }
 
     for (int i = 0, length = textShadowNode.getChildCount(); i < length; i++) {
       ReactShadowNode child = textShadowNode.getChildAt(i);
 
       if (child instanceof ReactRawTextShadowNode) {
-        sb.append(((ReactRawTextShadowNode) child).getText());
+        sb.append(
+            TextTransform.apply(
+                ((ReactRawTextShadowNode) child).getText(),
+                inheritedTextTransform));
       } else if (child instanceof ReactBaseTextShadowNode) {
-        buildSpannedFromShadowNode((ReactBaseTextShadowNode) child, sb, ops);
+        buildSpannedFromShadowNode((ReactBaseTextShadowNode) child, sb, ops, inheritedTextTransform);
       } else if (child instanceof ReactTextInlineImageShadowNode) {
         // We make the image take up 1 character in the span and put a corresponding character into
         // the text so that the image doesn't run over any following text.
@@ -174,13 +182,6 @@ public abstract class ReactBaseTextShadowNode extends LayoutShadowNode {
             new SetSpanOperation(
                 start, end, new CustomLineHeightSpan(textShadowNode.getEffectiveLineHeight())));
       }
-      if (textShadowNode.mTextTransform != TextTransform.UNSET) {
-        ops.add(
-          new SetSpanOperation(
-            start,
-            end,
-            new CustomTextTransformSpan(textShadowNode.mTextTransform)));
-      }
       ops.add(new SetSpanOperation(start, end, new ReactTagSpan(textShadowNode.getReactTag())));
     }
   }
@@ -201,10 +202,10 @@ public abstract class ReactBaseTextShadowNode extends LayoutShadowNode {
     // a new spannable will be wiped out
     List<SetSpanOperation> ops = new ArrayList<>();
 
-    buildSpannedFromShadowNode(textShadowNode, sb, ops);
+    buildSpannedFromShadowNode(textShadowNode, sb, ops, TextTransform.UNSET);
 
     if (text != null) {
-      sb.append(text);
+      sb.append(TextTransform.apply(text, textShadowNode.mTextTransform));
     }
 
     if (textShadowNode.mFontSize == UNSET) {
