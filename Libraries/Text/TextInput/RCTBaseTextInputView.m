@@ -68,7 +68,7 @@ RCT_NOT_IMPLEMENTED(- (instancetype)initWithFrame:(CGRect)frame)
 - (void)enforceTextAttributesIfNeeded
 {
   id<RCTBackedTextInputViewProtocol> backedTextInputView = self.backedTextInputView;
-  if (backedTextInputView.attributedText.string.length == 0) {
+  if (backedTextInputView.attributedText.string.length != 0) {
     return;
   }
 
@@ -208,60 +208,56 @@ RCT_NOT_IMPLEMENTED(- (instancetype)initWithFrame:(CGRect)frame)
         static NSDictionary<NSString *, NSString *> *contentTypeMap;
 
         dispatch_once(&onceToken, ^{
-          contentTypeMap = @{@"none": @"",
-                             @"URL": UITextContentTypeURL,
-                             @"addressCity": UITextContentTypeAddressCity,
-                             @"addressCityAndState":UITextContentTypeAddressCityAndState,
-                             @"addressState": UITextContentTypeAddressState,
-                             @"countryName": UITextContentTypeCountryName,
-                             @"creditCardNumber": UITextContentTypeCreditCardNumber,
-                             @"emailAddress": UITextContentTypeEmailAddress,
-                             @"familyName": UITextContentTypeFamilyName,
-                             @"fullStreetAddress": UITextContentTypeFullStreetAddress,
-                             @"givenName": UITextContentTypeGivenName,
-                             @"jobTitle": UITextContentTypeJobTitle,
-                             @"location": UITextContentTypeLocation,
-                             @"middleName": UITextContentTypeMiddleName,
-                             @"name": UITextContentTypeName,
-                             @"namePrefix": UITextContentTypeNamePrefix,
-                             @"nameSuffix": UITextContentTypeNameSuffix,
-                             @"nickname": UITextContentTypeNickname,
-                             @"organizationName": UITextContentTypeOrganizationName,
-                             @"postalCode": UITextContentTypePostalCode,
-                             @"streetAddressLine1": UITextContentTypeStreetAddressLine1,
-                             @"streetAddressLine2": UITextContentTypeStreetAddressLine2,
-                             @"sublocality": UITextContentTypeSublocality,
-                             @"telephoneNumber": UITextContentTypeTelephoneNumber,
-                             };
+            contentTypeMap = @{@"none": @"",
+                               @"URL": UITextContentTypeURL,
+                               @"addressCity": UITextContentTypeAddressCity,
+                               @"addressCityAndState":UITextContentTypeAddressCityAndState,
+                               @"addressState": UITextContentTypeAddressState,
+                               @"countryName": UITextContentTypeCountryName,
+                               @"creditCardNumber": UITextContentTypeCreditCardNumber,
+                               @"emailAddress": UITextContentTypeEmailAddress,
+                               @"familyName": UITextContentTypeFamilyName,
+                               @"fullStreetAddress": UITextContentTypeFullStreetAddress,
+                               @"givenName": UITextContentTypeGivenName,
+                               @"jobTitle": UITextContentTypeJobTitle,
+                               @"location": UITextContentTypeLocation,
+                               @"middleName": UITextContentTypeMiddleName,
+                               @"name": UITextContentTypeName,
+                               @"namePrefix": UITextContentTypeNamePrefix,
+                               @"nameSuffix": UITextContentTypeNameSuffix,
+                               @"nickname": UITextContentTypeNickname,
+                               @"organizationName": UITextContentTypeOrganizationName,
+                               @"postalCode": UITextContentTypePostalCode,
+                               @"streetAddressLine1": UITextContentTypeStreetAddressLine1,
+                               @"streetAddressLine2": UITextContentTypeStreetAddressLine2,
+                               @"sublocality": UITextContentTypeSublocality,
+                               @"telephoneNumber": UITextContentTypeTelephoneNumber,
+                               };
 
-          #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 110000 /* __IPHONE_11_0 */
-            if (@available(iOS 11.0, tvOS 11.0, *)) {
-              NSDictionary<NSString *, NSString *> * iOS11extras = @{@"username": UITextContentTypeUsername,
-                                                                     @"password": UITextContentTypePassword};
+            if (@available(iOS 11.0, *)) {
+                NSDictionary<NSString *, NSString *> * extras = @{@"username": UITextContentTypeUsername,
+                                                                  @"password": UITextContentTypePassword};
 
-              NSMutableDictionary<NSString *, NSString *> * iOS11baseMap = [contentTypeMap mutableCopy];
-              [iOS11baseMap addEntriesFromDictionary:iOS11extras];
+                NSMutableDictionary<NSString *, NSString *> * baseMap = [contentTypeMap mutableCopy];
+                [baseMap addEntriesFromDictionary:extras];
 
-              contentTypeMap = [iOS11baseMap copy];
+                contentTypeMap = [baseMap copy];
             }
-          #endif
 
-          #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 120000 /* __IPHONE_12_0 */
-            if (@available(iOS 12.0, tvOS 12.0, *)) {
-              NSDictionary<NSString *, NSString *> * iOS12extras = @{@"newPassword": UITextContentTypeNewPassword,
-                                                                     @"oneTimeCode": UITextContentTypeOneTimeCode};
+            if (@available(iOS 12.0, *)) {
+                NSDictionary<NSString *, NSString *> * extras = @{@"newPassword": UITextContentTypeNewPassword,
+                                                                  @"oneTimeCode": UITextContentTypeOneTimeCode};
 
-              NSMutableDictionary<NSString *, NSString *> * iOS12baseMap = [contentTypeMap mutableCopy];
-              [iOS12baseMap addEntriesFromDictionary:iOS12extras];
+                NSMutableDictionary<NSString *, NSString *> * baseMap = [contentTypeMap mutableCopy];
+                [baseMap addEntriesFromDictionary:extras];
 
-              contentTypeMap = [iOS12baseMap copy];
+                contentTypeMap = [baseMap copy];
             }
-          #endif
         });
 
         // Setting textContentType to an empty string will disable any
         // default behaviour, like the autofill bar for password inputs
-        self.backedTextInputView.textContentType = contentTypeMap[type] ?: type;
+        self.backedTextInputView.textContentType = type ? contentTypeMap[type] : type;
     }
   #endif
 }
@@ -281,24 +277,6 @@ RCT_NOT_IMPLEMENTED(- (instancetype)initWithFrame:(CGRect)frame)
       [textInputView reloadInputViews];
     }
   }
-}
-
-- (BOOL)secureTextEntry {
-  return self.backedTextInputView.secureTextEntry;
-}
-
-- (void)setSecureTextEntry:(BOOL)secureTextEntry {
-  UIView<RCTBackedTextInputViewProtocol> *textInputView = self.backedTextInputView;
-    
-  if (textInputView.secureTextEntry != secureTextEntry) {
-    textInputView.secureTextEntry = secureTextEntry;
-      
-    // Fix #5859, see https://stackoverflow.com/questions/14220187/uitextfield-has-trailing-whitespace-after-securetextentry-toggle/22537788#22537788
-    NSAttributedString *originalText = [textInputView.attributedText copy];
-    self.backedTextInputView.attributedText = [NSAttributedString new];
-    self.backedTextInputView.attributedText = originalText;
-  }
-    
 }
 
 #pragma mark - RCTBackedTextInputDelegate
@@ -379,9 +357,9 @@ RCT_NOT_IMPLEMENTED(- (instancetype)initWithFrame:(CGRect)frame)
   }
 
   if (_maxLength) {
-    NSInteger allowedLength = _maxLength.integerValue - backedTextInputView.attributedText.string.length + range.length;
+    NSUInteger allowedLength = _maxLength.integerValue - backedTextInputView.attributedText.string.length + range.length;
 
-    if (allowedLength < 0 || text.length > allowedLength) {
+    if (text.length > allowedLength) {
       // If we typed/pasted more than one character, limit the text inputted.
       if (text.length > 1) {
         // Truncate the input string so the result is exactly maxLength
@@ -439,8 +417,8 @@ RCT_NOT_IMPLEMENTED(- (instancetype)initWithFrame:(CGRect)frame)
 
   id<RCTBackedTextInputViewProtocol> backedTextInputView = self.backedTextInputView;
 
-  // Detect when `backedTextInputView` updates happened that didn't invoke `shouldChangeTextInRange`
-  // (e.g. typing simplified Chinese in pinyin will insert and remove spaces without
+  // Detect when `backedTextInputView` updates happend that didn't invoke `shouldChangeTextInRange`
+  // (e.g. typing simplified chinese in pinyin will insert and remove spaces without
   // calling shouldChangeTextInRange).  This will cause JS to get out of sync so we
   // update the mismatched range.
   NSRange currentRange;
