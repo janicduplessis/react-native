@@ -516,10 +516,6 @@
         xhr.withCredentials = false;
       }
 
-      if ('responseType' in xhr && support.blob) {
-        xhr.responseType = 'blob';
-      }
-
       request.headers.forEach(function(value, name) {
         xhr.setRequestHeader(name, value);
       });
