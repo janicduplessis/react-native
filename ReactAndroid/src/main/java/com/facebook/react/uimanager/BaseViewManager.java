@@ -7,7 +7,7 @@ package com.facebook.react.uimanager;
 
 import android.graphics.Color;
 import android.os.Build;
-import androidx.core.view.ViewCompat;
+import android.support.v4.view.ViewCompat;
 import android.view.View;
 import android.view.ViewParent;
 import com.facebook.react.R;

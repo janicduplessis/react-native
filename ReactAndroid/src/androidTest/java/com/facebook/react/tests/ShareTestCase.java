@@ -17,7 +17,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.IntentFilter.MalformedMimeTypeException;
-import androidx.fragment.app.DialogFragment;
+import android.support.v4.app.DialogFragment;
 
 import com.facebook.react.bridge.BaseJavaModule;
 import com.facebook.react.testing.ReactInstanceSpecForTest;

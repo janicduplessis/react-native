@@ -15,6 +15,7 @@ import javax.annotation.Nullable;
 
 import android.app.Instrumentation;
 import android.content.Context;
+import android.support.test.InstrumentationRegistry;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -119,13 +120,12 @@ public class ReactTestHelper {
   }
 
   public static ReactTestFactory getReactTestFactory() {
-// TODO: re-enable after cleanup of android-x migration
-//    Instrumentation inst = InstrumentationRegistry.getInstrumentation();
-//    if (!(inst instanceof ReactTestFactory)) {
+    Instrumentation inst = InstrumentationRegistry.getInstrumentation();
+    if (!(inst instanceof ReactTestFactory)) {
       return new DefaultReactTestFactory();
-//    }
-//
-//    return (ReactTestFactory) inst;
+    }
+
+    return (ReactTestFactory) inst;
   }
 
   public static ReactTestFactory.ReactInstanceEasyBuilder catalystInstanceBuilder(
@@ -151,14 +151,13 @@ public class ReactTestHelper {
           final CatalystInstance instance = builder.build();
           testCase.initializeWithInstance(instance);
           instance.runJSBundle();
-// TODO: re-enable after cleanup of android-x migration
-//          InstrumentationRegistry.getInstrumentation().runOnMainSync(new Runnable() {
-//            @Override
-//            public void run() {
+          InstrumentationRegistry.getInstrumentation().runOnMainSync(new Runnable() {
+            @Override
+            public void run() {
               ReactChoreographer.initialize();
               instance.initialize();
-//            }
-//          });
+            }
+          });
           testCase.waitForBridgeAndUIIdle();
           return instance;
         }

@@ -7,7 +7,7 @@
 
 package com.facebook.react.uimanager;
 
-import androidx.core.util.Pools;
+import android.support.v4.util.Pools;
 
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.WritableMap;
