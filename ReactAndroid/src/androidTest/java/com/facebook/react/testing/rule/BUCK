@@ -11,7 +11,6 @@ load(
 rn_android_library(
     name = "rule",
     srcs = glob(["*.java"]),
-    is_androidx = True,
     visibility = [
         "PUBLIC",
     ],

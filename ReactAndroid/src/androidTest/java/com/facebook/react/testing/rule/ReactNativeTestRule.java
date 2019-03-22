@@ -7,7 +7,7 @@ package com.facebook.react.testing.rule;
 
 import android.app.Activity;
 import android.os.Build;
-import androidx.test.rule.ActivityTestRule;
+import android.support.test.rule.ActivityTestRule;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import com.facebook.react.ReactInstanceManager;
 import com.facebook.react.ReactPackage;

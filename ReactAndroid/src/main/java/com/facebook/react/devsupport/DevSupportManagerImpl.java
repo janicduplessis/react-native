@@ -20,7 +20,7 @@ import android.content.pm.PackageManager;
 import android.hardware.SensorManager;
 import android.net.Uri;
 import android.os.AsyncTask;
-import androidx.annotation.Nullable;
+import android.support.annotation.Nullable;
 import android.util.Pair;
 import android.widget.Toast;
 import com.facebook.common.logging.FLog;

@@ -11,9 +11,9 @@ import android.app.TimePickerDialog.OnTimeSetListener;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnDismissListener;
 import android.os.Bundle;
-import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
+import android.support.v4.app.DialogFragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.widget.TimePicker;
 
 import com.facebook.react.bridge.NativeModule;

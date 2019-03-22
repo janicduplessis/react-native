@@ -10,7 +10,7 @@ package com.facebook.react.views.text;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
-import androidx.appcompat.widget.AppCompatTextView;
+import android.support.v7.widget.AppCompatTextView;
 import android.text.Layout;
 import android.text.Spannable;
 import android.text.Spanned;

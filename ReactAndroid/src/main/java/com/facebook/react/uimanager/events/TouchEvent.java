@@ -9,7 +9,7 @@ package com.facebook.react.uimanager.events;
 
 import javax.annotation.Nullable;
 
-import androidx.core.util.Pools;
+import android.support.v4.util.Pools;
 import android.view.MotionEvent;
 
 import com.facebook.infer.annotation.Assertions;

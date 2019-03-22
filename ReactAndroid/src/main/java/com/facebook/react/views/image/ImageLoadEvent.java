@@ -7,7 +7,7 @@
 
 package com.facebook.react.views.image;
 
-import androidx.annotation.IntDef;
+import android.support.annotation.IntDef;
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.uimanager.events.Event;

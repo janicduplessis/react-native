@@ -6,7 +6,7 @@
  */
 package com.facebook.react.fabric.mounting.mountitems;
 
-import androidx.annotation.UiThread;
+import android.support.annotation.UiThread;
 import com.facebook.react.fabric.mounting.MountingManager;
 
 public interface MountItem {
