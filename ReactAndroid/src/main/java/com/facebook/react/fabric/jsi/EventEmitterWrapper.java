@@ -7,7 +7,7 @@
 package com.facebook.react.fabric.jsi;
 
 import android.annotation.SuppressLint;
-import androidx.annotation.Nullable;
+import android.support.annotation.Nullable;
 import com.facebook.jni.HybridData;
 import com.facebook.proguard.annotations.DoNotStrip;
 import com.facebook.react.bridge.NativeMap;

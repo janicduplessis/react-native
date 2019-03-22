@@ -7,7 +7,7 @@
 
 package com.facebook.react.bridge;
 
-import androidx.annotation.NonNull;
+import android.support.annotation.NonNull;
 
 import com.facebook.jni.HybridData;
 import com.facebook.infer.annotation.Assertions;

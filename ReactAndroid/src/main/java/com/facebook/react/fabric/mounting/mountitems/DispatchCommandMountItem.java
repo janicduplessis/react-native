@@ -6,7 +6,7 @@
  */
 package com.facebook.react.fabric.mounting.mountitems;
 
-import androidx.annotation.Nullable;
+import android.support.annotation.Nullable;
 import com.facebook.react.fabric.mounting.MountingManager;
 import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.bridge.UiThreadUtil;
