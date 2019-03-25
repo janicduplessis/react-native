@@ -58,6 +58,11 @@ const ComponentExamples: Array<RNTesterExample> = [
     supportsTVOS: false,
   },
   {
+    key: 'LayoutContextExample',
+    module: require('./LayoutContextExample'),
+    supportsTVOS: true,
+  },
+  {
     key: 'LayoutEventsExample',
     module: require('../examples/Layout/LayoutEventsExample'),
     supportsTVOS: true,
