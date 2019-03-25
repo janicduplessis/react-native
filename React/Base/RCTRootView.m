@@ -21,6 +21,7 @@
 #import "RCTProfile.h"
 #import "RCTRootContentView.h"
 #import "RCTTouchHandler.h"
+#import "RCTSafeAreaUtils.h"
 #import "RCTUIManager.h"
 #import "RCTUIManagerUtils.h"
 #import "RCTUtils.h"
@@ -33,6 +34,23 @@
 #endif
 
 NSString *const RCTContentDidAppearNotification = @"RCTContentDidAppearNotification";
+
+static NSDictionary * RCTCreateLayoutContext(CGRect frame, UIEdgeInsets safeAreaInsets) {
+  return @{
+    @"safeAreaInsets": @{
+      @"top": @(safeAreaInsets.top),
+      @"right": @(safeAreaInsets.right),
+      @"bottom": @(safeAreaInsets.bottom),
+      @"left": @(safeAreaInsets.left),
+    },
+    @"layout": @{
+      @"x": @(frame.origin.x),
+      @"y": @(frame.origin.y),
+      @"width": @(frame.size.width),
+      @"height": @(frame.size.height),
+    },
+  };
+}
 
 @interface RCTUIManager (RCTRootView)
 
@@ -47,6 +65,9 @@ NSString *const RCTContentDidAppearNotification = @"RCTContentDidAppearNotificat
   RCTRootContentView *_contentView;
   BOOL _passThroughTouches;
   CGSize _intrinsicContentSize;
+  CGRect _lastFrame;
+  UIEdgeInsets _lastSafeAreaInsets;
+  BOOL _isMeasured;
 }
 
 - (instancetype)initWithBridge:(RCTBridge *)bridge
@@ -71,6 +92,9 @@ NSString *const RCTContentDidAppearNotification = @"RCTContentDidAppearNotificat
     _loadingViewFadeDelay = 0.25;
     _loadingViewFadeDuration = 0.25;
     _sizeFlexibility = RCTRootViewSizeFlexibilityNone;
+    _lastFrame = CGRectZero;
+    _lastSafeAreaInsets = UIEdgeInsetsZero;
+    _isMeasured = NO;
 
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(bridgeDidReload)
@@ -95,10 +119,6 @@ NSString *const RCTContentDidAppearNotification = @"RCTContentDidAppearNotificat
 #endif
 
     [self showLoadingView];
-
-    // Immediately schedule the application to be started.
-    // (Sometimes actual `_bridge` is already batched bridge here.)
-    [self bundleFinishedLoading:([_bridge batchedBridge] ?: _bridge)];
   }
 
   RCT_PROFILE_END_EVENT(RCTProfileTagAlways, @"");
@@ -174,6 +194,16 @@ RCT_NOT_IMPLEMENTED(- (instancetype)initWithCoder:(NSCoder *)aDecoder)
     CGRectGetMidX(self.bounds),
     CGRectGetMidY(self.bounds)
   };
+
+  if (!_isMeasured) {
+    _isMeasured = YES;
+    // Schedule the application to be started right after the first layout.
+    // This is needed since we need the root view initial frame.
+    // (Sometimes actual `_bridge` is already batched bridge here.)
+    [self bundleFinishedLoading:([_bridge batchedBridge] ?: _bridge)];
+  } else {
+    [self maybeUpdateLayoutContext];
+  }
 }
 
 - (UIViewController *)reactViewController
@@ -285,9 +315,13 @@ RCT_NOT_IMPLEMENTED(- (instancetype)initWithCoder:(NSCoder *)aDecoder)
 - (void)runApplication:(RCTBridge *)bridge
 {
   NSString *moduleName = _moduleName ?: @"";
+  UIEdgeInsets safeAreaInsets = RCTSafeAreaInsetsForView(self, YES);
+  _lastFrame = self.frame;
+  _lastSafeAreaInsets = safeAreaInsets;
   NSDictionary *appParameters = @{
     @"rootTag": _contentView.reactTag,
     @"initialProps": _appProperties ?: @{},
+    @"initialLayoutContext": RCTCreateLayoutContext(self.frame, safeAreaInsets),
   };
 
   RCTLogInfo(@"Running application %@ (%@)", moduleName, appParameters);
@@ -365,6 +399,40 @@ RCT_NOT_IMPLEMENTED(- (instancetype)initWithCoder:(NSCoder *)aDecoder)
   _contentView = nil;
   [self showLoadingView];
 }
+
+- (void)maybeUpdateLayoutContext
+{
+  CGRect frame = self.frame;
+  UIEdgeInsets safeAreaInsets = RCTSafeAreaInsetsForView(self, YES);
+  if (
+    RCTUIEdgeInsetsEqualToEdgeInsetsWithThreshold(safeAreaInsets, _lastSafeAreaInsets, RCTScreenScale()) &&
+    CGRectEqualToRect(frame, _lastFrame)
+  ) {
+    return;
+  }
+  NSDictionary *layoutContext = RCTCreateLayoutContext(frame, safeAreaInsets);
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+  [_bridge.eventDispatcher sendDeviceEventWithName:@"didUpdateLayoutContext" body:@{
+    @"rootTag": _contentView.reactTag,
+    @"layoutContext": layoutContext,
+  }];
+#pragma clang diagnostic pop
+
+  _lastFrame = frame;
+  _lastSafeAreaInsets = safeAreaInsets;
+}
+
+#if defined(__IPHONE_OS_VERSION_MAX_ALLOWED) && __IPHONE_OS_VERSION_MAX_ALLOWED >= 110000 /* __IPHONE_11_0 */
+
+- (void)safeAreaInsetsDidChange
+{
+  if (_isMeasured) {
+    [self maybeUpdateLayoutContext];
+  }
+}
+
+#endif
 
 - (void)dealloc
 {
