@@ -117,6 +117,7 @@ const AppRegistry = {
           ),
           appParameters.initialProps,
           appParameters.rootTag,
+          appParameters.initialLayoutContext,
           wrapperComponentProvider && wrapperComponentProvider(appParameters),
           appParameters.fabric,
           showFabricIndicator,
