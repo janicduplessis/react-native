@@ -123,8 +123,8 @@ class RNTesterApp extends React.Component<Props, RNTesterNavigationState> {
            * found when making Flow check .android.js files. */
           this.drawer = drawer;
         }}
-        renderNavigationView={this._renderDrawerContent}
-        statusBarBackgroundColor="#589c90">
+        renderNavigationView={this._renderDrawerContent}>
+        <StatusBar backgroundColor="#589c90" />
         {this._renderApp()}
       </DrawerLayoutAndroid>
     );
@@ -266,7 +266,6 @@ const styles = StyleSheet.create({
   },
   drawerContentWrapper: {
     flex: 1,
-    paddingTop: StatusBar.currentHeight,
     backgroundColor: 'white',
   },
 });
