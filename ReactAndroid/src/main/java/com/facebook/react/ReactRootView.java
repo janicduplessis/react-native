@@ -512,11 +512,15 @@ public class ReactRootView extends FrameLayout implements RootView, ReactRoot {
     RootViewInsets windowInsets;
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
       WindowInsets insets = getRootWindowInsets();
-      windowInsets = new RootViewInsets(
-        insets.getSystemWindowInsetTop(),
-        insets.getSystemWindowInsetRight(),
-        insets.getSystemWindowInsetBottom(),
-        insets.getSystemWindowInsetLeft());
+      if (insets == null) {
+        windowInsets = new RootViewInsets(0, 0, 0, 0);
+      } else {
+        windowInsets = new RootViewInsets(
+          insets.getSystemWindowInsetTop(),
+          insets.getSystemWindowInsetRight(),
+          insets.getSystemWindowInsetBottom(),
+          insets.getSystemWindowInsetLeft());
+      }
     } else {
       int rotation =
         ((WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE))
