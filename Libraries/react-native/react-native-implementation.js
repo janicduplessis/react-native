@@ -71,7 +71,7 @@ module.exports = {
     return require('../Components/Keyboard/KeyboardAvoidingView');
   },
   get LayoutContext() {
-    return require('RootViewLayout').Context.Consumer;
+    return require('../ReactNative/RootViewLayout').Context.Consumer;
   },
   get MaskedViewIOS() {
     warnOnce(

@@ -8,10 +8,10 @@
  * @format
  */
 
-const React = require('React');
-const RCTDeviceEventEmitter = require('RCTDeviceEventEmitter');
+const React = require('react');
+const RCTDeviceEventEmitter = require('../EventEmitter/RCTDeviceEventEmitter');
 
-import type {Layout} from 'CoreEventTypes';
+import type {Layout} from '../Types/CoreEventTypes';
 
 export type LayoutContext = $ReadOnly<{|
   layout: Layout,
