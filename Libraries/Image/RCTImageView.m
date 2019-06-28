@@ -16,7 +16,6 @@
 #import <SDWebImage/UIImageView+WebCache.h>
 #import <SDWebImagePhotosPlugin/SDWebImagePhotosPlugin.h>
 
-#import <React/RCTUIImageViewAnimated.h>
 #import <React/RCTImageBlurUtils.h>
 #import <React/RCTImageLoader.h>
 #import <React/RCTImageUtils.h>
@@ -82,7 +81,7 @@ static NSDictionary *onLoadParamsForSource(RCTImageSource *source)
   // Whether the latest change of props requires the image to be reloaded
   BOOL _needsReload;
 
-   RCTUIImageViewAnimated *_imageView;
+   UIImageView *_imageView;
 }
 
 - (instancetype)initWithBridge:(RCTBridge *)bridge
@@ -98,7 +97,7 @@ static NSDictionary *onLoadParamsForSource(RCTImageSource *source)
                selector:@selector(clearImageIfDetached)
                    name:UIApplicationDidEnterBackgroundNotification
                  object:nil];
-    _imageView = [[RCTUIImageViewAnimated alloc] init];
+    _imageView = [[UIImageView alloc] init];
     _imageView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     [self addSubview:_imageView];
   }
