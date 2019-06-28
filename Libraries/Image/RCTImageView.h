@@ -13,7 +13,7 @@
 @class RCTBridge;
 @class RCTImageSource;
 
-@interface RCTImageView : SDAnimatedImageView
+@interface RCTImageView : RCTView
 
 - (instancetype)initWithBridge:(RCTBridge *)bridge NS_DESIGNATED_INITIALIZER;
 

@@ -82,7 +82,7 @@ static NSDictionary *onLoadParamsForSource(RCTImageSource *source)
   // Whether the latest change of props requires the image to be reloaded
   BOOL _needsReload;
 
-   RCTUIImageViewAnimated *_imageView;
+  SDAnimatedImageView *_imageView;
 }
 
 - (instancetype)initWithBridge:(RCTBridge *)bridge
@@ -368,7 +368,7 @@ RCT_NOT_IMPLEMENTED(- (instancetype)initWithFrame:(CGRect)frame)
         [weakSelf imageLoaderLoadedImage:image error:error forImageSource:source partial:NO];
       };
 
-      [self sd_setImageWithURL:url
+      [_imageView sd_setImageWithURL:url
               placeholderImage:_defaultImage
                        options:SDWebImageRetryFailed
                       progress:progressHandler
