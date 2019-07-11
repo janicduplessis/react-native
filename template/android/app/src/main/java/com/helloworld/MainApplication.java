@@ -1,7 +1,16 @@
 package com.helloworld;
 
 import android.app.Application;
+<<<<<<< HEAD
+||||||| parent of e857d7066b... Add Hermes support to React Native 0.60
+
+=======
+import android.util.Log;
+
+>>>>>>> e857d7066b... Add Hermes support to React Native 0.60
 import com.facebook.react.PackageList;
+import com.facebook.hermes.reactexecutor.HermesExecutorFactory;
+import com.facebook.react.bridge.JavaScriptExecutorFactory;
 import com.facebook.react.ReactApplication;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
