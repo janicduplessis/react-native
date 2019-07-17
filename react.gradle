@@ -299,9 +299,9 @@ afterEvaluate {
         //
         // This should really be done by packaging all Hermes releated libs into
         // two separate HermesDebug and HermesRelease AARs, but until then we'll
-        // kludge it by deleting the .so files out of the /transforms/ directory.
+        // kludge it by deleting the .so files out of the /merged_native_libs/ directory.
         def isRelease = targetName.toLowerCase().contains("release")
-        def libDir = "$buildDir/intermediates/transforms/"
+        def libDir = "$buildDir/intermediates/merged_native_libs/"
         def vmSelectionAction = {
             fileTree(libDir).matching {
                 if (enableHermes) {
@@ -322,7 +322,7 @@ afterEvaluate {
                     include "**/libhermes*.so"
                 }
             }.visit { details ->
-                def targetVariant = ".*/transforms/[^/]*/${targetPath}/.*"
+                def targetVariant = ".*/merged_native_libs/${targetPath}/.*"
                 def path = details.file.getAbsolutePath().replace(File.separatorChar, '/' as char)
                 if (path.matches(targetVariant) && details.file.isFile()) {
                     details.file.delete()
@@ -331,8 +331,8 @@ afterEvaluate {
         }
 
         if (enableVmCleanup) {
-            def task = tasks.findByName("package${targetName}")
-            task.doFirst(vmSelectionAction)
+            def task = tasks.findByName("merge${targetName}NativeLibs")
+            task.doLast(vmSelectionAction)
         }
     }
 }
