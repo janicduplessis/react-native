@@ -303,7 +303,7 @@ afterEvaluate {
         }
 
         if (enableVmCleanup) {
-            def task = tasks.findByName("package${targetName}")
+            def task = tasks.findByName("build${targetName}PreBundle")
             task.doFirst(vmSelectionAction)
         }
     }
