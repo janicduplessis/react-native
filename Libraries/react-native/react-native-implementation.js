@@ -201,6 +201,9 @@ module.exports = {
   get DeviceInfo() {
     return require('../Utilities/DeviceInfo');
   },
+  get DevSettings() {
+    return require('../Utilities/DevSettings');
+  },
   get Dimensions() {
     return require('../Utilities/Dimensions');
   },
