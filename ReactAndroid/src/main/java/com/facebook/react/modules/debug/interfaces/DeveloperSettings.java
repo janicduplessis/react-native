@@ -32,4 +32,7 @@ public interface DeveloperSettings {
 
   /** Enable/Disable remote JS debugging. */
   void setRemoteJSDebugEnabled(boolean remoteJSDebugEnabled);
+
+  /** Add an item to the dev menu. */
+  void addMenuItem(String title);
 }
