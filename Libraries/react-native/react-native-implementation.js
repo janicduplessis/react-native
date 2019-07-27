@@ -57,6 +57,7 @@ import typeof BackHandler from '../Utilities/BackHandler';
 import typeof Clipboard from '../Components/Clipboard/Clipboard';
 import typeof DatePickerAndroid from '../Components/DatePickerAndroid/DatePickerAndroid';
 import typeof DeviceInfo from '../Utilities/DeviceInfo';
+import typeof DevSettings from '../Utilities/DevSettings';
 import typeof Dimensions from '../Utilities/Dimensions';
 import typeof Easing from '../Animated/src/Easing';
 import typeof ReactNative from '../Renderer/shims/ReactNative';
@@ -289,6 +290,9 @@ module.exports = {
   },
   get DeviceInfo(): DeviceInfo {
     return require('../Utilities/DeviceInfo');
+  },
+  get DevSettings(): DevSettings {
+    return require('../Utilities/DevSettings');
   },
   get Dimensions(): Dimensions {
     return require('../Utilities/Dimensions');
