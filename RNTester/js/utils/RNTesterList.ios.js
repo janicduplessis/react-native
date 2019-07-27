@@ -241,6 +241,10 @@ const APIExamples: Array<RNTesterExample> = [
     supportsTVOS: false,
   },
   {
+    key: 'DevSettings',
+    module: require('../examples/DevSettings/DevSettingsExample'),
+  },
+  {
     key: 'Dimensions',
     module: require('../examples/Dimensions/DimensionsExample'),
     supportsTVOS: true,
