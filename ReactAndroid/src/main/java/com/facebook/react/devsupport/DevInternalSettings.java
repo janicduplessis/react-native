@@ -166,6 +166,11 @@ public class DevInternalSettings
     mPreferences.edit().putBoolean(PREFS_REMOTE_JS_DEBUG_KEY, remoteJSDebugEnabled).apply();
   }
 
+  @Override
+  public void addMenuItem(String title) {
+    // Not supported.
+  }
+
   public interface Listener {
     void onInternalSettingsChanged();
   }
