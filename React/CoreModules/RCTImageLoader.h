@@ -15,6 +15,12 @@
 #import <React/RCTImageCache.h>
 #import <React/RCTImageLoaderProtocol.h>
 
+@interface UIImage (ReactImageLoader)
+
+@property (nonatomic, copy) CAKeyframeAnimation *reactKeyframeAnimation;
+
+@end
+
 @interface RCTImageLoader : NSObject <RCTBridgeModule, RCTImageLoaderProtocol>
 - (instancetype)init;
 - (instancetype)initWithRedirectDelegate:(id<RCTImageRedirectProtocol>)redirectDelegate NS_DESIGNATED_INITIALIZER;
