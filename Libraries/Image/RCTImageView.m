@@ -19,6 +19,7 @@
 #import <React/RCTUIImageViewAnimated.h>
 #import <React/RCTImageBlurUtils.h>
 #import <React/RCTImageUtils.h>
+#import <React/RCTImageLoader.h>
 #import <React/RCTImageLoaderProtocol.h>
 
 /**
@@ -82,7 +83,7 @@ static NSDictionary *onLoadParamsForSource(RCTImageSource *source)
   // Whether the latest change of props requires the image to be reloaded
   BOOL _needsReload;
 
-   RCTUIImageViewAnimated *_imageView;
+   UIImageView *_imageView;
 }
 
 - (instancetype)initWithBridge:(RCTBridge *)bridge
@@ -98,7 +99,7 @@ static NSDictionary *onLoadParamsForSource(RCTImageSource *source)
                selector:@selector(clearImageIfDetached)
                    name:UIApplicationDidEnterBackgroundNotification
                  object:nil];
-    _imageView = [[RCTUIImageViewAnimated alloc] init];
+    _imageView = [[UIImageView alloc] init];
     _imageView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     [self addSubview:_imageView];
   }
@@ -226,6 +227,7 @@ RCT_NOT_IMPLEMENTED(- (instancetype)initWithFrame:(CGRect)frame)
 - (void)clearImage
 {
   [self cancelImageLoad];
+  [_imageView.layer removeAnimationForKey:@"contents"];
   self.image = nil;
   _imageSource = nil;
 }
@@ -404,7 +406,18 @@ RCT_NOT_IMPLEMENTED(- (instancetype)initWithFrame:(CGRect)frame)
       self->_pendingImageSource = nil;
     }
 
-    self.image = image;
+    [self->_imageView.layer removeAnimationForKey:@"contents"];
+    if (image.reactKeyframeAnimation) {
+      CGImageRef posterImageRef = (__bridge CGImageRef)[image.reactKeyframeAnimation.values firstObject];
+      if (!posterImageRef) {
+        return;
+      }
+      // Apply renderingMode to animated image.
+      self->_imageView.image = [[UIImage imageWithCGImage:posterImageRef] imageWithRenderingMode:self->_renderingMode];
+      [self->_imageView.layer addAnimation:image.reactKeyframeAnimation forKey:@"contents"];
+    } else {
+      self.image = image;
+    }
 
     if (isPartialLoad) {
       if (self->_onPartialLoad) {
