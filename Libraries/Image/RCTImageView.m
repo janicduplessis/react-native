@@ -226,6 +226,7 @@ RCT_NOT_IMPLEMENTED(- (instancetype)initWithFrame:(CGRect)frame)
 - (void)clearImage
 {
   [self cancelImageLoad];
+  [_imageView.layer removeAnimationForKey:@"contents"];
   self.image = nil;
   _imageSource = nil;
 }
@@ -400,7 +401,18 @@ RCT_NOT_IMPLEMENTED(- (instancetype)initWithFrame:(CGRect)frame)
       self->_pendingImageSource = nil;
     }
 
-    self.image = image;
+    [self->_imageView.layer removeAnimationForKey:@"contents"];
+    if (image.reactKeyframeAnimation) {
+      CGImageRef posterImageRef = (__bridge CGImageRef)[image.reactKeyframeAnimation.values firstObject];
+      if (!posterImageRef) {
+        return;
+      }
+      // Apply renderingMode to animated image.
+      self->_imageView.image = [[UIImage imageWithCGImage:posterImageRef] imageWithRenderingMode:self->_renderingMode];
+      [self->_imageView.layer addAnimation:image.reactKeyframeAnimation forKey:@"contents"];
+    } else {
+      self.image = image;
+    }
 
     if (isPartialLoad) {
       if (self->_onPartialLoad) {
