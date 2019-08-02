@@ -35,6 +35,8 @@ project.xcworkspace
 /ReactAndroid/gradle/
 /ReactAndroid/gradlew
 /ReactAndroid/gradlew.bat
+/android/annotations/build/
+/android/annotations-compiler/build/
 
 # Buck
 .buckd
@@ -57,7 +59,6 @@ buck-out
 .gradle
 local.properties
 *.iml
-/android/
 
 # Node
 node_modules
