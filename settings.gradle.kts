@@ -27,3 +27,8 @@ if (File("template/node_modules/").exists()) {
         name = "template-android"
     }
 }
+
+include(":react-native-annotations")
+project(":react-native-annotations").projectDir = File(rootProject.projectDir, "packages/annotations-compiler/annotations")
+include(":react-native-annotations-compiler")
+project(":react-native-annotations-compiler").projectDir = File(rootProject.projectDir, "packages/annotations-compiler/compiler")

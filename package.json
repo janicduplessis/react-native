@@ -29,6 +29,7 @@
     "LICENSE",
     "local-cli",
     "packages/babel-plugin-codegen",
+    "packages/annotations-compiler",
     "React-Core.podspec",
     "react-native.config.js",
     "react.gradle",
