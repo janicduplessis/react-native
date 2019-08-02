@@ -34,3 +34,8 @@ plugins {
 if (File("./gradle/gradle-enterprise.gradle.kts").exists()) {
     apply(from = "./gradle/gradle-enterprise.gradle.kts")
 }
+
+include(":react-native-annotations")
+project(":react-native-annotations").projectDir = File(rootProject.projectDir, "packages/annotations-compiler/annotations")
+include(":react-native-annotations-compiler")
+project(":react-native-annotations-compiler").projectDir = File(rootProject.projectDir, "packages/annotations-compiler/compiler")

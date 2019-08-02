@@ -254,6 +254,15 @@ dependencies {
 
     //noinspection GradleDynamicVersion
     implementation "com.facebook.react:react-native:+"  // From node_modules
+    // If new architecture is enabled, we let you build RN from source
+    // Otherwise we fallback to a prebuilt .aar bundled in the NPM package.
+    if (isNewArchitectureEnabled()) {
+        implementation project(":ReactAndroid")
+    } else {
+        //noinspection GradleDynamicVersion
+        implementation "com.facebook.react:react-native:+"  // From node_modules
+    }
+    annotationProcessor project(':react-native-annotations-compiler')
 
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
 
