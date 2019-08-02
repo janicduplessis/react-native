@@ -377,6 +377,9 @@ android {
 }
 
 dependencies {
+    api(project(':react-native-annotations'))
+    annotationProcessor(project(':react-native-annotations-compiler'))
+
     api("androidx.appcompat:appcompat-resources:${ANDROIDX_APPCOMPAT_VERSION}")
     api("androidx.appcompat:appcompat:${ANDROIDX_APPCOMPAT_VERSION}")
     api("androidx.autofill:autofill:${ANDROIDX_AUTOFILL_VERSION}")

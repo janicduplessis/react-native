@@ -200,6 +200,7 @@ android {
 dependencies {
     // Build React Native from source
     implementation project(':ReactAndroid')
+    annotationProcessor project(":react-native-annotations-compiler")
 
     // Consume Hermes as built from source only for the Hermes variant.
     hermesImplementation(project(":ReactAndroid:hermes-engine")) {
