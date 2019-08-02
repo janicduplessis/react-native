@@ -51,8 +51,8 @@ import javax.lang.model.util.Types;
  * ReactPackage}s annotated with {@link ReactModuleList}.
  */
 @SupportedAnnotationTypes({
-  "com.facebook.react.module.annotations.ReactModule",
-  "com.facebook.react.module.annotations.ReactModuleList",
+    "com.facebook.react.module.annotations.ReactModule",
+    "com.facebook.react.module.annotations.ReactModuleList",
 })
 @SupportedSourceVersion(SourceVersion.RELEASE_7)
 public class ReactModuleSpecProcessor extends AbstractProcessor {
