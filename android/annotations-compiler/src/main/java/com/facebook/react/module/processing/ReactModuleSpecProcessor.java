@@ -13,7 +13,6 @@ import com.facebook.react.module.annotations.ReactModule;
 import com.facebook.react.module.annotations.ReactModuleList;
 import com.facebook.react.module.model.ReactModuleInfo;
 import com.facebook.react.module.model.ReactModuleInfoProvider;
-import com.facebook.react.turbomodule.core.interfaces.TurboModule;
 import com.squareup.javapoet.ClassName;
 import com.squareup.javapoet.CodeBlock;
 import com.squareup.javapoet.JavaFile;
@@ -50,8 +49,8 @@ import javax.lang.model.util.Types;
  * ReactPackage}s annotated with {@link ReactModuleList}.
  */
 @SupportedAnnotationTypes({
-  "com.facebook.react.module.annotations.ReactModule",
-  "com.facebook.react.module.annotations.ReactModuleList",
+    "com.facebook.react.module.annotations.ReactModule",
+    "com.facebook.react.module.annotations.ReactModuleList",
 })
 @SupportedSourceVersion(SourceVersion.RELEASE_7)
 public class ReactModuleSpecProcessor extends AbstractProcessor {
@@ -229,7 +228,7 @@ public class ReactModuleSpecProcessor extends AbstractProcessor {
       return false;
     }
     return typeElement.getInterfaces().stream()
-        .anyMatch(el -> el.toString().equals(TurboModule.class.getName()));
+        .anyMatch(el -> el.toString().equals("com.facebook.react.turbomodule.core.interfaces.TurboModule"));
   }
 
   private static class ReactModuleSpecException extends Exception {
