@@ -355,7 +355,7 @@ android {
 }
 
 dependencies {
-    implementation(project(':react-native-annotations'))
+    api(project(':react-native-annotations'))
     annotationProcessor(project(':react-native-annotations-compiler'))
 
     api("com.facebook.infer.annotation:infer-annotation:0.11.2")
