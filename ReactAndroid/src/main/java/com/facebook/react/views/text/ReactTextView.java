@@ -49,6 +49,7 @@ public class ReactTextView extends AppCompatTextView implements ReactCompoundVie
   private int mTextAlign = Gravity.NO_GRAVITY;
   private int mNumberOfLines = ViewDefaults.NUMBER_OF_LINES;
   private TextUtils.TruncateAt mEllipsizeLocation = TextUtils.TruncateAt.END;
+  private boolean mAdjustsFontSizeToFit = false;
   private int mLinkifyMaskType = 0;
   private boolean mNotifyOnInlineViewLayout;
 
@@ -457,6 +458,10 @@ public class ReactTextView extends AppCompatTextView implements ReactCompoundVie
     setMaxLines(mNumberOfLines);
   }
 
+  public void setAdjustFontSizeToFit(boolean adjustsFontSizeToFit) {
+    mAdjustsFontSizeToFit = adjustsFontSizeToFit;
+  }
+
   public void setEllipsizeLocation(TextUtils.TruncateAt ellipsizeLocation) {
     mEllipsizeLocation = ellipsizeLocation;
   }
@@ -468,7 +473,7 @@ public class ReactTextView extends AppCompatTextView implements ReactCompoundVie
   public void updateView() {
     @Nullable
     TextUtils.TruncateAt ellipsizeLocation =
-        mNumberOfLines == ViewDefaults.NUMBER_OF_LINES ? null : mEllipsizeLocation;
+        mNumberOfLines == ViewDefaults.NUMBER_OF_LINES || mAdjustsFontSizeToFit ? null : mEllipsizeLocation;
     setEllipsize(ellipsizeLocation);
   }
 
