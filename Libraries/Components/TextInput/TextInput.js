@@ -821,7 +821,6 @@ const TextInput = createReactClass({
   _focusSubscription: (undefined: ?Function),
   _lastNativeText: (undefined: ?string),
   _lastNativeSelection: (undefined: ?Selection),
-  _rafId: (null: ?AnimationFrameID),
 
   componentDidMount: function() {
     this._lastNativeText = this.props.value;
@@ -832,7 +831,7 @@ const TextInput = createReactClass({
     }
 
     if (this.props.autoFocus) {
-      this._rafId = requestAnimationFrame(this.focus);
+      this.focus();
     }
   },
 
@@ -844,9 +843,6 @@ const TextInput = createReactClass({
     const tag = ReactNative.findNodeHandle(this._inputRef);
     if (tag != null) {
       TextInputState.unregisterInput(tag);
-    }
-    if (this._rafId != null) {
-      cancelAnimationFrame(this._rafId);
     }
   },
 
