@@ -815,7 +815,6 @@ class InternalTextInput extends React.Component<Props> {
   _focusSubscription: ?Function = undefined;
   _lastNativeText: ?Stringish = null;
   _lastNativeSelection: ?Selection = null;
-  _rafId: ?AnimationFrameID = null;
 
   componentDidMount() {
     this._lastNativeText = this.props.value;
@@ -825,12 +824,8 @@ class InternalTextInput extends React.Component<Props> {
       TextInputState.registerInput(tag);
     }
 
-    if (this.props.autoFocus) {
-      this._rafId = requestAnimationFrame(() => {
-        if (this._inputRef) {
-          this._inputRef.focus();
-        }
-      });
+    if (this.props.autoFocus && this._inputRef) {
+      this._inputRef.focus();
     }
   }
 
@@ -876,9 +871,6 @@ class InternalTextInput extends React.Component<Props> {
     const tag = ReactNative.findNodeHandle(this._inputRef);
     if (tag != null) {
       TextInputState.unregisterInput(tag);
-    }
-    if (this._rafId != null) {
-      cancelAnimationFrame(this._rafId);
     }
   }
 
@@ -1020,12 +1012,10 @@ class InternalTextInput extends React.Component<Props> {
 
       /*
       Hi reader from the future. I'm sorry for this.
-
       This is a hack. Ideally we would forwardRef to the underlying
       host component. However, since TextInput has it's own methods that can be
       called as well, if we used the standard forwardRef then these
       methods wouldn't be accessible and thus be a breaking change.
-
       We have a couple of options of how to handle this:
       - Return a new ref with everything we methods from both. This is problematic
         because we need React to also know it is a host component which requires
