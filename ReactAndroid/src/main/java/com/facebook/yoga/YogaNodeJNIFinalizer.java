@@ -12,6 +12,10 @@ public class YogaNodeJNIFinalizer extends YogaNodeJNIBase {
     super();
   }
 
+  public YogaNodeJNIFinalizer(boolean useVanillaJNI) {
+    super(useVanillaJNI);
+  }
+
   public YogaNodeJNIFinalizer(YogaConfig config) {
     super(config);
   }
@@ -29,7 +33,10 @@ public class YogaNodeJNIFinalizer extends YogaNodeJNIBase {
     if (mNativePointer != 0) {
       long nativePointer = mNativePointer;
       mNativePointer = 0;
-      YogaNative.jni_YGNodeFreeJNI(nativePointer);
+      if (useVanillaJNI)
+        YogaNative.jni_YGNodeFreeJNI(nativePointer);
+      else
+        YogaNative.jni_YGNodeFree(nativePointer);
     }
   }
 }

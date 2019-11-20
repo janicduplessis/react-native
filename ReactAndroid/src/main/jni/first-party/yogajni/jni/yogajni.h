@@ -5,6 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-namespace YGJNIVanilla {
-void registerNatives(JNIEnv* env);
+#include <fbjni/fbjni.h>
+
+namespace YGJNI {
+jint registerNativeMethods(JavaVM* vm);
 };
