@@ -40,7 +40,7 @@ RCT_EXPORT_MODULE()
   SDImageWebPCoder *webPCoder = [SDImageWebPCoder sharedCoder];
   [SDImageCodersManager.sharedManager addCoder:webPCoder];
   // Supports HTTP URL as well as Photos URL globally
-  SDImageLoadersManager.sharedManager.loaders = @[SDWebImageDownloader.sharedDownloader, SDWebImagePhotosLoader.sharedLoader];
+  SDImageLoadersManager.sharedManager.loaders = @[SDWebImageDownloader.sharedDownloader, SDImagePhotosLoader.sharedLoader];
   // Replace default manager's loader implementation
   SDWebImageManager.defaultImageLoader = SDImageLoadersManager.sharedManager;
 }
