@@ -5,7 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  *
  * @noflow
- * @providesModule ReactNativeRenderer-dev
  * @preventMunge
  * @generated
  */
@@ -2607,21 +2606,26 @@ injection.injectEventPluginsByName({
   ReactNativeBridgeEventPlugin: ReactNativeBridgeEventPlugin
 });
 
-var debugRenderPhaseSideEffectsForStrictMode = false;
+// Uncomment to re-export dynamic flags from the fbsource version.
+var _require = require("../shims/ReactFeatureFlags");
+var enableNativeTargetAsInstance = _require.enableNativeTargetAsInstance; // The rest of the flags are static for better dead code elimination.
+
 var enableUserTimingAPI = true;
-var replayFailedUnitOfWorkWithInvokeGuardedCallback = true;
-var warnAboutDeprecatedLifecycles = true;
 var enableProfilerTimer = true;
 var enableSchedulerTracing = true;
 var enableSuspenseServerRenderer = false;
 
 var enableChunksAPI = false;
 
+var debugRenderPhaseSideEffectsForStrictMode = true;
+
+var replayFailedUnitOfWorkWithInvokeGuardedCallback = true;
+var warnAboutDeprecatedLifecycles = true;
 var enableDeprecatedFlareAPI = false;
 var enableFundamentalAPI = false;
 var enableScopeAPI = false;
 
-var warnAboutUnmockedScheduler = false;
+var warnAboutUnmockedScheduler = true;
 var flushSuspenseFallbacksInTests = true;
 var enableSuspenseCallback = false;
 var warnAboutDefaultPropsOnFunctionComponents = false;
@@ -2629,8 +2633,6 @@ var warnAboutStringRefs = false;
 var disableLegacyContext = false;
 var disableSchedulerTimeoutBasedOnReactExpirationTime = false;
 var enableTrainModelFix = true;
-
-var enableNativeTargetAsInstance = false;
 
 // Only used in www builds.
 
