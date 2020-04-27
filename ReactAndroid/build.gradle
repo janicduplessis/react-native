@@ -22,7 +22,7 @@ import org.apache.tools.ant.filters.ReplaceTokens
 // After that we build native code from src/main/jni with module path pointing at third-party-ndk.
 
 def customDownloadsDir = System.getenv("REACT_NATIVE_DOWNLOADS_DIR")
-def downloadsDir = customDownloadsDir ? new File(customDownloadsDir) : new File("$buildDir/downloads")
+def downloadsDir = customDownloadsDir ? new File(customDownloadsDir) : new File("$projectDir/../downloads")
 def thirdPartyNdkDir = new File("$buildDir/third-party-ndk")
 
 // You need to have following folders in this directory:
@@ -166,7 +166,7 @@ task prepareJSC {
         def jscPackagePath = findNodeModulePath(projectDir, "jsc-android")
         if (!jscPackagePath) {
             throw new GradleScriptException("Could not find the jsc-android npm package", null)
-        } 
+        }
 
         def jscDist = file("$jscPackagePath/dist")
         if (!jscDist.exists()) {
@@ -223,7 +223,7 @@ task downloadNdkBuildDependencies {
 def findNodeModulePath(baseDir, packageName) {
     def basePath = baseDir.toPath().normalize()
     // Node's module resolution algorithm searches up to the root directory,
-    // after which the base path will be null 
+    // after which the base path will be null
     while (basePath) {
         def candidatePath = Paths.get(basePath.toString(), "node_modules", packageName)
         if (candidatePath.toFile().exists()) {
