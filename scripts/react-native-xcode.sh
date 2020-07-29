@@ -78,14 +78,9 @@ if [[ "$ENTRY_FILE" ]]; then
   # Use ENTRY_FILE defined by user
   :
 elif [[ -s "index.ios.js" ]]; then
-  ENTRY_FILE=${1:-index.ios.js}
-else
-  ENTRY_FILE=${1:-index.js}
-fi
-
-if [[ $DEV != true && ! -f "$ENTRY_FILE" ]]; then
-  echo "error: Entry file $ENTRY_FILE does not exist. If you use another file as your entry point, pass ENTRY_FILE=myindex.js" >&2
-  exit 2
+   ENTRY_FILE=${1:-index.ios.js}
+ else
+   ENTRY_FILE=${1:-index.js}
 fi
 
 if [[ -s "$HOME/.nvm/nvm.sh" ]]; then
