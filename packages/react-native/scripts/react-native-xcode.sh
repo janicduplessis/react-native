@@ -139,6 +139,10 @@ if [[ $USE_HERMES != false && $DEV == false ]]; then
   EXTRA_ARGS+=("--minify" "false")
 fi
 
+# PRODUCT_SETTINGS_PATH is where the target Info.plist file is. The asset
+# catalog will be in the same folder.
+ASSET_CATALOG_DEST=${ASSET_CATALOG_DEST:-"$(dirname "$PRODUCT_SETTINGS_PATH")"}
+
 "$NODE_BINARY" $NODE_ARGS "$CLI_PATH" $BUNDLE_COMMAND \
   $CONFIG_ARG \
   --entry-file "$ENTRY_FILE" \
@@ -148,6 +152,7 @@ fi
   --bundle-output "$BUNDLE_FILE" \
   --assets-dest "$DEST" \
   "${EXTRA_ARGS[@]}" \
+  --asset-catalog-dest "$ASSET_CATALOG_DEST" \
   $EXTRA_PACKAGER_ARGS
 
 if [[ $USE_HERMES == false ]]; then
