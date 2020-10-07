@@ -60,3 +60,6 @@ buck-out/
 # Ruby / CocoaPods
 /ios/Pods/
 /vendor/bundle/
+
+# Generated asset catalog
+**/RNAssets.xcassets/*.imageset
