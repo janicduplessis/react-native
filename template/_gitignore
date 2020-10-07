@@ -58,3 +58,6 @@ buck-out/
 
 # CocoaPods
 /ios/Pods/
+
+# Generated asset catalog
+**/RNAssets.xcassets/*.imageset
