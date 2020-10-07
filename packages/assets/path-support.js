@@ -72,7 +72,7 @@ function getAndroidResourceFolderName(
   return 'drawable-' + suffix;
 }
 
-function getAndroidResourceIdentifier(asset: PackagerAsset): string {
+function getResourceIdentifier(asset: PackagerAsset): string {
   return (getBasePath(asset) + '/' + asset.name)
     .toLowerCase()
     .replace(/\//g, '_') // Encode folder structure in file name
@@ -87,6 +87,6 @@ function getBasePath(asset: PackagerAsset): string {
 
 module.exports = {
   getAndroidResourceFolderName,
-  getAndroidResourceIdentifier,
+  getResourceIdentifier,
   getBasePath,
 };
