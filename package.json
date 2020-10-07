@@ -1,8 +1,10 @@
 {
   "name": "react-native",
   "private": true,
-  "version": "0.62.26",
-  "bin": "./cli.js",
+  "version": "0.65.7",
+  "bin": {
+    "react-native": "cli.js"
+  },
   "description": "A framework for building native apps using React",
   "license": "MIT",
   "repository": "github:facebook/react-native",
@@ -93,7 +95,7 @@
     "@react-native-community/cli": "^5.0.1-alpha.0",
     "@react-native-community/cli-platform-android": "^5.0.1-alpha.0",
     "@react-native-community/cli-platform-ios": "^5.0.1-alpha.0",
-    "@react-native/assets": "1.0.0",
+    "@react-native/assets": "1.1.0",
     "@react-native/normalize-color": "1.0.0",
     "@react-native/polyfills": "1.0.0",
     "abort-controller": "^3.0.0",
