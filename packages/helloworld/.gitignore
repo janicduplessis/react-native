@@ -53,3 +53,6 @@ vendor/bundle/
 !.yarn/releases
 !.yarn/sdks
 !.yarn/versions
+
+# Generated asset catalog
+**/RNAssets.xcassets/*.imageset
