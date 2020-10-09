@@ -1,8 +1,10 @@
 {
   "name": "react-native",
   "private": true,
-  "version": "0.62.26",
-  "bin": "./cli.js",
+  "version": "0.64.7",
+  "bin": {
+    "react-native": "cli.js"
+  },
   "description": "A framework for building native apps using React",
   "license": "MIT",
   "repository": "github:facebook/react-native",
