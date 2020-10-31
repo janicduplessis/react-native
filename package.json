@@ -1,7 +1,7 @@
 {
   "name": "react-native",
   "private": true,
-  "version": "0.64.6",
+  "version": "0.64.7",
   "bin": {
     "react-native": "cli.js"
   },
