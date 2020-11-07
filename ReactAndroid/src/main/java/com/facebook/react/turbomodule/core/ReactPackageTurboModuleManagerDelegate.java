@@ -72,9 +72,17 @@ public abstract class ReactPackageTurboModuleManagerDelegate extends TurboModule
 
     for (final TurboReactPackage pkg : mPackages) {
       try {
-        NativeModule module = pkg.getModule(moduleName, mReactApplicationContext);
-        if (resolvedModule == null || module != null && module.canOverrideExistingModule()) {
-          resolvedModule = module;
+        ReactModuleInfo moduleInfo =
+          pkg.getReactModuleInfoProvider().getReactModuleInfos().get(moduleName);
+        if (moduleInfo != null) {
+          if (!moduleInfo.isTurboModule()) {
+            break;
+          }
+
+          NativeModule module = pkg.getModule(moduleName, mReactApplicationContext);
+          if (resolvedModule == null || module != null && module.canOverrideExistingModule()) {
+            resolvedModule = module;
+          }
         }
       } catch (IllegalArgumentException ex) {
         /**
