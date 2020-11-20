@@ -11,7 +11,8 @@
   },
   "dependencies": {
     "react": "17.0.1",
-    "react-native": "1000.0.0"
+    "react-native": "file:///Users/janic/Developer/react-native/react-native-1000.0.0.tgz",
+    "react-native-codegen": "file:///Users/janic/Developer/react-native/packages/react-native-codegen/react-native-codegen-0.0.5.tgz"
   },
   "devDependencies": {
     "@babel/core": "^7.8.4",
