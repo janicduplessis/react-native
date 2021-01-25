@@ -27,7 +27,7 @@ set -e
 THIS_DIR=$(cd -P "$(dirname "$(readlink "${BASH_SOURCE[0]}" || echo "${BASH_SOURCE[0]}")")" && pwd)
 TEMP_DIR=$(mktemp -d /tmp/react-native-codegen-XXXXXXXX)
 RN_DIR=$(cd "$THIS_DIR/.." && pwd)
-YARN_BINARY="${YARN_BINARY:-$(command -v yarn)}"
+YARN_BINARY="${YARN_BINARY:-$(command -v yarn || true)}"
 USE_FABRIC="${USE_FABRIC:-0}"
 
 cleanup () {
@@ -55,6 +55,11 @@ main() {
 
   CODEGEN_REPO_PATH="$RN_DIR/packages/react-native-codegen"
   CODEGEN_NPM_PATH="$RN_DIR/../react-native-codegen"
+  
+  if [ -z "$YARN_BINARY" ]; then
+    echo "Error: Could not find yarn. Make sure it is in bash PATH or set the YARN_BINARY environment variable." 1>&2
+    exit 1
+  fi
 
   if [ -z "$YARN_BINARY" ]; then
     echo "Error: Could not find yarn. Make sure it is in bash path or set the YARN_BINARY environment variable." 1>&2
