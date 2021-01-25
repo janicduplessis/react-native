@@ -170,7 +170,7 @@ def use_react_native_codegen!(spec, options={})
     :name => 'Generate Specs',
     :input_files => [srcs_dir],
     :output_files => ["$(DERIVED_FILE_DIR)/codegen-#{codegen_modules_library_name}.log"],
-    :script => "bash -c '#{env_vars} CODEGEN_MODULES_LIBRARY_NAME=#{codegen_modules_library_name} #{File.join(__dir__, "generate-specs.sh")}' | tee \"${SCRIPT_OUTPUT_FILE_0}\"",
+    :script => "bash -l -c '#{env_vars} CODEGEN_MODULES_LIBRARY_NAME=#{codegen_modules_library_name} #{File.join(__dir__, "generate-specs.sh")}' | tee \"${SCRIPT_OUTPUT_FILE_0}\"",
     :execution_position => :before_compile,
     :show_env_vars_in_log => true
   }
