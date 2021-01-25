@@ -56,6 +56,11 @@ main() {
   CODEGEN_REPO_PATH="$RN_DIR/packages/react-native-codegen"
   CODEGEN_NPM_PATH="$RN_DIR/../react-native-codegen"
 
+  if [ -z "$YARN_BINARY" ]; then
+    echo "Error: Could not find yarn. Make sure it is in bash path or set the YARN_BINARY environment variable." 1>&2
+    exit 1
+  fi
+
   if [ -d "$CODEGEN_REPO_PATH" ]; then
     CODEGEN_PATH=$(cd "$CODEGEN_REPO_PATH" && pwd)
   elif [ -d "$CODEGEN_NPM_PATH" ]; then
