@@ -110,7 +110,7 @@ package-lock.json
 /packages/rn-tester/RNTester/RNAssets.xcassets/*.imageset
 
 # react-native-codegen
-/React/FBReactNativeSpec/FBReactNativeSpec
+# /React/FBReactNativeSpec/FBReactNativeSpec
 /packages/react-native-codegen/lib
 /ReactCommon/react/renderer/components/rncore/
 /packages/rn-tester/NativeModuleExample/ScreenshotManagerSpec*
