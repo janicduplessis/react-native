@@ -194,5 +194,5 @@ def use_react_native_codegen!(spec, options={})
     :execution_position => :before_compile,
     :show_env_vars_in_log => true
   }
-  spec.prepare_command = "mkdir -p #{generated_dirs.map {|dir| "'../../#{dir}'"}.join(" ")} && touch #{generated_files.map {|file| "'../../#{file}'"}.join(" ")}"
+  spec.prepare_command = "mkdir -p #{generated_dirs.map {|dir| "'#{prefix.sub(/\${?PODS_TARGET_SRCROOT}?\/?/, '.')}/#{dir}'"}.join(" ")} && touch #{generated_files.map {|file| "'#{prefix.sub(/\${?PODS_TARGET_SRCROOT}?\/?/, './')}/#{file}'"}.join(" ")}"
 end
