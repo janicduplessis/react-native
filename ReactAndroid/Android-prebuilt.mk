@@ -27,6 +27,7 @@ include $(CLEAR_VARS)
 LOCAL_MODULE := fb
 LOCAL_SRC_FILES := $(REACT_NDK_EXPORT_DIR)/$(TARGET_ARCH_ABI)/libfb.so
 LOCAL_EXPORT_C_INCLUDES := $(FIRST_PARTY_NDK_DIR)/fb/include
+LOCAL_EXPORT_LDLIBS := -llog
 include $(PREBUILT_SHARED_LIBRARY)
 
 # folly_json
@@ -41,9 +42,10 @@ LOCAL_EXPORT_C_INCLUDES := \
 FOLLY_FLAGS := \
   -DFOLLY_NO_CONFIG=1 \
   -DFOLLY_HAVE_CLOCK_GETTIME=1 \
-  -DFOLLY_HAVE_MEMRCHR=1 \
   -DFOLLY_USE_LIBCPP=1 \
   -DFOLLY_MOBILE=1 \
+  -DFOLLY_HAVE_RECVMMSG=1 \
+  -DFOLLY_HAVE_PTHREAD=1 \
   -DFOLLY_HAVE_XSI_STRERROR_R=1
 LOCAL_CFLAGS += $(FOLLY_FLAGS)
 LOCAL_EXPORT_CPPFLAGS := $(FOLLY_FLAGS)
@@ -53,7 +55,7 @@ include $(PREBUILT_SHARED_LIBRARY)
 include $(CLEAR_VARS)
 LOCAL_MODULE := folly_futures
 LOCAL_SRC_FILES := $(REACT_NDK_EXPORT_DIR)/$(TARGET_ARCH_ABI)/libfolly_futures.so
-LOCAL_SHARED_LIBRARIES := liblibfolly_json
+LOCAL_SHARED_LIBRARIES := libfolly_json
 include $(PREBUILT_SHARED_LIBRARY)
 
 # glog
@@ -82,11 +84,20 @@ LOCAL_MODULE := react_nativemodule_core
 LOCAL_SRC_FILES := $(REACT_NDK_EXPORT_DIR)/$(TARGET_ARCH_ABI)/libreact_nativemodule_core.so
 LOCAL_EXPORT_C_INCLUDES := \
   $(REACT_ANDROID_SRC_DIR)/jni \
+  $(REACT_COMMON_DIR) \
   $(REACT_COMMON_DIR)/callinvoker \
   $(REACT_COMMON_DIR)/jsi \
   $(REACT_COMMON_DIR)/react/nativemodule/core \
   $(REACT_COMMON_DIR)/react/nativemodule/core/platform/android
-LOCAL_SHARED_LIBRARIES := libfolly_json
+LOCAL_SHARED_LIBRARIES := libjni libfolly_json libreactnativejni libreact_debug
+include $(PREBUILT_SHARED_LIBRARY)
+
+# reactnativejni
+include $(CLEAR_VARS)
+LOCAL_MODULE := reactnativejni
+LOCAL_SRC_FILES := $(REACT_NDK_EXPORT_DIR)/$(TARGET_ARCH_ABI)/libreactnativejni.so
+LOCAL_EXPORT_C_INCLUDES := \
+  $(REACT_ANDROID_SRC_DIR)/jni
 include $(PREBUILT_SHARED_LIBRARY)
 
 # turbomodulejsijni
