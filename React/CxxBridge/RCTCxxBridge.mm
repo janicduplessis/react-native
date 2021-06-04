@@ -40,19 +40,6 @@
 #import <jsireact/JSIExecutor.h>
 #import <reactperflogger/BridgeNativeModulePerfLogger.h>
 
-#ifndef RCT_USE_HERMES
-#if __has_include(<reacthermes/HermesExecutorFactory.h>)
-#define RCT_USE_HERMES 1
-#else
-#define RCT_USE_HERMES 0
-#endif
-#endif
-
-#if RCT_USE_HERMES
-#import <reacthermes/HermesExecutorFactory.h>
-#else
-#import "JSCExecutorFactory.h"
-#endif
 #import "RCTJSIExecutorRuntimeInstaller.h"
 
 #import "NSDataBigString.h"
@@ -429,14 +416,6 @@ struct RCTInstanceCallback : public InstanceCallback {
     if ([self.delegate conformsToProtocol:@protocol(RCTCxxBridgeDelegate)]) {
       id<RCTCxxBridgeDelegate> cxxDelegate = (id<RCTCxxBridgeDelegate>)self.delegate;
       executorFactory = [cxxDelegate jsExecutorFactoryForBridge:self];
-    }
-    if (!executorFactory) {
-      auto installBindings = RCTJSIExecutorRuntimeInstaller(nullptr);
-#if RCT_USE_HERMES
-      executorFactory = std::make_shared<HermesExecutorFactory>(installBindings);
-#else
-      executorFactory = std::make_shared<JSCExecutorFactory>(installBindings);
-#endif
     }
   } else {
     id<RCTJavaScriptExecutor> objcExecutor = [self moduleForClass:self.executorClass];
