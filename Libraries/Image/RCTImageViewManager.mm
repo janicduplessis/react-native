@@ -11,6 +11,7 @@
 
 #import <React/RCTConvert.h>
 #import <React/RCTImageSource.h>
+#import <SDWebImageAVIFCoder/SDImageAVIFCoder.h>
 #import <SDWebImageWebPCoder/SDWebImageWebPCoder.h>
 #import <SDWebImagePhotosPlugin/SDWebImagePhotosPlugin.h>
 #import <SDWebImage/SDWebImage.h>
@@ -37,6 +38,8 @@ RCT_EXPORT_MODULE()
 {
   [super setBridge:bridge];
 
+  SDImageAVIFCoder *AVIFCoder = [SDImageAVIFCoder sharedCoder];
+  [SDImageCodersManager.sharedManager addCoder:AVIFCoder];
   SDImageWebPCoder *webPCoder = [SDImageWebPCoder sharedCoder];
   [SDImageCodersManager.sharedManager addCoder:webPCoder];
   // Supports HTTP URL as well as Photos URL globally
