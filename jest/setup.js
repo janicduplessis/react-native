@@ -110,11 +110,9 @@ jest
       getNativeRef: jest.fn(),
     }),
   )
-  .mock('../Libraries/Modal/Modal', () => {
-    const baseComponent = mockComponent('../Libraries/Modal/Modal');
-    const mockModal = jest.requireActual('./mockModal');
-    return mockModal(baseComponent);
-  })
+  .mock('../Libraries/Modal/Modal', () =>
+    mockComponent('../Libraries/Modal/Modal'),
+  )
   .mock('../Libraries/Components/View/View', () =>
     mockComponent('../Libraries/Components/View/View', MockNativeMethods),
   )
