@@ -77,7 +77,7 @@ function main(appRootDir, outputPath) {
     Object.keys(dependencies).forEach(dependency => {
       const codegenConfigFileDir = path.join(
         appRootDir,
-        'node_modules',
+        '../../node_modules',
         dependency,
       );
       const configFilePath = path.join(
@@ -150,6 +150,9 @@ function main(appRootDir, outputPath) {
 
     // 5. For each codegen-enabled library, generate the native code spec files
     libraries.forEach(library => {
+      if (library.config.type === 'components' && !process.env.USE_FABRIC) {
+        return;
+      }
       const tmpDir = fs.mkdtempSync(
         path.join(os.tmpdir(), library.config.name),
       );
@@ -162,7 +165,9 @@ function main(appRootDir, outputPath) {
         outputPath ? outputPath : appRootDir,
         'build/generated/ios',
         library.config.name,
-        'react/renderer/components',
+        library.config.type === 'components'
+          ? 'react/renderer/components'
+          : '.',
       );
       const pathToTempOutputDir = path.join(tmpDir, 'out');
 
