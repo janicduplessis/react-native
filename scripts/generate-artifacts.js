@@ -89,7 +89,7 @@ function main(appRootDir, outputPath) {
     Object.keys(dependencies).forEach(dependency => {
       const codegenConfigFileDir = path.join(
         appRootDir,
-        'node_modules',
+        '../../node_modules',
         dependency,
       );
       const configFilePath = path.join(
