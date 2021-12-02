@@ -35,11 +35,14 @@ function getLatestVersionTag(branchVersion) {
     .split('\n')
     .filter(tag => tag.length > 0);
 
+console.log('getLatestVersionTag', {tags});
   // If there are no tags, return null
   if (tags.length === 0) {
+	console.log('tags.length === 0');
     return null;
   }
 
+	console.log('tags.length != 0');
   // Return most recent tag (with the "v" prefix)
   return tags[0];
 }
@@ -51,9 +54,11 @@ function getNextVersionFromTags(branch) {
 
   // Get the latest version tag of the release branch
   const versionTag = getLatestVersionTag(branchVersion);
+console.log({versionTag});
 
   // If there are no tags , we assume this is the first pre-release
   if (versionTag == null) {
+	console.log('We return here no?');
     return `${branchVersion}.0-rc.0`;
   }
 
