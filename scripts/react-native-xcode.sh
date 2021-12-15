@@ -74,11 +74,6 @@ else
   ENTRY_FILE=${1:-index.js}
 fi
 
-if [[ $DEV != true && ! -f "$ENTRY_FILE" ]]; then
-  echo "error: Entry file $ENTRY_FILE does not exist. If you use another file as your entry point, pass ENTRY_FILE=myindex.js" >&2
-  exit 2
-fi
-
 NODE_BINARY="$(command -v node)"
 
 # check and assign NODE_BINARY env
