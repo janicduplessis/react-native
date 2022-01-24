@@ -10,6 +10,7 @@
 #include <cstdlib>
 #include <mutex>
 #include <sstream>
+#include <fstream>
 
 #include <folly/Conv.h>
 #include <folly/Executor.h>
@@ -89,6 +90,8 @@ class Connection::Impl : public inspector::InspectorObserver,
   void handle(const m::debugger::StepIntoRequest &req) override;
   void handle(const m::debugger::StepOutRequest &req) override;
   void handle(const m::debugger::StepOverRequest &req) override;
+  void handle(const m::profiler::StartRequest &req) override;
+  void handle(const m::profiler::StopRequest &req) override;
   void handle(const m::heapProfiler::TakeHeapSnapshotRequest &req) override;
   void handle(
       const m::heapProfiler::StartTrackingHeapObjectsRequest &req) override;
@@ -918,6 +921,46 @@ void Connection::Impl::handle(const m::debugger::StepOutRequest &req) {
 
 void Connection::Impl::handle(const m::debugger::StepOverRequest &req) {
   sendResponseToClientViaExecutor(inspector_->stepOver(), req.id);
+}
+
+void Connection::Impl::handle(const m::profiler::StartRequest &req) {
+  const auto id = req.id;
+  inspector_
+      ->executeIfEnabled(
+          "Profiler.start",
+          [this](const debugger::ProgramState &) {
+              hermes::HermesRuntime::enableSamplingProfiler();
+          })
+      .via(executor_.get())
+      .thenValue(
+          [this, id](auto &&) { sendResponseToClient(m::makeOkResponse(id)); })
+      .thenError<std::exception>(sendErrorToClient(req.id));
+}
+
+void Connection::Impl::handle(const m::profiler::StopRequest &req) {
+  const auto id = req.id;
+    folly::makeFuture()
+      .via(executor_.get())
+      .thenValue(
+          [this, id](auto &&) {
+              hermes::HermesRuntime::disableSamplingProfiler();
+              auto tmpFileName = tmpnam(nullptr);
+              std::string tmpFileNameString(tmpFileName);
+              hermes::HermesRuntime::dumpSampledTraceToFile(tmpFileNameString);
+              std::ifstream tmpFileStream(tmpFileNameString);
+              std::stringstream stream;
+              stream << tmpFileStream.rdbuf();
+              auto jsonStr = stream.str();
+              folly::dynamic json = folly::parseJson(jsonStr);
+              
+              m::profiler::Profile profile{json};
+              
+              m::profiler::StopResponse resp;
+              resp.id = id;
+              resp.profile = profile;
+              sendResponseToClient(resp);
+          })
+      .thenError<std::exception>(sendErrorToClient(req.id));
 }
 
 std::vector<m::runtime::PropertyDescriptor>

@@ -93,6 +93,15 @@ struct StopTrackingHeapObjectsRequest;
 struct TakeHeapSnapshotRequest;
 } // namespace heapProfiler
 
+namespace profiler {
+struct PositionTickInfo;
+struct Profile;
+struct ProfileNode;
+struct StartRequest;
+struct StopRequest;
+struct StopResponse;
+} // namespace profiler
+
 /// RequestHandler handles requests via the visitor pattern.
 struct RequestHandler {
   virtual ~RequestHandler() = default;
@@ -124,6 +133,8 @@ struct RequestHandler {
   virtual void handle(
       const heapProfiler::StopTrackingHeapObjectsRequest &req) = 0;
   virtual void handle(const heapProfiler::TakeHeapSnapshotRequest &req) = 0;
+  virtual void handle(const profiler::StartRequest &req) = 0;
+  virtual void handle(const profiler::StopRequest &req) = 0;
   virtual void handle(const runtime::EvaluateRequest &req) = 0;
   virtual void handle(const runtime::GetHeapUsageRequest &req) = 0;
   virtual void handle(const runtime::GetPropertiesRequest &req) = 0;
@@ -159,6 +170,8 @@ struct NoopRequestHandler : public RequestHandler {
   void handle(
       const heapProfiler::StopTrackingHeapObjectsRequest &req) override {}
   void handle(const heapProfiler::TakeHeapSnapshotRequest &req) override {}
+  void handle(const profiler::StartRequest &req) override {}
+  void handle(const profiler::StopRequest &req) override {}
   void handle(const runtime::EvaluateRequest &req) override {}
   void handle(const runtime::GetHeapUsageRequest &req) override {}
   void handle(const runtime::GetPropertiesRequest &req) override {}
@@ -283,6 +296,40 @@ struct heapProfiler::SamplingHeapProfile : public Serializable {
 
   heapProfiler::SamplingHeapProfileNode head{};
   std::vector<heapProfiler::SamplingHeapProfileSample> samples;
+};
+
+struct profiler::PositionTickInfo : public Serializable {
+  PositionTickInfo() = default;
+  explicit PositionTickInfo(const folly::dynamic &obj);
+  folly::dynamic toDynamic() const override;
+
+  int line{};
+  int ticks{};
+};
+
+struct profiler::ProfileNode : public Serializable {
+  ProfileNode() = default;
+  explicit ProfileNode(const folly::dynamic &obj);
+  folly::dynamic toDynamic() const override;
+
+  int id{};
+  runtime::CallFrame callFrame{};
+  folly::Optional<int> hitCount;
+  folly::Optional<std::vector<int>> children;
+  folly::Optional<std::string> deoptReason;
+  folly::Optional<std::vector<profiler::PositionTickInfo>> positionTicks;
+};
+
+struct profiler::Profile : public Serializable {
+  Profile() = default;
+  explicit Profile(const folly::dynamic &obj);
+  folly::dynamic toDynamic() const override;
+
+  std::vector<profiler::ProfileNode> nodes;
+  double startTime{};
+  double endTime{};
+  folly::Optional<std::vector<int>> samples;
+  folly::Optional<std::vector<int>> timeDeltas;
 };
 
 struct runtime::ExecutionContextDescription : public Serializable {
@@ -554,6 +601,22 @@ struct heapProfiler::TakeHeapSnapshotRequest : public Request {
   folly::Optional<bool> captureNumericValue;
 };
 
+struct profiler::StartRequest : public Request {
+  StartRequest();
+  explicit StartRequest(const folly::dynamic &obj);
+
+  folly::dynamic toDynamic() const override;
+  void accept(RequestHandler &handler) const override;
+};
+
+struct profiler::StopRequest : public Request {
+  StopRequest();
+  explicit StopRequest(const folly::dynamic &obj);
+
+  folly::dynamic toDynamic() const override;
+  void accept(RequestHandler &handler) const override;
+};
+
 struct runtime::EvaluateRequest : public Request {
   EvaluateRequest();
   explicit EvaluateRequest(const folly::dynamic &obj);
@@ -672,6 +735,14 @@ struct heapProfiler::StopSamplingResponse : public Response {
   folly::dynamic toDynamic() const override;
 
   heapProfiler::SamplingHeapProfile profile{};
+};
+
+struct profiler::StopResponse : public Response {
+  StopResponse() = default;
+  explicit StopResponse(const folly::dynamic &obj);
+  folly::dynamic toDynamic() const override;
+
+  profiler::Profile profile{};
 };
 
 struct runtime::EvaluateResponse : public Response {
