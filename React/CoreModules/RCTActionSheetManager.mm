@@ -55,10 +55,14 @@ RCT_EXPORT_MODULE()
   [parentViewController presentViewController:alertController animated:YES completion:nil];
 }
 
+static int invocationNumber = 0;
+
 RCT_EXPORT_METHOD(showActionSheetWithOptions
                   : (JS::NativeActionSheetManager::SpecShowActionSheetWithOptionsOptions &)options callback
                   : (RCTResponseSenderBlock)callback)
 {
+    int localInvNum = invocationNumber++;
+    NSLog(@"Invoke %i", localInvNum);
   if (RCTRunningInAppExtension()) {
     RCTLogError(@"Unable to show action sheet from app extension");
     return;
@@ -124,8 +128,13 @@ RCT_EXPORT_METHOD(showActionSheetWithOptions
                                                                            message:message
                                                                     preferredStyle:UIAlertControllerStyleActionSheet];
 
+  
   NSInteger index = 0;
   bool isCancelButtonIndex = false;
+  // The handler for a button might get called more than once when tapping outside
+  // the action sheet on iPad. RCTResponseSenderBlock can only be called once so
+  // keep track of callback invocation here.
+  __block bool callbackInvoked = false;
   for (NSString *option in buttons) {
     UIAlertActionStyle style = UIAlertActionStyleDefault;
     if ([destructiveButtonIndices containsObject:@(index)]) {
@@ -139,7 +148,9 @@ RCT_EXPORT_METHOD(showActionSheetWithOptions
     UIAlertAction *actionButton = [UIAlertAction actionWithTitle:option
                                                            style:style
                                                          handler:^(__unused UIAlertAction *action) {
-                                                           callback(@[ @(localIndex) ]);
+                                                           if (!callbackInvoked) {
+                                                             callback(@[ @(localIndex) ]);
+                                                           }
                                                          }];
     if (isCancelButtonIndex) {
       [actionButton setValue:cancelButtonTintColor forKey:@"titleTextColor"];
