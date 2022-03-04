@@ -1,0 +1,15 @@
+rootProject.name = 'HelloWorld'
+
+include(":react-native-annotations")
+project(":react-native-annotations").projectDir = File(rootProject.projectDir, "../node_modules/react-native/packages/annotations-compiler/annotations")
+include(":react-native-annotations-compiler")
+project(":react-native-annotations-compiler").projectDir = File(rootProject.projectDir, "../node_modules/react-native/packages/annotations-compiler/compiler")
+
+apply from: file("../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesSettingsGradle(settings)
+include ':app'
+includeBuild('../node_modules/react-native-gradle-plugin')
+
+if (settings.hasProperty("newArchEnabled") && settings.newArchEnabled == "true") {
+    include(":ReactAndroid")
+    project(":ReactAndroid").projectDir = file('../node_modules/react-native/ReactAndroid')
+}
