@@ -1,0 +1,1101 @@
+{
+  "buildFiles": [
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/lib/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/API/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/tools/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/lib/VM/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/public/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/lib/ADT/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/lib/AST/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/ReactCommon/jsi/jsi/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/lib/Inst/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/external/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/lib/BCGen/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/lib/Regex/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/tools/hdb/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/tools/hvm/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/tools/jsi/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/unittests/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/lib/AST2JS/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/lib/Parser/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/API/hermes/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/lib/Support/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/unsupported/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/tools/synth/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/lib/Platform/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/external/zip/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/tools/hermes/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/unittests/IR/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/external/llvh/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/lib/SourceMap/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/lib/BCGen/HBC/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/external/dtoa/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/tools/hermesc/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/tools/hbcdump/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/tools/fuzzers/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/unittests/AST/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/unittests/API/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/unittests/ADT/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/lib/FlowParser/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/tools/hbc-diff/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/unittests/dtoa/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/lib/ConsoleHost/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/tools/hvm-bench/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/tools/emhermesc/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/unittests/BCGen/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/utils/hermes-lit/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/lib/FrontEndDefs/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/unittests/Parser/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/external/llvh/lib/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/lib/Platform/Intl/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/unsupported/tools/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/tools/node-hermes/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/unittests/Support/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/lib/CompilerDriver/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/tools/hbc-deltaprep/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/tools/hbc-attribute/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/tools/hermes-parser/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/unittests/VMRuntime/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/unittests/Optimizer/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/lib/Platform/Unicode/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/lib/InternalBytecode/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/public/hermes/Public/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/lib/VM/Instrumentation/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/tools/fuzzers/fuzzilli/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/external/llvh/utils/not/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/lib/DependencyExtractor/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/tools/fuzzers/libfuzzer/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/external/llvh/lib/Support/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/external/llvh/utils/count/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/unsupported/tools/rustgen/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/unittests/PlatformUnicode/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/external/llvh/lib/Demangle/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/tools/dependency-extractor/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/external/llvh/utils/unittest/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/external/llvh/utils/FileCheck/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/unittests/VMRuntime/Instrumentation/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/external/llvh/utils/unittest/UnitTestMain/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/android/intltest/java/com/facebook/hermes/test/CMakeLists.txt"
+  ],
+  "cleanCommandsComponents": [
+    [
+      "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+      "-C",
+      "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a",
+      "clean"
+    ]
+  ],
+  "buildTargetsCommandComponents": [
+    "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+    "-C",
+    "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a",
+    "{LIST_OF_TARGETS_TO_BUILD}"
+  ],
+  "libraries": {
+    "hermesPlatform-MinSizeRel-armeabi-v7a": {
+      "artifactName": "hermesPlatform",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a",
+        "hermesPlatform"
+      ],
+      "abi": "armeabi-v7a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a/lib/Platform/libhermesPlatform.a",
+      "runtimeFiles": []
+    },
+    "gtest-MinSizeRel-armeabi-v7a": {
+      "artifactName": "gtest",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a",
+        "gtest"
+      ],
+      "abi": "armeabi-v7a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a/external/llvh/utils/unittest/libgtest.a",
+      "runtimeFiles": []
+    },
+    "hermesSupport-MinSizeRel-armeabi-v7a": {
+      "artifactName": "hermesSupport",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a",
+        "hermesSupport"
+      ],
+      "abi": "armeabi-v7a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a/lib/Support/libhermesSupport.a",
+      "runtimeFiles": []
+    },
+    "hermes-jsi-MinSizeRel-armeabi-v7a": {
+      "artifactName": "hermes-jsi",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a",
+        "hermes-jsi"
+      ],
+      "abi": "armeabi-v7a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a/bin/hermes-jsi",
+      "runtimeFiles": [
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/build/intermediates/cxx/MinSizeRel/1g696kf7/obj/armeabi-v7a/libjsi.so",
+        "/Users/janicduplessis/.gradle/caches/transforms-3/2bf5ae3e876bb8fe3a8a84a4c8d7d1d8/transformed/fbjni-0.2.2/prefab/modules/fbjni/libs/android.armeabi-v7a/libfbjni.so"
+      ]
+    },
+    "hermesAST-MinSizeRel-armeabi-v7a": {
+      "artifactName": "hermesAST",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a",
+        "hermesAST"
+      ],
+      "abi": "armeabi-v7a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a/lib/AST/libhermesAST.a",
+      "runtimeFiles": []
+    },
+    "jsi-MinSizeRel-armeabi-v7a": {
+      "artifactName": "jsi",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a",
+        "jsi"
+      ],
+      "abi": "armeabi-v7a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/build/intermediates/cxx/MinSizeRel/1g696kf7/obj/armeabi-v7a/libjsi.so",
+      "runtimeFiles": []
+    },
+    "hermesFrontend-MinSizeRel-armeabi-v7a": {
+      "artifactName": "hermesFrontend",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a",
+        "hermesFrontend"
+      ],
+      "abi": "armeabi-v7a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a/lib/libhermesFrontend.a",
+      "runtimeFiles": []
+    },
+    "HermesVMRuntimeTests-MinSizeRel-armeabi-v7a": {
+      "artifactName": "HermesVMRuntimeTests",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a",
+        "HermesVMRuntimeTests"
+      ],
+      "abi": "armeabi-v7a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/build/intermediates/cxx/MinSizeRel/1g696kf7/obj/armeabi-v7a/HermesVMRuntimeTests",
+      "runtimeFiles": [
+        "/Users/janicduplessis/.gradle/caches/transforms-3/2bf5ae3e876bb8fe3a8a84a4c8d7d1d8/transformed/fbjni-0.2.2/prefab/modules/fbjni/libs/android.armeabi-v7a/libfbjni.so"
+      ]
+    },
+    "HermesSupportTests-MinSizeRel-armeabi-v7a": {
+      "artifactName": "HermesSupportTests",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a",
+        "HermesSupportTests"
+      ],
+      "abi": "armeabi-v7a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/build/intermediates/cxx/MinSizeRel/1g696kf7/obj/armeabi-v7a/HermesSupportTests",
+      "runtimeFiles": [
+        "/Users/janicduplessis/.gradle/caches/transforms-3/2bf5ae3e876bb8fe3a8a84a4c8d7d1d8/transformed/fbjni-0.2.2/prefab/modules/fbjni/libs/android.armeabi-v7a/libfbjni.so"
+      ]
+    },
+    "jsijni-MinSizeRel-armeabi-v7a": {
+      "artifactName": "jsijni",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a",
+        "jsijni"
+      ],
+      "abi": "armeabi-v7a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/build/intermediates/cxx/MinSizeRel/1g696kf7/obj/armeabi-v7a/libjsijni.so",
+      "runtimeFiles": [
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/build/intermediates/cxx/MinSizeRel/1g696kf7/obj/armeabi-v7a/libhermes.so",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/build/intermediates/cxx/MinSizeRel/1g696kf7/obj/armeabi-v7a/libjsi.so",
+        "/Users/janicduplessis/.gradle/caches/transforms-3/2bf5ae3e876bb8fe3a8a84a4c8d7d1d8/transformed/fbjni-0.2.2/prefab/modules/fbjni/libs/android.armeabi-v7a/libfbjni.so"
+      ]
+    },
+    "hermesAST2JS-MinSizeRel-armeabi-v7a": {
+      "artifactName": "hermesAST2JS",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a",
+        "hermesAST2JS"
+      ],
+      "abi": "armeabi-v7a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a/lib/AST2JS/libhermesAST2JS.a",
+      "runtimeFiles": []
+    },
+    "hermesHBCBackend-MinSizeRel-armeabi-v7a": {
+      "artifactName": "hermesHBCBackend",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a",
+        "hermesHBCBackend"
+      ],
+      "abi": "armeabi-v7a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a/lib/BCGen/HBC/libhermesHBCBackend.a",
+      "runtimeFiles": []
+    },
+    "hbcdump-MinSizeRel-armeabi-v7a": {
+      "artifactName": "hbcdump",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a",
+        "hbcdump"
+      ],
+      "abi": "armeabi-v7a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a/bin/hbcdump",
+      "runtimeFiles": [
+        "/Users/janicduplessis/.gradle/caches/transforms-3/2bf5ae3e876bb8fe3a8a84a4c8d7d1d8/transformed/fbjni-0.2.2/prefab/modules/fbjni/libs/android.armeabi-v7a/libfbjni.so"
+      ]
+    },
+    "hermesSourceMap-MinSizeRel-armeabi-v7a": {
+      "artifactName": "hermesSourceMap",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a",
+        "hermesSourceMap"
+      ],
+      "abi": "armeabi-v7a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a/lib/SourceMap/libhermesSourceMap.a",
+      "runtimeFiles": []
+    },
+    "rustgen-MinSizeRel-armeabi-v7a": {
+      "artifactName": "rustgen",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a",
+        "rustgen"
+      ],
+      "abi": "armeabi-v7a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a/bin/rustgen",
+      "runtimeFiles": []
+    },
+    "HermesBCGenTests-MinSizeRel-armeabi-v7a": {
+      "artifactName": "HermesBCGenTests",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a",
+        "HermesBCGenTests"
+      ],
+      "abi": "armeabi-v7a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/build/intermediates/cxx/MinSizeRel/1g696kf7/obj/armeabi-v7a/HermesBCGenTests",
+      "runtimeFiles": [
+        "/Users/janicduplessis/.gradle/caches/transforms-3/2bf5ae3e876bb8fe3a8a84a4c8d7d1d8/transformed/fbjni-0.2.2/prefab/modules/fbjni/libs/android.armeabi-v7a/libfbjni.so"
+      ]
+    },
+    "hermesFlowParser-MinSizeRel-armeabi-v7a": {
+      "artifactName": "hermesFlowParser",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a",
+        "hermesFlowParser"
+      ],
+      "abi": "armeabi-v7a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a/lib/FlowParser/libhermesFlowParser.a",
+      "runtimeFiles": []
+    },
+    "LLVHDemangle-MinSizeRel-armeabi-v7a": {
+      "artifactName": "LLVHDemangle",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a",
+        "LLVHDemangle"
+      ],
+      "abi": "armeabi-v7a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a/external/llvh/lib/Demangle/libLLVHDemangle.a",
+      "runtimeFiles": []
+    },
+    "hermesBackend-MinSizeRel-armeabi-v7a": {
+      "artifactName": "hermesBackend",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a",
+        "hermesBackend"
+      ],
+      "abi": "armeabi-v7a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a/lib/BCGen/libhermesBackend.a",
+      "runtimeFiles": []
+    },
+    "HermesOptimizerTests-MinSizeRel-armeabi-v7a": {
+      "artifactName": "HermesOptimizerTests",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a",
+        "HermesOptimizerTests"
+      ],
+      "abi": "armeabi-v7a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/build/intermediates/cxx/MinSizeRel/1g696kf7/obj/armeabi-v7a/HermesOptimizerTests",
+      "runtimeFiles": [
+        "/Users/janicduplessis/.gradle/caches/transforms-3/2bf5ae3e876bb8fe3a8a84a4c8d7d1d8/transformed/fbjni-0.2.2/prefab/modules/fbjni/libs/android.armeabi-v7a/libfbjni.so"
+      ]
+    },
+    "hermesInst-MinSizeRel-armeabi-v7a": {
+      "artifactName": "hermesInst",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a",
+        "hermesInst"
+      ],
+      "abi": "armeabi-v7a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a/lib/Inst/libhermesInst.a",
+      "runtimeFiles": []
+    },
+    "SamplingProfilerTests-MinSizeRel-armeabi-v7a": {
+      "artifactName": "SamplingProfilerTests",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a",
+        "SamplingProfilerTests"
+      ],
+      "abi": "armeabi-v7a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/build/intermediates/cxx/MinSizeRel/1g696kf7/obj/armeabi-v7a/SamplingProfilerTests",
+      "runtimeFiles": [
+        "/Users/janicduplessis/.gradle/caches/transforms-3/2bf5ae3e876bb8fe3a8a84a4c8d7d1d8/transformed/fbjni-0.2.2/prefab/modules/fbjni/libs/android.armeabi-v7a/libfbjni.so",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/build/intermediates/cxx/MinSizeRel/1g696kf7/obj/armeabi-v7a/libjsi.so"
+      ]
+    },
+    "hbc-attribute-MinSizeRel-armeabi-v7a": {
+      "artifactName": "hbc-attribute",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a",
+        "hbc-attribute"
+      ],
+      "abi": "armeabi-v7a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a/bin/hbc-attribute",
+      "runtimeFiles": [
+        "/Users/janicduplessis/.gradle/caches/transforms-3/2bf5ae3e876bb8fe3a8a84a4c8d7d1d8/transformed/fbjni-0.2.2/prefab/modules/fbjni/libs/android.armeabi-v7a/libfbjni.so"
+      ]
+    },
+    "hermesapiLean-MinSizeRel-armeabi-v7a": {
+      "artifactName": "hermesapiLean",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a",
+        "hermesapiLean"
+      ],
+      "abi": "armeabi-v7a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a/API/hermes/libhermesapiLean.a",
+      "runtimeFiles": []
+    },
+    "SegmentTestCompile-MinSizeRel-armeabi-v7a": {
+      "artifactName": "SegmentTestCompile",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a",
+        "SegmentTestCompile"
+      ],
+      "abi": "armeabi-v7a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a/unittests/API/libSegmentTestCompile.a",
+      "runtimeFiles": []
+    },
+    "hermesCompilerDriver-MinSizeRel-armeabi-v7a": {
+      "artifactName": "hermesCompilerDriver",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a",
+        "hermesCompilerDriver"
+      ],
+      "abi": "armeabi-v7a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a/lib/CompilerDriver/libhermesCompilerDriver.a",
+      "runtimeFiles": []
+    },
+    "hvm-MinSizeRel-armeabi-v7a": {
+      "artifactName": "hvm",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a",
+        "hvm"
+      ],
+      "abi": "armeabi-v7a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a/bin/hvm",
+      "runtimeFiles": [
+        "/Users/janicduplessis/.gradle/caches/transforms-3/2bf5ae3e876bb8fe3a8a84a4c8d7d1d8/transformed/fbjni-0.2.2/prefab/modules/fbjni/libs/android.armeabi-v7a/libfbjni.so"
+      ]
+    },
+    "timerStats-MinSizeRel-armeabi-v7a": {
+      "artifactName": "timerStats",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a",
+        "timerStats"
+      ],
+      "abi": "armeabi-v7a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a/API/hermes/libtimerStats.a",
+      "runtimeFiles": []
+    },
+    "hdb-MinSizeRel-armeabi-v7a": {
+      "artifactName": "hdb",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a",
+        "hdb"
+      ],
+      "abi": "armeabi-v7a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a/bin/hdb",
+      "runtimeFiles": [
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/build/intermediates/cxx/MinSizeRel/1g696kf7/obj/armeabi-v7a/libjsi.so",
+        "/Users/janicduplessis/.gradle/caches/transforms-3/2bf5ae3e876bb8fe3a8a84a4c8d7d1d8/transformed/fbjni-0.2.2/prefab/modules/fbjni/libs/android.armeabi-v7a/libfbjni.so"
+      ]
+    },
+    "hermesc-MinSizeRel-armeabi-v7a": {
+      "artifactName": "hermesc",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a",
+        "hermesc"
+      ],
+      "abi": "armeabi-v7a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a/bin/hermesc",
+      "runtimeFiles": [
+        "/Users/janicduplessis/.gradle/caches/transforms-3/2bf5ae3e876bb8fe3a8a84a4c8d7d1d8/transformed/fbjni-0.2.2/prefab/modules/fbjni/libs/android.armeabi-v7a/libfbjni.so"
+      ]
+    },
+    "hbc-diff-MinSizeRel-armeabi-v7a": {
+      "artifactName": "hbc-diff",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a",
+        "hbc-diff"
+      ],
+      "abi": "armeabi-v7a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a/bin/hbc-diff",
+      "runtimeFiles": [
+        "/Users/janicduplessis/.gradle/caches/transforms-3/2bf5ae3e876bb8fe3a8a84a4c8d7d1d8/transformed/fbjni-0.2.2/prefab/modules/fbjni/libs/android.armeabi-v7a/libfbjni.so"
+      ]
+    },
+    "hermesPlatformIntl-MinSizeRel-armeabi-v7a": {
+      "artifactName": "hermesPlatformIntl",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a",
+        "hermesPlatformIntl"
+      ],
+      "abi": "armeabi-v7a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a/lib/Platform/Intl/libhermesPlatformIntl.a",
+      "runtimeFiles": []
+    },
+    "LLVHSupport-MinSizeRel-armeabi-v7a": {
+      "artifactName": "LLVHSupport",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a",
+        "LLVHSupport"
+      ],
+      "abi": "armeabi-v7a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a/external/llvh/lib/Support/libLLVHSupport.a",
+      "runtimeFiles": []
+    },
+    "hermesVMRuntimeLean-MinSizeRel-armeabi-v7a": {
+      "artifactName": "hermesVMRuntimeLean",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a",
+        "hermesVMRuntimeLean"
+      ],
+      "abi": "armeabi-v7a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a/lib/VM/libhermesVMRuntimeLean.a",
+      "runtimeFiles": []
+    },
+    "hermesapi-MinSizeRel-armeabi-v7a": {
+      "artifactName": "hermesapi",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a",
+        "hermesapi"
+      ],
+      "abi": "armeabi-v7a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a/API/hermes/libhermesapi.a",
+      "runtimeFiles": []
+    },
+    "DtoaTests-MinSizeRel-armeabi-v7a": {
+      "artifactName": "DtoaTests",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a",
+        "DtoaTests"
+      ],
+      "abi": "armeabi-v7a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/build/intermediates/cxx/MinSizeRel/1g696kf7/obj/armeabi-v7a/DtoaTests",
+      "runtimeFiles": []
+    },
+    "synth-MinSizeRel-armeabi-v7a": {
+      "artifactName": "synth",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a",
+        "synth"
+      ],
+      "abi": "armeabi-v7a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a/bin/synth",
+      "runtimeFiles": [
+        "/Users/janicduplessis/.gradle/caches/transforms-3/2bf5ae3e876bb8fe3a8a84a4c8d7d1d8/transformed/fbjni-0.2.2/prefab/modules/fbjni/libs/android.armeabi-v7a/libfbjni.so",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/build/intermediates/cxx/MinSizeRel/1g696kf7/obj/armeabi-v7a/libjsi.so"
+      ]
+    },
+    "HermesASTTests-MinSizeRel-armeabi-v7a": {
+      "artifactName": "HermesASTTests",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a",
+        "HermesASTTests"
+      ],
+      "abi": "armeabi-v7a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/build/intermediates/cxx/MinSizeRel/1g696kf7/obj/armeabi-v7a/HermesASTTests",
+      "runtimeFiles": [
+        "/Users/janicduplessis/.gradle/caches/transforms-3/2bf5ae3e876bb8fe3a8a84a4c8d7d1d8/transformed/fbjni-0.2.2/prefab/modules/fbjni/libs/android.armeabi-v7a/libfbjni.so"
+      ]
+    },
+    "zip-MinSizeRel-armeabi-v7a": {
+      "artifactName": "zip",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a",
+        "zip"
+      ],
+      "abi": "armeabi-v7a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a/external/zip/libzip.a",
+      "runtimeFiles": []
+    },
+    "synthTrace-MinSizeRel-armeabi-v7a": {
+      "artifactName": "synthTrace",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a",
+        "synthTrace"
+      ],
+      "abi": "armeabi-v7a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a/API/hermes/libsynthTrace.a",
+      "runtimeFiles": []
+    },
+    "hermesADT-MinSizeRel-armeabi-v7a": {
+      "artifactName": "hermesADT",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a",
+        "hermesADT"
+      ],
+      "abi": "armeabi-v7a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a/lib/ADT/libhermesADT.a",
+      "runtimeFiles": []
+    },
+    "hermesDependencyExtractor-MinSizeRel-armeabi-v7a": {
+      "artifactName": "hermesDependencyExtractor",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a",
+        "hermesDependencyExtractor"
+      ],
+      "abi": "armeabi-v7a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a/lib/DependencyExtractor/libhermesDependencyExtractor.a",
+      "runtimeFiles": []
+    },
+    "interp-dispatch-bench-MinSizeRel-armeabi-v7a": {
+      "artifactName": "interp-dispatch-bench",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a",
+        "interp-dispatch-bench"
+      ],
+      "abi": "armeabi-v7a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a/bin/interp-dispatch-bench",
+      "runtimeFiles": [
+        "/Users/janicduplessis/.gradle/caches/transforms-3/2bf5ae3e876bb8fe3a8a84a4c8d7d1d8/transformed/fbjni-0.2.2/prefab/modules/fbjni/libs/android.armeabi-v7a/libfbjni.so"
+      ]
+    },
+    "APITests-MinSizeRel-armeabi-v7a": {
+      "artifactName": "APITests",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a",
+        "APITests"
+      ],
+      "abi": "armeabi-v7a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/build/intermediates/cxx/MinSizeRel/1g696kf7/obj/armeabi-v7a/APITests",
+      "runtimeFiles": [
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/build/intermediates/cxx/MinSizeRel/1g696kf7/obj/armeabi-v7a/libjsi.so",
+        "/Users/janicduplessis/.gradle/caches/transforms-3/2bf5ae3e876bb8fe3a8a84a4c8d7d1d8/transformed/fbjni-0.2.2/prefab/modules/fbjni/libs/android.armeabi-v7a/libfbjni.so"
+      ]
+    },
+    "github-cli-release-MinSizeRel-armeabi-v7a": {
+      "artifactName": "github-cli-release",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a",
+        "github-cli-release"
+      ],
+      "abi": "armeabi-v7a",
+      "runtimeFiles": []
+    },
+    "hermesHBCBackendLean-MinSizeRel-armeabi-v7a": {
+      "artifactName": "hermesHBCBackendLean",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a",
+        "hermesHBCBackendLean"
+      ],
+      "abi": "armeabi-v7a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a/lib/BCGen/HBC/libhermesHBCBackendLean.a",
+      "runtimeFiles": []
+    },
+    "hermesParser-MinSizeRel-armeabi-v7a": {
+      "artifactName": "hermesParser",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a",
+        "hermesParser"
+      ],
+      "abi": "armeabi-v7a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a/lib/Parser/libhermesParser.a",
+      "runtimeFiles": []
+    },
+    "emhermesc-MinSizeRel-armeabi-v7a": {
+      "artifactName": "emhermesc",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a",
+        "emhermesc"
+      ],
+      "abi": "armeabi-v7a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a/bin/emhermesc",
+      "runtimeFiles": [
+        "/Users/janicduplessis/.gradle/caches/transforms-3/2bf5ae3e876bb8fe3a8a84a4c8d7d1d8/transformed/fbjni-0.2.2/prefab/modules/fbjni/libs/android.armeabi-v7a/libfbjni.so"
+      ]
+    },
+    "HermesInstrumentationTests-MinSizeRel-armeabi-v7a": {
+      "artifactName": "HermesInstrumentationTests",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a",
+        "HermesInstrumentationTests"
+      ],
+      "abi": "armeabi-v7a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/build/intermediates/cxx/MinSizeRel/1g696kf7/obj/armeabi-v7a/HermesInstrumentationTests",
+      "runtimeFiles": [
+        "/Users/janicduplessis/.gradle/caches/transforms-3/2bf5ae3e876bb8fe3a8a84a4c8d7d1d8/transformed/fbjni-0.2.2/prefab/modules/fbjni/libs/android.armeabi-v7a/libfbjni.so"
+      ]
+    },
+    "gtest_main-MinSizeRel-armeabi-v7a": {
+      "artifactName": "gtest_main",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a",
+        "gtest_main"
+      ],
+      "abi": "armeabi-v7a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a/external/llvh/utils/unittest/UnitTestMain/libgtest_main.a",
+      "runtimeFiles": []
+    },
+    "hermesInternalBytecode-MinSizeRel-armeabi-v7a": {
+      "artifactName": "hermesInternalBytecode",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a",
+        "hermesInternalBytecode"
+      ],
+      "abi": "armeabi-v7a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a/lib/InternalBytecode/libhermesInternalBytecode.a",
+      "runtimeFiles": []
+    },
+    "jsijniepi-MinSizeRel-armeabi-v7a": {
+      "artifactName": "jsijniepi",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a",
+        "jsijniepi"
+      ],
+      "abi": "armeabi-v7a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/build/intermediates/cxx/MinSizeRel/1g696kf7/obj/armeabi-v7a/libjsijniepi.so",
+      "runtimeFiles": [
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/build/intermediates/cxx/MinSizeRel/1g696kf7/obj/armeabi-v7a/libhermes.so",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/build/intermediates/cxx/MinSizeRel/1g696kf7/obj/armeabi-v7a/libjsi.so",
+        "/Users/janicduplessis/.gradle/caches/transforms-3/2bf5ae3e876bb8fe3a8a84a4c8d7d1d8/transformed/fbjni-0.2.2/prefab/modules/fbjni/libs/android.armeabi-v7a/libfbjni.so"
+      ]
+    },
+    "APILeanTests-MinSizeRel-armeabi-v7a": {
+      "artifactName": "APILeanTests",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a",
+        "APILeanTests"
+      ],
+      "abi": "armeabi-v7a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/build/intermediates/cxx/MinSizeRel/1g696kf7/obj/armeabi-v7a/APILeanTests",
+      "runtimeFiles": [
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/build/intermediates/cxx/MinSizeRel/1g696kf7/obj/armeabi-v7a/libjsi.so",
+        "/Users/janicduplessis/.gradle/caches/transforms-3/2bf5ae3e876bb8fe3a8a84a4c8d7d1d8/transformed/fbjni-0.2.2/prefab/modules/fbjni/libs/android.armeabi-v7a/libfbjni.so"
+      ]
+    },
+    "check-hermes-MinSizeRel-armeabi-v7a": {
+      "artifactName": "check-hermes",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a",
+        "check-hermes"
+      ],
+      "abi": "armeabi-v7a",
+      "runtimeFiles": []
+    },
+    "dtoa-MinSizeRel-armeabi-v7a": {
+      "artifactName": "dtoa",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a",
+        "dtoa"
+      ],
+      "abi": "armeabi-v7a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a/external/dtoa/libdtoa.a",
+      "runtimeFiles": []
+    },
+    "hermesPlatformUnicode-MinSizeRel-armeabi-v7a": {
+      "artifactName": "hermesPlatformUnicode",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a",
+        "hermesPlatformUnicode"
+      ],
+      "abi": "armeabi-v7a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a/lib/Platform/Unicode/libhermesPlatformUnicode.a",
+      "runtimeFiles": []
+    },
+    "hermes-MinSizeRel-armeabi-v7a": {
+      "artifactName": "hermes",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a",
+        "hermes"
+      ],
+      "abi": "armeabi-v7a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a/bin/hermes",
+      "runtimeFiles": [
+        "/Users/janicduplessis/.gradle/caches/transforms-3/2bf5ae3e876bb8fe3a8a84a4c8d7d1d8/transformed/fbjni-0.2.2/prefab/modules/fbjni/libs/android.armeabi-v7a/libfbjni.so"
+      ]
+    },
+    "dependency-extractor-MinSizeRel-armeabi-v7a": {
+      "artifactName": "dependency-extractor",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a",
+        "dependency-extractor"
+      ],
+      "abi": "armeabi-v7a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a/bin/dependency-extractor",
+      "runtimeFiles": [
+        "/Users/janicduplessis/.gradle/caches/transforms-3/2bf5ae3e876bb8fe3a8a84a4c8d7d1d8/transformed/fbjni-0.2.2/prefab/modules/fbjni/libs/android.armeabi-v7a/libfbjni.so"
+      ]
+    },
+    "traceInterpreter-MinSizeRel-armeabi-v7a": {
+      "artifactName": "traceInterpreter",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a",
+        "traceInterpreter"
+      ],
+      "abi": "armeabi-v7a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a/API/hermes/libtraceInterpreter.a",
+      "runtimeFiles": []
+    },
+    "hermesConsoleHost-MinSizeRel-armeabi-v7a": {
+      "artifactName": "hermesConsoleHost",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a",
+        "hermesConsoleHost"
+      ],
+      "abi": "armeabi-v7a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a/lib/ConsoleHost/libhermesConsoleHost.a",
+      "runtimeFiles": []
+    },
+    "emdependency-extractor-MinSizeRel-armeabi-v7a": {
+      "artifactName": "emdependency-extractor",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a",
+        "emdependency-extractor"
+      ],
+      "abi": "armeabi-v7a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a/bin/emdependency-extractor",
+      "runtimeFiles": [
+        "/Users/janicduplessis/.gradle/caches/transforms-3/2bf5ae3e876bb8fe3a8a84a4c8d7d1d8/transformed/fbjni-0.2.2/prefab/modules/fbjni/libs/android.armeabi-v7a/libfbjni.so"
+      ]
+    },
+    "HermesIRTests-MinSizeRel-armeabi-v7a": {
+      "artifactName": "HermesIRTests",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a",
+        "HermesIRTests"
+      ],
+      "abi": "armeabi-v7a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/build/intermediates/cxx/MinSizeRel/1g696kf7/obj/armeabi-v7a/HermesIRTests",
+      "runtimeFiles": [
+        "/Users/janicduplessis/.gradle/caches/transforms-3/2bf5ae3e876bb8fe3a8a84a4c8d7d1d8/transformed/fbjni-0.2.2/prefab/modules/fbjni/libs/android.armeabi-v7a/libfbjni.so"
+      ]
+    },
+    "compileJS-MinSizeRel-armeabi-v7a": {
+      "artifactName": "compileJS",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a",
+        "compileJS"
+      ],
+      "abi": "armeabi-v7a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a/API/hermes/libcompileJS.a",
+      "runtimeFiles": []
+    },
+    "count-MinSizeRel-armeabi-v7a": {
+      "artifactName": "count",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a",
+        "count"
+      ],
+      "abi": "armeabi-v7a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a/bin/count",
+      "runtimeFiles": []
+    },
+    "hermesInstrumentation-MinSizeRel-armeabi-v7a": {
+      "artifactName": "hermesInstrumentation",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a",
+        "hermesInstrumentation"
+      ],
+      "abi": "armeabi-v7a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a/lib/VM/Instrumentation/libhermesInstrumentation.a",
+      "runtimeFiles": []
+    },
+    "synthTraceParser-MinSizeRel-armeabi-v7a": {
+      "artifactName": "synthTraceParser",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a",
+        "synthTraceParser"
+      ],
+      "abi": "armeabi-v7a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a/API/hermes/libsynthTraceParser.a",
+      "runtimeFiles": []
+    },
+    "not-MinSizeRel-armeabi-v7a": {
+      "artifactName": "not",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a",
+        "not"
+      ],
+      "abi": "armeabi-v7a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a/bin/not",
+      "runtimeFiles": []
+    },
+    "HermesParserTests-MinSizeRel-armeabi-v7a": {
+      "artifactName": "HermesParserTests",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a",
+        "HermesParserTests"
+      ],
+      "abi": "armeabi-v7a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/build/intermediates/cxx/MinSizeRel/1g696kf7/obj/armeabi-v7a/HermesParserTests",
+      "runtimeFiles": [
+        "/Users/janicduplessis/.gradle/caches/transforms-3/2bf5ae3e876bb8fe3a8a84a4c8d7d1d8/transformed/fbjni-0.2.2/prefab/modules/fbjni/libs/android.armeabi-v7a/libfbjni.so"
+      ]
+    },
+    "hermesVMRuntime-MinSizeRel-armeabi-v7a": {
+      "artifactName": "hermesVMRuntime",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a",
+        "hermesVMRuntime"
+      ],
+      "abi": "armeabi-v7a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a/lib/VM/libhermesVMRuntime.a",
+      "runtimeFiles": []
+    },
+    "HermesADTTests-MinSizeRel-armeabi-v7a": {
+      "artifactName": "HermesADTTests",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a",
+        "HermesADTTests"
+      ],
+      "abi": "armeabi-v7a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/build/intermediates/cxx/MinSizeRel/1g696kf7/obj/armeabi-v7a/HermesADTTests",
+      "runtimeFiles": [
+        "/Users/janicduplessis/.gradle/caches/transforms-3/2bf5ae3e876bb8fe3a8a84a4c8d7d1d8/transformed/fbjni-0.2.2/prefab/modules/fbjni/libs/android.armeabi-v7a/libfbjni.so"
+      ]
+    },
+    "hermesOptimizer-MinSizeRel-armeabi-v7a": {
+      "artifactName": "hermesOptimizer",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a",
+        "hermesOptimizer"
+      ],
+      "abi": "armeabi-v7a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a/lib/libhermesOptimizer.a",
+      "runtimeFiles": []
+    },
+    "libhermes-MinSizeRel-armeabi-v7a": {
+      "artifactName": "libhermes",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a",
+        "libhermes"
+      ],
+      "abi": "armeabi-v7a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/build/intermediates/cxx/MinSizeRel/1g696kf7/obj/armeabi-v7a/libhermes.so",
+      "runtimeFiles": [
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/build/intermediates/cxx/MinSizeRel/1g696kf7/obj/armeabi-v7a/libjsi.so",
+        "/Users/janicduplessis/.gradle/caches/transforms-3/2bf5ae3e876bb8fe3a8a84a4c8d7d1d8/transformed/fbjni-0.2.2/prefab/modules/fbjni/libs/android.armeabi-v7a/libfbjni.so"
+      ]
+    },
+    "FileCheck-MinSizeRel-armeabi-v7a": {
+      "artifactName": "FileCheck",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a",
+        "FileCheck"
+      ],
+      "abi": "armeabi-v7a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a/bin/FileCheck",
+      "runtimeFiles": []
+    },
+    "hermesFrontEndDefs-MinSizeRel-armeabi-v7a": {
+      "artifactName": "hermesFrontEndDefs",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a",
+        "hermesFrontEndDefs"
+      ],
+      "abi": "armeabi-v7a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a/lib/FrontEndDefs/libhermesFrontEndDefs.a",
+      "runtimeFiles": []
+    },
+    "PlatformUnicodeTests-MinSizeRel-armeabi-v7a": {
+      "artifactName": "PlatformUnicodeTests",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a",
+        "PlatformUnicodeTests"
+      ],
+      "abi": "armeabi-v7a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/build/intermediates/cxx/MinSizeRel/1g696kf7/obj/armeabi-v7a/PlatformUnicodeTests",
+      "runtimeFiles": [
+        "/Users/janicduplessis/.gradle/caches/transforms-3/2bf5ae3e876bb8fe3a8a84a4c8d7d1d8/transformed/fbjni-0.2.2/prefab/modules/fbjni/libs/android.armeabi-v7a/libfbjni.so"
+      ]
+    },
+    "make_bundle_dir-MinSizeRel-armeabi-v7a": {
+      "artifactName": "make_bundle_dir",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a",
+        "make_bundle_dir"
+      ],
+      "abi": "armeabi-v7a",
+      "runtimeFiles": []
+    },
+    "hermesRegex-MinSizeRel-armeabi-v7a": {
+      "artifactName": "hermesRegex",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a",
+        "hermesRegex"
+      ],
+      "abi": "armeabi-v7a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a/lib/Regex/libhermesRegex.a",
+      "runtimeFiles": []
+    },
+    "hbc-deltaprep-MinSizeRel-armeabi-v7a": {
+      "artifactName": "hbc-deltaprep",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a",
+        "hbc-deltaprep"
+      ],
+      "abi": "armeabi-v7a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/armeabi-v7a/bin/hbc-deltaprep",
+      "runtimeFiles": [
+        "/Users/janicduplessis/.gradle/caches/transforms-3/2bf5ae3e876bb8fe3a8a84a4c8d7d1d8/transformed/fbjni-0.2.2/prefab/modules/fbjni/libs/android.armeabi-v7a/libfbjni.so"
+      ]
+    }
+  }
+}

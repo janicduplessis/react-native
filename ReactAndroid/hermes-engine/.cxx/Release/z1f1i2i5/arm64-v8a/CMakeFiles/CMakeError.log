@@ -1,0 +1,457 @@
+Performing C++ SOURCE FILE Test DEPRECATED_COPY_FLAG failed with the following output:
+Change Dir: /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a/CMakeFiles/CMakeTmp
+
+Run Build Command:"/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja" "cmTC_2cbdd"
+[1/2] Building CXX object CMakeFiles/cmTC_2cbdd.dir/src.cxx.o
+warning: unknown warning option '-Wdeprecated-copy'; did you mean '-Wdeprecated'? [-Wunknown-warning-option]
+1 warning generated.
+[2/2] Linking CXX executable cmTC_2cbdd
+
+Source file was:
+int main() { return 0; }
+Performing C++ SOURCE FILE Test CXX_SUPPORTS_CLASS_MEMACCESS_FLAG failed with the following output:
+Change Dir: /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a/CMakeFiles/CMakeTmp
+
+Run Build Command:"/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja" "cmTC_f2cc6"
+[1/2] Building CXX object CMakeFiles/cmTC_f2cc6.dir/src.cxx.o
+warning: unknown warning option '-Wclass-memaccess'; did you mean '-Wclass-varargs'? [-Wunknown-warning-option]
+1 warning generated.
+[2/2] Linking CXX executable cmTC_f2cc6
+
+Source file was:
+int main() { return 0; }
+Performing C++ SOURCE FILE Test HAVE_GC_SECTIONS failed with the following output:
+Change Dir: /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a/CMakeFiles/CMakeTmp
+
+Run Build Command:"/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja" "cmTC_ae951"
+[1/2] Building CXX object CMakeFiles/cmTC_ae951.dir/src.cxx.o
+[2/2] Linking CXX executable cmTC_ae951
+FAILED: cmTC_ae951 
+: && /Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang++ --target=aarch64-none-linux-android21 --gcc-toolchain=/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64 --sysroot=/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/sysroot  -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security   -Wall -Wextra -Wno-unused-parameter -Wwrite-strings -Wcast-qual -Wmissing-field-initializers -Wno-noexcept-type -Wnon-virtual-dtor -Wdelete-non-virtual-dtor -Wno-range-loop-analysis -DHAVE_GC_SECTIONS  --gc-sections CMakeFiles/cmTC_ae951.dir/src.cxx.o  -o cmTC_ae951  -latomic -lm && :
+clang++: error: unsupported option '--gc-sections'
+ninja: build stopped: subcommand failed.
+
+Source file was:
+int main() { return 0; }
+Determining if the include file malloc/malloc.h exists failed with the following output:
+Change Dir: /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a/CMakeFiles/CMakeTmp
+
+Run Build Command:"/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja" "cmTC_e035b"
+[1/2] Building C object CMakeFiles/cmTC_e035b.dir/CheckIncludeFile.c.o
+FAILED: CMakeFiles/cmTC_e035b.dir/CheckIncludeFile.c.o 
+/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang --target=aarch64-none-linux-android21 --gcc-toolchain=/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64 --sysroot=/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/sysroot   -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -Wall -Wextra -Wno-unused-parameter -Wwrite-strings -Wmissing-field-initializers -Wdelete-non-virtual-dtor  -fPIE -o CMakeFiles/cmTC_e035b.dir/CheckIncludeFile.c.o   -c CheckIncludeFile.c
+CheckIncludeFile.c:1:10: fatal error: 'malloc/malloc.h' file not found
+#include <malloc/malloc.h>
+         ^~~~~~~~~~~~~~~~~
+1 error generated.
+ninja: build stopped: subcommand failed.
+
+
+Determining if the include file valgrind/valgrind.h exists failed with the following output:
+Change Dir: /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a/CMakeFiles/CMakeTmp
+
+Run Build Command:"/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja" "cmTC_7f88b"
+[1/2] Building C object CMakeFiles/cmTC_7f88b.dir/CheckIncludeFile.c.o
+FAILED: CMakeFiles/cmTC_7f88b.dir/CheckIncludeFile.c.o 
+/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang --target=aarch64-none-linux-android21 --gcc-toolchain=/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64 --sysroot=/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/sysroot   -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -Wall -Wextra -Wno-unused-parameter -Wwrite-strings -Wmissing-field-initializers -Wdelete-non-virtual-dtor  -fPIE -o CMakeFiles/cmTC_7f88b.dir/CheckIncludeFile.c.o   -c CheckIncludeFile.c
+CheckIncludeFile.c:1:10: fatal error: 'valgrind/valgrind.h' file not found
+#include <valgrind/valgrind.h>
+         ^~~~~~~~~~~~~~~~~~~~~
+1 error generated.
+ninja: build stopped: subcommand failed.
+
+
+Determining if the include file mach/mach.h exists failed with the following output:
+Change Dir: /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a/CMakeFiles/CMakeTmp
+
+Run Build Command:"/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja" "cmTC_b37f2"
+[1/2] Building C object CMakeFiles/cmTC_b37f2.dir/CheckIncludeFile.c.o
+FAILED: CMakeFiles/cmTC_b37f2.dir/CheckIncludeFile.c.o 
+/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang --target=aarch64-none-linux-android21 --gcc-toolchain=/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64 --sysroot=/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/sysroot   -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -Wall -Wextra -Wno-unused-parameter -Wwrite-strings -Wmissing-field-initializers -Wdelete-non-virtual-dtor  -fPIE -o CMakeFiles/cmTC_b37f2.dir/CheckIncludeFile.c.o   -c CheckIncludeFile.c
+CheckIncludeFile.c:1:10: fatal error: 'mach/mach.h' file not found
+#include <mach/mach.h>
+         ^~~~~~~~~~~~~
+1 error generated.
+ninja: build stopped: subcommand failed.
+
+
+Determining if the include file histedit.h exists failed with the following output:
+Change Dir: /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a/CMakeFiles/CMakeTmp
+
+Run Build Command:"/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja" "cmTC_48b22"
+[1/2] Building C object CMakeFiles/cmTC_48b22.dir/CheckIncludeFile.c.o
+FAILED: CMakeFiles/cmTC_48b22.dir/CheckIncludeFile.c.o 
+/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang --target=aarch64-none-linux-android21 --gcc-toolchain=/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64 --sysroot=/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/sysroot   -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -Wall -Wextra -Wno-unused-parameter -Wwrite-strings -Wmissing-field-initializers -Wdelete-non-virtual-dtor  -fPIE -o CMakeFiles/cmTC_48b22.dir/CheckIncludeFile.c.o   -c CheckIncludeFile.c
+CheckIncludeFile.c:1:10: fatal error: 'histedit.h' file not found
+#include <histedit.h>
+         ^~~~~~~~~~~~
+1 error generated.
+ninja: build stopped: subcommand failed.
+
+
+Determining if the include file CrashReporterClient.h exists failed with the following output:
+Change Dir: /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a/CMakeFiles/CMakeTmp
+
+Run Build Command:"/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja" "cmTC_821cb"
+[1/2] Building C object CMakeFiles/cmTC_821cb.dir/CheckIncludeFile.c.o
+FAILED: CMakeFiles/cmTC_821cb.dir/CheckIncludeFile.c.o 
+/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang --target=aarch64-none-linux-android21 --gcc-toolchain=/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64 --sysroot=/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/sysroot   -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -Wall -Wextra -Wno-unused-parameter -Wwrite-strings -Wmissing-field-initializers -Wdelete-non-virtual-dtor  -fPIE -o CMakeFiles/cmTC_821cb.dir/CheckIncludeFile.c.o   -c CheckIncludeFile.c
+CheckIncludeFile.c:1:10: fatal error: 'CrashReporterClient.h' file not found
+#include <CrashReporterClient.h>
+         ^~~~~~~~~~~~~~~~~~~~~~~
+1 error generated.
+ninja: build stopped: subcommand failed.
+
+
+Determining if the function pthread_create exists in the pthread failed with the following output:
+Change Dir: /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a/CMakeFiles/CMakeTmp
+
+Run Build Command:"/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja" "cmTC_85273"
+[1/2] Building C object CMakeFiles/cmTC_85273.dir/CheckFunctionExists.c.o
+/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/CheckFunctionExists.c:7:3: warning: declaration of built-in function 'pthread_create' requires inclusion of the header <pthread.h> [-Wbuiltin-requires-header]
+  CHECK_FUNCTION_EXISTS(void);
+  ^
+<command line>:3:31: note: expanded from here
+#define CHECK_FUNCTION_EXISTS pthread_create
+                              ^
+1 warning generated.
+[2/2] Linking C executable cmTC_85273
+FAILED: cmTC_85273 
+: && /Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang --target=aarch64-none-linux-android21 --gcc-toolchain=/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64 --sysroot=/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/sysroot -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -Wall -Wextra -Wno-unused-parameter -Wwrite-strings -Wmissing-field-initializers -Wdelete-non-virtual-dtor -DCHECK_FUNCTION_EXISTS=pthread_create  -Wl,--exclude-libs,libgcc.a -Wl,--exclude-libs,libgcc_real.a -Wl,--exclude-libs,libatomic.a -Wl,--build-id -Wl,--fatal-warnings -Wl,--no-undefined -Qunused-arguments -Wl,--gc-sections CMakeFiles/cmTC_85273.dir/CheckFunctionExists.c.o  -o cmTC_85273  -lpthread -lm -latomic -lm && :
+/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/lib/gcc/aarch64-linux-android/4.9.x/../../../../aarch64-linux-android/bin/ld: cannot find -lpthread
+clang: error: linker command failed with exit code 1 (use -v to see invocation)
+ninja: build stopped: subcommand failed.
+
+
+Determining if the function clock_gettime exists in the rt failed with the following output:
+Change Dir: /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a/CMakeFiles/CMakeTmp
+
+Run Build Command:"/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja" "cmTC_29e26"
+[1/2] Building C object CMakeFiles/cmTC_29e26.dir/CheckFunctionExists.c.o
+[2/2] Linking C executable cmTC_29e26
+FAILED: cmTC_29e26 
+: && /Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang --target=aarch64-none-linux-android21 --gcc-toolchain=/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64 --sysroot=/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/sysroot -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -Wall -Wextra -Wno-unused-parameter -Wwrite-strings -Wmissing-field-initializers -Wdelete-non-virtual-dtor -DCHECK_FUNCTION_EXISTS=clock_gettime  -Wl,--exclude-libs,libgcc.a -Wl,--exclude-libs,libgcc_real.a -Wl,--exclude-libs,libatomic.a -Wl,--build-id -Wl,--fatal-warnings -Wl,--no-undefined -Qunused-arguments -Wl,--gc-sections CMakeFiles/cmTC_29e26.dir/CheckFunctionExists.c.o  -o cmTC_29e26  -lrt -lm -latomic -lm && :
+/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/lib/gcc/aarch64-linux-android/4.9.x/../../../../aarch64-linux-android/bin/ld: cannot find -lrt
+clang: error: linker command failed with exit code 1 (use -v to see invocation)
+ninja: build stopped: subcommand failed.
+
+
+Determining if the function xar_open exists in the xar failed with the following output:
+Change Dir: /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a/CMakeFiles/CMakeTmp
+
+Run Build Command:"/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja" "cmTC_adfe6"
+[1/2] Building C object CMakeFiles/cmTC_adfe6.dir/CheckFunctionExists.c.o
+[2/2] Linking C executable cmTC_adfe6
+FAILED: cmTC_adfe6 
+: && /Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang --target=aarch64-none-linux-android21 --gcc-toolchain=/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64 --sysroot=/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/sysroot -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -Wall -Wextra -Wno-unused-parameter -Wwrite-strings -Wmissing-field-initializers -Wdelete-non-virtual-dtor -DCHECK_FUNCTION_EXISTS=xar_open  -Wl,--exclude-libs,libgcc.a -Wl,--exclude-libs,libgcc_real.a -Wl,--exclude-libs,libatomic.a -Wl,--build-id -Wl,--fatal-warnings -Wl,--no-undefined -Qunused-arguments -Wl,--gc-sections CMakeFiles/cmTC_adfe6.dir/CheckFunctionExists.c.o  -o cmTC_adfe6  -lxar -lm -latomic -lm && :
+/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/lib/gcc/aarch64-linux-android/4.9.x/../../../../aarch64-linux-android/bin/ld: cannot find -lxar
+clang: error: linker command failed with exit code 1 (use -v to see invocation)
+ninja: build stopped: subcommand failed.
+
+
+Determining if the backtrace exist failed with the following output:
+Change Dir: /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a/CMakeFiles/CMakeTmp
+
+Run Build Command:"/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja" "cmTC_a501f"
+[1/2] Building C object CMakeFiles/cmTC_a501f.dir/CheckSymbolExists.c.o
+FAILED: CMakeFiles/cmTC_a501f.dir/CheckSymbolExists.c.o 
+/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang --target=aarch64-none-linux-android21 --gcc-toolchain=/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64 --sysroot=/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/sysroot   -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -Wall -Wextra -Wno-unused-parameter -Wwrite-strings -Wmissing-field-initializers -Wdelete-non-virtual-dtor  -fPIE -o CMakeFiles/cmTC_a501f.dir/CheckSymbolExists.c.o   -c CheckSymbolExists.c
+CheckSymbolExists.c:2:10: fatal error: 'execinfo.h' file not found
+#include <execinfo.h>
+         ^~~~~~~~~~~~
+1 error generated.
+ninja: build stopped: subcommand failed.
+
+File /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <execinfo.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef backtrace
+  return ((int*)(&backtrace))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the futimes exist failed with the following output:
+Change Dir: /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a/CMakeFiles/CMakeTmp
+
+Run Build Command:"/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja" "cmTC_4a989"
+[1/2] Building C object CMakeFiles/cmTC_4a989.dir/CheckSymbolExists.c.o
+FAILED: CMakeFiles/cmTC_4a989.dir/CheckSymbolExists.c.o 
+/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang --target=aarch64-none-linux-android21 --gcc-toolchain=/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64 --sysroot=/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/sysroot   -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -Wall -Wextra -Wno-unused-parameter -Wwrite-strings -Wmissing-field-initializers -Wdelete-non-virtual-dtor  -Werror=unguarded-availability-new -fPIE -o CMakeFiles/cmTC_4a989.dir/CheckSymbolExists.c.o   -c CheckSymbolExists.c
+CheckSymbolExists.c:8:19: error: use of undeclared identifier 'futimes'; did you mean 'utimes'?
+  return ((int*)(&futimes))[argc];
+                  ^~~~~~~
+                  utimes
+/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/include/sys/time.h:47:5: note: 'utimes' declared here
+int utimes(const char* __path, const struct timeval __times[2]);
+    ^
+1 error generated.
+ninja: build stopped: subcommand failed.
+
+File /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <sys/time.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef futimes
+  return ((int*)(&futimes))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the mallctl exist failed with the following output:
+Change Dir: /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a/CMakeFiles/CMakeTmp
+
+Run Build Command:"/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja" "cmTC_3bc4f"
+[1/2] Building C object CMakeFiles/cmTC_3bc4f.dir/CheckSymbolExists.c.o
+FAILED: CMakeFiles/cmTC_3bc4f.dir/CheckSymbolExists.c.o 
+/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang --target=aarch64-none-linux-android21 --gcc-toolchain=/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64 --sysroot=/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/sysroot   -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -Wall -Wextra -Wno-unused-parameter -Wwrite-strings -Wmissing-field-initializers -Wdelete-non-virtual-dtor  -Werror=unguarded-availability-new -fPIE -o CMakeFiles/cmTC_3bc4f.dir/CheckSymbolExists.c.o   -c CheckSymbolExists.c
+CheckSymbolExists.c:2:10: fatal error: 'malloc_np.h' file not found
+#include <malloc_np.h>
+         ^~~~~~~~~~~~~
+1 error generated.
+ninja: build stopped: subcommand failed.
+
+File /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <malloc_np.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef mallctl
+  return ((int*)(&mallctl))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the malloc_zone_statistics exist failed with the following output:
+Change Dir: /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a/CMakeFiles/CMakeTmp
+
+Run Build Command:"/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja" "cmTC_ba163"
+[1/2] Building C object CMakeFiles/cmTC_ba163.dir/CheckSymbolExists.c.o
+FAILED: CMakeFiles/cmTC_ba163.dir/CheckSymbolExists.c.o 
+/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang --target=aarch64-none-linux-android21 --gcc-toolchain=/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64 --sysroot=/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/sysroot   -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -Wall -Wextra -Wno-unused-parameter -Wwrite-strings -Wmissing-field-initializers -Wdelete-non-virtual-dtor  -Werror=unguarded-availability-new -fPIE -o CMakeFiles/cmTC_ba163.dir/CheckSymbolExists.c.o   -c CheckSymbolExists.c
+CheckSymbolExists.c:2:10: fatal error: 'malloc/malloc.h' file not found
+#include <malloc/malloc.h>
+         ^~~~~~~~~~~~~~~~~
+1 error generated.
+ninja: build stopped: subcommand failed.
+
+File /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <malloc/malloc.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef malloc_zone_statistics
+  return ((int*)(&malloc_zone_statistics))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the posix_spawn exist failed with the following output:
+Change Dir: /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a/CMakeFiles/CMakeTmp
+
+Run Build Command:"/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja" "cmTC_686f0"
+[1/2] Building C object CMakeFiles/cmTC_686f0.dir/CheckSymbolExists.c.o
+FAILED: CMakeFiles/cmTC_686f0.dir/CheckSymbolExists.c.o 
+/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang --target=aarch64-none-linux-android21 --gcc-toolchain=/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64 --sysroot=/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/sysroot   -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -Wall -Wextra -Wno-unused-parameter -Wwrite-strings -Wmissing-field-initializers -Wdelete-non-virtual-dtor  -Werror=unguarded-availability-new -fPIE -o CMakeFiles/cmTC_686f0.dir/CheckSymbolExists.c.o   -c CheckSymbolExists.c
+CheckSymbolExists.c:8:19: error: use of undeclared identifier 'posix_spawn'
+  return ((int*)(&posix_spawn))[argc];
+                  ^
+1 error generated.
+ninja: build stopped: subcommand failed.
+
+File /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <spawn.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef posix_spawn
+  return ((int*)(&posix_spawn))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the strerror_s exist failed with the following output:
+Change Dir: /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a/CMakeFiles/CMakeTmp
+
+Run Build Command:"/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja" "cmTC_75bb8"
+[1/2] Building C object CMakeFiles/cmTC_75bb8.dir/CheckSymbolExists.c.o
+FAILED: CMakeFiles/cmTC_75bb8.dir/CheckSymbolExists.c.o 
+/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang --target=aarch64-none-linux-android21 --gcc-toolchain=/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64 --sysroot=/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/sysroot   -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -Wall -Wextra -Wno-unused-parameter -Wwrite-strings -Wmissing-field-initializers -Wdelete-non-virtual-dtor  -Werror=unguarded-availability-new -fPIE -o CMakeFiles/cmTC_75bb8.dir/CheckSymbolExists.c.o   -c CheckSymbolExists.c
+CheckSymbolExists.c:8:19: error: use of undeclared identifier 'strerror_s'; did you mean 'strerror_r'?
+  return ((int*)(&strerror_s))[argc];
+                  ^~~~~~~~~~
+                  strerror_r
+/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/include/string.h:131:5: note: 'strerror_r' declared here
+int strerror_r(int __errno_value, char* __buf, size_t __n);
+    ^
+1 error generated.
+ninja: build stopped: subcommand failed.
+
+File /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <string.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef strerror_s
+  return ((int*)(&strerror_s))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the __GLIBC__ exist failed with the following output:
+Change Dir: /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a/CMakeFiles/CMakeTmp
+
+Run Build Command:"/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja" "cmTC_e81c1"
+[1/2] Building C object CMakeFiles/cmTC_e81c1.dir/CheckSymbolExists.c.o
+FAILED: CMakeFiles/cmTC_e81c1.dir/CheckSymbolExists.c.o 
+/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang --target=aarch64-none-linux-android21 --gcc-toolchain=/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64 --sysroot=/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/sysroot   -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -Wall -Wextra -Wno-unused-parameter -Wwrite-strings -Wmissing-field-initializers -Wdelete-non-virtual-dtor  -Werror=unguarded-availability-new -fPIE -o CMakeFiles/cmTC_e81c1.dir/CheckSymbolExists.c.o   -c CheckSymbolExists.c
+CheckSymbolExists.c:8:19: error: use of undeclared identifier '__GLIBC__'
+  return ((int*)(&__GLIBC__))[argc];
+                  ^
+1 error generated.
+ninja: build stopped: subcommand failed.
+
+File /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <stdio.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef __GLIBC__
+  return ((int*)(&__GLIBC__))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the sched_getaffinity exist failed with the following output:
+Change Dir: /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a/CMakeFiles/CMakeTmp
+
+Run Build Command:"/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja" "cmTC_9498b"
+[1/2] Building C object CMakeFiles/cmTC_9498b.dir/CheckSymbolExists.c.o
+FAILED: CMakeFiles/cmTC_9498b.dir/CheckSymbolExists.c.o 
+/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang --target=aarch64-none-linux-android21 --gcc-toolchain=/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64 --sysroot=/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/sysroot   -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -Wall -Wextra -Wno-unused-parameter -Wwrite-strings -Wmissing-field-initializers -Wdelete-non-virtual-dtor  -Werror=unguarded-availability-new -fPIE -o CMakeFiles/cmTC_9498b.dir/CheckSymbolExists.c.o   -c CheckSymbolExists.c
+CheckSymbolExists.c:8:19: error: use of undeclared identifier 'sched_getaffinity'
+  return ((int*)(&sched_getaffinity))[argc];
+                  ^
+1 error generated.
+ninja: build stopped: subcommand failed.
+
+File /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <sched.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef sched_getaffinity
+  return ((int*)(&sched_getaffinity))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the CPU_COUNT exist failed with the following output:
+Change Dir: /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a/CMakeFiles/CMakeTmp
+
+Run Build Command:"/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja" "cmTC_2f5fd"
+[1/2] Building C object CMakeFiles/cmTC_2f5fd.dir/CheckSymbolExists.c.o
+FAILED: CMakeFiles/cmTC_2f5fd.dir/CheckSymbolExists.c.o 
+/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang --target=aarch64-none-linux-android21 --gcc-toolchain=/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64 --sysroot=/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/sysroot   -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -Wall -Wextra -Wno-unused-parameter -Wwrite-strings -Wmissing-field-initializers -Wdelete-non-virtual-dtor  -Werror=unguarded-availability-new -fPIE -o CMakeFiles/cmTC_2f5fd.dir/CheckSymbolExists.c.o   -c CheckSymbolExists.c
+CheckSymbolExists.c:8:19: error: use of undeclared identifier 'CPU_COUNT'
+  return ((int*)(&CPU_COUNT))[argc];
+                  ^
+1 error generated.
+ninja: build stopped: subcommand failed.
+
+File /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <sched.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef CPU_COUNT
+  return ((int*)(&CPU_COUNT))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the pthread_getname_np exist failed with the following output:
+Change Dir: /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a/CMakeFiles/CMakeTmp
+
+Run Build Command:"/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja" "cmTC_24b73"
+[1/2] Building C object CMakeFiles/cmTC_24b73.dir/CheckSymbolExists.c.o
+FAILED: CMakeFiles/cmTC_24b73.dir/CheckSymbolExists.c.o 
+/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang --target=aarch64-none-linux-android21 --gcc-toolchain=/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64 --sysroot=/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/sysroot   -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -Wall -Wextra -Wno-unused-parameter -Wwrite-strings -Wmissing-field-initializers -Wdelete-non-virtual-dtor  -Werror=unguarded-availability-new -fPIE -o CMakeFiles/cmTC_24b73.dir/CheckSymbolExists.c.o   -c CheckSymbolExists.c
+CheckSymbolExists.c:8:19: error: use of undeclared identifier 'pthread_getname_np'; did you mean 'pthread_setname_np'?
+  return ((int*)(&pthread_getname_np))[argc];
+                  ^~~~~~~~~~~~~~~~~~
+                  pthread_setname_np
+/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/include/pthread.h:352:5: note: 'pthread_setname_np' declared here
+int pthread_setname_np(pthread_t __pthread, const char* __name);
+    ^
+1 error generated.
+ninja: build stopped: subcommand failed.
+
+File /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <pthread.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef pthread_getname_np
+  return ((int*)(&pthread_getname_np))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the function readline exists failed with the following output:
+Change Dir: /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a/CMakeFiles/CMakeTmp
+
+Run Build Command:"/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja" "cmTC_e3510"
+[1/2] Building C object CMakeFiles/cmTC_e3510.dir/CheckFunctionExists.c.o
+[2/2] Linking C executable cmTC_e3510
+FAILED: cmTC_e3510 
+: && /Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang --target=aarch64-none-linux-android21 --gcc-toolchain=/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64 --sysroot=/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/sysroot -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -Wall -Wextra -Wno-unused-parameter -Wwrite-strings -Wmissing-field-initializers -Wdelete-non-virtual-dtor -DCHECK_FUNCTION_EXISTS=readline  -Wl,--exclude-libs,libgcc.a -Wl,--exclude-libs,libgcc_real.a -Wl,--exclude-libs,libatomic.a -Wl,--build-id -Wl,--fatal-warnings -Wl,--no-undefined -Qunused-arguments -Wl,--gc-sections CMakeFiles/cmTC_e3510.dir/CheckFunctionExists.c.o  -o cmTC_e3510  -latomic -lm && :
+CMakeFiles/cmTC_e3510.dir/CheckFunctionExists.c.o: In function `main':
+/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/CheckFunctionExists.c:17: undefined reference to `readline'
+clang: error: linker command failed with exit code 1 (use -v to see invocation)
+ninja: build stopped: subcommand failed.
+
+

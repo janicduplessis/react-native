@@ -1,0 +1,192 @@
+{
+  "abi": "X86_64",
+  "info": {
+    "abi": "X86_64",
+    "bitness": 64,
+    "deprecated": false,
+    "default": true
+  },
+  "cxxBuildFolder": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/x86_64",
+  "soFolder": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/build/intermediates/cxx/MinSizeRel/1g696kf7/obj/x86_64",
+  "soRepublishFolder": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/build/intermediates/cmake/release/obj/x86_64",
+  "abiPlatformVersion": 21,
+  "cmake": {
+    "effectiveConfiguration": {
+      "inheritEnvironments": [],
+      "variables": []
+    }
+  },
+  "variant": {
+    "buildSystemArgumentList": [
+      "-DHERMES_IS_ANDROID\u003dTrue",
+      "-DANDROID_STL\u003dc++_shared",
+      "-DANDROID_PIE\u003dTrue",
+      "-DIMPORT_HERMESC\u003d/Users/janicduplessis/Developer/react-native/sdks/hermes/ninja_build/ImportHermesc.cmake",
+      "-DJSI_DIR\u003d/Users/janicduplessis/Developer/react-native/ReactCommon/jsi",
+      "-DHERMES_SLOW_DEBUG\u003dFalse",
+      "-DHERMES_BUILD_SHARED_JSI\u003dTrue",
+      "-DHERMES_ENABLE_INTL\u003dTrue",
+      "-DCMAKE_BUILD_TYPE\u003dMinSizeRel"
+    ],
+    "cFlagsList": [],
+    "cppFlagsList": [],
+    "variantName": "release",
+    "soFolder": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/build/intermediates/cxx/MinSizeRel/1g696kf7/obj",
+    "soRepublishFolder": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/build/intermediates/cmake/release/obj",
+    "cxxBuildFolder": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7",
+    "intermediatesFolder": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/build/intermediates/cxx/MinSizeRel/1g696kf7",
+    "isDebuggableEnabled": false,
+    "validAbiList": [
+      "ARMEABI_V7A",
+      "ARM64_V8A",
+      "X86",
+      "X86_64"
+    ],
+    "buildTargetSet": [
+      "libhermes"
+    ],
+    "implicitBuildTargetSet": [],
+    "cmakeSettingsConfiguration": "android-gradle-plugin-predetermined-name",
+    "module": {
+      "cxxFolder": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx",
+      "intermediatesBaseFolder": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/build/intermediates",
+      "intermediatesFolder": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/build/intermediates/cxx",
+      "gradleModulePathName": ":ReactAndroid:hermes-engine",
+      "moduleRootFolder": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine",
+      "moduleBuildFile": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/build.gradle",
+      "makeFile": "/Users/janicduplessis/Developer/react-native/sdks/hermes/CMakeLists.txt",
+      "buildSystem": "CMAKE",
+      "ndkFolder": "/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529",
+      "ndkVersion": "21.4.7075529",
+      "ndkSupportedAbiList": [
+        "ARMEABI_V7A",
+        "ARM64_V8A",
+        "X86",
+        "X86_64"
+      ],
+      "ndkDefaultAbiList": [
+        "ARMEABI_V7A",
+        "ARM64_V8A",
+        "X86",
+        "X86_64"
+      ],
+      "ndkDefaultStl": "LIBCXX_STATIC",
+      "ndkMetaPlatforms": {
+        "min": 16,
+        "max": 30,
+        "aliases": {
+          "20": 19,
+          "25": 24,
+          "J": 16,
+          "J-MR1": 17,
+          "J-MR2": 18,
+          "K": 19,
+          "L": 21,
+          "L-MR1": 22,
+          "M": 23,
+          "N": 24,
+          "N-MR1": 24,
+          "O": 26,
+          "O-MR1": 27,
+          "P": 28,
+          "Q": 29,
+          "R": 30
+        }
+      },
+      "ndkMetaAbiList": [
+        {
+          "abi": "ARMEABI_V7A",
+          "bitness": 32,
+          "deprecated": false,
+          "default": true
+        },
+        {
+          "abi": "ARM64_V8A",
+          "bitness": 64,
+          "deprecated": false,
+          "default": true
+        },
+        {
+          "abi": "X86",
+          "bitness": 32,
+          "deprecated": false,
+          "default": true
+        },
+        {
+          "abi": "X86_64",
+          "bitness": 64,
+          "deprecated": false,
+          "default": true
+        }
+      ],
+      "cmakeToolchainFile": "/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/build/cmake/android.toolchain.cmake",
+      "cmake": {
+        "isValidCmakeAvailable": true,
+        "cmakeExe": "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/cmake",
+        "minimumCmakeVersion": "3.10.2",
+        "ninjaExe": "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja"
+      },
+      "stlSharedObjectMap": {
+        "LIBCXX_SHARED": {
+          "ARMEABI_V7A": "/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/lib/arm-linux-androideabi/libc++_shared.so",
+          "ARM64_V8A": "/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/lib/aarch64-linux-android/libc++_shared.so",
+          "X86": "/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/lib/i686-linux-android/libc++_shared.so",
+          "X86_64": "/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/lib/x86_64-linux-android/libc++_shared.so"
+        },
+        "LIBCXX_STATIC": {},
+        "NONE": {},
+        "SYSTEM": {}
+      },
+      "project": {
+        "rootBuildGradleFolder": "/Users/janicduplessis/Developer/react-native",
+        "sdkFolder": "/Users/janicduplessis/Library/Android/sdk",
+        "isBuildOnlyTargetAbiEnabled": true,
+        "isCmakeBuildCohabitationEnabled": false,
+        "isPrefabEnabled": true
+      },
+      "outputOptions": []
+    },
+    "prefabClassPathFileCollection": [
+      "/Users/janicduplessis/.gradle/caches/modules-2/files-2.1/com.google.prefab/cli/2.0.0/f2702b5ca13df54e3ca92f29d6b403fb6285d8df/cli-2.0.0-all.jar"
+    ],
+    "prefabPackageDirectoryListFileCollection": [
+      "/Users/janicduplessis/.gradle/caches/transforms-3/2bf5ae3e876bb8fe3a8a84a4c8d7d1d8/transformed/fbjni-0.2.2/prefab"
+    ],
+    "stlType": "c++_shared",
+    "optimizationTag": "MinSizeRel"
+  },
+  "buildSettings": {
+    "environmentVariables": []
+  },
+  "prefabFolder": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/prefab/x86_64",
+  "isActiveAbi": true,
+  "fullConfigurationHash": "1g696kf70274w6g632f3706a5l1t445w3g24506vh1bvm5x5v1t305yx39",
+  "configurationArguments": [
+    "-H/Users/janicduplessis/Developer/react-native/sdks/hermes",
+    "-DCMAKE_SYSTEM_NAME\u003dAndroid",
+    "-DCMAKE_EXPORT_COMPILE_COMMANDS\u003dON",
+    "-DCMAKE_SYSTEM_VERSION\u003d21",
+    "-DANDROID_PLATFORM\u003dandroid-21",
+    "-DANDROID_ABI\u003dx86_64",
+    "-DCMAKE_ANDROID_ARCH_ABI\u003dx86_64",
+    "-DANDROID_NDK\u003d/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529",
+    "-DCMAKE_ANDROID_NDK\u003d/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529",
+    "-DCMAKE_TOOLCHAIN_FILE\u003d/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/build/cmake/android.toolchain.cmake",
+    "-DCMAKE_MAKE_PROGRAM\u003d/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+    "-DCMAKE_LIBRARY_OUTPUT_DIRECTORY\u003d/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/build/intermediates/cxx/MinSizeRel/1g696kf7/obj/x86_64",
+    "-DCMAKE_RUNTIME_OUTPUT_DIRECTORY\u003d/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/build/intermediates/cxx/MinSizeRel/1g696kf7/obj/x86_64",
+    "-DCMAKE_FIND_ROOT_PATH\u003d/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/prefab/x86_64/prefab",
+    "-B/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/x86_64",
+    "-GNinja",
+    "-DHERMES_IS_ANDROID\u003dTrue",
+    "-DANDROID_STL\u003dc++_shared",
+    "-DANDROID_PIE\u003dTrue",
+    "-DIMPORT_HERMESC\u003d/Users/janicduplessis/Developer/react-native/sdks/hermes/ninja_build/ImportHermesc.cmake",
+    "-DJSI_DIR\u003d/Users/janicduplessis/Developer/react-native/ReactCommon/jsi",
+    "-DHERMES_SLOW_DEBUG\u003dFalse",
+    "-DHERMES_BUILD_SHARED_JSI\u003dTrue",
+    "-DHERMES_ENABLE_INTL\u003dTrue",
+    "-DCMAKE_BUILD_TYPE\u003dMinSizeRel"
+  ],
+  "stlLibraryFile": "/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/lib/x86_64-linux-android/libc++_shared.so"
+}
