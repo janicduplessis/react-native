@@ -14,6 +14,10 @@
     "outputName": "js-test-results.xml"
   },
   "files": [
+    "!packages/annotations-compiler/annotations/build",
+    "!packages/annotations-compiler/compiler/build",
+    "!ReactAndroid/build",
+    "!ReactAndroid/src/main/jni/prebuilt",
     "android",
     "cli.js",
     "flow",
