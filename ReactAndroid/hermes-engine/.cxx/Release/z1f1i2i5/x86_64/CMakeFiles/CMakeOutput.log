@@ -1,0 +1,1410 @@
+The target system is: Android - 1 - x86_64
+The host system is: Darwin - 21.1.0 - x86_64
+Determining if the C compiler works passed with the following output:
+Change Dir: /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/x86_64/CMakeFiles/CMakeTmp
+
+Run Build Command:"/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja" "cmTC_2994a"
+[1/2] Building C object CMakeFiles/cmTC_2994a.dir/testCCompiler.c.o
+[2/2] Linking C executable cmTC_2994a
+
+
+Detecting C compiler ABI info compiled with the following output:
+Change Dir: /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/x86_64/CMakeFiles/CMakeTmp
+
+Run Build Command:"/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja" "cmTC_a7acd"
+[1/2] Building C object CMakeFiles/cmTC_a7acd.dir/CMakeCCompilerABI.c.o
+[2/2] Linking C executable cmTC_a7acd
+Android (7019983 based on r365631c3) clang version 9.0.9 (https://android.googlesource.com/toolchain/llvm-project a2a1e703c0edb03ba29944e529ccbf457742737b) (based on LLVM 9.0.9svn)
+Target: x86_64-none-linux-android21
+Thread model: posix
+InstalledDir: /Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/bin
+Found candidate GCC installation: /Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/lib/gcc/i686-linux-android/4.9.x
+Found candidate GCC installation: /Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/lib/gcc/x86_64-linux-android/4.9.x
+Selected GCC installation: /Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/lib/gcc/x86_64-linux-android/4.9.x
+Candidate multilib: .;@m64
+Selected multilib: .;@m64
+ "/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/lib/gcc/x86_64-linux-android/4.9.x/../../../../x86_64-linux-android/bin/ld" --sysroot=/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/sysroot -pie -z noexecstack --warn-shared-textrel -z now -z relro --hash-style=both --enable-new-dtags --eh-frame-hdr -m elf_x86_64 -dynamic-linker /system/bin/linker64 -o cmTC_a7acd /Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/lib/x86_64-linux-android/21/crtbegin_dynamic.o -L/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/lib64/clang/9.0.9/lib/linux/x86_64 -L/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/lib/gcc/x86_64-linux-android/4.9.x -L/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/lib/gcc/x86_64-linux-android/4.9.x/../../../../x86_64-linux-android/lib/../lib64 -L/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/lib/x86_64-linux-android/21 -L/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/lib/x86_64-linux-android -L/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/lib/gcc/x86_64-linux-android/4.9.x/../../../../x86_64-linux-android/lib -L/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/lib --exclude-libs libgcc.a --exclude-libs libgcc_real.a --exclude-libs libatomic.a --build-id --fatal-warnings --no-undefined --gc-sections CMakeFiles/cmTC_a7acd.dir/CMakeCCompilerABI.c.o -lgcc -ldl -lc -lgcc -ldl /Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/lib/x86_64-linux-android/21/crtend_android.o
+
+
+Parsed C implicit link information from above output:
+  link line regex: [^( *|.*[/\])(x86_64-linux-android-ld|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\]+-)?ld|collect2)[^/\]*( |$)]
+  ignore line: [Change Dir: /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/x86_64/CMakeFiles/CMakeTmp]
+  ignore line: []
+  ignore line: [Run Build Command:"/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja" "cmTC_a7acd"]
+  ignore line: [[1/2] Building C object CMakeFiles/cmTC_a7acd.dir/CMakeCCompilerABI.c.o]
+  ignore line: [[2/2] Linking C executable cmTC_a7acd]
+  ignore line: [Android (7019983 based on r365631c3) clang version 9.0.9 (https://android.googlesource.com/toolchain/llvm-project a2a1e703c0edb03ba29944e529ccbf457742737b) (based on LLVM 9.0.9svn)]
+  ignore line: [Target: x86_64-none-linux-android21]
+  ignore line: [Thread model: posix]
+  ignore line: [InstalledDir: /Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/bin]
+  ignore line: [Found candidate GCC installation: /Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/lib/gcc/i686-linux-android/4.9.x]
+  ignore line: [Found candidate GCC installation: /Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/lib/gcc/x86_64-linux-android/4.9.x]
+  ignore line: [Selected GCC installation: /Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/lib/gcc/x86_64-linux-android/4.9.x]
+  ignore line: [Candidate multilib: .]
+  ignore line: [@m64]
+  ignore line: [Selected multilib: .]
+  ignore line: [@m64]
+  link line: [ "/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/lib/gcc/x86_64-linux-android/4.9.x/../../../../x86_64-linux-android/bin/ld" --sysroot=/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/sysroot -pie -z noexecstack --warn-shared-textrel -z now -z relro --hash-style=both --enable-new-dtags --eh-frame-hdr -m elf_x86_64 -dynamic-linker /system/bin/linker64 -o cmTC_a7acd /Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/lib/x86_64-linux-android/21/crtbegin_dynamic.o -L/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/lib64/clang/9.0.9/lib/linux/x86_64 -L/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/lib/gcc/x86_64-linux-android/4.9.x -L/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/lib/gcc/x86_64-linux-android/4.9.x/../../../../x86_64-linux-android/lib/../lib64 -L/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/lib/x86_64-linux-android/21 -L/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/lib/x86_64-linux-android -L/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/lib/gcc/x86_64-linux-android/4.9.x/../../../../x86_64-linux-android/lib -L/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/lib --exclude-libs libgcc.a --exclude-libs libgcc_real.a --exclude-libs libatomic.a --build-id --fatal-warnings --no-undefined --gc-sections CMakeFiles/cmTC_a7acd.dir/CMakeCCompilerABI.c.o -lgcc -ldl -lc -lgcc -ldl /Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/lib/x86_64-linux-android/21/crtend_android.o]
+    arg [/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/lib/gcc/x86_64-linux-android/4.9.x/../../../../x86_64-linux-android/bin/ld] ==> ignore
+    arg [--sysroot=/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/sysroot] ==> ignore
+    arg [-pie] ==> ignore
+    arg [-znoexecstack] ==> ignore
+    arg [--warn-shared-textrel] ==> ignore
+    arg [-znow] ==> ignore
+    arg [-zrelro] ==> ignore
+    arg [--hash-style=both] ==> ignore
+    arg [--enable-new-dtags] ==> ignore
+    arg [--eh-frame-hdr] ==> ignore
+    arg [-m] ==> ignore
+    arg [elf_x86_64] ==> ignore
+    arg [-dynamic-linker] ==> ignore
+    arg [/system/bin/linker64] ==> ignore
+    arg [-o] ==> ignore
+    arg [cmTC_a7acd] ==> ignore
+    arg [/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/lib/x86_64-linux-android/21/crtbegin_dynamic.o] ==> ignore
+    arg [-L/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/lib64/clang/9.0.9/lib/linux/x86_64] ==> dir [/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/lib64/clang/9.0.9/lib/linux/x86_64]
+    arg [-L/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/lib/gcc/x86_64-linux-android/4.9.x] ==> dir [/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/lib/gcc/x86_64-linux-android/4.9.x]
+    arg [-L/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/lib/gcc/x86_64-linux-android/4.9.x/../../../../x86_64-linux-android/lib/../lib64] ==> dir [/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/lib/gcc/x86_64-linux-android/4.9.x/../../../../x86_64-linux-android/lib/../lib64]
+    arg [-L/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/lib/x86_64-linux-android/21] ==> dir [/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/lib/x86_64-linux-android/21]
+    arg [-L/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/lib/x86_64-linux-android] ==> dir [/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/lib/x86_64-linux-android]
+    arg [-L/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/lib/gcc/x86_64-linux-android/4.9.x/../../../../x86_64-linux-android/lib] ==> dir [/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/lib/gcc/x86_64-linux-android/4.9.x/../../../../x86_64-linux-android/lib]
+    arg [-L/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/lib] ==> dir [/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/lib]
+    arg [--exclude-libs] ==> ignore
+    arg [libgcc.a] ==> ignore
+    arg [--exclude-libs] ==> ignore
+    arg [libgcc_real.a] ==> ignore
+    arg [--exclude-libs] ==> ignore
+    arg [libatomic.a] ==> ignore
+    arg [--build-id] ==> ignore
+    arg [--fatal-warnings] ==> ignore
+    arg [--no-undefined] ==> ignore
+    arg [--gc-sections] ==> ignore
+    arg [CMakeFiles/cmTC_a7acd.dir/CMakeCCompilerABI.c.o] ==> ignore
+    arg [-lgcc] ==> lib [gcc]
+    arg [-ldl] ==> lib [dl]
+    arg [-lc] ==> lib [c]
+    arg [-lgcc] ==> lib [gcc]
+    arg [-ldl] ==> lib [dl]
+    arg [/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/lib/x86_64-linux-android/21/crtend_android.o] ==> ignore
+  collapse library dir [/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/lib64/clang/9.0.9/lib/linux/x86_64] ==> [/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/lib64/clang/9.0.9/lib/linux/x86_64]
+  collapse library dir [/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/lib/gcc/x86_64-linux-android/4.9.x] ==> [/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/lib/gcc/x86_64-linux-android/4.9.x]
+  collapse library dir [/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/lib/gcc/x86_64-linux-android/4.9.x/../../../../x86_64-linux-android/lib/../lib64] ==> [/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/x86_64-linux-android/lib64]
+  collapse library dir [/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/lib/x86_64-linux-android/21] ==> [/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/lib/x86_64-linux-android/21]
+  collapse library dir [/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/lib/x86_64-linux-android] ==> [/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/lib/x86_64-linux-android]
+  collapse library dir [/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/lib/gcc/x86_64-linux-android/4.9.x/../../../../x86_64-linux-android/lib] ==> [/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/x86_64-linux-android/lib]
+  collapse library dir [/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/lib] ==> [/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/lib]
+  implicit libs: [gcc;dl;c;gcc;dl]
+  implicit dirs: [/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/lib64/clang/9.0.9/lib/linux/x86_64;/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/lib/gcc/x86_64-linux-android/4.9.x;/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/x86_64-linux-android/lib64;/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/lib/x86_64-linux-android/21;/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/lib/x86_64-linux-android;/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/x86_64-linux-android/lib;/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/lib]
+  implicit fwks: []
+
+
+
+
+Detecting C [-std=c11] compiler features compiled with the following output:
+Change Dir: /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/x86_64/CMakeFiles/CMakeTmp
+
+Run Build Command:"/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja" "cmTC_0fde9"
+[1/2] Building C object CMakeFiles/cmTC_0fde9.dir/feature_tests.c.o
+[2/2] Linking C executable cmTC_0fde9
+
+
+    Feature record: C_FEATURE:1c_function_prototypes
+    Feature record: C_FEATURE:1c_restrict
+    Feature record: C_FEATURE:1c_static_assert
+    Feature record: C_FEATURE:1c_variadic_macros
+
+
+Detecting C [-std=c99] compiler features compiled with the following output:
+Change Dir: /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/x86_64/CMakeFiles/CMakeTmp
+
+Run Build Command:"/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja" "cmTC_c8f05"
+[1/2] Building C object CMakeFiles/cmTC_c8f05.dir/feature_tests.c.o
+[2/2] Linking C executable cmTC_c8f05
+
+
+    Feature record: C_FEATURE:1c_function_prototypes
+    Feature record: C_FEATURE:1c_restrict
+    Feature record: C_FEATURE:0c_static_assert
+    Feature record: C_FEATURE:1c_variadic_macros
+
+
+Detecting C [-std=c90] compiler features compiled with the following output:
+Change Dir: /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/x86_64/CMakeFiles/CMakeTmp
+
+Run Build Command:"/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja" "cmTC_8c88d"
+[1/2] Building C object CMakeFiles/cmTC_8c88d.dir/feature_tests.c.o
+[2/2] Linking C executable cmTC_8c88d
+
+
+    Feature record: C_FEATURE:1c_function_prototypes
+    Feature record: C_FEATURE:0c_restrict
+    Feature record: C_FEATURE:0c_static_assert
+    Feature record: C_FEATURE:0c_variadic_macros
+Determining if the CXX compiler works passed with the following output:
+Change Dir: /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/x86_64/CMakeFiles/CMakeTmp
+
+Run Build Command:"/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja" "cmTC_d35af"
+[1/2] Building CXX object CMakeFiles/cmTC_d35af.dir/testCXXCompiler.cxx.o
+[2/2] Linking CXX executable cmTC_d35af
+
+
+Detecting CXX compiler ABI info compiled with the following output:
+Change Dir: /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/x86_64/CMakeFiles/CMakeTmp
+
+Run Build Command:"/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja" "cmTC_d9f44"
+[1/2] Building CXX object CMakeFiles/cmTC_d9f44.dir/CMakeCXXCompilerABI.cpp.o
+[2/2] Linking CXX executable cmTC_d9f44
+Android (7019983 based on r365631c3) clang version 9.0.9 (https://android.googlesource.com/toolchain/llvm-project a2a1e703c0edb03ba29944e529ccbf457742737b) (based on LLVM 9.0.9svn)
+Target: x86_64-none-linux-android21
+Thread model: posix
+InstalledDir: /Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/bin
+Found candidate GCC installation: /Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/lib/gcc/i686-linux-android/4.9.x
+Found candidate GCC installation: /Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/lib/gcc/x86_64-linux-android/4.9.x
+Selected GCC installation: /Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/lib/gcc/x86_64-linux-android/4.9.x
+Candidate multilib: .;@m64
+Selected multilib: .;@m64
+ "/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/lib/gcc/x86_64-linux-android/4.9.x/../../../../x86_64-linux-android/bin/ld" --sysroot=/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/sysroot -pie -z noexecstack --warn-shared-textrel -z now -z relro --hash-style=both --enable-new-dtags --eh-frame-hdr -m elf_x86_64 -dynamic-linker /system/bin/linker64 -o cmTC_d9f44 /Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/lib/x86_64-linux-android/21/crtbegin_dynamic.o -L/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/lib64/clang/9.0.9/lib/linux/x86_64 -L/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/lib/gcc/x86_64-linux-android/4.9.x -L/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/lib/gcc/x86_64-linux-android/4.9.x/../../../../x86_64-linux-android/lib/../lib64 -L/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/lib/x86_64-linux-android/21 -L/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/lib/x86_64-linux-android -L/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/lib/gcc/x86_64-linux-android/4.9.x/../../../../x86_64-linux-android/lib -L/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/lib --exclude-libs libgcc.a --exclude-libs libgcc_real.a --exclude-libs libatomic.a --build-id --fatal-warnings --no-undefined --gc-sections CMakeFiles/cmTC_d9f44.dir/CMakeCXXCompilerABI.cpp.o -lc++ -lm -lgcc -ldl -lc -lgcc -ldl /Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/lib/x86_64-linux-android/21/crtend_android.o
+
+
+Parsed CXX implicit link information from above output:
+  link line regex: [^( *|.*[/\])(x86_64-linux-android-ld|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\]+-)?ld|collect2)[^/\]*( |$)]
+  ignore line: [Change Dir: /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/x86_64/CMakeFiles/CMakeTmp]
+  ignore line: []
+  ignore line: [Run Build Command:"/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja" "cmTC_d9f44"]
+  ignore line: [[1/2] Building CXX object CMakeFiles/cmTC_d9f44.dir/CMakeCXXCompilerABI.cpp.o]
+  ignore line: [[2/2] Linking CXX executable cmTC_d9f44]
+  ignore line: [Android (7019983 based on r365631c3) clang version 9.0.9 (https://android.googlesource.com/toolchain/llvm-project a2a1e703c0edb03ba29944e529ccbf457742737b) (based on LLVM 9.0.9svn)]
+  ignore line: [Target: x86_64-none-linux-android21]
+  ignore line: [Thread model: posix]
+  ignore line: [InstalledDir: /Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/bin]
+  ignore line: [Found candidate GCC installation: /Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/lib/gcc/i686-linux-android/4.9.x]
+  ignore line: [Found candidate GCC installation: /Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/lib/gcc/x86_64-linux-android/4.9.x]
+  ignore line: [Selected GCC installation: /Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/lib/gcc/x86_64-linux-android/4.9.x]
+  ignore line: [Candidate multilib: .]
+  ignore line: [@m64]
+  ignore line: [Selected multilib: .]
+  ignore line: [@m64]
+  link line: [ "/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/lib/gcc/x86_64-linux-android/4.9.x/../../../../x86_64-linux-android/bin/ld" --sysroot=/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/sysroot -pie -z noexecstack --warn-shared-textrel -z now -z relro --hash-style=both --enable-new-dtags --eh-frame-hdr -m elf_x86_64 -dynamic-linker /system/bin/linker64 -o cmTC_d9f44 /Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/lib/x86_64-linux-android/21/crtbegin_dynamic.o -L/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/lib64/clang/9.0.9/lib/linux/x86_64 -L/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/lib/gcc/x86_64-linux-android/4.9.x -L/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/lib/gcc/x86_64-linux-android/4.9.x/../../../../x86_64-linux-android/lib/../lib64 -L/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/lib/x86_64-linux-android/21 -L/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/lib/x86_64-linux-android -L/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/lib/gcc/x86_64-linux-android/4.9.x/../../../../x86_64-linux-android/lib -L/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/lib --exclude-libs libgcc.a --exclude-libs libgcc_real.a --exclude-libs libatomic.a --build-id --fatal-warnings --no-undefined --gc-sections CMakeFiles/cmTC_d9f44.dir/CMakeCXXCompilerABI.cpp.o -lc++ -lm -lgcc -ldl -lc -lgcc -ldl /Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/lib/x86_64-linux-android/21/crtend_android.o]
+    arg [/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/lib/gcc/x86_64-linux-android/4.9.x/../../../../x86_64-linux-android/bin/ld] ==> ignore
+    arg [--sysroot=/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/sysroot] ==> ignore
+    arg [-pie] ==> ignore
+    arg [-znoexecstack] ==> ignore
+    arg [--warn-shared-textrel] ==> ignore
+    arg [-znow] ==> ignore
+    arg [-zrelro] ==> ignore
+    arg [--hash-style=both] ==> ignore
+    arg [--enable-new-dtags] ==> ignore
+    arg [--eh-frame-hdr] ==> ignore
+    arg [-m] ==> ignore
+    arg [elf_x86_64] ==> ignore
+    arg [-dynamic-linker] ==> ignore
+    arg [/system/bin/linker64] ==> ignore
+    arg [-o] ==> ignore
+    arg [cmTC_d9f44] ==> ignore
+    arg [/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/lib/x86_64-linux-android/21/crtbegin_dynamic.o] ==> ignore
+    arg [-L/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/lib64/clang/9.0.9/lib/linux/x86_64] ==> dir [/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/lib64/clang/9.0.9/lib/linux/x86_64]
+    arg [-L/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/lib/gcc/x86_64-linux-android/4.9.x] ==> dir [/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/lib/gcc/x86_64-linux-android/4.9.x]
+    arg [-L/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/lib/gcc/x86_64-linux-android/4.9.x/../../../../x86_64-linux-android/lib/../lib64] ==> dir [/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/lib/gcc/x86_64-linux-android/4.9.x/../../../../x86_64-linux-android/lib/../lib64]
+    arg [-L/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/lib/x86_64-linux-android/21] ==> dir [/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/lib/x86_64-linux-android/21]
+    arg [-L/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/lib/x86_64-linux-android] ==> dir [/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/lib/x86_64-linux-android]
+    arg [-L/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/lib/gcc/x86_64-linux-android/4.9.x/../../../../x86_64-linux-android/lib] ==> dir [/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/lib/gcc/x86_64-linux-android/4.9.x/../../../../x86_64-linux-android/lib]
+    arg [-L/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/lib] ==> dir [/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/lib]
+    arg [--exclude-libs] ==> ignore
+    arg [libgcc.a] ==> ignore
+    arg [--exclude-libs] ==> ignore
+    arg [libgcc_real.a] ==> ignore
+    arg [--exclude-libs] ==> ignore
+    arg [libatomic.a] ==> ignore
+    arg [--build-id] ==> ignore
+    arg [--fatal-warnings] ==> ignore
+    arg [--no-undefined] ==> ignore
+    arg [--gc-sections] ==> ignore
+    arg [CMakeFiles/cmTC_d9f44.dir/CMakeCXXCompilerABI.cpp.o] ==> ignore
+    arg [-lc++] ==> lib [c++]
+    arg [-lm] ==> lib [m]
+    arg [-lgcc] ==> lib [gcc]
+    arg [-ldl] ==> lib [dl]
+    arg [-lc] ==> lib [c]
+    arg [-lgcc] ==> lib [gcc]
+    arg [-ldl] ==> lib [dl]
+    arg [/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/lib/x86_64-linux-android/21/crtend_android.o] ==> ignore
+  collapse library dir [/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/lib64/clang/9.0.9/lib/linux/x86_64] ==> [/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/lib64/clang/9.0.9/lib/linux/x86_64]
+  collapse library dir [/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/lib/gcc/x86_64-linux-android/4.9.x] ==> [/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/lib/gcc/x86_64-linux-android/4.9.x]
+  collapse library dir [/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/lib/gcc/x86_64-linux-android/4.9.x/../../../../x86_64-linux-android/lib/../lib64] ==> [/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/x86_64-linux-android/lib64]
+  collapse library dir [/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/lib/x86_64-linux-android/21] ==> [/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/lib/x86_64-linux-android/21]
+  collapse library dir [/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/lib/x86_64-linux-android] ==> [/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/lib/x86_64-linux-android]
+  collapse library dir [/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/lib/gcc/x86_64-linux-android/4.9.x/../../../../x86_64-linux-android/lib] ==> [/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/x86_64-linux-android/lib]
+  collapse library dir [/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/lib] ==> [/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/lib]
+  implicit libs: [c++;m;gcc;dl;c;gcc;dl]
+  implicit dirs: [/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/lib64/clang/9.0.9/lib/linux/x86_64;/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/lib/gcc/x86_64-linux-android/4.9.x;/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/x86_64-linux-android/lib64;/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/lib/x86_64-linux-android/21;/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/lib/x86_64-linux-android;/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/x86_64-linux-android/lib;/Users/janicduplessis/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/lib]
+  implicit fwks: []
+
+
+
+
+Detecting CXX [-std=c++1z] compiler features compiled with the following output:
+Change Dir: /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/x86_64/CMakeFiles/CMakeTmp
+
+Run Build Command:"/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja" "cmTC_61d16"
+[1/2] Building CXX object CMakeFiles/cmTC_61d16.dir/feature_tests.cxx.o
+[2/2] Linking CXX executable cmTC_61d16
+
+
+    Feature record: CXX_FEATURE:1cxx_aggregate_default_initializers
+    Feature record: CXX_FEATURE:1cxx_alias_templates
+    Feature record: CXX_FEATURE:1cxx_alignas
+    Feature record: CXX_FEATURE:1cxx_alignof
+    Feature record: CXX_FEATURE:1cxx_attributes
+    Feature record: CXX_FEATURE:1cxx_attribute_deprecated
+    Feature record: CXX_FEATURE:1cxx_auto_type
+    Feature record: CXX_FEATURE:1cxx_binary_literals
+    Feature record: CXX_FEATURE:1cxx_constexpr
+    Feature record: CXX_FEATURE:1cxx_contextual_conversions
+    Feature record: CXX_FEATURE:1cxx_decltype
+    Feature record: CXX_FEATURE:1cxx_decltype_auto
+    Feature record: CXX_FEATURE:1cxx_decltype_incomplete_return_types
+    Feature record: CXX_FEATURE:1cxx_default_function_template_args
+    Feature record: CXX_FEATURE:1cxx_defaulted_functions
+    Feature record: CXX_FEATURE:1cxx_defaulted_move_initializers
+    Feature record: CXX_FEATURE:1cxx_delegating_constructors
+    Feature record: CXX_FEATURE:1cxx_deleted_functions
+    Feature record: CXX_FEATURE:1cxx_digit_separators
+    Feature record: CXX_FEATURE:1cxx_enum_forward_declarations
+    Feature record: CXX_FEATURE:1cxx_explicit_conversions
+    Feature record: CXX_FEATURE:1cxx_extended_friend_declarations
+    Feature record: CXX_FEATURE:1cxx_extern_templates
+    Feature record: CXX_FEATURE:1cxx_final
+    Feature record: CXX_FEATURE:1cxx_func_identifier
+    Feature record: CXX_FEATURE:1cxx_generalized_initializers
+    Feature record: CXX_FEATURE:1cxx_generic_lambdas
+    Feature record: CXX_FEATURE:1cxx_inheriting_constructors
+    Feature record: CXX_FEATURE:1cxx_inline_namespaces
+    Feature record: CXX_FEATURE:1cxx_lambdas
+    Feature record: CXX_FEATURE:1cxx_lambda_init_captures
+    Feature record: CXX_FEATURE:1cxx_local_type_template_args
+    Feature record: CXX_FEATURE:1cxx_long_long_type
+    Feature record: CXX_FEATURE:1cxx_noexcept
+    Feature record: CXX_FEATURE:1cxx_nonstatic_member_init
+    Feature record: CXX_FEATURE:1cxx_nullptr
+    Feature record: CXX_FEATURE:1cxx_override
+    Feature record: CXX_FEATURE:1cxx_range_for
+    Feature record: CXX_FEATURE:1cxx_raw_string_literals
+    Feature record: CXX_FEATURE:1cxx_reference_qualified_functions
+    Feature record: CXX_FEATURE:1cxx_relaxed_constexpr
+    Feature record: CXX_FEATURE:1cxx_return_type_deduction
+    Feature record: CXX_FEATURE:1cxx_right_angle_brackets
+    Feature record: CXX_FEATURE:1cxx_rvalue_references
+    Feature record: CXX_FEATURE:1cxx_sizeof_member
+    Feature record: CXX_FEATURE:1cxx_static_assert
+    Feature record: CXX_FEATURE:1cxx_strong_enums
+    Feature record: CXX_FEATURE:1cxx_template_template_parameters
+    Feature record: CXX_FEATURE:1cxx_thread_local
+    Feature record: CXX_FEATURE:1cxx_trailing_return_types
+    Feature record: CXX_FEATURE:1cxx_unicode_literals
+    Feature record: CXX_FEATURE:1cxx_uniform_initialization
+    Feature record: CXX_FEATURE:1cxx_unrestricted_unions
+    Feature record: CXX_FEATURE:1cxx_user_literals
+    Feature record: CXX_FEATURE:1cxx_variable_templates
+    Feature record: CXX_FEATURE:1cxx_variadic_macros
+    Feature record: CXX_FEATURE:1cxx_variadic_templates
+
+
+Detecting CXX [-std=c++14] compiler features compiled with the following output:
+Change Dir: /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/x86_64/CMakeFiles/CMakeTmp
+
+Run Build Command:"/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja" "cmTC_ea77c"
+[1/2] Building CXX object CMakeFiles/cmTC_ea77c.dir/feature_tests.cxx.o
+[2/2] Linking CXX executable cmTC_ea77c
+
+
+    Feature record: CXX_FEATURE:1cxx_aggregate_default_initializers
+    Feature record: CXX_FEATURE:1cxx_alias_templates
+    Feature record: CXX_FEATURE:1cxx_alignas
+    Feature record: CXX_FEATURE:1cxx_alignof
+    Feature record: CXX_FEATURE:1cxx_attributes
+    Feature record: CXX_FEATURE:1cxx_attribute_deprecated
+    Feature record: CXX_FEATURE:1cxx_auto_type
+    Feature record: CXX_FEATURE:1cxx_binary_literals
+    Feature record: CXX_FEATURE:1cxx_constexpr
+    Feature record: CXX_FEATURE:1cxx_contextual_conversions
+    Feature record: CXX_FEATURE:1cxx_decltype
+    Feature record: CXX_FEATURE:1cxx_decltype_auto
+    Feature record: CXX_FEATURE:1cxx_decltype_incomplete_return_types
+    Feature record: CXX_FEATURE:1cxx_default_function_template_args
+    Feature record: CXX_FEATURE:1cxx_defaulted_functions
+    Feature record: CXX_FEATURE:1cxx_defaulted_move_initializers
+    Feature record: CXX_FEATURE:1cxx_delegating_constructors
+    Feature record: CXX_FEATURE:1cxx_deleted_functions
+    Feature record: CXX_FEATURE:1cxx_digit_separators
+    Feature record: CXX_FEATURE:1cxx_enum_forward_declarations
+    Feature record: CXX_FEATURE:1cxx_explicit_conversions
+    Feature record: CXX_FEATURE:1cxx_extended_friend_declarations
+    Feature record: CXX_FEATURE:1cxx_extern_templates
+    Feature record: CXX_FEATURE:1cxx_final
+    Feature record: CXX_FEATURE:1cxx_func_identifier
+    Feature record: CXX_FEATURE:1cxx_generalized_initializers
+    Feature record: CXX_FEATURE:1cxx_generic_lambdas
+    Feature record: CXX_FEATURE:1cxx_inheriting_constructors
+    Feature record: CXX_FEATURE:1cxx_inline_namespaces
+    Feature record: CXX_FEATURE:1cxx_lambdas
+    Feature record: CXX_FEATURE:1cxx_lambda_init_captures
+    Feature record: CXX_FEATURE:1cxx_local_type_template_args
+    Feature record: CXX_FEATURE:1cxx_long_long_type
+    Feature record: CXX_FEATURE:1cxx_noexcept
+    Feature record: CXX_FEATURE:1cxx_nonstatic_member_init
+    Feature record: CXX_FEATURE:1cxx_nullptr
+    Feature record: CXX_FEATURE:1cxx_override
+    Feature record: CXX_FEATURE:1cxx_range_for
+    Feature record: CXX_FEATURE:1cxx_raw_string_literals
+    Feature record: CXX_FEATURE:1cxx_reference_qualified_functions
+    Feature record: CXX_FEATURE:1cxx_relaxed_constexpr
+    Feature record: CXX_FEATURE:1cxx_return_type_deduction
+    Feature record: CXX_FEATURE:1cxx_right_angle_brackets
+    Feature record: CXX_FEATURE:1cxx_rvalue_references
+    Feature record: CXX_FEATURE:1cxx_sizeof_member
+    Feature record: CXX_FEATURE:1cxx_static_assert
+    Feature record: CXX_FEATURE:1cxx_strong_enums
+    Feature record: CXX_FEATURE:1cxx_template_template_parameters
+    Feature record: CXX_FEATURE:1cxx_thread_local
+    Feature record: CXX_FEATURE:1cxx_trailing_return_types
+    Feature record: CXX_FEATURE:1cxx_unicode_literals
+    Feature record: CXX_FEATURE:1cxx_uniform_initialization
+    Feature record: CXX_FEATURE:1cxx_unrestricted_unions
+    Feature record: CXX_FEATURE:1cxx_user_literals
+    Feature record: CXX_FEATURE:1cxx_variable_templates
+    Feature record: CXX_FEATURE:1cxx_variadic_macros
+    Feature record: CXX_FEATURE:1cxx_variadic_templates
+
+
+Detecting CXX [-std=c++11] compiler features compiled with the following output:
+Change Dir: /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/x86_64/CMakeFiles/CMakeTmp
+
+Run Build Command:"/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja" "cmTC_6c407"
+[1/2] Building CXX object CMakeFiles/cmTC_6c407.dir/feature_tests.cxx.o
+[2/2] Linking CXX executable cmTC_6c407
+
+
+    Feature record: CXX_FEATURE:0cxx_aggregate_default_initializers
+    Feature record: CXX_FEATURE:1cxx_alias_templates
+    Feature record: CXX_FEATURE:1cxx_alignas
+    Feature record: CXX_FEATURE:1cxx_alignof
+    Feature record: CXX_FEATURE:1cxx_attributes
+    Feature record: CXX_FEATURE:0cxx_attribute_deprecated
+    Feature record: CXX_FEATURE:1cxx_auto_type
+    Feature record: CXX_FEATURE:0cxx_binary_literals
+    Feature record: CXX_FEATURE:1cxx_constexpr
+    Feature record: CXX_FEATURE:0cxx_contextual_conversions
+    Feature record: CXX_FEATURE:1cxx_decltype
+    Feature record: CXX_FEATURE:0cxx_decltype_auto
+    Feature record: CXX_FEATURE:1cxx_decltype_incomplete_return_types
+    Feature record: CXX_FEATURE:1cxx_default_function_template_args
+    Feature record: CXX_FEATURE:1cxx_defaulted_functions
+    Feature record: CXX_FEATURE:1cxx_defaulted_move_initializers
+    Feature record: CXX_FEATURE:1cxx_delegating_constructors
+    Feature record: CXX_FEATURE:1cxx_deleted_functions
+    Feature record: CXX_FEATURE:0cxx_digit_separators
+    Feature record: CXX_FEATURE:1cxx_enum_forward_declarations
+    Feature record: CXX_FEATURE:1cxx_explicit_conversions
+    Feature record: CXX_FEATURE:1cxx_extended_friend_declarations
+    Feature record: CXX_FEATURE:1cxx_extern_templates
+    Feature record: CXX_FEATURE:1cxx_final
+    Feature record: CXX_FEATURE:1cxx_func_identifier
+    Feature record: CXX_FEATURE:1cxx_generalized_initializers
+    Feature record: CXX_FEATURE:0cxx_generic_lambdas
+    Feature record: CXX_FEATURE:1cxx_inheriting_constructors
+    Feature record: CXX_FEATURE:1cxx_inline_namespaces
+    Feature record: CXX_FEATURE:1cxx_lambdas
+    Feature record: CXX_FEATURE:0cxx_lambda_init_captures
+    Feature record: CXX_FEATURE:1cxx_local_type_template_args
+    Feature record: CXX_FEATURE:1cxx_long_long_type
+    Feature record: CXX_FEATURE:1cxx_noexcept
+    Feature record: CXX_FEATURE:1cxx_nonstatic_member_init
+    Feature record: CXX_FEATURE:1cxx_nullptr
+    Feature record: CXX_FEATURE:1cxx_override
+    Feature record: CXX_FEATURE:1cxx_range_for
+    Feature record: CXX_FEATURE:1cxx_raw_string_literals
+    Feature record: CXX_FEATURE:1cxx_reference_qualified_functions
+    Feature record: CXX_FEATURE:0cxx_relaxed_constexpr
+    Feature record: CXX_FEATURE:0cxx_return_type_deduction
+    Feature record: CXX_FEATURE:1cxx_right_angle_brackets
+    Feature record: CXX_FEATURE:1cxx_rvalue_references
+    Feature record: CXX_FEATURE:1cxx_sizeof_member
+    Feature record: CXX_FEATURE:1cxx_static_assert
+    Feature record: CXX_FEATURE:1cxx_strong_enums
+    Feature record: CXX_FEATURE:1cxx_template_template_parameters
+    Feature record: CXX_FEATURE:1cxx_thread_local
+    Feature record: CXX_FEATURE:1cxx_trailing_return_types
+    Feature record: CXX_FEATURE:1cxx_unicode_literals
+    Feature record: CXX_FEATURE:1cxx_uniform_initialization
+    Feature record: CXX_FEATURE:1cxx_unrestricted_unions
+    Feature record: CXX_FEATURE:1cxx_user_literals
+    Feature record: CXX_FEATURE:0cxx_variable_templates
+    Feature record: CXX_FEATURE:1cxx_variadic_macros
+    Feature record: CXX_FEATURE:1cxx_variadic_templates
+
+
+Detecting CXX [-std=c++98] compiler features compiled with the following output:
+Change Dir: /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/x86_64/CMakeFiles/CMakeTmp
+
+Run Build Command:"/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja" "cmTC_0a5df"
+[1/2] Building CXX object CMakeFiles/cmTC_0a5df.dir/feature_tests.cxx.o
+[2/2] Linking CXX executable cmTC_0a5df
+
+
+    Feature record: CXX_FEATURE:0cxx_aggregate_default_initializers
+    Feature record: CXX_FEATURE:0cxx_alias_templates
+    Feature record: CXX_FEATURE:0cxx_alignas
+    Feature record: CXX_FEATURE:0cxx_alignof
+    Feature record: CXX_FEATURE:0cxx_attributes
+    Feature record: CXX_FEATURE:0cxx_attribute_deprecated
+    Feature record: CXX_FEATURE:0cxx_auto_type
+    Feature record: CXX_FEATURE:0cxx_binary_literals
+    Feature record: CXX_FEATURE:0cxx_constexpr
+    Feature record: CXX_FEATURE:0cxx_contextual_conversions
+    Feature record: CXX_FEATURE:0cxx_decltype
+    Feature record: CXX_FEATURE:0cxx_decltype_auto
+    Feature record: CXX_FEATURE:0cxx_decltype_incomplete_return_types
+    Feature record: CXX_FEATURE:0cxx_default_function_template_args
+    Feature record: CXX_FEATURE:0cxx_defaulted_functions
+    Feature record: CXX_FEATURE:0cxx_defaulted_move_initializers
+    Feature record: CXX_FEATURE:0cxx_delegating_constructors
+    Feature record: CXX_FEATURE:0cxx_deleted_functions
+    Feature record: CXX_FEATURE:0cxx_digit_separators
+    Feature record: CXX_FEATURE:0cxx_enum_forward_declarations
+    Feature record: CXX_FEATURE:0cxx_explicit_conversions
+    Feature record: CXX_FEATURE:0cxx_extended_friend_declarations
+    Feature record: CXX_FEATURE:0cxx_extern_templates
+    Feature record: CXX_FEATURE:0cxx_final
+    Feature record: CXX_FEATURE:0cxx_func_identifier
+    Feature record: CXX_FEATURE:0cxx_generalized_initializers
+    Feature record: CXX_FEATURE:0cxx_generic_lambdas
+    Feature record: CXX_FEATURE:0cxx_inheriting_constructors
+    Feature record: CXX_FEATURE:0cxx_inline_namespaces
+    Feature record: CXX_FEATURE:0cxx_lambdas
+    Feature record: CXX_FEATURE:0cxx_lambda_init_captures
+    Feature record: CXX_FEATURE:0cxx_local_type_template_args
+    Feature record: CXX_FEATURE:0cxx_long_long_type
+    Feature record: CXX_FEATURE:0cxx_noexcept
+    Feature record: CXX_FEATURE:0cxx_nonstatic_member_init
+    Feature record: CXX_FEATURE:0cxx_nullptr
+    Feature record: CXX_FEATURE:0cxx_override
+    Feature record: CXX_FEATURE:0cxx_range_for
+    Feature record: CXX_FEATURE:0cxx_raw_string_literals
+    Feature record: CXX_FEATURE:0cxx_reference_qualified_functions
+    Feature record: CXX_FEATURE:0cxx_relaxed_constexpr
+    Feature record: CXX_FEATURE:0cxx_return_type_deduction
+    Feature record: CXX_FEATURE:0cxx_right_angle_brackets
+    Feature record: CXX_FEATURE:0cxx_rvalue_references
+    Feature record: CXX_FEATURE:0cxx_sizeof_member
+    Feature record: CXX_FEATURE:0cxx_static_assert
+    Feature record: CXX_FEATURE:0cxx_strong_enums
+    Feature record: CXX_FEATURE:1cxx_template_template_parameters
+    Feature record: CXX_FEATURE:0cxx_thread_local
+    Feature record: CXX_FEATURE:0cxx_trailing_return_types
+    Feature record: CXX_FEATURE:0cxx_unicode_literals
+    Feature record: CXX_FEATURE:0cxx_uniform_initialization
+    Feature record: CXX_FEATURE:0cxx_unrestricted_unions
+    Feature record: CXX_FEATURE:0cxx_user_literals
+    Feature record: CXX_FEATURE:0cxx_variable_templates
+    Feature record: CXX_FEATURE:0cxx_variadic_macros
+    Feature record: CXX_FEATURE:0cxx_variadic_templates
+Performing C++ SOURCE FILE Test CXX_SUPPORTS_MISSING_FIELD_INITIALIZERS_FLAG succeeded with the following output:
+Change Dir: /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/x86_64/CMakeFiles/CMakeTmp
+
+Run Build Command:"/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja" "cmTC_3a89e"
+[1/2] Building CXX object CMakeFiles/cmTC_3a89e.dir/src.cxx.o
+[2/2] Linking CXX executable cmTC_3a89e
+
+Source file was:
+int main() { return 0; }
+Performing C++ SOURCE FILE Test CXX_SUPPORTS_NOEXCEPT_TYPE_FLAG succeeded with the following output:
+Change Dir: /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/x86_64/CMakeFiles/CMakeTmp
+
+Run Build Command:"/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja" "cmTC_a0286"
+[1/2] Building CXX object CMakeFiles/cmTC_a0286.dir/src.cxx.o
+[2/2] Linking CXX executable cmTC_a0286
+
+Source file was:
+int main() { return 0; }
+Performing C++ SOURCE FILE Test CXX_WONT_WARN_ON_FINAL_NONVIRTUALDTOR succeeded with the following output:
+Change Dir: /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/x86_64/CMakeFiles/CMakeTmp
+
+Run Build Command:"/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja" "cmTC_9a2c8"
+[1/2] Building CXX object CMakeFiles/cmTC_9a2c8.dir/src.cxx.o
+[2/2] Linking CXX executable cmTC_9a2c8
+
+Source file was:
+class base {public: virtual void anchor();protected: ~base();};
+                             class derived final : public base { public: ~derived();};
+                             int main() { return 0; }
+Performing C SOURCE FILE Test C_SUPPORTS_DELETE_NON_VIRTUAL_DTOR_FLAG succeeded with the following output:
+Change Dir: /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/x86_64/CMakeFiles/CMakeTmp
+
+Run Build Command:"/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja" "cmTC_9489c"
+[1/2] Building C object CMakeFiles/cmTC_9489c.dir/src.c.o
+[2/2] Linking C executable cmTC_9489c
+
+Source file was:
+int main(void) { return 0; }
+Performing C++ SOURCE FILE Test CXX_SUPPORTS_DELETE_NON_VIRTUAL_DTOR_FLAG succeeded with the following output:
+Change Dir: /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/x86_64/CMakeFiles/CMakeTmp
+
+Run Build Command:"/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja" "cmTC_023e1"
+[1/2] Building CXX object CMakeFiles/cmTC_023e1.dir/src.cxx.o
+[2/2] Linking CXX executable cmTC_023e1
+
+Source file was:
+int main() { return 0; }
+Performing C++ SOURCE FILE Test RANGE_ANALYSIS_FLAG succeeded with the following output:
+Change Dir: /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/x86_64/CMakeFiles/CMakeTmp
+
+Run Build Command:"/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja" "cmTC_3f55f"
+[1/2] Building CXX object CMakeFiles/cmTC_3f55f.dir/src.cxx.o
+[2/2] Linking CXX executable cmTC_3f55f
+
+Source file was:
+int main() { return 0; }
+Performing C++ SOURCE FILE Test HAVE_COMPUTED_GOTO succeeded with the following output:
+Change Dir: /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/x86_64/CMakeFiles/CMakeTmp
+
+Run Build Command:"/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja" "cmTC_9362d"
+[1/2] Building CXX object CMakeFiles/cmTC_9362d.dir/src.cxx.o
+[2/2] Linking CXX executable cmTC_9362d
+
+Source file was:
+int main() { void *p = &&label; goto *p; label: return 0; }
+Performing C++ SOURCE FILE Test LLVM_NO_OLD_LIBSTDCXX succeeded with the following output:
+Change Dir: /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/x86_64/CMakeFiles/CMakeTmp
+
+Run Build Command:"/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja" "cmTC_f2195"
+[1/2] Building CXX object CMakeFiles/cmTC_f2195.dir/src.cxx.o
+[2/2] Linking CXX executable cmTC_f2195
+
+Source file was:
+
+#include <atomic>
+std::atomic<float> x(0.0f);
+int main() { return (float)x; }
+Determining if the include file dlfcn.h exists passed with the following output:
+Change Dir: /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/x86_64/CMakeFiles/CMakeTmp
+
+Run Build Command:"/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja" "cmTC_ab2c2"
+[1/2] Building C object CMakeFiles/cmTC_ab2c2.dir/CheckIncludeFile.c.o
+[2/2] Linking C executable cmTC_ab2c2
+
+
+Determining if the include file errno.h exists passed with the following output:
+Change Dir: /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/x86_64/CMakeFiles/CMakeTmp
+
+Run Build Command:"/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja" "cmTC_448f8"
+[1/2] Building C object CMakeFiles/cmTC_448f8.dir/CheckIncludeFile.c.o
+[2/2] Linking C executable cmTC_448f8
+
+
+Determining if the include file fcntl.h exists passed with the following output:
+Change Dir: /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/x86_64/CMakeFiles/CMakeTmp
+
+Run Build Command:"/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja" "cmTC_a422a"
+[1/2] Building C object CMakeFiles/cmTC_a422a.dir/CheckIncludeFile.c.o
+[2/2] Linking C executable cmTC_a422a
+
+
+Determining if the include file link.h exists passed with the following output:
+Change Dir: /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/x86_64/CMakeFiles/CMakeTmp
+
+Run Build Command:"/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja" "cmTC_14be9"
+[1/2] Building C object CMakeFiles/cmTC_14be9.dir/CheckIncludeFile.c.o
+[2/2] Linking C executable cmTC_14be9
+
+
+Determining if the include file malloc.h exists passed with the following output:
+Change Dir: /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/x86_64/CMakeFiles/CMakeTmp
+
+Run Build Command:"/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja" "cmTC_4b64d"
+[1/2] Building C object CMakeFiles/cmTC_4b64d.dir/CheckIncludeFile.c.o
+[2/2] Linking C executable cmTC_4b64d
+
+
+Determining if the include file pthread.h exists passed with the following output:
+Change Dir: /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/x86_64/CMakeFiles/CMakeTmp
+
+Run Build Command:"/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja" "cmTC_cd52b"
+[1/2] Building C object CMakeFiles/cmTC_cd52b.dir/CheckIncludeFile.c.o
+[2/2] Linking C executable cmTC_cd52b
+
+
+Determining if the include file signal.h exists passed with the following output:
+Change Dir: /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/x86_64/CMakeFiles/CMakeTmp
+
+Run Build Command:"/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja" "cmTC_3c13e"
+[1/2] Building C object CMakeFiles/cmTC_3c13e.dir/CheckIncludeFile.c.o
+[2/2] Linking C executable cmTC_3c13e
+
+
+Determining if the include file sys/ioctl.h exists passed with the following output:
+Change Dir: /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/x86_64/CMakeFiles/CMakeTmp
+
+Run Build Command:"/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja" "cmTC_696da"
+[1/2] Building C object CMakeFiles/cmTC_696da.dir/CheckIncludeFile.c.o
+[2/2] Linking C executable cmTC_696da
+
+
+Determining if the include file sys/mman.h exists passed with the following output:
+Change Dir: /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/x86_64/CMakeFiles/CMakeTmp
+
+Run Build Command:"/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja" "cmTC_819b7"
+[1/2] Building C object CMakeFiles/cmTC_819b7.dir/CheckIncludeFile.c.o
+[2/2] Linking C executable cmTC_819b7
+
+
+Determining if the include file sys/param.h exists passed with the following output:
+Change Dir: /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/x86_64/CMakeFiles/CMakeTmp
+
+Run Build Command:"/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja" "cmTC_020f6"
+[1/2] Building C object CMakeFiles/cmTC_020f6.dir/CheckIncludeFile.c.o
+[2/2] Linking C executable cmTC_020f6
+
+
+Determining if the include file sys/resource.h exists passed with the following output:
+Change Dir: /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/x86_64/CMakeFiles/CMakeTmp
+
+Run Build Command:"/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja" "cmTC_de1be"
+[1/2] Building C object CMakeFiles/cmTC_de1be.dir/CheckIncludeFile.c.o
+[2/2] Linking C executable cmTC_de1be
+
+
+Determining if the include file sys/stat.h exists passed with the following output:
+Change Dir: /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/x86_64/CMakeFiles/CMakeTmp
+
+Run Build Command:"/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja" "cmTC_09c3c"
+[1/2] Building C object CMakeFiles/cmTC_09c3c.dir/CheckIncludeFile.c.o
+[2/2] Linking C executable cmTC_09c3c
+
+
+Determining if the include file sys/time.h exists passed with the following output:
+Change Dir: /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/x86_64/CMakeFiles/CMakeTmp
+
+Run Build Command:"/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja" "cmTC_3fa76"
+[1/2] Building C object CMakeFiles/cmTC_3fa76.dir/CheckIncludeFile.c.o
+[2/2] Linking C executable cmTC_3fa76
+
+
+Determining if the include file sys/types.h exists passed with the following output:
+Change Dir: /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/x86_64/CMakeFiles/CMakeTmp
+
+Run Build Command:"/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja" "cmTC_ffedc"
+[1/2] Building C object CMakeFiles/cmTC_ffedc.dir/CheckIncludeFile.c.o
+[2/2] Linking C executable cmTC_ffedc
+
+
+Determining if the include file termios.h exists passed with the following output:
+Change Dir: /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/x86_64/CMakeFiles/CMakeTmp
+
+Run Build Command:"/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja" "cmTC_2e9a3"
+[1/2] Building C object CMakeFiles/cmTC_2e9a3.dir/CheckIncludeFile.c.o
+[2/2] Linking C executable cmTC_2e9a3
+
+
+Determining if the include file unistd.h exists passed with the following output:
+Change Dir: /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/x86_64/CMakeFiles/CMakeTmp
+
+Run Build Command:"/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja" "cmTC_c8d2e"
+[1/2] Building C object CMakeFiles/cmTC_c8d2e.dir/CheckIncludeFile.c.o
+[2/2] Linking C executable cmTC_c8d2e
+
+
+Determining if the include file zlib.h exists passed with the following output:
+Change Dir: /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/x86_64/CMakeFiles/CMakeTmp
+
+Run Build Command:"/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja" "cmTC_2aac7"
+[1/2] Building C object CMakeFiles/cmTC_2aac7.dir/CheckIncludeFile.c.o
+[2/2] Linking C executable cmTC_2aac7
+
+
+Determining if the include file fenv.h exists passed with the following output:
+Change Dir: /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/x86_64/CMakeFiles/CMakeTmp
+
+Run Build Command:"/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja" "cmTC_a44b5"
+[1/2] Building C object CMakeFiles/cmTC_a44b5.dir/CheckIncludeFile.c.o
+[2/2] Linking C executable cmTC_a44b5
+
+
+Determining if the FE_ALL_EXCEPT exist passed with the following output:
+Change Dir: /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/x86_64/CMakeFiles/CMakeTmp
+
+Run Build Command:"/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja" "cmTC_61dc4"
+[1/2] Building C object CMakeFiles/cmTC_61dc4.dir/CheckSymbolExists.c.o
+[2/2] Linking C executable cmTC_61dc4
+
+File /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/x86_64/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <fenv.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef FE_ALL_EXCEPT
+  return ((int*)(&FE_ALL_EXCEPT))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the FE_INEXACT exist passed with the following output:
+Change Dir: /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/x86_64/CMakeFiles/CMakeTmp
+
+Run Build Command:"/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja" "cmTC_cd4c6"
+[1/2] Building C object CMakeFiles/cmTC_cd4c6.dir/CheckSymbolExists.c.o
+[2/2] Linking C executable cmTC_cd4c6
+
+File /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/x86_64/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <fenv.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef FE_INEXACT
+  return ((int*)(&FE_INEXACT))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the function pthread_create exists in the c passed with the following output:
+Change Dir: /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/x86_64/CMakeFiles/CMakeTmp
+
+Run Build Command:"/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja" "cmTC_940d9"
+[1/2] Building C object CMakeFiles/cmTC_940d9.dir/CheckFunctionExists.c.o
+/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/CheckFunctionExists.c:7:3: warning: declaration of built-in function 'pthread_create' requires inclusion of the header <pthread.h> [-Wbuiltin-requires-header]
+  CHECK_FUNCTION_EXISTS(void);
+  ^
+<command line>:3:31: note: expanded from here
+#define CHECK_FUNCTION_EXISTS pthread_create
+                              ^
+1 warning generated.
+[2/2] Linking C executable cmTC_940d9
+
+
+Determining if the function pthread_getspecific exists in the c passed with the following output:
+Change Dir: /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/x86_64/CMakeFiles/CMakeTmp
+
+Run Build Command:"/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja" "cmTC_d0c9a"
+[1/2] Building C object CMakeFiles/cmTC_d0c9a.dir/CheckFunctionExists.c.o
+[2/2] Linking C executable cmTC_d0c9a
+
+
+Determining if the function pthread_rwlock_init exists in the c passed with the following output:
+Change Dir: /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/x86_64/CMakeFiles/CMakeTmp
+
+Run Build Command:"/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja" "cmTC_fd16e"
+[1/2] Building C object CMakeFiles/cmTC_fd16e.dir/CheckFunctionExists.c.o
+[2/2] Linking C executable cmTC_fd16e
+
+
+Determining if the function pthread_mutex_lock exists in the c passed with the following output:
+Change Dir: /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/x86_64/CMakeFiles/CMakeTmp
+
+Run Build Command:"/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja" "cmTC_7c1f4"
+[1/2] Building C object CMakeFiles/cmTC_7c1f4.dir/CheckFunctionExists.c.o
+[2/2] Linking C executable cmTC_7c1f4
+
+
+Determining if the function dlopen exists in the dl passed with the following output:
+Change Dir: /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/x86_64/CMakeFiles/CMakeTmp
+
+Run Build Command:"/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja" "cmTC_15c23"
+[1/2] Building C object CMakeFiles/cmTC_15c23.dir/CheckFunctionExists.c.o
+[2/2] Linking C executable cmTC_15c23
+
+
+Determining if the arc4random exist passed with the following output:
+Change Dir: /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/x86_64/CMakeFiles/CMakeTmp
+
+Run Build Command:"/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja" "cmTC_95e39"
+[1/2] Building C object CMakeFiles/cmTC_95e39.dir/CheckSymbolExists.c.o
+[2/2] Linking C executable cmTC_95e39
+
+File /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/x86_64/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <stdlib.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef arc4random
+  return ((int*)(&arc4random))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Performing C SOURCE FILE Test C_SUPPORTS_WERROR_UNGUARDED_AVAILABILITY_NEW succeeded with the following output:
+Change Dir: /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/x86_64/CMakeFiles/CMakeTmp
+
+Run Build Command:"/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja" "cmTC_168d3"
+[1/2] Building C object CMakeFiles/cmTC_168d3.dir/src.c.o
+[2/2] Linking C executable cmTC_168d3
+
+Source file was:
+int main(void) { return 0; }
+Determining if the _Unwind_Backtrace exist passed with the following output:
+Change Dir: /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/x86_64/CMakeFiles/CMakeTmp
+
+Run Build Command:"/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja" "cmTC_c93b7"
+[1/2] Building C object CMakeFiles/cmTC_c93b7.dir/CheckSymbolExists.c.o
+[2/2] Linking C executable cmTC_c93b7
+
+File /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/x86_64/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <unwind.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef _Unwind_Backtrace
+  return ((int*)(&_Unwind_Backtrace))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the getpagesize exist passed with the following output:
+Change Dir: /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/x86_64/CMakeFiles/CMakeTmp
+
+Run Build Command:"/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja" "cmTC_e36a5"
+[1/2] Building C object CMakeFiles/cmTC_e36a5.dir/CheckSymbolExists.c.o
+[2/2] Linking C executable cmTC_e36a5
+
+File /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/x86_64/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <unistd.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef getpagesize
+  return ((int*)(&getpagesize))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the sysconf exist passed with the following output:
+Change Dir: /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/x86_64/CMakeFiles/CMakeTmp
+
+Run Build Command:"/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja" "cmTC_afc15"
+[1/2] Building C object CMakeFiles/cmTC_afc15.dir/CheckSymbolExists.c.o
+[2/2] Linking C executable cmTC_afc15
+
+File /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/x86_64/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <unistd.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef sysconf
+  return ((int*)(&sysconf))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the getrusage exist passed with the following output:
+Change Dir: /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/x86_64/CMakeFiles/CMakeTmp
+
+Run Build Command:"/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja" "cmTC_65246"
+[1/2] Building C object CMakeFiles/cmTC_65246.dir/CheckSymbolExists.c.o
+[2/2] Linking C executable cmTC_65246
+
+File /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/x86_64/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <sys/resource.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef getrusage
+  return ((int*)(&getrusage))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the setrlimit exist passed with the following output:
+Change Dir: /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/x86_64/CMakeFiles/CMakeTmp
+
+Run Build Command:"/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja" "cmTC_d6360"
+[1/2] Building C object CMakeFiles/cmTC_d6360.dir/CheckSymbolExists.c.o
+[2/2] Linking C executable cmTC_d6360
+
+File /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/x86_64/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <sys/resource.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef setrlimit
+  return ((int*)(&setrlimit))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the isatty exist passed with the following output:
+Change Dir: /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/x86_64/CMakeFiles/CMakeTmp
+
+Run Build Command:"/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja" "cmTC_2b4b6"
+[1/2] Building C object CMakeFiles/cmTC_2b4b6.dir/CheckSymbolExists.c.o
+[2/2] Linking C executable cmTC_2b4b6
+
+File /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/x86_64/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <unistd.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef isatty
+  return ((int*)(&isatty))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the futimens exist passed with the following output:
+Change Dir: /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/x86_64/CMakeFiles/CMakeTmp
+
+Run Build Command:"/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja" "cmTC_175c4"
+[1/2] Building C object CMakeFiles/cmTC_175c4.dir/CheckSymbolExists.c.o
+[2/2] Linking C executable cmTC_175c4
+
+File /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/x86_64/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <sys/stat.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef futimens
+  return ((int*)(&futimens))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the posix_fallocate exist passed with the following output:
+Change Dir: /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/x86_64/CMakeFiles/CMakeTmp
+
+Run Build Command:"/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja" "cmTC_e16b0"
+[1/2] Building C object CMakeFiles/cmTC_e16b0.dir/CheckSymbolExists.c.o
+[2/2] Linking C executable cmTC_e16b0
+
+File /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/x86_64/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <fcntl.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef posix_fallocate
+  return ((int*)(&posix_fallocate))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the sigaltstack exist passed with the following output:
+Change Dir: /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/x86_64/CMakeFiles/CMakeTmp
+
+Run Build Command:"/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja" "cmTC_4b5a0"
+[1/2] Building C object CMakeFiles/cmTC_4b5a0.dir/CheckSymbolExists.c.o
+[2/2] Linking C executable cmTC_4b5a0
+
+File /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/x86_64/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <signal.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef sigaltstack
+  return ((int*)(&sigaltstack))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the lseek64 exist passed with the following output:
+Change Dir: /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/x86_64/CMakeFiles/CMakeTmp
+
+Run Build Command:"/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja" "cmTC_23c5a"
+[1/2] Building C object CMakeFiles/cmTC_23c5a.dir/CheckSymbolExists.c.o
+[2/2] Linking C executable cmTC_23c5a
+
+File /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/x86_64/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <sys/types.h>
+#include <unistd.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef lseek64
+  return ((int*)(&lseek64))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the mallinfo exist passed with the following output:
+Change Dir: /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/x86_64/CMakeFiles/CMakeTmp
+
+Run Build Command:"/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja" "cmTC_a692f"
+[1/2] Building C object CMakeFiles/cmTC_a692f.dir/CheckSymbolExists.c.o
+[2/2] Linking C executable cmTC_a692f
+
+File /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/x86_64/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <malloc.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef mallinfo
+  return ((int*)(&mallinfo))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the getrlimit exist passed with the following output:
+Change Dir: /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/x86_64/CMakeFiles/CMakeTmp
+
+Run Build Command:"/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja" "cmTC_730cc"
+[1/2] Building C object CMakeFiles/cmTC_730cc.dir/CheckSymbolExists.c.o
+[2/2] Linking C executable cmTC_730cc
+
+File /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/x86_64/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <sys/types.h>
+#include <sys/time.h>
+#include <sys/resource.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef getrlimit
+  return ((int*)(&getrlimit))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the pread exist passed with the following output:
+Change Dir: /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/x86_64/CMakeFiles/CMakeTmp
+
+Run Build Command:"/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja" "cmTC_78b90"
+[1/2] Building C object CMakeFiles/cmTC_78b90.dir/CheckSymbolExists.c.o
+[2/2] Linking C executable cmTC_78b90
+
+File /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/x86_64/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <unistd.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef pread
+  return ((int*)(&pread))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the realpath exist passed with the following output:
+Change Dir: /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/x86_64/CMakeFiles/CMakeTmp
+
+Run Build Command:"/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja" "cmTC_eea30"
+[1/2] Building C object CMakeFiles/cmTC_eea30.dir/CheckSymbolExists.c.o
+[2/2] Linking C executable cmTC_eea30
+
+File /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/x86_64/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <stdlib.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef realpath
+  return ((int*)(&realpath))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the sbrk exist passed with the following output:
+Change Dir: /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/x86_64/CMakeFiles/CMakeTmp
+
+Run Build Command:"/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja" "cmTC_37e20"
+[1/2] Building C object CMakeFiles/cmTC_37e20.dir/CheckSymbolExists.c.o
+[2/2] Linking C executable cmTC_37e20
+
+File /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/x86_64/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <unistd.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef sbrk
+  return ((int*)(&sbrk))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the strerror exist passed with the following output:
+Change Dir: /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/x86_64/CMakeFiles/CMakeTmp
+
+Run Build Command:"/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja" "cmTC_5a599"
+[1/2] Building C object CMakeFiles/cmTC_5a599.dir/CheckSymbolExists.c.o
+[2/2] Linking C executable cmTC_5a599
+
+File /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/x86_64/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <string.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef strerror
+  return ((int*)(&strerror))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the strerror_r exist passed with the following output:
+Change Dir: /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/x86_64/CMakeFiles/CMakeTmp
+
+Run Build Command:"/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja" "cmTC_575ea"
+[1/2] Building C object CMakeFiles/cmTC_575ea.dir/CheckSymbolExists.c.o
+[2/2] Linking C executable cmTC_575ea
+
+File /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/x86_64/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <string.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef strerror_r
+  return ((int*)(&strerror_r))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the setenv exist passed with the following output:
+Change Dir: /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/x86_64/CMakeFiles/CMakeTmp
+
+Run Build Command:"/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja" "cmTC_36f49"
+[1/2] Building C object CMakeFiles/cmTC_36f49.dir/CheckSymbolExists.c.o
+[2/2] Linking C executable cmTC_36f49
+
+File /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/x86_64/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <stdlib.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef setenv
+  return ((int*)(&setenv))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the dlopen exist passed with the following output:
+Change Dir: /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/x86_64/CMakeFiles/CMakeTmp
+
+Run Build Command:"/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja" "cmTC_9b8d3"
+[1/2] Building C object CMakeFiles/cmTC_9b8d3.dir/CheckSymbolExists.c.o
+[2/2] Linking C executable cmTC_9b8d3
+
+File /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/x86_64/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <dlfcn.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef dlopen
+  return ((int*)(&dlopen))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the dladdr exist passed with the following output:
+Change Dir: /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/x86_64/CMakeFiles/CMakeTmp
+
+Run Build Command:"/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja" "cmTC_c757a"
+[1/2] Building C object CMakeFiles/cmTC_c757a.dir/CheckSymbolExists.c.o
+[2/2] Linking C executable cmTC_c757a
+
+File /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/x86_64/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <dlfcn.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef dladdr
+  return ((int*)(&dladdr))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the pthread_setname_np exist passed with the following output:
+Change Dir: /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/x86_64/CMakeFiles/CMakeTmp
+
+Run Build Command:"/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja" "cmTC_096ab"
+[1/2] Building C object CMakeFiles/cmTC_096ab.dir/CheckSymbolExists.c.o
+[2/2] Linking C executable cmTC_096ab
+
+File /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/x86_64/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <pthread.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef pthread_setname_np
+  return ((int*)(&pthread_setname_np))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Performing C++ SOURCE FILE Test HAVE_CXX_ATOMICS_WITHOUT_LIB succeeded with the following output:
+Change Dir: /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/x86_64/CMakeFiles/CMakeTmp
+
+Run Build Command:"/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja" "cmTC_9d84c"
+[1/2] Building CXX object CMakeFiles/cmTC_9d84c.dir/src.cxx.o
+[2/2] Linking CXX executable cmTC_9d84c
+
+Source file was:
+
+#include <atomic>
+std::atomic<int> x;
+int main() {
+  return x;
+}
+
+Performing C++ SOURCE FILE Test HAVE_CXX_ATOMICS64_WITHOUT_LIB succeeded with the following output:
+Change Dir: /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/x86_64/CMakeFiles/CMakeTmp
+
+Run Build Command:"/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja" "cmTC_f2680"
+[1/2] Building CXX object CMakeFiles/cmTC_f2680.dir/src.cxx.o
+src.cxx:6:12: warning: unused variable 'i' [-Wunused-variable]
+  uint64_t i = x.load(std::memory_order_relaxed);
+           ^
+1 warning generated.
+[2/2] Linking CXX executable cmTC_f2680
+
+Source file was:
+
+#include <atomic>
+#include <cstdint>
+std::atomic<uint64_t> x (0);
+int main() {
+  uint64_t i = x.load(std::memory_order_relaxed);
+  return 0;
+}
+
+Performing C++ SOURCE FILE Test LLVM_HAS_ATOMICS succeeded with the following output:
+Change Dir: /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/x86_64/CMakeFiles/CMakeTmp
+
+Run Build Command:"/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja" "cmTC_e1924"
+[1/2] Building CXX object CMakeFiles/cmTC_e1924.dir/src.cxx.o
+[2/2] Linking CXX executable cmTC_e1924
+
+Source file was:
+
+#ifdef _MSC_VER
+#include <windows.h>
+#endif
+int main() {
+#ifdef _MSC_VER
+        volatile LONG val = 1;
+        MemoryBarrier();
+        InterlockedCompareExchange(&val, 0, 1);
+        InterlockedIncrement(&val);
+        InterlockedDecrement(&val);
+#else
+        volatile unsigned long val = 1;
+        __sync_synchronize();
+        __sync_val_compare_and_swap(&val, 1, 0);
+        __sync_add_and_fetch(&val, 1);
+        __sync_sub_and_fetch(&val, 1);
+#endif
+        return 0;
+      }
+
+Performing C++ SOURCE FILE Test SUPPORTS_NO_PIE_FLAG succeeded with the following output:
+Change Dir: /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/x86_64/CMakeFiles/CMakeTmp
+
+Run Build Command:"/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja" "cmTC_37d72"
+[1/2] Building CXX object CMakeFiles/cmTC_37d72.dir/src.cxx.o
+[2/2] Linking CXX executable cmTC_37d72
+
+Source file was:
+int main() { return 0; }
+Performing C++ SOURCE FILE Test SUPPORTS_VARIADIC_MACROS_FLAG succeeded with the following output:
+Change Dir: /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/x86_64/CMakeFiles/CMakeTmp
+
+Run Build Command:"/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja" "cmTC_2cd8e"
+[1/2] Building CXX object CMakeFiles/cmTC_2cd8e.dir/src.cxx.o
+[2/2] Linking CXX executable cmTC_2cd8e
+
+Source file was:
+int main() { return 0; }
+Performing C++ SOURCE FILE Test SUPPORTS_GNU_ZERO_VARIADIC_MACRO_ARGUMENTS_FLAG succeeded with the following output:
+Change Dir: /Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/x86_64/CMakeFiles/CMakeTmp
+
+Run Build Command:"/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja" "cmTC_a82d4"
+[1/2] Building CXX object CMakeFiles/cmTC_a82d4.dir/src.cxx.o
+[2/2] Linking CXX executable cmTC_a82d4
+
+Source file was:
+int main() { return 0; }

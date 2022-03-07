@@ -1,0 +1,19 @@
+Executable : null
+arguments : 
+--build-system
+cmake
+--platform
+android
+--abi
+armeabi-v7a
+--os-version
+21
+--stl
+c++_shared
+--ndk-version
+21
+--output
+/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/MinSizeRel/1g696kf7/prefab/armeabi-v7a/prefab
+/Users/janicduplessis/.gradle/caches/transforms-3/2bf5ae3e876bb8fe3a8a84a4c8d7d1d8/transformed/fbjni-0.2.2/prefab
+jvmArgs : 
+
