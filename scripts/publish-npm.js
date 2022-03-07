@@ -152,10 +152,10 @@ const shortCommit = currentCommit.slice(0, 9);
 const rawVersion =
   // 0.0.0 triggers issues with cocoapods for codegen when building template project.
   dryRunBuild
-    ? '1000.0.0'
+    ? '0.1000.0'
     : // For nightly we continue to use 0.0.0 for clarity for npm
     nightlyBuild
-    ? '0.0.0'
+    ? '0.1000.0'
     : // For pre-release and stable releases, we use the git tag of the version we're releasing (set in bump-oss-version)
       buildTag;
 
