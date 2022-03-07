@@ -1,0 +1,1101 @@
+{
+  "buildFiles": [
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/lib/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/API/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/tools/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/lib/VM/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/public/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/lib/ADT/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/lib/AST/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/ReactCommon/jsi/jsi/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/lib/Inst/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/external/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/lib/BCGen/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/lib/Regex/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/tools/hdb/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/tools/hvm/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/tools/jsi/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/unittests/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/lib/AST2JS/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/lib/Parser/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/API/hermes/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/lib/Support/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/unsupported/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/tools/synth/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/lib/Platform/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/external/zip/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/tools/hermes/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/unittests/IR/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/external/llvh/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/lib/SourceMap/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/lib/BCGen/HBC/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/external/dtoa/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/tools/hermesc/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/tools/hbcdump/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/tools/fuzzers/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/unittests/AST/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/unittests/API/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/unittests/ADT/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/lib/FlowParser/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/tools/hbc-diff/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/unittests/dtoa/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/lib/ConsoleHost/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/tools/hvm-bench/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/tools/emhermesc/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/unittests/BCGen/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/utils/hermes-lit/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/lib/FrontEndDefs/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/unittests/Parser/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/external/llvh/lib/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/lib/Platform/Intl/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/unsupported/tools/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/tools/node-hermes/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/unittests/Support/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/lib/CompilerDriver/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/tools/hbc-deltaprep/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/tools/hbc-attribute/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/tools/hermes-parser/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/unittests/VMRuntime/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/unittests/Optimizer/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/lib/Platform/Unicode/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/lib/InternalBytecode/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/public/hermes/Public/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/lib/VM/Instrumentation/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/tools/fuzzers/fuzzilli/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/external/llvh/utils/not/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/lib/DependencyExtractor/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/tools/fuzzers/libfuzzer/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/external/llvh/lib/Support/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/external/llvh/utils/count/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/unsupported/tools/rustgen/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/unittests/PlatformUnicode/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/external/llvh/lib/Demangle/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/tools/dependency-extractor/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/external/llvh/utils/unittest/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/external/llvh/utils/FileCheck/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/unittests/VMRuntime/Instrumentation/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/external/llvh/utils/unittest/UnitTestMain/CMakeLists.txt",
+    "/Users/janicduplessis/Developer/react-native/sdks/hermes/android/intltest/java/com/facebook/hermes/test/CMakeLists.txt"
+  ],
+  "cleanCommandsComponents": [
+    [
+      "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+      "-C",
+      "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a",
+      "clean"
+    ]
+  ],
+  "buildTargetsCommandComponents": [
+    "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+    "-C",
+    "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a",
+    "{LIST_OF_TARGETS_TO_BUILD}"
+  ],
+  "libraries": {
+    "jsijni-Release-arm64-v8a": {
+      "artifactName": "jsijni",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a",
+        "jsijni"
+      ],
+      "abi": "arm64-v8a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/build/intermediates/cxx/Release/z1f1i2i5/obj/arm64-v8a/libjsijni.so",
+      "runtimeFiles": [
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/build/intermediates/cxx/Release/z1f1i2i5/obj/arm64-v8a/libhermes.so",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/build/intermediates/cxx/Release/z1f1i2i5/obj/arm64-v8a/libjsi.so",
+        "/Users/janicduplessis/.gradle/caches/transforms-3/2bf5ae3e876bb8fe3a8a84a4c8d7d1d8/transformed/fbjni-0.2.2/prefab/modules/fbjni/libs/android.arm64-v8a/libfbjni.so"
+      ]
+    },
+    "LLVHDemangle-Release-arm64-v8a": {
+      "artifactName": "LLVHDemangle",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a",
+        "LLVHDemangle"
+      ],
+      "abi": "arm64-v8a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a/external/llvh/lib/Demangle/libLLVHDemangle.a",
+      "runtimeFiles": []
+    },
+    "hermesSourceMap-Release-arm64-v8a": {
+      "artifactName": "hermesSourceMap",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a",
+        "hermesSourceMap"
+      ],
+      "abi": "arm64-v8a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a/lib/SourceMap/libhermesSourceMap.a",
+      "runtimeFiles": []
+    },
+    "hermesBackend-Release-arm64-v8a": {
+      "artifactName": "hermesBackend",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a",
+        "hermesBackend"
+      ],
+      "abi": "arm64-v8a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a/lib/BCGen/libhermesBackend.a",
+      "runtimeFiles": []
+    },
+    "hermesPlatformUnicode-Release-arm64-v8a": {
+      "artifactName": "hermesPlatformUnicode",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a",
+        "hermesPlatformUnicode"
+      ],
+      "abi": "arm64-v8a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a/lib/Platform/Unicode/libhermesPlatformUnicode.a",
+      "runtimeFiles": []
+    },
+    "timerStats-Release-arm64-v8a": {
+      "artifactName": "timerStats",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a",
+        "timerStats"
+      ],
+      "abi": "arm64-v8a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a/API/hermes/libtimerStats.a",
+      "runtimeFiles": []
+    },
+    "hermesInstrumentation-Release-arm64-v8a": {
+      "artifactName": "hermesInstrumentation",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a",
+        "hermesInstrumentation"
+      ],
+      "abi": "arm64-v8a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a/lib/VM/Instrumentation/libhermesInstrumentation.a",
+      "runtimeFiles": []
+    },
+    "dtoa-Release-arm64-v8a": {
+      "artifactName": "dtoa",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a",
+        "dtoa"
+      ],
+      "abi": "arm64-v8a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a/external/dtoa/libdtoa.a",
+      "runtimeFiles": []
+    },
+    "hvm-Release-arm64-v8a": {
+      "artifactName": "hvm",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a",
+        "hvm"
+      ],
+      "abi": "arm64-v8a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a/bin/hvm",
+      "runtimeFiles": [
+        "/Users/janicduplessis/.gradle/caches/transforms-3/2bf5ae3e876bb8fe3a8a84a4c8d7d1d8/transformed/fbjni-0.2.2/prefab/modules/fbjni/libs/android.arm64-v8a/libfbjni.so"
+      ]
+    },
+    "HermesSupportTests-Release-arm64-v8a": {
+      "artifactName": "HermesSupportTests",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a",
+        "HermesSupportTests"
+      ],
+      "abi": "arm64-v8a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/build/intermediates/cxx/Release/z1f1i2i5/obj/arm64-v8a/HermesSupportTests",
+      "runtimeFiles": [
+        "/Users/janicduplessis/.gradle/caches/transforms-3/2bf5ae3e876bb8fe3a8a84a4c8d7d1d8/transformed/fbjni-0.2.2/prefab/modules/fbjni/libs/android.arm64-v8a/libfbjni.so"
+      ]
+    },
+    "libhermes-Release-arm64-v8a": {
+      "artifactName": "libhermes",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a",
+        "libhermes"
+      ],
+      "abi": "arm64-v8a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/build/intermediates/cxx/Release/z1f1i2i5/obj/arm64-v8a/libhermes.so",
+      "runtimeFiles": [
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/build/intermediates/cxx/Release/z1f1i2i5/obj/arm64-v8a/libjsi.so",
+        "/Users/janicduplessis/.gradle/caches/transforms-3/2bf5ae3e876bb8fe3a8a84a4c8d7d1d8/transformed/fbjni-0.2.2/prefab/modules/fbjni/libs/android.arm64-v8a/libfbjni.so"
+      ]
+    },
+    "gtest_main-Release-arm64-v8a": {
+      "artifactName": "gtest_main",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a",
+        "gtest_main"
+      ],
+      "abi": "arm64-v8a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a/external/llvh/utils/unittest/UnitTestMain/libgtest_main.a",
+      "runtimeFiles": []
+    },
+    "make_bundle_dir-Release-arm64-v8a": {
+      "artifactName": "make_bundle_dir",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a",
+        "make_bundle_dir"
+      ],
+      "abi": "arm64-v8a",
+      "runtimeFiles": []
+    },
+    "PlatformUnicodeTests-Release-arm64-v8a": {
+      "artifactName": "PlatformUnicodeTests",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a",
+        "PlatformUnicodeTests"
+      ],
+      "abi": "arm64-v8a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/build/intermediates/cxx/Release/z1f1i2i5/obj/arm64-v8a/PlatformUnicodeTests",
+      "runtimeFiles": [
+        "/Users/janicduplessis/.gradle/caches/transforms-3/2bf5ae3e876bb8fe3a8a84a4c8d7d1d8/transformed/fbjni-0.2.2/prefab/modules/fbjni/libs/android.arm64-v8a/libfbjni.so"
+      ]
+    },
+    "FileCheck-Release-arm64-v8a": {
+      "artifactName": "FileCheck",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a",
+        "FileCheck"
+      ],
+      "abi": "arm64-v8a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a/bin/FileCheck",
+      "runtimeFiles": []
+    },
+    "hermesParser-Release-arm64-v8a": {
+      "artifactName": "hermesParser",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a",
+        "hermesParser"
+      ],
+      "abi": "arm64-v8a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a/lib/Parser/libhermesParser.a",
+      "runtimeFiles": []
+    },
+    "HermesOptimizerTests-Release-arm64-v8a": {
+      "artifactName": "HermesOptimizerTests",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a",
+        "HermesOptimizerTests"
+      ],
+      "abi": "arm64-v8a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/build/intermediates/cxx/Release/z1f1i2i5/obj/arm64-v8a/HermesOptimizerTests",
+      "runtimeFiles": [
+        "/Users/janicduplessis/.gradle/caches/transforms-3/2bf5ae3e876bb8fe3a8a84a4c8d7d1d8/transformed/fbjni-0.2.2/prefab/modules/fbjni/libs/android.arm64-v8a/libfbjni.so"
+      ]
+    },
+    "LLVHSupport-Release-arm64-v8a": {
+      "artifactName": "LLVHSupport",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a",
+        "LLVHSupport"
+      ],
+      "abi": "arm64-v8a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a/external/llvh/lib/Support/libLLVHSupport.a",
+      "runtimeFiles": []
+    },
+    "hermesFrontend-Release-arm64-v8a": {
+      "artifactName": "hermesFrontend",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a",
+        "hermesFrontend"
+      ],
+      "abi": "arm64-v8a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a/lib/libhermesFrontend.a",
+      "runtimeFiles": []
+    },
+    "hermesPlatform-Release-arm64-v8a": {
+      "artifactName": "hermesPlatform",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a",
+        "hermesPlatform"
+      ],
+      "abi": "arm64-v8a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a/lib/Platform/libhermesPlatform.a",
+      "runtimeFiles": []
+    },
+    "hermesapi-Release-arm64-v8a": {
+      "artifactName": "hermesapi",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a",
+        "hermesapi"
+      ],
+      "abi": "arm64-v8a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a/API/hermes/libhermesapi.a",
+      "runtimeFiles": []
+    },
+    "HermesASTTests-Release-arm64-v8a": {
+      "artifactName": "HermesASTTests",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a",
+        "HermesASTTests"
+      ],
+      "abi": "arm64-v8a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/build/intermediates/cxx/Release/z1f1i2i5/obj/arm64-v8a/HermesASTTests",
+      "runtimeFiles": [
+        "/Users/janicduplessis/.gradle/caches/transforms-3/2bf5ae3e876bb8fe3a8a84a4c8d7d1d8/transformed/fbjni-0.2.2/prefab/modules/fbjni/libs/android.arm64-v8a/libfbjni.so"
+      ]
+    },
+    "hermesVMRuntime-Release-arm64-v8a": {
+      "artifactName": "hermesVMRuntime",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a",
+        "hermesVMRuntime"
+      ],
+      "abi": "arm64-v8a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a/lib/VM/libhermesVMRuntime.a",
+      "runtimeFiles": []
+    },
+    "hermesHBCBackendLean-Release-arm64-v8a": {
+      "artifactName": "hermesHBCBackendLean",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a",
+        "hermesHBCBackendLean"
+      ],
+      "abi": "arm64-v8a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a/lib/BCGen/HBC/libhermesHBCBackendLean.a",
+      "runtimeFiles": []
+    },
+    "hermesSupport-Release-arm64-v8a": {
+      "artifactName": "hermesSupport",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a",
+        "hermesSupport"
+      ],
+      "abi": "arm64-v8a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a/lib/Support/libhermesSupport.a",
+      "runtimeFiles": []
+    },
+    "interp-dispatch-bench-Release-arm64-v8a": {
+      "artifactName": "interp-dispatch-bench",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a",
+        "interp-dispatch-bench"
+      ],
+      "abi": "arm64-v8a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a/bin/interp-dispatch-bench",
+      "runtimeFiles": [
+        "/Users/janicduplessis/.gradle/caches/transforms-3/2bf5ae3e876bb8fe3a8a84a4c8d7d1d8/transformed/fbjni-0.2.2/prefab/modules/fbjni/libs/android.arm64-v8a/libfbjni.so"
+      ]
+    },
+    "HermesADTTests-Release-arm64-v8a": {
+      "artifactName": "HermesADTTests",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a",
+        "HermesADTTests"
+      ],
+      "abi": "arm64-v8a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/build/intermediates/cxx/Release/z1f1i2i5/obj/arm64-v8a/HermesADTTests",
+      "runtimeFiles": [
+        "/Users/janicduplessis/.gradle/caches/transforms-3/2bf5ae3e876bb8fe3a8a84a4c8d7d1d8/transformed/fbjni-0.2.2/prefab/modules/fbjni/libs/android.arm64-v8a/libfbjni.so"
+      ]
+    },
+    "not-Release-arm64-v8a": {
+      "artifactName": "not",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a",
+        "not"
+      ],
+      "abi": "arm64-v8a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a/bin/not",
+      "runtimeFiles": []
+    },
+    "HermesBCGenTests-Release-arm64-v8a": {
+      "artifactName": "HermesBCGenTests",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a",
+        "HermesBCGenTests"
+      ],
+      "abi": "arm64-v8a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/build/intermediates/cxx/Release/z1f1i2i5/obj/arm64-v8a/HermesBCGenTests",
+      "runtimeFiles": [
+        "/Users/janicduplessis/.gradle/caches/transforms-3/2bf5ae3e876bb8fe3a8a84a4c8d7d1d8/transformed/fbjni-0.2.2/prefab/modules/fbjni/libs/android.arm64-v8a/libfbjni.so"
+      ]
+    },
+    "hermesADT-Release-arm64-v8a": {
+      "artifactName": "hermesADT",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a",
+        "hermesADT"
+      ],
+      "abi": "arm64-v8a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a/lib/ADT/libhermesADT.a",
+      "runtimeFiles": []
+    },
+    "HermesIRTests-Release-arm64-v8a": {
+      "artifactName": "HermesIRTests",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a",
+        "HermesIRTests"
+      ],
+      "abi": "arm64-v8a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/build/intermediates/cxx/Release/z1f1i2i5/obj/arm64-v8a/HermesIRTests",
+      "runtimeFiles": [
+        "/Users/janicduplessis/.gradle/caches/transforms-3/2bf5ae3e876bb8fe3a8a84a4c8d7d1d8/transformed/fbjni-0.2.2/prefab/modules/fbjni/libs/android.arm64-v8a/libfbjni.so"
+      ]
+    },
+    "hermesCompilerDriver-Release-arm64-v8a": {
+      "artifactName": "hermesCompilerDriver",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a",
+        "hermesCompilerDriver"
+      ],
+      "abi": "arm64-v8a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a/lib/CompilerDriver/libhermesCompilerDriver.a",
+      "runtimeFiles": []
+    },
+    "rustgen-Release-arm64-v8a": {
+      "artifactName": "rustgen",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a",
+        "rustgen"
+      ],
+      "abi": "arm64-v8a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a/bin/rustgen",
+      "runtimeFiles": []
+    },
+    "count-Release-arm64-v8a": {
+      "artifactName": "count",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a",
+        "count"
+      ],
+      "abi": "arm64-v8a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a/bin/count",
+      "runtimeFiles": []
+    },
+    "traceInterpreter-Release-arm64-v8a": {
+      "artifactName": "traceInterpreter",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a",
+        "traceInterpreter"
+      ],
+      "abi": "arm64-v8a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a/API/hermes/libtraceInterpreter.a",
+      "runtimeFiles": []
+    },
+    "hermesAST2JS-Release-arm64-v8a": {
+      "artifactName": "hermesAST2JS",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a",
+        "hermesAST2JS"
+      ],
+      "abi": "arm64-v8a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a/lib/AST2JS/libhermesAST2JS.a",
+      "runtimeFiles": []
+    },
+    "hermesDependencyExtractor-Release-arm64-v8a": {
+      "artifactName": "hermesDependencyExtractor",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a",
+        "hermesDependencyExtractor"
+      ],
+      "abi": "arm64-v8a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a/lib/DependencyExtractor/libhermesDependencyExtractor.a",
+      "runtimeFiles": []
+    },
+    "hermesRegex-Release-arm64-v8a": {
+      "artifactName": "hermesRegex",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a",
+        "hermesRegex"
+      ],
+      "abi": "arm64-v8a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a/lib/Regex/libhermesRegex.a",
+      "runtimeFiles": []
+    },
+    "jsi-Release-arm64-v8a": {
+      "artifactName": "jsi",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a",
+        "jsi"
+      ],
+      "abi": "arm64-v8a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/build/intermediates/cxx/Release/z1f1i2i5/obj/arm64-v8a/libjsi.so",
+      "runtimeFiles": []
+    },
+    "hermesAST-Release-arm64-v8a": {
+      "artifactName": "hermesAST",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a",
+        "hermesAST"
+      ],
+      "abi": "arm64-v8a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a/lib/AST/libhermesAST.a",
+      "runtimeFiles": []
+    },
+    "zip-Release-arm64-v8a": {
+      "artifactName": "zip",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a",
+        "zip"
+      ],
+      "abi": "arm64-v8a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a/external/zip/libzip.a",
+      "runtimeFiles": []
+    },
+    "jsijniepi-Release-arm64-v8a": {
+      "artifactName": "jsijniepi",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a",
+        "jsijniepi"
+      ],
+      "abi": "arm64-v8a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/build/intermediates/cxx/Release/z1f1i2i5/obj/arm64-v8a/libjsijniepi.so",
+      "runtimeFiles": [
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/build/intermediates/cxx/Release/z1f1i2i5/obj/arm64-v8a/libhermes.so",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/build/intermediates/cxx/Release/z1f1i2i5/obj/arm64-v8a/libjsi.so",
+        "/Users/janicduplessis/.gradle/caches/transforms-3/2bf5ae3e876bb8fe3a8a84a4c8d7d1d8/transformed/fbjni-0.2.2/prefab/modules/fbjni/libs/android.arm64-v8a/libfbjni.so"
+      ]
+    },
+    "compileJS-Release-arm64-v8a": {
+      "artifactName": "compileJS",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a",
+        "compileJS"
+      ],
+      "abi": "arm64-v8a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a/API/hermes/libcompileJS.a",
+      "runtimeFiles": []
+    },
+    "hermesVMRuntimeLean-Release-arm64-v8a": {
+      "artifactName": "hermesVMRuntimeLean",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a",
+        "hermesVMRuntimeLean"
+      ],
+      "abi": "arm64-v8a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a/lib/VM/libhermesVMRuntimeLean.a",
+      "runtimeFiles": []
+    },
+    "hbcdump-Release-arm64-v8a": {
+      "artifactName": "hbcdump",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a",
+        "hbcdump"
+      ],
+      "abi": "arm64-v8a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a/bin/hbcdump",
+      "runtimeFiles": [
+        "/Users/janicduplessis/.gradle/caches/transforms-3/2bf5ae3e876bb8fe3a8a84a4c8d7d1d8/transformed/fbjni-0.2.2/prefab/modules/fbjni/libs/android.arm64-v8a/libfbjni.so"
+      ]
+    },
+    "emhermesc-Release-arm64-v8a": {
+      "artifactName": "emhermesc",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a",
+        "emhermesc"
+      ],
+      "abi": "arm64-v8a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a/bin/emhermesc",
+      "runtimeFiles": [
+        "/Users/janicduplessis/.gradle/caches/transforms-3/2bf5ae3e876bb8fe3a8a84a4c8d7d1d8/transformed/fbjni-0.2.2/prefab/modules/fbjni/libs/android.arm64-v8a/libfbjni.so"
+      ]
+    },
+    "hermes-Release-arm64-v8a": {
+      "artifactName": "hermes",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a",
+        "hermes"
+      ],
+      "abi": "arm64-v8a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a/bin/hermes",
+      "runtimeFiles": [
+        "/Users/janicduplessis/.gradle/caches/transforms-3/2bf5ae3e876bb8fe3a8a84a4c8d7d1d8/transformed/fbjni-0.2.2/prefab/modules/fbjni/libs/android.arm64-v8a/libfbjni.so"
+      ]
+    },
+    "emdependency-extractor-Release-arm64-v8a": {
+      "artifactName": "emdependency-extractor",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a",
+        "emdependency-extractor"
+      ],
+      "abi": "arm64-v8a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a/bin/emdependency-extractor",
+      "runtimeFiles": [
+        "/Users/janicduplessis/.gradle/caches/transforms-3/2bf5ae3e876bb8fe3a8a84a4c8d7d1d8/transformed/fbjni-0.2.2/prefab/modules/fbjni/libs/android.arm64-v8a/libfbjni.so"
+      ]
+    },
+    "DtoaTests-Release-arm64-v8a": {
+      "artifactName": "DtoaTests",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a",
+        "DtoaTests"
+      ],
+      "abi": "arm64-v8a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/build/intermediates/cxx/Release/z1f1i2i5/obj/arm64-v8a/DtoaTests",
+      "runtimeFiles": []
+    },
+    "hermesPlatformIntl-Release-arm64-v8a": {
+      "artifactName": "hermesPlatformIntl",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a",
+        "hermesPlatformIntl"
+      ],
+      "abi": "arm64-v8a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a/lib/Platform/Intl/libhermesPlatformIntl.a",
+      "runtimeFiles": []
+    },
+    "HermesParserTests-Release-arm64-v8a": {
+      "artifactName": "HermesParserTests",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a",
+        "HermesParserTests"
+      ],
+      "abi": "arm64-v8a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/build/intermediates/cxx/Release/z1f1i2i5/obj/arm64-v8a/HermesParserTests",
+      "runtimeFiles": [
+        "/Users/janicduplessis/.gradle/caches/transforms-3/2bf5ae3e876bb8fe3a8a84a4c8d7d1d8/transformed/fbjni-0.2.2/prefab/modules/fbjni/libs/android.arm64-v8a/libfbjni.so"
+      ]
+    },
+    "hbc-deltaprep-Release-arm64-v8a": {
+      "artifactName": "hbc-deltaprep",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a",
+        "hbc-deltaprep"
+      ],
+      "abi": "arm64-v8a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a/bin/hbc-deltaprep",
+      "runtimeFiles": [
+        "/Users/janicduplessis/.gradle/caches/transforms-3/2bf5ae3e876bb8fe3a8a84a4c8d7d1d8/transformed/fbjni-0.2.2/prefab/modules/fbjni/libs/android.arm64-v8a/libfbjni.so"
+      ]
+    },
+    "hermesFrontEndDefs-Release-arm64-v8a": {
+      "artifactName": "hermesFrontEndDefs",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a",
+        "hermesFrontEndDefs"
+      ],
+      "abi": "arm64-v8a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a/lib/FrontEndDefs/libhermesFrontEndDefs.a",
+      "runtimeFiles": []
+    },
+    "HermesVMRuntimeTests-Release-arm64-v8a": {
+      "artifactName": "HermesVMRuntimeTests",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a",
+        "HermesVMRuntimeTests"
+      ],
+      "abi": "arm64-v8a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/build/intermediates/cxx/Release/z1f1i2i5/obj/arm64-v8a/HermesVMRuntimeTests",
+      "runtimeFiles": [
+        "/Users/janicduplessis/.gradle/caches/transforms-3/2bf5ae3e876bb8fe3a8a84a4c8d7d1d8/transformed/fbjni-0.2.2/prefab/modules/fbjni/libs/android.arm64-v8a/libfbjni.so"
+      ]
+    },
+    "gtest-Release-arm64-v8a": {
+      "artifactName": "gtest",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a",
+        "gtest"
+      ],
+      "abi": "arm64-v8a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a/external/llvh/utils/unittest/libgtest.a",
+      "runtimeFiles": []
+    },
+    "dependency-extractor-Release-arm64-v8a": {
+      "artifactName": "dependency-extractor",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a",
+        "dependency-extractor"
+      ],
+      "abi": "arm64-v8a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a/bin/dependency-extractor",
+      "runtimeFiles": [
+        "/Users/janicduplessis/.gradle/caches/transforms-3/2bf5ae3e876bb8fe3a8a84a4c8d7d1d8/transformed/fbjni-0.2.2/prefab/modules/fbjni/libs/android.arm64-v8a/libfbjni.so"
+      ]
+    },
+    "github-cli-release-Release-arm64-v8a": {
+      "artifactName": "github-cli-release",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a",
+        "github-cli-release"
+      ],
+      "abi": "arm64-v8a",
+      "runtimeFiles": []
+    },
+    "hbc-attribute-Release-arm64-v8a": {
+      "artifactName": "hbc-attribute",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a",
+        "hbc-attribute"
+      ],
+      "abi": "arm64-v8a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a/bin/hbc-attribute",
+      "runtimeFiles": [
+        "/Users/janicduplessis/.gradle/caches/transforms-3/2bf5ae3e876bb8fe3a8a84a4c8d7d1d8/transformed/fbjni-0.2.2/prefab/modules/fbjni/libs/android.arm64-v8a/libfbjni.so"
+      ]
+    },
+    "APILeanTests-Release-arm64-v8a": {
+      "artifactName": "APILeanTests",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a",
+        "APILeanTests"
+      ],
+      "abi": "arm64-v8a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/build/intermediates/cxx/Release/z1f1i2i5/obj/arm64-v8a/APILeanTests",
+      "runtimeFiles": [
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/build/intermediates/cxx/Release/z1f1i2i5/obj/arm64-v8a/libjsi.so",
+        "/Users/janicduplessis/.gradle/caches/transforms-3/2bf5ae3e876bb8fe3a8a84a4c8d7d1d8/transformed/fbjni-0.2.2/prefab/modules/fbjni/libs/android.arm64-v8a/libfbjni.so"
+      ]
+    },
+    "hermesConsoleHost-Release-arm64-v8a": {
+      "artifactName": "hermesConsoleHost",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a",
+        "hermesConsoleHost"
+      ],
+      "abi": "arm64-v8a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a/lib/ConsoleHost/libhermesConsoleHost.a",
+      "runtimeFiles": []
+    },
+    "hbc-diff-Release-arm64-v8a": {
+      "artifactName": "hbc-diff",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a",
+        "hbc-diff"
+      ],
+      "abi": "arm64-v8a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a/bin/hbc-diff",
+      "runtimeFiles": [
+        "/Users/janicduplessis/.gradle/caches/transforms-3/2bf5ae3e876bb8fe3a8a84a4c8d7d1d8/transformed/fbjni-0.2.2/prefab/modules/fbjni/libs/android.arm64-v8a/libfbjni.so"
+      ]
+    },
+    "synthTrace-Release-arm64-v8a": {
+      "artifactName": "synthTrace",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a",
+        "synthTrace"
+      ],
+      "abi": "arm64-v8a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a/API/hermes/libsynthTrace.a",
+      "runtimeFiles": []
+    },
+    "hermesFlowParser-Release-arm64-v8a": {
+      "artifactName": "hermesFlowParser",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a",
+        "hermesFlowParser"
+      ],
+      "abi": "arm64-v8a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a/lib/FlowParser/libhermesFlowParser.a",
+      "runtimeFiles": []
+    },
+    "SamplingProfilerTests-Release-arm64-v8a": {
+      "artifactName": "SamplingProfilerTests",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a",
+        "SamplingProfilerTests"
+      ],
+      "abi": "arm64-v8a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/build/intermediates/cxx/Release/z1f1i2i5/obj/arm64-v8a/SamplingProfilerTests",
+      "runtimeFiles": [
+        "/Users/janicduplessis/.gradle/caches/transforms-3/2bf5ae3e876bb8fe3a8a84a4c8d7d1d8/transformed/fbjni-0.2.2/prefab/modules/fbjni/libs/android.arm64-v8a/libfbjni.so",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/build/intermediates/cxx/Release/z1f1i2i5/obj/arm64-v8a/libjsi.so"
+      ]
+    },
+    "synth-Release-arm64-v8a": {
+      "artifactName": "synth",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a",
+        "synth"
+      ],
+      "abi": "arm64-v8a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a/bin/synth",
+      "runtimeFiles": [
+        "/Users/janicduplessis/.gradle/caches/transforms-3/2bf5ae3e876bb8fe3a8a84a4c8d7d1d8/transformed/fbjni-0.2.2/prefab/modules/fbjni/libs/android.arm64-v8a/libfbjni.so",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/build/intermediates/cxx/Release/z1f1i2i5/obj/arm64-v8a/libjsi.so"
+      ]
+    },
+    "APITests-Release-arm64-v8a": {
+      "artifactName": "APITests",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a",
+        "APITests"
+      ],
+      "abi": "arm64-v8a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/build/intermediates/cxx/Release/z1f1i2i5/obj/arm64-v8a/APITests",
+      "runtimeFiles": [
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/build/intermediates/cxx/Release/z1f1i2i5/obj/arm64-v8a/libjsi.so",
+        "/Users/janicduplessis/.gradle/caches/transforms-3/2bf5ae3e876bb8fe3a8a84a4c8d7d1d8/transformed/fbjni-0.2.2/prefab/modules/fbjni/libs/android.arm64-v8a/libfbjni.so"
+      ]
+    },
+    "hermesapiLean-Release-arm64-v8a": {
+      "artifactName": "hermesapiLean",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a",
+        "hermesapiLean"
+      ],
+      "abi": "arm64-v8a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a/API/hermes/libhermesapiLean.a",
+      "runtimeFiles": []
+    },
+    "SegmentTestCompile-Release-arm64-v8a": {
+      "artifactName": "SegmentTestCompile",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a",
+        "SegmentTestCompile"
+      ],
+      "abi": "arm64-v8a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a/unittests/API/libSegmentTestCompile.a",
+      "runtimeFiles": []
+    },
+    "hermesInternalBytecode-Release-arm64-v8a": {
+      "artifactName": "hermesInternalBytecode",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a",
+        "hermesInternalBytecode"
+      ],
+      "abi": "arm64-v8a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a/lib/InternalBytecode/libhermesInternalBytecode.a",
+      "runtimeFiles": []
+    },
+    "synthTraceParser-Release-arm64-v8a": {
+      "artifactName": "synthTraceParser",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a",
+        "synthTraceParser"
+      ],
+      "abi": "arm64-v8a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a/API/hermes/libsynthTraceParser.a",
+      "runtimeFiles": []
+    },
+    "HermesInstrumentationTests-Release-arm64-v8a": {
+      "artifactName": "HermesInstrumentationTests",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a",
+        "HermesInstrumentationTests"
+      ],
+      "abi": "arm64-v8a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/build/intermediates/cxx/Release/z1f1i2i5/obj/arm64-v8a/HermesInstrumentationTests",
+      "runtimeFiles": [
+        "/Users/janicduplessis/.gradle/caches/transforms-3/2bf5ae3e876bb8fe3a8a84a4c8d7d1d8/transformed/fbjni-0.2.2/prefab/modules/fbjni/libs/android.arm64-v8a/libfbjni.so"
+      ]
+    },
+    "hermesHBCBackend-Release-arm64-v8a": {
+      "artifactName": "hermesHBCBackend",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a",
+        "hermesHBCBackend"
+      ],
+      "abi": "arm64-v8a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a/lib/BCGen/HBC/libhermesHBCBackend.a",
+      "runtimeFiles": []
+    },
+    "hermes-jsi-Release-arm64-v8a": {
+      "artifactName": "hermes-jsi",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a",
+        "hermes-jsi"
+      ],
+      "abi": "arm64-v8a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a/bin/hermes-jsi",
+      "runtimeFiles": [
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/build/intermediates/cxx/Release/z1f1i2i5/obj/arm64-v8a/libjsi.so",
+        "/Users/janicduplessis/.gradle/caches/transforms-3/2bf5ae3e876bb8fe3a8a84a4c8d7d1d8/transformed/fbjni-0.2.2/prefab/modules/fbjni/libs/android.arm64-v8a/libfbjni.so"
+      ]
+    },
+    "hdb-Release-arm64-v8a": {
+      "artifactName": "hdb",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a",
+        "hdb"
+      ],
+      "abi": "arm64-v8a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a/bin/hdb",
+      "runtimeFiles": [
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/build/intermediates/cxx/Release/z1f1i2i5/obj/arm64-v8a/libjsi.so",
+        "/Users/janicduplessis/.gradle/caches/transforms-3/2bf5ae3e876bb8fe3a8a84a4c8d7d1d8/transformed/fbjni-0.2.2/prefab/modules/fbjni/libs/android.arm64-v8a/libfbjni.so"
+      ]
+    },
+    "hermesInst-Release-arm64-v8a": {
+      "artifactName": "hermesInst",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a",
+        "hermesInst"
+      ],
+      "abi": "arm64-v8a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a/lib/Inst/libhermesInst.a",
+      "runtimeFiles": []
+    },
+    "hermesOptimizer-Release-arm64-v8a": {
+      "artifactName": "hermesOptimizer",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a",
+        "hermesOptimizer"
+      ],
+      "abi": "arm64-v8a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a/lib/libhermesOptimizer.a",
+      "runtimeFiles": []
+    },
+    "check-hermes-Release-arm64-v8a": {
+      "artifactName": "check-hermes",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a",
+        "check-hermes"
+      ],
+      "abi": "arm64-v8a",
+      "runtimeFiles": []
+    },
+    "hermesc-Release-arm64-v8a": {
+      "artifactName": "hermesc",
+      "buildCommandComponents": [
+        "/Users/janicduplessis/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a",
+        "hermesc"
+      ],
+      "abi": "arm64-v8a",
+      "output": "/Users/janicduplessis/Developer/react-native/ReactAndroid/hermes-engine/.cxx/Release/z1f1i2i5/arm64-v8a/bin/hermesc",
+      "runtimeFiles": [
+        "/Users/janicduplessis/.gradle/caches/transforms-3/2bf5ae3e876bb8fe3a8a84a4c8d7d1d8/transformed/fbjni-0.2.2/prefab/modules/fbjni/libs/android.arm64-v8a/libfbjni.so"
+      ]
+    }
+  }
+}
