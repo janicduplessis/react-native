@@ -1,5 +1,5 @@
 {
-  "name": "react-native",
+  "name": "@th3rdwave/react-native",
   "private": true,
   "version": "1000.0.0",
   "bin": "./cli.js",
