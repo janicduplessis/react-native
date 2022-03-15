@@ -9,6 +9,7 @@
 
 #import <React/RCTAssert.h>
 #import <React/RCTConstants.h>
+#import <React/RCTConversions.h>
 #import <React/UIView+React.h>
 #import <react/renderer/components/legacyviewmanagerinterop/LegacyViewManagerInteropComponentDescriptor.h>
 #import <react/renderer/components/legacyviewmanagerinterop/LegacyViewManagerInteropViewProps.h>
@@ -205,9 +206,13 @@ static NSString *const kRCTLegacyInteropChildIndexKey = @"index";
   for (NSDictionary *mountInstruction in _viewsToBeMounted) {
     NSNumber *index = mountInstruction[kRCTLegacyInteropChildIndexKey];
     UIView *childView = mountInstruction[kRCTLegacyInteropChildComponentKey];
-    if ([childView isKindOfClass:[RCTLegacyViewManagerInteropComponentView class]]) {
-      UIView *target = ((RCTLegacyViewManagerInteropComponentView *)childView).contentView;
-      [_adapter.paperView insertReactSubview:target atIndex:index.integerValue];
+    if (RCTGetInteropLayerKeepViewHierarchy()) {
+      if ([childView isKindOfClass:[RCTLegacyViewManagerInteropComponentView class]]) {
+        UIView *target = ((RCTLegacyViewManagerInteropComponentView *)childView).contentView;
+        [_adapter.paperView insertReactSubview:target atIndex:index.integerValue];
+      } else {
+        [_adapter.paperView insertReactSubview:childView atIndex:index.integerValue];
+      }
     } else {
       [_adapter.paperView insertReactSubview:childView atIndex:index.integerValue];
     }
@@ -226,6 +231,11 @@ static NSString *const kRCTLegacyInteropChildIndexKey = @"index";
   if (updateMask & RNComponentViewUpdateMaskProps) {
     const auto &newProps = *std::static_pointer_cast<const LegacyViewManagerInteropViewProps>(_props);
     [_adapter setProps:newProps.otherProps];
+    NSMutableArray *updatedPropNames = [NSMutableArray arrayWithCapacity: newProps.otherProps.size()];
+    for (auto& key : newProps.otherProps.keys()) {
+      [updatedPropNames addObject:RCTNSStringFromString(key.asString())];
+    }
+    [_adapter.paperView didSetProps:updatedPropNames];
   }
 }
 
