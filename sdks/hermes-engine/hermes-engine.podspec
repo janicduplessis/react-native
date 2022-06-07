@@ -37,7 +37,8 @@ elsif File.exists?(hermestag_file) && isInCI
   source[:git] = git
   source[:tag] = hermestag
 else
-  source[:http] = "https://github.com/facebook/react-native/releases/download/v#{version}/hermes-runtime-darwin-v#{version}.tar.gz"
+  hermes_version = File.read(File.join(__dir__, "..", ".hermesversion")).strip
+  source[:http] = "https://tw-react-native.s3.us-west-2.amazonaws.com/hermes-#{hermes_version}/hermes-runtime-darwin-v1000.0.0.tar.gz"
 end
 
 module HermesHelper
