@@ -31,7 +31,7 @@ import java.lang.ref.WeakReference;
  *
  * This uses UIManager to listen to updates and capture position of items before and after layout.
  */
-public class MaintainVisibleScrollPositionHelper<ScrollViewT extends ViewGroup & HasSmoothScroll> implements UIManagerListener {
+public class MaintainVisibleContentPositionHelper<ScrollViewT extends ViewGroup & HasSmoothScroll> implements UIManagerListener {
   private final ScrollViewT mScrollView;
   private final boolean mHorizontal;
   private @Nullable Config mConfig;
@@ -58,7 +58,7 @@ public class MaintainVisibleScrollPositionHelper<ScrollViewT extends ViewGroup &
     }
   }
 
-  public MaintainVisibleScrollPositionHelper(ScrollViewT scrollView, boolean horizontal) {
+  public MaintainVisibleContentPositionHelper(ScrollViewT scrollView, boolean horizontal) {
     mScrollView = scrollView;
     mHorizontal = horizontal;
   }

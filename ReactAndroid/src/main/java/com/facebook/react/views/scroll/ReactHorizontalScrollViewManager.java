@@ -325,7 +325,7 @@ public class ReactHorizontalScrollViewManager extends ViewGroupManager<ReactHori
   public void setMaintainVisibleContentPosition(ReactHorizontalScrollView view, ReadableMap value) {
     if (value != null) {
       view.setMaintainVisibleContentPosition(
-        MaintainVisibleScrollPositionHelper.Config.fromReadableMap(value));
+        MaintainVisibleContentPositionHelper.Config.fromReadableMap(value));
     } else {
       view.setMaintainVisibleContentPosition(null);
     }

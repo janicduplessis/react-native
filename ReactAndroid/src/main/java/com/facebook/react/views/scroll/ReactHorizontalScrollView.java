@@ -115,7 +115,7 @@ public class ReactHorizontalScrollView extends HorizontalScrollView
   private long mLastScrollDispatchTime = 0;
   private int mScrollEventThrottle = 0;
   private @Nullable View mContentView;
-  private @Nullable MaintainVisibleScrollPositionHelper mMaintainVisibleContentPositionHelper = null;
+  private @Nullable MaintainVisibleContentPositionHelper mMaintainVisibleContentPositionHelper = null;
 
   private final Rect mTempRect = new Rect();
 
@@ -265,9 +265,9 @@ public class ReactHorizontalScrollView extends HorizontalScrollView
     invalidate();
   }
 
-  public void setMaintainVisibleContentPosition(@Nullable MaintainVisibleScrollPositionHelper.Config config) {
+  public void setMaintainVisibleContentPosition(@Nullable MaintainVisibleContentPositionHelper.Config config) {
     if (config != null && mMaintainVisibleContentPositionHelper == null) {
-      mMaintainVisibleContentPositionHelper = new MaintainVisibleScrollPositionHelper(this, true);
+      mMaintainVisibleContentPositionHelper = new MaintainVisibleContentPositionHelper(this, true);
       mMaintainVisibleContentPositionHelper.start();
     } else if (config == null && mMaintainVisibleContentPositionHelper != null) {
       mMaintainVisibleContentPositionHelper.stop();

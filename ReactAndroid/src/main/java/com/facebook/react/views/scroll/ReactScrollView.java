@@ -110,7 +110,7 @@ public class ReactScrollView extends ScrollView
   private PointerEvents mPointerEvents = PointerEvents.AUTO;
   private long mLastScrollDispatchTime = 0;
   private int mScrollEventThrottle = 0;
-  private @Nullable MaintainVisibleScrollPositionHelper mMaintainVisibleContentPositionHelper = null;
+  private @Nullable MaintainVisibleContentPositionHelper mMaintainVisibleContentPositionHelper = null;
 
   public ReactScrollView(Context context) {
     this(context, null);
@@ -236,9 +236,9 @@ public class ReactScrollView extends ScrollView
     invalidate();
   }
 
-  public void setMaintainVisibleContentPosition(@Nullable MaintainVisibleScrollPositionHelper.Config config) {
+  public void setMaintainVisibleContentPosition(@Nullable MaintainVisibleContentPositionHelper.Config config) {
     if (config != null && mMaintainVisibleContentPositionHelper == null) {
-      mMaintainVisibleContentPositionHelper = new MaintainVisibleScrollPositionHelper(this, false);
+      mMaintainVisibleContentPositionHelper = new MaintainVisibleContentPositionHelper(this, false);
       mMaintainVisibleContentPositionHelper.start();
     } else if (config == null && mMaintainVisibleContentPositionHelper != null) {
       mMaintainVisibleContentPositionHelper.stop();
