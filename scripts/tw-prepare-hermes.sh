@@ -7,12 +7,12 @@ set -e
 # Artifacts are copied to our s3 bucket since circleci only keeps them for 30 days.
 
 # `prepare_hermes_workspace` -> `Download Hermes tarball`
-HERMES_TAG="8ad46117c3517b842c4da411ff4b8612364f5354"
+HERMES_TAG="163f70598f88a11c0fdd171de288341814217584"
 # `build_hermesc_linux` -> `Artifacts`
-HERMESC_LINUX_URL="https://output.circle-artifacts.com/output/job/92e4ce0a-8644-4b92-a696-f03af44ae8a4/artifacts/0/tmp/hermes/linux64-bin/hermesc"
+HERMESC_LINUX_URL="https://output.circle-artifacts.com/output/job/6332fd15-22f6-4f50-9d88-b0b101f17691/artifacts/0/tmp/hermes/linux64-bin/hermesc"
 # `build_hermes_macos` -> `Artifacts`
-HERMESC_MACOS_URL="https://output.circle-artifacts.com/output/job/76a723af-ebff-4c55-8790-14cfd07a0e07/artifacts/0/tmp/hermes/osx-bin/hermesc"
-HERMES_RUNTIME_IOS_URL="https://output.circle-artifacts.com/output/job/76a723af-ebff-4c55-8790-14cfd07a0e07/artifacts/0/tmp/hermes/output/hermes-runtime-darwin-v1000.0.0.tar.gz"
+HERMESC_MACOS_URL="https://output.circle-artifacts.com/output/job/560a988c-7fad-4470-aaa0-1d36649bd762/artifacts/0/tmp/hermes/osx-bin/hermesc"
+HERMES_RUNTIME_IOS_URL="https://output.circle-artifacts.com/output/job/560a988c-7fad-4470-aaa0-1d36649bd762/artifacts/0/tmp/hermes/hermes-runtime-darwin/hermes-runtime-darwin-v1000.0.0.tar.gz"
 
 BUCKET_NAME="tw-react-native"
 THIS_DIR=$(cd -P "$(dirname "$(realpath "${BASH_SOURCE[0]}" || echo "${BASH_SOURCE[0]}")")" && pwd)
