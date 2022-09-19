@@ -30,6 +30,7 @@ import com.facebook.systrace.SystraceMessage;
 import com.facebook.yoga.YogaConstants;
 import com.facebook.yoga.YogaDirection;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -62,6 +63,30 @@ public class UIImplementation {
 
     /** Called when the layout has been updated */
     void onLayoutUpdated(ReactShadowNode root);
+  }
+
+  public UIImplementation(
+      ReactApplicationContext reactContext,
+      ViewManagerResolver viewManagerResolver,
+      EventDispatcher eventDispatcher,
+      int minTimeLeftInFrameForNonBatchedOperationMs) {
+    this(
+        reactContext,
+        new ViewManagerRegistry(viewManagerResolver),
+        eventDispatcher,
+        minTimeLeftInFrameForNonBatchedOperationMs);
+  }
+
+  public UIImplementation(
+      ReactApplicationContext reactContext,
+      List<ViewManager> viewManagers,
+      EventDispatcher eventDispatcher,
+      int minTimeLeftInFrameForNonBatchedOperationMs) {
+    this(
+        reactContext,
+        new ViewManagerRegistry(viewManagers),
+        eventDispatcher,
+        minTimeLeftInFrameForNonBatchedOperationMs);
   }
 
   UIImplementation(
