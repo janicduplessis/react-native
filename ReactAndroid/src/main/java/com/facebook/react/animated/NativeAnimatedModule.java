@@ -299,6 +299,16 @@ public class NativeAnimatedModule extends NativeAnimatedModuleSpec
     mCurrentFrameNumber++;
   }
 
+  @Override
+  public void willMountItems(UIManager uiManager) {
+    // noop
+  }
+
+  @Override
+  public void didMountItems(UIManager uiManager) {
+    // noop
+  }
+
   // For FabricUIManager only
   @Override
   @UiThread
