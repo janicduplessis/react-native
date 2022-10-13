@@ -20,6 +20,7 @@ import com.facebook.react.bridge.UIManager;
 import com.facebook.react.bridge.UIManagerListener;
 import com.facebook.react.bridge.UiThreadUtil;
 import com.facebook.react.uimanager.UIManagerHelper;
+import com.facebook.react.uimanager.common.UIManagerType;
 import com.facebook.react.uimanager.common.ViewUtil;
 import com.facebook.react.views.view.ReactViewGroup;
 import com.facebook.react.views.scroll.ReactScrollViewHelper.HasSmoothScroll;
@@ -94,6 +95,14 @@ public class MaintainVisibleScrollPositionHelper<ScrollViewT extends ViewGroup &
    * has been updated.
    */
   public void updateScrollPosition() {
+    // On Fabric this will be called internally in `didMountItems`.
+    if (ViewUtil.getUIManagerType(mScrollView.getId()) == UIManagerType.FABRIC) {
+      return;
+    }
+    updateScrollPositionInternal();
+  }
+
+  private void updateScrollPositionInternal() {
     if (mConfig == null
       || mFirstVisibleView == null
       || mPrevFirstVisibleFrame == null) {
@@ -172,6 +181,16 @@ public class MaintainVisibleScrollPositionHelper<ScrollViewT extends ViewGroup &
             computeTargetView();
           }
         });
+  }
+
+  @Override
+  public void willMountItems(UIManager uiManager) {
+    computeTargetView();
+  }
+
+  @Override
+  public void didMountItems(UIManager uiManager) {
+    updateScrollPositionInternal();
   }
 
   @Override
