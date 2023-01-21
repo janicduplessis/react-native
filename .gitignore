@@ -159,3 +159,5 @@ vendor/
 
 # CircleCI
 .circleci/generated_config.yml
+
+react-native-*.tgz
