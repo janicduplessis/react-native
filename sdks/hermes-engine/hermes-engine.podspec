@@ -8,8 +8,8 @@ require_relative "./hermes-utils.rb"
 
 react_native_path = File.join(__dir__, "..", "..")
 
-# Whether Hermes is built for Release or Debug is determined by the PRODUCTION envvar.
-build_type = ENV['PRODUCTION'] == "1" ? :release : :debug
+# Always use release build of hermes.
+build_type = :release
 
 # package.json
 package = JSON.parse(File.read(File.join(react_native_path, "package.json")))
