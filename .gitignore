@@ -154,3 +154,5 @@ package-lock.json
 # E2E files
 /packages/rn-tester-e2e/apps/*.apk
 /packages/rn-tester-e2e/apps/*.app
+
+react-native-*.tgz

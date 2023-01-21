@@ -56,13 +56,18 @@ React Native is developed and supported by many companies and individual core co
 
 ## Contents
 
-- [Requirements](#-requirements)
-- [Building your first React Native app](#-building-your-first-react-native-app)
-- [Documentation](#-documentation)
-- [Upgrading](#-upgrading)
-- [How to Contribute](#-how-to-contribute)
-- [Code of Conduct](#code-of-conduct)
-- [License](#-license)
+- [Contents](#contents)
+- [📋 Requirements](#-requirements)
+- [🎉 Building your first React Native app](#-building-your-first-react-native-app)
+- [📖 Documentation](#-documentation)
+- [🚀 Upgrading](#-upgrading)
+- [👏 How to Contribute](#-how-to-contribute)
+  - [Code of Conduct](#code-of-conduct)
+  - [Contributing Guide](#contributing-guide)
+  - [Open Source Roadmap](#open-source-roadmap)
+  - [Good First Issues](#good-first-issues)
+  - [Discussions](#discussions)
+- [📄 License](#-license)
 
 
 ## 📋 Requirements
