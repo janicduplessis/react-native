@@ -8,3 +8,5 @@ src/main/third-party/
 # Exclude Android & JVM tests
 src/test/
 src/androidTest/
+# Exclude prebuilt
+src/main/jni/prebuilt/lib/
