@@ -16,6 +16,9 @@ const argv = yargs
   .option('fork-version', {
     type: 'string',
   })
+  .option('hermes-version', {
+    type: 'string',
+  })
   .option('clean', {
     type: 'boolean',
     default: false,
@@ -23,6 +26,7 @@ const argv = yargs
   .strict().argv;
 const baseVersion = argv.baseVersion;
 const forkVersion = argv.forkVersion;
+const hermesVersion = argv.hermesVersion;
 const clean = argv.clean;
 
 const rnDir = path.join(__dirname, '../packages/react-native');
@@ -77,6 +81,8 @@ if (
   echo('Failed to copy hermesc from base react-native package');
   exit(1);
 }
+
+exec(`echo "${hermesVersion}" > ${hermescDest}/.hermesversion`);
 
 // Build the android artifacts in the npm package.
 if (exec('./gradlew publishAllInsideNpmPackage').code) {
