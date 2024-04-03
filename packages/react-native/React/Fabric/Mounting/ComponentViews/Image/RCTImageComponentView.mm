@@ -18,6 +18,10 @@
 #import <react/renderer/imagemanager/RCTImagePrimitivesConversions.h>
 #import <react/utils/CoreFeatures.h>
 
+#import <SDWebImageAVIFCoder/SDImageAVIFCoder.h>
+#import <SDWebImagePhotosPlugin/SDWebImagePhotosPlugin.h>
+#import <SDWebImageWebPCoder/SDWebImageWebPCoder.h>
+
 using namespace facebook::react;
 
 @implementation RCTImageComponentView {
@@ -31,13 +35,24 @@ using namespace facebook::react;
     const auto &defaultProps = ImageShadowNode::defaultSharedProps();
     _props = defaultProps;
 
-    _imageView = [RCTUIImageViewAnimated new];
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+      SDImageAVIFCoder *AVIFCoder = [SDImageAVIFCoder sharedCoder];
+      [SDImageCodersManager.sharedManager addCoder:AVIFCoder];
+      SDImageWebPCoder *webPCoder = [SDImageWebPCoder sharedCoder];
+      [SDImageCodersManager.sharedManager addCoder:webPCoder];
+      // Supports HTTP URL as well as Photos URL globally
+      SDImageLoadersManager.sharedManager.loaders =
+          @[ SDWebImageDownloader.sharedDownloader, SDImagePhotosLoader.sharedLoader ];
+      // Replace default manager's loader implementation
+      SDWebImageManager.defaultImageLoader = SDImageLoadersManager.sharedManager;
+    });
+
+    _imageView = [SDAnimatedImageView new];
     _imageView.clipsToBounds = YES;
     _imageView.contentMode = RCTContentModeFromImageResizeMode(defaultProps->resizeMode);
     _imageView.layer.minificationFilter = kCAFilterTrilinear;
     _imageView.layer.magnificationFilter = kCAFilterTrilinear;
-
-    _imageResponseObserverProxy = RCTImageResponseObserverProxy(self);
 
     self.contentView = _imageView;
   }
@@ -79,13 +94,77 @@ using namespace facebook::react;
 
   auto oldImageState = std::static_pointer_cast<ImageShadowNode::ConcreteState const>(_state);
   auto newImageState = std::static_pointer_cast<ImageShadowNode::ConcreteState const>(state);
+  // TODO: Add fadeDuration
+  // const auto &imageProps = static_cast<const ImageProps &>(*_props);
 
-  [self _setStateAndResubscribeImageResponseObserver:newImageState];
+  _state = newImageState;
 
   bool havePreviousData = oldImageState && oldImageState->getData().getImageSource() != ImageSource{};
 
   if (!havePreviousData ||
       (newImageState && newImageState->getData().getImageSource() != oldImageState->getData().getImageSource())) {
+    NSURL *url = [NSURL URLWithString:RCTNSStringFromString(newImageState->getData().getImageSource().uri)];
+
+    __weak RCTImageComponentView *weakSelf = self;
+    SDImageLoaderProgressBlock progressHandler =
+        ^(NSInteger receivedSize, NSInteger expectedSize, NSURL *_Nullable targetURL) {
+          __typeof(self) strongSelf = weakSelf;
+          if (!strongSelf) {
+            return;
+          }
+
+          [strongSelf didReceiveProgress:receivedSize / (float)expectedSize];
+        };
+
+    SDExternalCompletionBlock completionHandler =
+        ^(UIImage *_Nullable image, NSError *_Nullable error, SDImageCacheType cacheType, NSURL *_Nullable imageURL) {
+          __typeof(self) strongSelf = weakSelf;
+          if (!strongSelf) {
+            return;
+          }
+
+          if (error) {
+            [strongSelf didReceiveFailure];
+            return;
+          }
+
+          if (image && (cacheType == SDImageCacheTypeNone || cacheType == SDImageCacheTypeDisk)) {
+            weakSelf.alpha = 0;
+            [UIView animateWithDuration:0.3
+                             animations:^{
+                               weakSelf.alpha = 1;
+                             }];
+          }
+
+          [strongSelf didReceiveImage:image];
+        };
+
+    // Handle asset bundle images.
+    if (RCTIsBundleAssetURL(url)) {
+      NSString *catalogName = RCTAssetCatalogNameForURL(url);
+      if (catalogName) {
+        UIImage *image = [UIImage imageNamed:catalogName];
+        [_imageView sd_cancelCurrentImageLoad];
+        _imageView.image = image;
+        if (progressHandler) {
+          progressHandler(1, 1, url);
+        }
+        completionHandler(image, nil, SDImageCacheTypeMemory, url);
+        return;
+      }
+    }
+
+    // Rewrite assets library to use the same scheme that SDWebImage expects.
+    if ([url.scheme isEqualToString:@"assets-library"] || [url.scheme isEqualToString:@"ph"]) {
+      url = [NSURL sd_URLWithAssetLocalIdentifier:url.path];
+    }
+
+    [_imageView sd_setImageWithURL:url
+                  placeholderImage:nil
+                           options:SDWebImageRetryFailed
+                          progress:progressHandler
+                         completed:completionHandler];
+
     // Loading actually starts a little before this, but this is the first time we know
     // the image is loading and can fire an event from this component
     static_cast<const ImageEventEmitter &>(*_eventEmitter).onLoadStart();
@@ -95,39 +174,17 @@ using namespace facebook::react;
   }
 }
 
-- (void)_setStateAndResubscribeImageResponseObserver:(const ImageShadowNode::ConcreteState::Shared &)state
-{
-  if (_state) {
-    const auto &imageRequest = _state->getData().getImageRequest();
-    auto &observerCoordinator = imageRequest.getObserverCoordinator();
-    observerCoordinator.removeObserver(_imageResponseObserverProxy);
-    // Cancelling image request because we are no longer observing it.
-    // This is not 100% correct place to do this because we may want to
-    // re-create RCTImageComponentView with the same image and if it
-    // was cancelled before downloaded, download is not resumed.
-    // This will only become issue if we decouple life cycle of a
-    // ShadowNode from ComponentView, which is not something we do now.
-    imageRequest.cancel();
-  }
-
-  _state = state;
-
-  if (_state) {
-    auto &observerCoordinator = _state->getData().getImageRequest().getObserverCoordinator();
-    observerCoordinator.addObserver(_imageResponseObserverProxy);
-  }
-}
-
 - (void)prepareForRecycle
 {
   [super prepareForRecycle];
-  [self _setStateAndResubscribeImageResponseObserver:nullptr];
+  [_imageView sd_cancelCurrentImageLoad];
   _imageView.image = nil;
+  _state.reset();
 }
 
 #pragma mark - RCTImageResponseDelegate
 
-- (void)didReceiveImage:(UIImage *)image metadata:(id)metadata fromObserver:(const void *)observer
+- (void)didReceiveImage:(UIImage *)image
 {
   if (!_eventEmitter || !_state) {
     // Notifications are delivered asynchronously and might arrive after the view is already recycled.
@@ -168,7 +225,7 @@ using namespace facebook::react;
   }
 }
 
-- (void)didReceiveProgress:(float)progress fromObserver:(const void *)observer
+- (void)didReceiveProgress:(float)progress
 {
   if (!_eventEmitter) {
     return;
@@ -177,7 +234,7 @@ using namespace facebook::react;
   static_cast<const ImageEventEmitter &>(*_eventEmitter).onProgress(progress);
 }
 
-- (void)didReceiveFailureFromObserver:(const void *)observer
+- (void)didReceiveFailure
 {
   _imageView.image = nil;
 
