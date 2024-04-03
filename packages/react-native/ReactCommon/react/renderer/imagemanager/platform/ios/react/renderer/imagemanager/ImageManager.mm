@@ -36,8 +36,7 @@ ImageManager::~ImageManager()
 
 ImageRequest ImageManager::requestImage(const ImageSource &imageSource, SurfaceId surfaceId) const
 {
-  RCTImageManager *imageManager = (__bridge RCTImageManager *)self_;
-  return [imageManager requestImage:imageSource surfaceId:surfaceId];
+  return {imageSource, nullptr, {}};
 }
 
 } // namespace facebook::react
