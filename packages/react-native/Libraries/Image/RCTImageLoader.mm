@@ -10,6 +10,7 @@
 #import <atomic>
 
 #import <ImageIO/ImageIO.h>
+#import <SDWebImage/SDWebImage.h>
 
 #import <FBReactNativeSpec/FBReactNativeSpec.h>
 #import <React/RCTConvert.h>
@@ -1222,7 +1223,12 @@ RCT_EXPORT_METHOD(prefetchImage
                   : (RCTPromiseResolveBlock)resolve reject
                   : (RCTPromiseRejectBlock)reject)
 {
-  [self prefetchImageWithMetadata:uri queryRootName:nil rootTag:0 resolve:resolve reject:reject];
+  NSURL *URL = [RCTConvert NSURL:uri];
+  [SDWebImagePrefetcher.sharedImagePrefetcher prefetchURLs:@[ URL ]
+                                                  progress:nil
+                                                 completed:^(NSUInteger noOfFinishedUrls, NSUInteger noOfSkippedUrls) {
+                                                   resolve(@YES);
+                                                 }];
 }
 
 RCT_EXPORT_METHOD(prefetchImageWithMetadata
