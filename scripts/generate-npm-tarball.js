@@ -32,6 +32,10 @@ const clean = argv.clean;
 const rnDir = path.join(__dirname, '../packages/react-native');
 
 if (clean) {
+  if (exec('./gradlew clean').code) {
+    echo('Failed to run gradle clean');
+    exit(1);
+  }
   rm('-rf', path.join(rnDir, 'android'));
   rm('-rf', path.join(rnDir, 'sdks/download'));
   rm('-rf', path.join(rnDir, 'sdks/hermes'));
