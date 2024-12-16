@@ -41,23 +41,12 @@ public fun Window.setStatusBarVisibility(isHidden: Boolean) {
 
 @Suppress("DEPRECATION")
 private fun Window.statusBarHide() {
-  if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-    // Ensure the content extends into the cutout area
-    attributes.layoutInDisplayCutoutMode =
-        WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES
-    setDecorFitsSystemWindows(false)
-  }
   addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
   clearFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN)
 }
 
 @Suppress("DEPRECATION")
 private fun Window.statusBarShow() {
-  if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-    attributes.layoutInDisplayCutoutMode =
-        WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_DEFAULT
-    setDecorFitsSystemWindows(true)
-  }
   addFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN)
   clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
 }
