@@ -20,7 +20,7 @@ import kotlin.jvm.JvmStatic
 public open class ReadableNativeArray protected constructor() : NativeArray(), ReadableArray {
 
   private val localArray: Array<Any?> by
-      lazy(LazyThreadSafetyMode.SYNCHRONIZED) {
+      lazy(LazyThreadSafetyMode.NONE) {
         jniPassCounter++
         importArray()
       }
@@ -28,7 +28,7 @@ public open class ReadableNativeArray protected constructor() : NativeArray(), R
   private external fun importArray(): Array<Any?>
 
   private val localTypeArray: Array<ReadableType> by
-      lazy(LazyThreadSafetyMode.SYNCHRONIZED) {
+      lazy(LazyThreadSafetyMode.NONE) {
         jniPassCounter++
         val tempArray = importTypeArray()
         Arrays.copyOf(tempArray, tempArray.size, Array<ReadableType>::class.java)

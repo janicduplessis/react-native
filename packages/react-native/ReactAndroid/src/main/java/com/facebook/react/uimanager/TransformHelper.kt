@@ -15,13 +15,10 @@ import com.facebook.react.common.ReactConstants
 
 public object TransformHelper {
 
-  private val helperMatrix: ThreadLocal<DoubleArray> =
-      object : ThreadLocal<DoubleArray>() {
-        override fun initialValue(): DoubleArray = DoubleArray(16)
-      }
+  private val helperMatrix: DoubleArray = DoubleArray(16)
 
   private fun convertToRadians(transformMap: ReadableMap, key: String): Double {
-    var value: Double
+    val value: Double
     var inRadians = true
     if (transformMap.getType(key) == ReadableType.String) {
       var stringValue = transformMap.getString(key)!!
@@ -69,7 +66,7 @@ public object TransformHelper {
       transformOrigin: ReadableArray?,
       allowPercentageResolution: Boolean
   ) {
-    val helperMatrix = helperMatrix.get()!!
+    val helperMatrix = helperMatrix
     MatrixMathHelper.resetIdentityMatrix(result)
     val offsets =
         getTranslateForTransformOrigin(

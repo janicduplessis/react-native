@@ -8,6 +8,7 @@
 package com.facebook.react.bridge
 
 import android.annotation.SuppressLint
+import android.util.ArrayMap
 import com.facebook.infer.annotation.Assertions
 import com.facebook.proguard.annotations.DoNotStripAny
 
@@ -18,12 +19,12 @@ import com.facebook.proguard.annotations.DoNotStripAny
 @DoNotStripAny
 public open class ReadableNativeMap protected constructor() : NativeMap(), ReadableMap {
   private val keys: Array<String> by
-      lazy(LazyThreadSafetyMode.SYNCHRONIZED) { importKeys().also { jniPassCounter++ } }
+      lazy(LazyThreadSafetyMode.NONE) { importKeys().also { jniPassCounter++ } }
 
-  private val localMap: HashMap<String, Any?> by
-      lazy(LazyThreadSafetyMode.SYNCHRONIZED) {
+  private val localMap: Map<String, Any?> by
+      lazy(LazyThreadSafetyMode.NONE) {
         val length = keys.size
-        val res = HashMap<String, Any?>(length)
+        val res = if (length > 10) HashMap<String, Any?>(length) else ArrayMap(length)
         val values = importValues()
         jniPassCounter++
         for (i in 0 until length) {
@@ -32,10 +33,10 @@ public open class ReadableNativeMap protected constructor() : NativeMap(), Reada
         res
       }
 
-  private val localTypeMap: HashMap<String, ReadableType> by
-      lazy(LazyThreadSafetyMode.SYNCHRONIZED) {
+  private val localTypeMap: Map<String, ReadableType> by
+      lazy(LazyThreadSafetyMode.NONE) {
         val length = keys.size
-        val res = HashMap<String, ReadableType>(length)
+        val res = if (length > 10) HashMap<String, ReadableType>(length) else ArrayMap(length)
         val types = importTypes()
         jniPassCounter++
         for (i in 0 until length) {
@@ -66,8 +67,9 @@ public open class ReadableNativeMap protected constructor() : NativeMap(), Reada
               "Value for $name cannot be cast from ${instance?.javaClass?.simpleName ?: "NULL"} to ${type.simpleName}")
 
   private fun getValue(name: String): Any {
-    if (hasKey(name)) {
-      return Assertions.assertNotNull(localMap[name])
+    val value = localMap[name]
+    if (value != null) {
+      return value
     }
     throw NoSuchKeyException(name)
   }
@@ -75,7 +77,7 @@ public open class ReadableNativeMap protected constructor() : NativeMap(), Reada
   private inline fun <reified T> getValue(name: String, type: Class<T>): T =
       checkInstance(name, getValue(name), type)
 
-  private fun getNullableValue(name: String): Any? = localMap.get(name)
+  private fun getNullableValue(name: String): Any? = localMap[name]
 
   private inline fun <reified T> getNullableValue(name: String, type: Class<T>): T? {
     val res = getNullableValue(name)

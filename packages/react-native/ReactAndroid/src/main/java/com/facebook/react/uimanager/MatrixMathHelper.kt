@@ -20,13 +20,17 @@ import kotlin.math.tan
  * translate, scale and rotate commands.
  */
 public object MatrixMathHelper {
-  private const val EPSILON = .00001
+  private const val EPSILON = 1e-5
+  private const val RAD_TO_DEG = 180.0 / Math.PI
 
-  private fun isZero(d: Double): Boolean {
-    return if (java.lang.Double.isNaN(d)) {
-      false
-    } else abs(d) < EPSILON
-  }
+  private val matrix = Array(4) { DoubleArray(4) }
+  private val row = Array(3) { DoubleArray(3) }
+  private val perspectiveMatrix = DoubleArray(16)
+  private val inverseMatrix = DoubleArray(16)
+  private val transposedMatrix = DoubleArray(16)
+  private val rightHandSide = DoubleArray(4)
+
+  private inline fun isZero(d: Double): Boolean = d > -1e-8 && d < 1e-8
 
   @JvmStatic
   public fun multiplyInto(out: DoubleArray, a: DoubleArray, b: DoubleArray) {
@@ -82,117 +86,120 @@ public object MatrixMathHelper {
 
   /** @param transformMatrix 16-element array of numbers representing 4x4 transform matrix */
   @JvmStatic
-  public fun decomposeMatrix(transformMatrix: DoubleArray, ctx: MatrixDecompositionContext) {
-    Assertions.assertCondition(transformMatrix.size == 16)
+  public fun decomposeMatrix(matrixInput: DoubleArray, ctx: MatrixDecompositionContext) {
+    if (matrixInput.size != 16 || isZero(matrixInput[15])) return
 
-    // output values
-    val perspective = ctx.perspective
     val scale = ctx.scale
     val skew = ctx.skew
     val translation = ctx.translation
-    val rotationDegrees = ctx.rotationDegrees
+    val rotation = ctx.rotationDegrees
+    val perspective = ctx.perspective
 
-    // create normalized, 2d array matrix
-    // and normalized 1d array perspectiveMatrix with redefined 4th column
-    if (isZero(transformMatrix[15])) {
-      return
-    }
-    val matrix = Array(4) { DoubleArray(4) }
-    val perspectiveMatrix = DoubleArray(16)
+    // Normalize matrix and setup perspectiveMatrix
     for (i in 0..3) {
       for (j in 0..3) {
-        val value = transformMatrix[i * 4 + j] / transformMatrix[15]
+        val value = matrixInput[i * 4 + j] / matrixInput[15]
         matrix[i][j] = value
         perspectiveMatrix[i * 4 + j] = if (j == 3) 0.0 else value
       }
     }
     perspectiveMatrix[15] = 1.0
 
-    // test for singularity of upper 3x3 part of the perspective matrix
-    if (isZero(determinant(perspectiveMatrix))) {
-      return
-    }
+    if (isZero(determinant(perspectiveMatrix))) return
 
-    // isolate perspective
+    // Handle perspective
     if (!isZero(matrix[0][3]) || !isZero(matrix[1][3]) || !isZero(matrix[2][3])) {
-      // rightHandSide is the right hand side of the equation.
-      // rightHandSide is a vector, or point in 3d space relative to the origin.
-      val rightHandSide = doubleArrayOf(matrix[0][3], matrix[1][3], matrix[2][3], matrix[3][3])
+      rightHandSide[0] = matrix[0][3]
+      rightHandSide[1] = matrix[1][3]
+      rightHandSide[2] = matrix[2][3]
+      rightHandSide[3] = matrix[3][3]
 
-      // Solve the equation by inverting perspectiveMatrix and multiplying
-      // rightHandSide by the inverse.
-      val inversePerspectiveMatrix = inverse(perspectiveMatrix)
-      val transposedInversePerspectiveMatrix = transpose(inversePerspectiveMatrix)
-      multiplyVectorByMatrix(rightHandSide, transposedInversePerspectiveMatrix, perspective)
+      inverse(perspectiveMatrix, inverseMatrix)
+      transpose(inverseMatrix, transposedMatrix)
+      multiplyVectorByMatrix(rightHandSide, transposedMatrix, perspective)
     } else {
-      // no perspective
+      perspective[0] = 0.0
+      perspective[1] = 0.0
       perspective[2] = 0.0
-      perspective[1] = perspective[2]
-      perspective[0] = perspective[1]
       perspective[3] = 1.0
     }
 
-    // translation is simple
-    for (i in 0..2) {
-      translation[i] = matrix[3][i]
-    }
+    // Extract translation
+    translation[0] = matrix[3][0]
+    translation[1] = matrix[3][1]
+    translation[2] = matrix[3][2]
 
-    // Now get scale and shear.
-    // 'row' is a 3 element array of 3 component vectors
-    val row = Array(3) { DoubleArray(3) }
+    // Rows from 3x3 upper-left
     for (i in 0..2) {
       row[i][0] = matrix[i][0]
       row[i][1] = matrix[i][1]
       row[i][2] = matrix[i][2]
     }
 
-    // Compute X scale factor and normalize first row.
-    scale[0] = v3Length(row[0])
-    row[0] = v3Normalize(row[0], scale[0])
+    // Scale X and normalize row 0
+    val len0 = v3Length(row[0])
+    scale[0] = len0
+    v3NormalizeInPlace(row[0], len0)
 
-    // Compute XY shear factor and make 2nd row orthogonal to 1st.
+    // Skew XY
     skew[0] = v3Dot(row[0], row[1])
-    row[1] = v3Combine(row[1], row[0], 1.0, -skew[0])
+    v3CombineInPlace(row[1], row[0], 1.0, -skew[0])
 
-    // Now, compute Y scale and normalize 2nd row.
-    scale[1] = v3Length(row[1])
-    row[1] = v3Normalize(row[1], scale[1])
-    skew[0] /= scale[1]
+    val len1 = v3Length(row[1])
+    scale[1] = len1
+    v3NormalizeInPlace(row[1], len1)
+    skew[0] /= len1
 
-    // Compute XZ and YZ shears, orthogonalize 3rd row
+    // Skew XZ, YZ
     skew[1] = v3Dot(row[0], row[2])
-    row[2] = v3Combine(row[2], row[0], 1.0, -skew[1])
+    v3CombineInPlace(row[2], row[0], 1.0, -skew[1])
     skew[2] = v3Dot(row[1], row[2])
-    row[2] = v3Combine(row[2], row[1], 1.0, -skew[2])
+    v3CombineInPlace(row[2], row[1], 1.0, -skew[2])
 
-    // Next, get Z scale and normalize 3rd row.
-    scale[2] = v3Length(row[2])
-    row[2] = v3Normalize(row[2], scale[2])
-    skew[1] /= scale[2]
-    skew[2] /= scale[2]
+    val len2 = v3Length(row[2])
+    scale[2] = len2
+    v3NormalizeInPlace(row[2], len2)
+    skew[1] /= len2
+    skew[2] /= len2
 
-    // At this point, the matrix (in rows) is orthonormal.
-    // Check for a coordinate system flip.  If the determinant
-    // is -1, then negate the matrix and the scaling factors.
+    // Check for coordinate system flip
     val pdum3 = v3Cross(row[1], row[2])
-    if (v3Dot(row[0], pdum3) < 0) {
+    if (v3Dot(row[0], pdum3) < 0.0) {
       for (i in 0..2) {
         scale[i] *= -1.0
-        row[i][0] *= -1.0
-        row[i][1] *= -1.0
-        row[i][2] *= -1.0
+        for (j in 0..2) row[i][j] *= -1.0
       }
     }
 
-    // Now, get the rotations out
-    // Based on: http://nghiaho.com/?page_id=846
-    val conv = 180 / Math.PI
-    rotationDegrees[0] = roundTo3Places(-atan2(row[2][1], row[2][2]) * conv)
-    rotationDegrees[1] =
-        roundTo3Places(
-            -atan2(-row[2][0], sqrt(row[2][1] * row[2][1] + row[2][2] * row[2][2])) * conv)
-    rotationDegrees[2] = roundTo3Places(-atan2(row[1][0], row[0][0]) * conv)
+    // Rotation (degrees)
+    rotation[0] = -atan2(row[2][1], row[2][2]) * RAD_TO_DEG
+    rotation[1] = -atan2(-row[2][0], sqrt(row[2][1] * row[2][1] + row[2][2] * row[2][2])) * RAD_TO_DEG
+    rotation[2] = -atan2(row[1][0], row[0][0]) * RAD_TO_DEG
   }
+
+  private inline fun v3Length(v: DoubleArray): Double = sqrt(v[0] * v[0] + v[1] * v[1] + v[2] * v[2])
+
+  private fun v3NormalizeInPlace(v: DoubleArray, len: Double) {
+    val inv = 1.0 / len
+    v[0] *= inv
+    v[1] *= inv
+    v[2] *= inv
+  }
+
+  private fun v3Dot(a: DoubleArray, b: DoubleArray): Double = a[0] * b[0] + a[1] * b[1] + a[2] * b[2]
+
+  private fun v3CombineInPlace(a: DoubleArray, b: DoubleArray, aScale: Double, bScale: Double) {
+    a[0] = aScale * a[0] + bScale * b[0]
+    a[1] = aScale * a[1] + bScale * b[1]
+    a[2] = aScale * a[2] + bScale * b[2]
+  }
+
+  private fun v3Cross(a: DoubleArray, b: DoubleArray): DoubleArray =
+    doubleArrayOf(
+      a[1] * b[2] - a[2] * b[1],
+      a[2] * b[0] - a[0] * b[2],
+      a[0] * b[1] - a[1] * b[0]
+    )
 
   @JvmStatic
   public fun determinant(matrix: DoubleArray): Double {
@@ -233,82 +240,54 @@ public object MatrixMathHelper {
    * http://www.euclideanspace.com/maths/algebra/matrix/functions/inverse/fourD/index.htm
    */
   @JvmStatic
-  public fun inverse(matrix: DoubleArray): DoubleArray {
-    val det = determinant(matrix)
-    if (isZero(det)) {
-      return matrix
-    }
-    val m00 = matrix[0]
-    val m01 = matrix[1]
-    val m02 = matrix[2]
-    val m03 = matrix[3]
-    val m10 = matrix[4]
-    val m11 = matrix[5]
-    val m12 = matrix[6]
-    val m13 = matrix[7]
-    val m20 = matrix[8]
-    val m21 = matrix[9]
-    val m22 = matrix[10]
-    val m23 = matrix[11]
-    val m30 = matrix[12]
-    val m31 = matrix[13]
-    val m32 = matrix[14]
-    val m33 = matrix[15]
-    return doubleArrayOf(
-        ((m12 * m23 * m31 - m13 * m22 * m31 + m13 * m21 * m32) - m11 * m23 * m32 - m12 * m21 * m33 +
-            m11 * m22 * m33) / det,
-        (m03 * m22 * m31 - m02 * m23 * m31 - m03 * m21 * m32 + m01 * m23 * m32 + m02 * m21 * m33 -
-            m01 * m22 * m33) / det,
-        ((m02 * m13 * m31 - m03 * m12 * m31 + m03 * m11 * m32) - m01 * m13 * m32 - m02 * m11 * m33 +
-            m01 * m12 * m33) / det,
-        (m03 * m12 * m21 - m02 * m13 * m21 - m03 * m11 * m22 + m01 * m13 * m22 + m02 * m11 * m23 -
-            m01 * m12 * m23) / det,
-        (m13 * m22 * m30 - m12 * m23 * m30 - m13 * m20 * m32 + m10 * m23 * m32 + m12 * m20 * m33 -
-            m10 * m22 * m33) / det,
-        ((m02 * m23 * m30 - m03 * m22 * m30 + m03 * m20 * m32) - m00 * m23 * m32 - m02 * m20 * m33 +
-            m00 * m22 * m33) / det,
-        (m03 * m12 * m30 - m02 * m13 * m30 - m03 * m10 * m32 + m00 * m13 * m32 + m02 * m10 * m33 -
-            m00 * m12 * m33) / det,
-        ((m02 * m13 * m20 - m03 * m12 * m20 + m03 * m10 * m22) - m00 * m13 * m22 - m02 * m10 * m23 +
-            m00 * m12 * m23) / det,
-        ((m11 * m23 * m30 - m13 * m21 * m30 + m13 * m20 * m31) - m10 * m23 * m31 - m11 * m20 * m33 +
-            m10 * m21 * m33) / det,
-        (m03 * m21 * m30 - m01 * m23 * m30 - m03 * m20 * m31 + m00 * m23 * m31 + m01 * m20 * m33 -
-            m00 * m21 * m33) / det,
-        ((m01 * m13 * m30 - m03 * m11 * m30 + m03 * m10 * m31) - m00 * m13 * m31 - m01 * m10 * m33 +
-            m00 * m11 * m33) / det,
-        (m03 * m11 * m20 - m01 * m13 * m20 - m03 * m10 * m21 + m00 * m13 * m21 + m01 * m10 * m23 -
-            m00 * m11 * m23) / det,
-        (m12 * m21 * m30 - m11 * m22 * m30 - m12 * m20 * m31 + m10 * m22 * m31 + m11 * m20 * m32 -
-            m10 * m21 * m32) / det,
-        ((m01 * m22 * m30 - m02 * m21 * m30 + m02 * m20 * m31) - m00 * m22 * m31 - m01 * m20 * m32 +
-            m00 * m21 * m32) / det,
-        (m02 * m11 * m30 - m01 * m12 * m30 - m02 * m10 * m31 + m00 * m12 * m31 + m01 * m10 * m32 -
-            m00 * m11 * m32) / det,
-        ((m01 * m12 * m20 - m02 * m11 * m20 + m02 * m10 * m21) - m00 * m12 * m21 - m01 * m10 * m22 +
-            m00 * m11 * m22) / det)
+  public fun inverse(m: DoubleArray, out: DoubleArray) {
+    val det = determinant(m)
+    if (isZero(det)) return
+
+    out[0] = m[5]  * m[10] * m[15] - m[5]  * m[11] * m[14] - m[9]  * m[6]  * m[15] +
+      m[9]  * m[7]  * m[14] + m[13] * m[6]  * m[11] - m[13] * m[7]  * m[10]
+    out[1] = -m[1]  * m[10] * m[15] + m[1]  * m[11] * m[14] + m[9]  * m[2] * m[15] -
+      m[9]  * m[3] * m[14] - m[13] * m[2] * m[11] + m[13] * m[3] * m[10]
+    out[2] = m[1]  * m[6] * m[15] - m[1]  * m[7] * m[14] - m[5]  * m[2] * m[15] +
+      m[5]  * m[3] * m[14] + m[13] * m[2] * m[7] - m[13] * m[3] * m[6]
+    out[3] = -m[1]  * m[6] * m[11] + m[1]  * m[7] * m[10] + m[5]  * m[2] * m[11] -
+      m[5]  * m[3] * m[10] - m[9]  * m[2] * m[7] + m[9]  * m[3] * m[6]
+    out[4] = -m[4]  * m[10] * m[15] + m[4]  * m[11] * m[14] + m[8]  * m[6] * m[15] -
+      m[8]  * m[7] * m[14] - m[12] * m[6] * m[11] + m[12] * m[7] * m[10]
+    out[5] = m[0]  * m[10] * m[15] - m[0]  * m[11] * m[14] - m[8]  * m[2] * m[15] +
+      m[8]  * m[3] * m[14] + m[12] * m[2] * m[11] - m[12] * m[3] * m[10]
+    out[6] = -m[0]  * m[6] * m[15] + m[0]  * m[7] * m[14] + m[4]  * m[2] * m[15] -
+      m[4]  * m[3] * m[14] - m[12] * m[2] * m[7] + m[12] * m[3] * m[6]
+    out[7] = m[0]  * m[6] * m[11] - m[0]  * m[7] * m[10] - m[4]  * m[2] * m[11] +
+      m[4]  * m[3] * m[10] + m[8]  * m[2] * m[7] - m[8]  * m[3] * m[6]
+    out[8] = m[4]  * m[9] * m[15] - m[4]  * m[11] * m[13] - m[8]  * m[5] * m[15] +
+      m[8]  * m[7] * m[13] + m[12] * m[5] * m[11] - m[12] * m[7] * m[9]
+    out[9] = -m[0]  * m[9] * m[15] + m[0]  * m[11] * m[13] + m[8]  * m[1] * m[15] -
+      m[8]  * m[3] * m[13] - m[12] * m[1] * m[11] + m[12] * m[3] * m[9]
+    out[10] = m[0]  * m[5] * m[15] - m[0]  * m[7] * m[13] - m[4]  * m[1] * m[15] +
+      m[4]  * m[3] * m[13] + m[12] * m[1] * m[7] - m[12] * m[3] * m[5]
+    out[11] = -m[0]  * m[5] * m[11] + m[0]  * m[7] * m[9] + m[4]  * m[1] * m[11] -
+      m[4]  * m[3] * m[9] - m[8]  * m[1] * m[7] + m[8]  * m[3] * m[5]
+    out[12] = -m[4]  * m[9] * m[14] + m[4]  * m[10] * m[13] + m[8]  * m[5] * m[14] -
+      m[8]  * m[6] * m[13] - m[12] * m[5] * m[10] + m[12] * m[6] * m[9]
+    out[13] = m[0]  * m[9] * m[14] - m[0]  * m[10] * m[13] - m[8]  * m[1] * m[14] +
+      m[8]  * m[2] * m[13] + m[12] * m[1] * m[10] - m[12] * m[2] * m[9]
+    out[14] = -m[0]  * m[5] * m[14] + m[0]  * m[6] * m[13] + m[4]  * m[1] * m[14] -
+      m[4]  * m[2] * m[13] - m[12] * m[1] * m[6] + m[12] * m[2] * m[5]
+    out[15] = m[0]  * m[5] * m[10] - m[0]  * m[6] * m[9] - m[4]  * m[1] * m[10] +
+      m[4]  * m[2] * m[9] + m[8]  * m[1] * m[6] - m[8]  * m[2] * m[5]
+
+    for (i in 0..15) out[i] /= det
   }
 
   /** Turns columns into rows and rows into columns. */
   @JvmStatic
-  public fun transpose(m: DoubleArray): DoubleArray {
-    return doubleArrayOf(
-        m[0],
-        m[4],
-        m[8],
-        m[12],
-        m[1],
-        m[5],
-        m[9],
-        m[13],
-        m[2],
-        m[6],
-        m[10],
-        m[14],
-        m[3],
-        m[7],
-        m[11],
-        m[15])
+  public fun transpose(src: DoubleArray, dst: DoubleArray) {
+    for (i in 0..3) {
+      for (j in 0..3) {
+        dst[i * 4 + j] = src[j * 4 + i]
+      }
+    }
   }
 
   /** Based on: http://tog.acm.org/resources/GraphicsGems/gemsii/unmatrix.c */
@@ -324,26 +303,11 @@ public object MatrixMathHelper {
     result[3] = vx * m[3] + vy * m[7] + vz * m[11] + vw * m[15]
   }
 
-  /** From: https://code.google.com/p/webgl-mjs/source/browse/mjs.js */
-  @JvmStatic
-  public fun v3Length(a: DoubleArray): Double {
-    return sqrt(a[0] * a[0] + a[1] * a[1] + a[2] * a[2])
-  }
-
   /** Based on: https://code.google.com/p/webgl-mjs/source/browse/mjs.js */
   @JvmStatic
   public fun v3Normalize(vector: DoubleArray, norm: Double): DoubleArray {
     val im = 1 / if (isZero(norm)) v3Length(vector) else norm
     return doubleArrayOf(vector[0] * im, vector[1] * im, vector[2] * im)
-  }
-
-  /**
-   * The dot product of a and b, two 3-element vectors. From:
-   * https://code.google.com/p/webgl-mjs/source/browse/mjs.js
-   */
-  @JvmStatic
-  public fun v3Dot(a: DoubleArray, b: DoubleArray): Double {
-    return a[0] * b[0] + a[1] * b[1] + a[2] * b[2]
   }
 
   /**
@@ -359,16 +323,6 @@ public object MatrixMathHelper {
   ): DoubleArray {
     return doubleArrayOf(
         aScale * a[0] + bScale * b[0], aScale * a[1] + bScale * b[1], aScale * a[2] + bScale * b[2])
-  }
-
-  /**
-   * From:
-   * http://www.opensource.apple.com/source/WebCore/WebCore-514/platform/graphics/transforms/TransformationMatrix.cpp
-   */
-  @JvmStatic
-  public fun v3Cross(a: DoubleArray, b: DoubleArray): DoubleArray {
-    return doubleArrayOf(
-        a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a[0] * b[1] - a[1] * b[0])
   }
 
   @JvmStatic

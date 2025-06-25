@@ -637,8 +637,8 @@ public abstract class BaseViewManager<T extends View, C extends LayoutShadowNode
       @Nullable ReadableArray transforms,
       @Nullable ReadableArray transformOrigin) {
     if (transforms == null) {
-      view.setTranslationX(PixelUtil.toPixelFromDIP(0));
-      view.setTranslationY(PixelUtil.toPixelFromDIP(0));
+      view.setTranslationX(0);
+      view.setTranslationY(0);
       view.setRotation(0);
       view.setRotationX(0);
       view.setRotationY(0);
@@ -659,6 +659,8 @@ public abstract class BaseViewManager<T extends View, C extends LayoutShadowNode
         transformOrigin,
         allowPercentageResolution);
     MatrixMathHelper.decomposeMatrix(sTransformDecompositionArray, sMatrixDecompositionContext);
+    float rotationX = sanitizeFloatPropertyValue((float) sMatrixDecompositionContext.rotationDegrees[0]);
+    float rotationY = sanitizeFloatPropertyValue((float) sMatrixDecompositionContext.rotationDegrees[1]);
     view.setTranslationX(
         PixelUtil.toPixelFromDIP(
             sanitizeFloatPropertyValue((float) sMatrixDecompositionContext.translation[0])));
@@ -667,16 +669,14 @@ public abstract class BaseViewManager<T extends View, C extends LayoutShadowNode
             sanitizeFloatPropertyValue((float) sMatrixDecompositionContext.translation[1])));
     view.setRotation(
         sanitizeFloatPropertyValue((float) sMatrixDecompositionContext.rotationDegrees[2]));
-    view.setRotationX(
-        sanitizeFloatPropertyValue((float) sMatrixDecompositionContext.rotationDegrees[0]));
-    view.setRotationY(
-        sanitizeFloatPropertyValue((float) sMatrixDecompositionContext.rotationDegrees[1]));
+    view.setRotationX(rotationX);
+    view.setRotationY(rotationY);
     view.setScaleX(sanitizeFloatPropertyValue((float) sMatrixDecompositionContext.scale[0]));
     view.setScaleY(sanitizeFloatPropertyValue((float) sMatrixDecompositionContext.scale[1]));
 
     double[] perspectiveArray = sMatrixDecompositionContext.perspective;
 
-    if (perspectiveArray.length > PERSPECTIVE_ARRAY_INVERTED_CAMERA_DISTANCE_INDEX) {
+    if ((rotationX != 0 || rotationY != 0) && perspectiveArray.length > PERSPECTIVE_ARRAY_INVERTED_CAMERA_DISTANCE_INDEX) {
       float invertedCameraDistance =
           (float) perspectiveArray[PERSPECTIVE_ARRAY_INVERTED_CAMERA_DISTANCE_INDEX];
       if (invertedCameraDistance == 0) {

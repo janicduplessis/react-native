@@ -209,18 +209,18 @@ function _validateTransform(
     case 'rotate':
     case 'skewX':
     case 'skewY':
-      invariant(
-        typeof value === 'string',
-        'Transform with key of "%s" must be a string: %s',
-        key,
-        stringifySafe(transformation),
-      );
-      invariant(
-        value.indexOf('deg') > -1 || value.indexOf('rad') > -1,
-        'Rotate transform must be expressed in degrees (deg) or radians ' +
-          '(rad): %s',
-        stringifySafe(transformation),
-      );
+      // invariant(
+      //   typeof value === 'string',
+      //   'Transform with key of "%s" must be a string: %s',
+      //   key,
+      //   stringifySafe(transformation),
+      // );
+      // invariant(
+      //   value.indexOf('deg') > -1 || value.indexOf('rad') > -1,
+      //   'Rotate transform must be expressed in degrees (deg) or radians ' +
+      //     '(rad): %s',
+      //   stringifySafe(transformation),
+      // );
       break;
     case 'perspective':
       invariant(
