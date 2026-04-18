@@ -97,6 +97,45 @@
   [self _updatePlaceholder];
 }
 
+// UITextField / UIFieldEditor does not honor NSBaselineOffsetAttributeName when drawing typed
+// text, and it draws at the baseline of a paragraphStyle-sized line box — so when
+// `lineHeight > font.lineHeight` the glyphs sit at the bottom of that line box. Strip the
+// paragraphStyle line-height for the super-class rendering path so UITextField uses its
+// default intrinsic line height and its built-in vertical centering positions the glyph in the
+// bounds. `_defaultTextAttributes` (local) keeps the unmodified paragraphStyle so the
+// placeholder path (`_placeholderTextAttributes`) still sees the real lineHeight.
+- (void)setAttributedText:(NSAttributedString *)attributedText
+{
+  if (attributedText.length == 0) {
+    [super setAttributedText:attributedText];
+    return;
+  }
+  NSMutableAttributedString *mutableStr = [attributedText mutableCopy];
+  [mutableStr enumerateAttribute:NSParagraphStyleAttributeName
+                         inRange:NSMakeRange(0, mutableStr.length)
+                         options:0
+                      usingBlock:^(NSParagraphStyle *style, NSRange range, __unused BOOL *stop) {
+                        if (!style || style.maximumLineHeight == 0) {
+                          return;
+                        }
+                        UIFont *font = [mutableStr attribute:NSFontAttributeName
+                                                     atIndex:range.location
+                                              effectiveRange:NULL];
+                        if (!font || style.maximumLineHeight <= font.lineHeight) {
+                          return;
+                        }
+                        NSMutableParagraphStyle *stripped = [style mutableCopy];
+                        stripped.minimumLineHeight = 0;
+                        stripped.maximumLineHeight = 0;
+                        [mutableStr addAttribute:NSParagraphStyleAttributeName value:stripped range:range];
+                        // Drop any NSBaselineOffsetAttributeName applied by the Fabric baseline-offset
+                        // helper in the same range: UITextField does not honor it for typed text
+                        // rendering, but a non-zero value still inflates the caret rect.
+                        [mutableStr removeAttribute:NSBaselineOffsetAttributeName range:range];
+                      }];
+  [super setAttributedText:mutableStr];
+}
+
 - (NSDictionary<NSAttributedStringKey, id> *)defaultTextAttributes
 {
   return _defaultTextAttributes;
@@ -167,6 +206,12 @@
     [textAttributes setValue:self.placeholderColor forKey:NSForegroundColorAttributeName];
   } else {
     [textAttributes removeObjectForKey:NSForegroundColorAttributeName];
+  }
+
+  NSParagraphStyle *paragraphStyle = textAttributes[NSParagraphStyleAttributeName];
+  UIFont *font = textAttributes[NSFontAttributeName];
+  if (paragraphStyle && font && paragraphStyle.maximumLineHeight > font.lineHeight) {
+    textAttributes[NSBaselineOffsetAttributeName] = @((paragraphStyle.maximumLineHeight - font.lineHeight) / 2.0);
   }
 
   return textAttributes;

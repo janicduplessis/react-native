@@ -364,6 +364,12 @@ static UIColor *defaultPlaceholderColor(void)
     [textAttributes setValue:defaultPlaceholderFont() forKey:NSFontAttributeName];
   }
 
+  NSParagraphStyle *paragraphStyle = textAttributes[NSParagraphStyleAttributeName];
+  UIFont *font = textAttributes[NSFontAttributeName];
+  if (paragraphStyle && font && paragraphStyle.maximumLineHeight > font.lineHeight) {
+    textAttributes[NSBaselineOffsetAttributeName] = @((paragraphStyle.maximumLineHeight - font.lineHeight) / 2.0);
+  }
+
   return textAttributes;
 }
 

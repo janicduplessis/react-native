@@ -768,6 +768,30 @@ static NSSet<NSNumber *> *returnKeyTypesSet;
 
 - (void)_setAttributedString:(NSAttributedString *)attributedString
 {
+  // When the user types, UIKit's typingAttributes drop NSParagraphStyleAttributeName, so the
+  // attributedText round-tripping back through state lacks the paragraph style that
+  // RCTApplyBaselineOffset needs. Re-seed paragraph style from defaultTextAttributes on ranges
+  // that are missing it or carry a zero-lineHeight stub, so the helper can compute the offset.
+  NSMutableAttributedString *mutableString = [attributedString mutableCopy];
+  NSParagraphStyle *defaultParagraphStyle =
+      _backedTextInputView.defaultTextAttributes[NSParagraphStyleAttributeName];
+  if (defaultParagraphStyle && mutableString.length > 0) {
+    [mutableString
+        enumerateAttribute:NSParagraphStyleAttributeName
+                   inRange:NSMakeRange(0, mutableString.length)
+                   options:0
+                usingBlock:^(NSParagraphStyle *style, NSRange range, __unused BOOL *stop) {
+                  if (!style || style.maximumLineHeight == 0) {
+                    [mutableString addAttribute:NSParagraphStyleAttributeName
+                                          value:defaultParagraphStyle
+                                          range:range];
+                  }
+                }];
+  }
+
+  RCTApplyBaselineOffset(mutableString);
+  attributedString = mutableString;
+
   if ([self _textOf:attributedString equals:_backedTextInputView.attributedText]) {
     return;
   }
