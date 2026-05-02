@@ -768,6 +768,31 @@ static NSSet<NSNumber *> *returnKeyTypesSet;
 
 - (void)_setAttributedString:(NSAttributedString *)attributedString
 {
+  // When `lineHeight > font.lineHeight`, UIKit's draw paths anchor glyphs to the bottom of the
+  // paragraph line box. UITextView honors NSBaselineOffsetAttributeName to re-center; UITextField
+  // does not, so we zero the paragraph line height instead and let UITextField's built-in
+  // vertical centering position the glyph (this also shrinks the otherwise-too-tall caret).
+  NSDictionary<NSAttributedStringKey, id> *defaults = _backedTextInputView.defaultTextAttributes;
+  NSParagraphStyle *paragraphStyle = defaults[NSParagraphStyleAttributeName];
+  UIFont *font = defaults[NSFontAttributeName];
+  if (attributedString.length > 0 && paragraphStyle && font &&
+      paragraphStyle.maximumLineHeight > font.lineHeight) {
+    NSMutableAttributedString *mutableString = [attributedString mutableCopy];
+    NSRange fullRange = NSMakeRange(0, mutableString.length);
+    if ([_backedTextInputView isKindOfClass:[RCTUITextView class]]) {
+      [mutableString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:fullRange];
+      [mutableString addAttribute:NSBaselineOffsetAttributeName
+                            value:@((paragraphStyle.maximumLineHeight - font.lineHeight) / 2.0)
+                            range:fullRange];
+    } else {
+      NSMutableParagraphStyle *stripped = [paragraphStyle mutableCopy];
+      stripped.minimumLineHeight = 0;
+      stripped.maximumLineHeight = 0;
+      [mutableString addAttribute:NSParagraphStyleAttributeName value:stripped range:fullRange];
+    }
+    attributedString = mutableString;
+  }
+
   if ([self _textOf:attributedString equals:_backedTextInputView.attributedText]) {
     return;
   }
