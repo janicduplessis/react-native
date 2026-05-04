@@ -169,6 +169,14 @@
     [textAttributes removeObjectForKey:NSForegroundColorAttributeName];
   }
 
+  // The UILabel-based draw path used by `attributedPlaceholder` honors
+  // NSBaselineOffsetAttributeName (unlike the typed-text path).
+  NSParagraphStyle *paragraphStyle = textAttributes[NSParagraphStyleAttributeName];
+  UIFont *font = textAttributes[NSFontAttributeName];
+  if (paragraphStyle && font && paragraphStyle.maximumLineHeight > font.lineHeight) {
+    textAttributes[NSBaselineOffsetAttributeName] = @((paragraphStyle.maximumLineHeight - font.lineHeight) / 2.0);
+  }
+
   return textAttributes;
 }
 

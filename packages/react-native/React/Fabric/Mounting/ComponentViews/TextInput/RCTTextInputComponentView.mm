@@ -768,6 +768,56 @@ static NSSet<NSNumber *> *returnKeyTypesSet;
 
 - (void)_setAttributedString:(NSAttributedString *)attributedString
 {
+  // When `lineHeight > font.lineHeight`, UIKit's draw paths anchor glyphs to the bottom of the
+  // paragraph line box. UITextView honors NSBaselineOffsetAttributeName to re-center; UITextField
+  // does not, so for single-line we instead zero the paragraph-style line height (UITextField
+  // then renders at the font's natural line height and its built-in vertical centering positions
+  // the glyph in the bounds; the caret rect, sized from the same line box, shrinks to match).
+  NSDictionary<NSAttributedStringKey, id> *defaults = _backedTextInputView.defaultTextAttributes;
+  NSParagraphStyle *defaultParagraphStyle = defaults[NSParagraphStyleAttributeName];
+  UIFont *defaultFont = defaults[NSFontAttributeName];
+  if (attributedString.length > 0 && defaultParagraphStyle && defaultFont &&
+      defaultParagraphStyle.maximumLineHeight > defaultFont.lineHeight) {
+    NSMutableAttributedString *mutableString = [attributedString mutableCopy];
+    NSRange fullRange = NSMakeRange(0, mutableString.length);
+    if ([_backedTextInputView isKindOfClass:[RCTUITextView class]]) {
+      // UIKit's typingAttributes drop NSParagraphStyle on the round-trip, so chars typed
+      // since the last state push arrive without a paragraph style. Re-seed those ranges
+      // (and ranges with a zero-line-height stub) from the default so UITextView resolves a
+      // consistent line-box height across the whole string. RCTApplyBaselineOffset then
+      // computes the centering offset using the max font.lineHeight present on each line —
+      // correct for mixed-font input from nested <Text> children.
+      [mutableString enumerateAttribute:NSParagraphStyleAttributeName
+                                inRange:fullRange
+                                options:0
+                             usingBlock:^(NSParagraphStyle *style, NSRange range, __unused BOOL *stop) {
+                               if (!style || style.maximumLineHeight == 0) {
+                                 [mutableString addAttribute:NSParagraphStyleAttributeName
+                                                       value:defaultParagraphStyle
+                                                       range:range];
+                               }
+                             }];
+      RCTApplyBaselineOffset(mutableString);
+    } else {
+      // Single-line: per-range zero out the paragraph-style line height while preserving any
+      // other paragraph-style fields (alignment, indent) the user set on nested <Text>.
+      [mutableString enumerateAttribute:NSParagraphStyleAttributeName
+                                inRange:fullRange
+                                options:0
+                             usingBlock:^(NSParagraphStyle *style, NSRange range, __unused BOOL *stop) {
+                               NSParagraphStyle *source = style ?: defaultParagraphStyle;
+                               if (source.maximumLineHeight == 0 && source.minimumLineHeight == 0) {
+                                 return;
+                               }
+                               NSMutableParagraphStyle *stripped = [source mutableCopy];
+                               stripped.minimumLineHeight = 0;
+                               stripped.maximumLineHeight = 0;
+                               [mutableString addAttribute:NSParagraphStyleAttributeName value:stripped range:range];
+                             }];
+    }
+    attributedString = mutableString;
+  }
+
   if ([self _textOf:attributedString equals:_backedTextInputView.attributedText]) {
     return;
   }

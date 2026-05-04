@@ -364,6 +364,15 @@ static UIColor *defaultPlaceholderColor(void)
     [textAttributes setValue:defaultPlaceholderFont() forKey:NSFontAttributeName];
   }
 
+  // The placeholder UILabel honors NSBaselineOffsetAttributeName. Center the placeholder
+  // glyph in the line box when `lineHeight > font.lineHeight` (placeholder is a single
+  // string with one set of attributes, so a direct computation is equivalent to RCTApplyBaselineOffset).
+  NSParagraphStyle *paragraphStyle = textAttributes[NSParagraphStyleAttributeName];
+  UIFont *font = textAttributes[NSFontAttributeName];
+  if (paragraphStyle && font && paragraphStyle.maximumLineHeight > font.lineHeight) {
+    textAttributes[NSBaselineOffsetAttributeName] = @((paragraphStyle.maximumLineHeight - font.lineHeight) / 2.0);
+  }
+
   return textAttributes;
 }
 
