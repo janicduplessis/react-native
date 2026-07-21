@@ -15,7 +15,7 @@ module.exports = {
 
   extends: ['@react-native'],
 
-  plugins: ['@react-native/monorepo', '@react-native/specs'],
+  plugins: ['@react-native/monorepo', '@react-native/specs', 'import'],
 
   overrides: [
     // overriding the JS config from @react-native/eslint-config to ensure
@@ -44,6 +44,7 @@ module.exports = {
       files: ['*.js', '*.jsx', '*.ts', '*.tsx'],
       rules: {
         '@react-native/no-deep-imports': 'off',
+        'import/enforce-node-protocol-usage': ['warn', 'always'],
       },
     },
     {
@@ -62,16 +63,13 @@ module.exports = {
       parser: 'jsonc-eslint-parser',
     },
     {
-      files: ['package.json'],
-      rules: {
-        '@react-native/monorepo/react-native-manifest': 'error',
-      },
-    },
-    {
       files: ['flow-typed/**/*.js', 'packages/react-native/flow/**/*'],
       rules: {
         '@react-native/monorepo/valid-flow-typed-signature': 'error',
         'ft-flow/require-valid-file-annotation': 'off',
+        // These libdefs are kept byte-identical across projects (see
+        // flow-typed-sync-test), so they must not be migrated independently.
+        'import/enforce-node-protocol-usage': 'off',
         'no-shadow': 'off',
         'no-unused-vars': 'off',
         quotes: 'off',

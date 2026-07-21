@@ -10,9 +10,9 @@
 
 import type {AssetData} from 'metro';
 
-import assetPathUtils from './assetPathUtils';
-import fs from 'fs';
-import path from 'path';
+import {getAndroidResourceIdentifier} from '@react-native/asset-utils';
+import fs from 'node:fs';
+import path from 'node:path';
 
 export function cleanAssetCatalog(catalogDir: string): void {
   const files = fs
@@ -33,7 +33,7 @@ export function getImageSet(
   asset: AssetData,
   scales: ReadonlyArray<number>,
 ): ImageSet {
-  const fileName = assetPathUtils.getResourceIdentifier(asset);
+  const fileName = getAndroidResourceIdentifier(asset);
   return {
     basePath: path.join(catalogDir, `${fileName}.imageset`),
     files: scales.map((scale, idx) => {

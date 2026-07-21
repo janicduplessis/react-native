@@ -13,15 +13,14 @@ import '@react-native/fantom/src/setUpDefaultReactNativeEnvironment';
 import type {AccessibilityProps, HostInstance} from 'react-native';
 
 import * as Fantom from '@react-native/fantom';
+import nullthrows from 'nullthrows';
 import * as React from 'react';
 import {createRef} from 'react';
 import {Image} from 'react-native';
 import * as ImageInjection from 'react-native/Libraries/Image/ImageInjection';
 import accessibilityPropsSuite from 'react-native/src/private/__tests__/utilities/accessibilityPropsSuite';
 import {testIDPropSuite} from 'react-native/src/private/__tests__/utilities/commonPropsSuite';
-import ensureInstance from 'react-native/src/private/__tests__/utilities/ensureInstance';
 import NativeFantom from 'react-native/src/private/testing/fantom/specs/NativeFantom';
-import ReactNativeElement from 'react-native/src/private/webapis/dom/nodes/ReactNativeElement';
 
 const LOGO_SOURCE = {uri: 'https://reactnative.dev/img/tiny_logo.png'};
 
@@ -214,7 +213,7 @@ describe('<Image>', () => {
 
           expect(onPropCallback).toHaveBeenCalledTimes(0);
 
-          const image = ensureInstance(ref.current, ReactNativeElement);
+          const image = nullthrows(ref.current);
           Fantom.dispatchNativeEvent(image, onProp, {});
 
           expect(onPropCallback).toHaveBeenCalledTimes(1);
@@ -621,6 +620,34 @@ describe('<Image>', () => {
       });
     });
 
+    describe('alt', () => {
+      it('is passed as accessibilityLabel and marks the image accessible', () => {
+        const root = Fantom.createRoot();
+        Fantom.runTask(() => {
+          root.render(<Image alt="a picture" source={LOGO_SOURCE} />);
+        });
+        expect(
+          root
+            .getRenderedOutput({props: ['accessibilityLabel', 'accessible']})
+            .toJSX(),
+        ).toEqual(
+          <rn-image accessibilityLabel="a picture" accessible="true" />,
+        );
+      });
+    });
+
+    describe('aria-label', () => {
+      it('is passed as accessibilityLabel', () => {
+        const root = Fantom.createRoot();
+        Fantom.runTask(() => {
+          root.render(<Image aria-label="labelled" source={LOGO_SOURCE} />);
+        });
+        expect(
+          root.getRenderedOutput({props: ['accessibilityLabel']}).toJSX(),
+        ).toEqual(<rn-image accessibilityLabel="labelled" />);
+      });
+    });
+
     component TestComponent(testID?: ?string, ...props: AccessibilityProps) {
       return <Image {...props} testID={testID} source={LOGO_SOURCE} />;
     }
@@ -640,7 +667,7 @@ describe('<Image>', () => {
           root.render(<Image ref={elementRef} />);
         });
 
-        expect(elementRef.current).toBeInstanceOf(ReactNativeElement);
+        expect(elementRef.current).toBeInstanceOf(HTMLElement);
       });
 
       it('uses the "RN:Image" tag name', () => {
@@ -652,7 +679,7 @@ describe('<Image>', () => {
           root.render(<Image ref={elementRef} />);
         });
 
-        const element = ensureInstance(elementRef.current, ReactNativeElement);
+        const element = nullthrows(elementRef.current);
         expect(element.tagName).toBe('RN:Image');
       });
     });
@@ -1045,6 +1072,24 @@ describe('<Image>', () => {
         expect(result).toEqual(undefined);
         expect(error).toBeInstanceOf(Error);
         expect(error?.message).toBe('Failed to prefetch image');
+      });
+    });
+
+    describe('prefetchWithMetadata', () => {
+      it('prefetches the image', () => {
+        const uri = 'https://reactnative.dev/img/tiny_logo.png';
+
+        NativeFantom.setImageResponse(uri, {
+          width: 100,
+          height: 100,
+        });
+
+        let result;
+        Fantom.runTask(async () => {
+          result = await Image.prefetchWithMetadata(uri, 'queryRootName');
+        });
+
+        expect(result).toEqual(true);
       });
     });
 

@@ -405,6 +405,15 @@ concept facebook::react::CSSSyntaxVisitorReturn = std::is_default_constructible_
 template <typename T>
 concept facebook::react::CSSValidCompoundDataType = facebook::react::detail::is_variant_of_data_types<T>::value;
 template <typename T>
+concept facebook::react::DeclaresOwnSetProp = std::is_same_v<decltype(facebook::react::detail::memberFunctionClass(&T::setProp)), T>;
+template <typename T>
+concept facebook::react::HasIteratorSetterCtor = std::copy_constructible<T> && std::derived_from<T, facebook::react::Props> && HasSetProp<T>;
+template <typename T>
+concept facebook::react::HasSetProp = DeclaresOwnSetProp<T> &&
+requires(T& t, const facebook::react::PropsParserContext& ctx, facebook::react::RawPropsPropNameHash hash, const char* name, const facebook::react::RawValue& value) {
+  { t.setProp(ctx, hash, name, value) } -> std::same_as<void>;
+};
+template <typename T>
 concept facebook::react::Hashable = !std::is_same_v<T, const char*>&& (requires(T a) {
   { std::hash<T>{}(a) } -> std::convertible_to<std::size_t>;
 });
@@ -691,6 +700,7 @@ void facebook::react::fromRawValue(const facebook::react::PropsParserContext&, c
 void facebook::react::fromRawValueShared(const facebook::react::ContextContainer& contextContainer, int32_t surfaceId, const facebook::react::RawValue& value, facebook::react::SharedColor& result, facebook::react::parsePlatformColorFn parsePlatformColor);
 void facebook::react::fromString(const std::string& string, facebook::react::AccessibilityTraits& result);
 void facebook::react::g_setNativeAnimatedNowTimestampFunction(facebook::react::TimePointFunction nowFunction);
+void facebook::react::handleJSError(facebook::jsi::Runtime& runtime, const facebook::jsi::JSError& error, bool isFatal);
 void facebook::react::parseProcessedBackgroundImage(const facebook::react::PropsParserContext& context, const facebook::react::RawValue& value, std::vector<facebook::react::BackgroundImage>& result);
 void facebook::react::parseProcessedBoxShadow(const facebook::react::PropsParserContext& context, const facebook::react::RawValue& value, std::vector<facebook::react::BoxShadow>& result);
 void facebook::react::parseProcessedFilter(const facebook::react::PropsParserContext& context, const facebook::react::RawValue& value, std::vector<facebook::react::FilterFunction>& result);
@@ -2563,6 +2573,12 @@ class facebook::react::NetworkReporter {
   public void reportRequestStart(const std::string& requestId, const facebook::react::RequestInfo& requestInfo, int encodedDataLength, const std::optional<facebook::react::ResponseInfo>& redirectResponse);
   public void reportResponseEnd(const std::string& requestId, int encodedDataLength);
   public void reportResponseStart(const std::string& requestId, const facebook::react::ResponseInfo& responseInfo, int encodedDataLength);
+  public void reportWebSocketClosed(const std::string& requestId) const;
+  public void reportWebSocketCreated(const std::string& requestId, const std::string& url) const;
+  public void reportWebSocketHandshakeResponseReceived(const std::string& requestId, uint16_t statusCode, const facebook::react::Headers& headers) const;
+  public void reportWebSocketMessageReceived(const std::string& requestId, const std::string& payloadData, bool isBinary) const;
+  public void reportWebSocketMessageSent(const std::string& requestId, const std::string& payloadData, bool isBinary) const;
+  public void reportWebSocketWillSendHandshakeRequest(const std::string& requestId, const facebook::react::Headers& headers) const;
   public void storeResponseBody(const std::string& requestId, std::string_view body, bool base64Encoded);
 }
 
@@ -2737,7 +2753,7 @@ class facebook::react::PreparedTextCacheKey {
 
 class facebook::react::Props : public virtual facebook::react::Sealable, public virtual facebook::react::DebugStringConvertible {
   public Props() = default;
-  public Props(const facebook::react::Props& other) = delete;
+  public Props(const facebook::react::Props& other) = default;
   public Props(const facebook::react::PropsParserContext& context, const facebook::react::Props& sourceProps, const facebook::react::RawProps& rawProps, const std::function<bool(const std::string&)>& filterObjectKeys = nullptr);
   public facebook::react::Props& operator=(const facebook::react::Props& other) = delete;
   public std::string nativeId;
@@ -2785,6 +2801,8 @@ class facebook::react::RawProps {
   public folly::dynamic toDynamic(const std::function<bool(const std::string&)>& filterObjectKeys = nullptr) const;
   public operator folly::dynamic() const;
   public void parse(const facebook::react::RawPropsParser& parser) noexcept;
+  template <typename Fn>
+  public void forEachItem(Fn fn) const;
 }
 
 enum facebook::react::RawProps::Mode {
@@ -6360,6 +6378,7 @@ class facebook::react::ConcreteShadowNode : public BaseShadowNodeT {
   public static facebook::react::ComponentHandle Handle();
   public static facebook::react::ComponentName Name();
   public static facebook::react::ConcreteShadowNode::ConcreteStateData initialStateData(const facebook::react::Props::Shared&, const facebook::react::ShadowNodeFamily::Shared&, const facebook::react::ComponentDescriptor&);
+  public static facebook::react::ConcreteShadowNode::UnsharedConcreteProps Props(const facebook::react::Props::Shared& baseProps);
   public static facebook::react::ConcreteShadowNode::UnsharedConcreteProps Props(const facebook::react::PropsParserContext& context, const facebook::react::RawProps& rawProps, const facebook::react::Props::Shared& baseProps = nullptr);
   public static facebook::react::ShadowNodeTraits BaseTraits();
   public using ConcreteEventEmitter = EventEmitterT;
@@ -7014,6 +7033,8 @@ template <typename CSSColor>
 std::optional<facebook::react::CSSColor> facebook::react::detail::parseLegacyHslFunction(facebook::react::CSSValueParser& parser);
 template <typename CSSColor>
 std::optional<facebook::react::CSSColor> facebook::react::detail::parseModernHslFunction(facebook::react::CSSValueParser& parser);
+template <typename T, typename C>
+C facebook::react::detail::memberFunctionClass(T C::*);
 template <typename... ComponentT>
 constexpr std::optional<float> facebook::react::detail::normalizeComponent(const std::variant<std::monostate, ComponentT...>& component, float baseValue);
 
@@ -7719,7 +7740,6 @@ class facebook::react::jsinspector_modern::InspectorFlags {
   public bool getFrameRecordingEnabled() const;
   public bool getFuseboxEnabled() const;
   public bool getIsProfilingBuild() const;
-  public bool getNetworkInspectionEnabled() const;
   public bool getPerfIssuesEnabled() const;
   public bool getScreenshotCaptureEnabled() const;
   public facebook::react::jsinspector_modern::InspectorFlags& operator=(const facebook::react::jsinspector_modern::InspectorFlags&) = delete;
@@ -7815,6 +7835,12 @@ class facebook::react::jsinspector_modern::NetworkHandler {
   public void onRequestWillBeSent(const std::string& requestId, const facebook::react::jsinspector_modern::cdp::network::Request& request, const std::optional<facebook::react::jsinspector_modern::cdp::network::Response>& redirectResponse);
   public void onRequestWillBeSentExtraInfo(const std::string& requestId, const facebook::react::jsinspector_modern::Headers& headers);
   public void onResponseReceived(const std::string& requestId, const facebook::react::jsinspector_modern::cdp::network::Response& response);
+  public void onWebSocketClosed(const std::string& requestId);
+  public void onWebSocketCreated(const std::string& requestId, const std::string& url);
+  public void onWebSocketFrameReceived(const std::string& requestId, const std::string& payloadData, bool isBinary);
+  public void onWebSocketFrameSent(const std::string& requestId, const std::string& payloadData, bool isBinary);
+  public void onWebSocketHandshakeResponseReceived(const std::string& requestId, uint16_t status, const facebook::react::jsinspector_modern::Headers& headers);
+  public void onWebSocketWillSendHandshakeRequest(const std::string& requestId, const facebook::react::jsinspector_modern::Headers& headers);
   public void recordRequestInitiatorStack(const std::string& requestId, folly::dynamic stackTrace);
   public void storeResponseBody(const std::string& requestId, std::string_view body, bool base64Encoded);
 }
@@ -8288,11 +8314,17 @@ struct facebook::react::jsinspector_modern::tracing::FrameTimingSequence {
 }
 
 struct facebook::react::jsinspector_modern::tracing::HostTracingProfile {
+  public HostTracingProfile() = default;
+  public HostTracingProfile(const facebook::react::jsinspector_modern::tracing::HostTracingProfile&) = delete;
+  public HostTracingProfile(facebook::react::jsinspector_modern::tracing::HostTracingProfile&&) = default;
   public facebook::react::HighResTimeStamp startTime;
+  public facebook::react::jsinspector_modern::tracing::HostTracingProfile& operator=(const facebook::react::jsinspector_modern::tracing::HostTracingProfile&) = delete;
+  public facebook::react::jsinspector_modern::tracing::HostTracingProfile& operator=(facebook::react::jsinspector_modern::tracing::HostTracingProfile&&) = default;
   public facebook::react::jsinspector_modern::tracing::ProcessId processId;
   public std::vector<facebook::react::jsinspector_modern::tracing::FrameTimingSequence> frameTimings;
   public std::vector<facebook::react::jsinspector_modern::tracing::InstanceTracingProfile> instanceTracingProfiles;
   public std::vector<facebook::react::jsinspector_modern::tracing::RuntimeSamplingProfile> runtimeSamplingProfiles;
+  public ~HostTracingProfile() = default;
 }
 
 struct facebook::react::jsinspector_modern::tracing::IdGenerator {
@@ -8385,12 +8417,17 @@ struct facebook::react::jsinspector_modern::tracing::TraceEventProfileChunk::CPU
 }
 
 struct facebook::react::jsinspector_modern::tracing::TraceRecordingState {
+  public TraceRecordingState(const facebook::react::jsinspector_modern::tracing::TraceRecordingState&) = delete;
   public TraceRecordingState(facebook::react::jsinspector_modern::tracing::Mode tracingMode, std::set<facebook::react::jsinspector_modern::tracing::Category> enabledCategories, std::optional<facebook::react::HighResDuration> windowSize = std::nullopt);
+  public TraceRecordingState(facebook::react::jsinspector_modern::tracing::TraceRecordingState&&) = default;
   public facebook::react::jsinspector_modern::tracing::Mode mode;
+  public facebook::react::jsinspector_modern::tracing::TraceRecordingState& operator=(const facebook::react::jsinspector_modern::tracing::TraceRecordingState&) = delete;
+  public facebook::react::jsinspector_modern::tracing::TraceRecordingState& operator=(facebook::react::jsinspector_modern::tracing::TraceRecordingState&&) = default;
   public std::optional<facebook::react::HighResDuration> windowSize;
   public std::set<facebook::react::jsinspector_modern::tracing::Category> enabledCategories;
   public std::vector<facebook::react::jsinspector_modern::tracing::InstanceTracingProfile> instanceTracingProfiles;
   public std::vector<facebook::react::jsinspector_modern::tracing::RuntimeSamplingProfile> runtimeSamplingProfiles;
+  public ~TraceRecordingState() = default;
 }
 
 template <typename T>
@@ -8519,6 +8556,56 @@ struct facebook::react::jsinspector_modern::cdp::network::ResponseReceivedParams
   public std::string loaderId;
   public std::string requestId;
   public std::string type;
+}
+
+struct facebook::react::jsinspector_modern::cdp::network::WebSocketClosedParams {
+  public double timestamp;
+  public folly::dynamic toDynamic() const;
+  public std::string requestId;
+}
+
+struct facebook::react::jsinspector_modern::cdp::network::WebSocketCreatedParams {
+  public folly::dynamic initiator;
+  public folly::dynamic toDynamic() const;
+  public std::string requestId;
+  public std::string url;
+}
+
+struct facebook::react::jsinspector_modern::cdp::network::WebSocketFrame {
+  public bool mask;
+  public folly::dynamic toDynamic() const;
+  public int opcode;
+  public std::string payloadData;
+}
+
+struct facebook::react::jsinspector_modern::cdp::network::WebSocketFrameParams {
+  public double timestamp;
+  public facebook::react::jsinspector_modern::cdp::network::WebSocketFrame response;
+  public folly::dynamic toDynamic() const;
+  public std::string requestId;
+}
+
+struct facebook::react::jsinspector_modern::cdp::network::WebSocketHandshakeResponseReceivedParams {
+  public double timestamp;
+  public facebook::react::jsinspector_modern::cdp::network::WebSocketResponse response;
+  public folly::dynamic toDynamic() const;
+  public std::string requestId;
+}
+
+struct facebook::react::jsinspector_modern::cdp::network::WebSocketResponse {
+  public facebook::react::jsinspector_modern::cdp::network::Headers headers;
+  public folly::dynamic toDynamic() const;
+  public static facebook::react::jsinspector_modern::cdp::network::WebSocketResponse fromInputParams(uint16_t status, const facebook::react::jsinspector_modern::cdp::network::Headers& headers);
+  public std::string statusText;
+  public uint16_t status;
+}
+
+struct facebook::react::jsinspector_modern::cdp::network::WebSocketWillSendHandshakeRequestParams {
+  public double timestamp;
+  public double wallTime;
+  public facebook::react::jsinspector_modern::cdp::network::Headers headers;
+  public folly::dynamic toDynamic() const;
+  public std::string requestId;
 }
 
 
