@@ -13,6 +13,7 @@
 #import <objc/runtime.h>
 #import <zlib.h>
 #import <atomic>
+#import <vector>
 
 #import <UIKit/UIKit.h>
 
@@ -969,7 +970,7 @@ NSString *__nullable RCTAssetCatalogNameForURL(NSURL *__nullable URL)
 {
   // The "assets/" prefix the packager uses for all image assets. The CLI strips
   // it from the identifiers it names the imagesets with.
-  const NSUInteger assetsPrefixLength = 7;
+  constexpr NSUInteger assetsPrefixLength = sizeof("assets/") - 1;
 
   NSString *path = RCTBundlePathForURL(URL);
   // Packager assets always live under "assets/". Anything else (sub-bundles,
@@ -991,7 +992,12 @@ NSString *__nullable RCTAssetCatalogNameForURL(NSURL *__nullable URL)
 
   const NSUInteger length = path.length;
   unichar stackBuffer[256];
-  unichar *chars = length <= 256 ? stackBuffer : (unichar *)malloc(length * sizeof(unichar));
+  std::vector<unichar> heapBuffer;
+  unichar *chars = stackBuffer;
+  if (length > 256) {
+    heapBuffer.resize(length);
+    chars = heapBuffer.data();
+  }
   [path getCharacters:chars range:NSMakeRange(0, length)];
 
   // Strip the file extension (guaranteed present by RCTIsImageAssetsPath) and
@@ -1041,9 +1047,6 @@ NSString *__nullable RCTAssetCatalogNameForURL(NSURL *__nullable URL)
   }
 
   NSString *name = [NSString stringWithCharacters:chars length:resultLength];
-  if (chars != stackBuffer) {
-    free(chars);
-  }
   return name;
 }
 
