@@ -179,6 +179,9 @@ const directEventTypes = {
   topLayout: {
     registrationName: 'onLayout',
   },
+  topSafeAreaInsetsChange: {
+    registrationName: 'onSafeAreaInsetsChange',
+  },
   onGestureHandlerEvent: DynamicallyInjectedByGestureHandler({
     registrationName: 'onGestureHandlerEvent',
   }),
@@ -380,6 +383,7 @@ const validAttributesForNonEventProps = {
 // Props for bubbling and direct events
 const validAttributesForEventProps = ConditionallyIgnoredEventHandlers({
   onLayout: true,
+  onSafeAreaInsetsChange: true,
   onMagicTap: true,
 
   // Accessibility

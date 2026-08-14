@@ -101,6 +101,7 @@ class BaseViewProps : public YogaStylableProps, public AccessibilityProps {
   PointerEventsMode pointerEvents{};
   EdgeInsets hitSlop{};
   bool onLayout{};
+  bool onSafeAreaInsetsChange{};
 
   ViewEvents events{};
 

@@ -80,6 +80,10 @@ const Components: Array<RNTesterModuleInfo> = [
     module: require('../examples/SafeAreaView/SafeAreaViewExample'),
   },
   {
+    key: 'SafeAreaInsetsExample',
+    module: require('../examples/SafeAreaInsets/SafeAreaInsetsExample'),
+  },
+  {
     key: 'ScrollViewExample',
     module: require('../examples/ScrollView/ScrollViewExample'),
     category: 'Basic',

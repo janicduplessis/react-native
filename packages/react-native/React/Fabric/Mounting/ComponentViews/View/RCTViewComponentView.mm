@@ -25,6 +25,7 @@
 #import <React/RCTLocalizedString.h>
 #import <React/RCTLog.h>
 #import <React/RCTRadialGradient.h>
+#import <React/RCTUtils.h>
 #import <react/featureflags/ReactNativeFeatureFlags.h>
 #import <react/renderer/components/view/ViewComponentDescriptor.h>
 #import <react/renderer/components/view/ViewEventEmitter.h>
@@ -122,6 +123,10 @@ static BOOL RCTViewIsInteractiveAccessibilityElement(UIView *view, const ViewPro
   NSMutableSet<NSString *> *_accessibilityOrderNativeIDs;
   RCTSwiftUIContainerViewWrapper *_swiftUIWrapper;
   BOOL _focusable;
+  BOOL _observesSafeAreaInsets;
+  BOOL _safeAreaInsetsWereSent;
+  UIEdgeInsets _lastSafeAreaInsets;
+  CGRect _lastSafeAreaFrame;
 }
 
 #ifdef RCT_DYNAMIC_FRAMEWORKS
@@ -438,6 +443,11 @@ static BOOL RCTLayerTransformCollapsesAxis(CALayer *layer)
         -newViewProps.hitSlop.right};
   }
 
+  // `onSafeAreaInsetsChange`
+  if (oldViewProps.onSafeAreaInsetsChange != newViewProps.onSafeAreaInsetsChange) {
+    [self _setObservesSafeAreaInsets:newViewProps.onSafeAreaInsetsChange];
+  }
+
   // `overflow`
   if (oldViewProps.getClipsContentToBounds() != newViewProps.getClipsContentToBounds()) {
     self.currentContainerView.clipsToBounds = newViewProps.getClipsContentToBounds();
@@ -720,6 +730,130 @@ static BOOL RCTLayerTransformCollapsesAxis(CALayer *layer)
   }
 }
 
+#pragma mark - Safe area insets
+
+#if !TARGET_OS_TV
+static NSArray<NSNotificationName> *RCTSafeAreaInsetsNotificationNames(void)
+{
+  // The keyboard is part of the safe area on iOS, so its appearance changes the
+  // insets without the view hierarchy itself changing.
+  return @[
+    UIKeyboardDidShowNotification,
+    UIKeyboardDidHideNotification,
+    UIKeyboardDidChangeFrameNotification,
+  ];
+}
+#endif
+
+// The view controller the view is hosted in, which is the coordinate space
+// `frame` is reported in. Modals and other view controllers are positioned
+// independently of the window, so the window is not a usable reference.
+static UIViewController *RCTParentViewControllerOfView(UIView *view)
+{
+  UIResponder *responder = view.nextResponder;
+  while (responder != nil) {
+    if ([responder isKindOfClass:[UIViewController class]]) {
+      return (UIViewController *)responder;
+    }
+    responder = responder.nextResponder;
+  }
+  return nil;
+}
+
+static BOOL RCTEdgeInsetsEqualWithThreshold(UIEdgeInsets lhs, UIEdgeInsets rhs, CGFloat threshold)
+{
+  return ABS(lhs.left - rhs.left) <= threshold && ABS(lhs.top - rhs.top) <= threshold &&
+      ABS(lhs.right - rhs.right) <= threshold && ABS(lhs.bottom - rhs.bottom) <= threshold;
+}
+
+- (void)_setObservesSafeAreaInsets:(BOOL)observesSafeAreaInsets
+{
+  if (_observesSafeAreaInsets == observesSafeAreaInsets) {
+    return;
+  }
+
+  _observesSafeAreaInsets = observesSafeAreaInsets;
+  _safeAreaInsetsWereSent = NO;
+
+#if !TARGET_OS_TV
+  for (NSNotificationName name in RCTSafeAreaInsetsNotificationNames()) {
+    if (observesSafeAreaInsets) {
+      [NSNotificationCenter.defaultCenter addObserver:self
+                                             selector:@selector(_safeAreaInsetsMayHaveChanged)
+                                                 name:name
+                                               object:nil];
+    } else {
+      [NSNotificationCenter.defaultCenter removeObserver:self name:name object:nil];
+    }
+  }
+#endif
+
+  if (observesSafeAreaInsets) {
+    [self _safeAreaInsetsMayHaveChanged];
+  }
+}
+
+- (void)_safeAreaInsetsMayHaveChanged
+{
+  if (!_observesSafeAreaInsets || !_eventEmitter) {
+    return;
+  }
+
+  // The view has not been mounted or laid out yet, so the insets we would
+  // compute are not the ones the view ends up with.
+  if (self.window == nil || CGSizeEqualToSize(self.bounds.size, CGSizeZero)) {
+    return;
+  }
+
+  UIView *referenceView = RCTParentViewControllerOfView(self).view ?: self.window;
+  UIEdgeInsets insets = self.safeAreaInsets;
+  CGRect frame = [self convertRect:self.bounds toView:referenceView];
+
+  if (_safeAreaInsetsWereSent && CGRectEqualToRect(frame, _lastSafeAreaFrame) &&
+      RCTEdgeInsetsEqualWithThreshold(insets, _lastSafeAreaInsets, 1.0 / RCTScreenScale())) {
+    return;
+  }
+
+  _safeAreaInsetsWereSent = YES;
+  _lastSafeAreaInsets = insets;
+  _lastSafeAreaFrame = frame;
+
+  static_cast<const ViewEventEmitter &>(*_eventEmitter)
+      .onSafeAreaInsetsChange(
+          EdgeInsets{
+              .left = (Float)insets.left,
+              .top = (Float)insets.top,
+              .right = (Float)insets.right,
+              .bottom = (Float)insets.bottom},
+          RCTRectFromCGRect(frame));
+}
+
+- (void)safeAreaInsetsDidChange
+{
+  [super safeAreaInsetsDidChange];
+  [self _safeAreaInsetsMayHaveChanged];
+}
+
+- (void)didMoveToWindow
+{
+  [super didMoveToWindow];
+  // The ivar is checked here rather than inside `_safeAreaInsetsMayHaveChanged`
+  // so that views which do not use the prop only pay for a branch.
+  if (_observesSafeAreaInsets) {
+    [self _safeAreaInsetsMayHaveChanged];
+  }
+}
+
+- (void)layoutSubviews
+{
+  [super layoutSubviews];
+  // Both the insets and the frame depend on where the view sits in the window,
+  // so moving or resizing it changes them without UIKit notifying us.
+  if (_observesSafeAreaInsets) {
+    [self _safeAreaInsetsMayHaveChanged];
+  }
+}
+
 - (BOOL)isJSResponder
 {
   return _isJSResponder;
@@ -774,6 +908,8 @@ static BOOL RCTLayerTransformCollapsesAxis(CALayer *layer)
   [_filterLayer removeFromSuperlayer];
   _filterLayer = nil;
   [self clearExistingBackgroundImageLayers];
+
+  [self _setObservesSafeAreaInsets:NO];
 
   _propKeysManagedByAnimated_DO_NOT_USE_THIS_IS_BROKEN = nil;
   _eventEmitter.reset();

@@ -9,23 +9,60 @@
  */
 
 import type {ViewProps} from '../../../../Libraries/Components/View/ViewPropTypes';
+import type {
+  SafeAreaInsets,
+  SafeAreaInsetsChangeEvent,
+} from '../../../../Libraries/Types/CoreEventTypes';
+import type {HostInstance} from '../../types/HostInstance';
 
 import View from '../../../../Libraries/Components/View/View';
-import UIManager from '../../../../Libraries/ReactNative/UIManager';
-import Platform from '../../../../Libraries/Utilities/Platform';
 import * as React from 'react';
+import {useCallback, useMemo, useState} from 'react';
 
-const exported: component(
-  ref?: React.RefSetter<React.ElementRef<typeof View>>,
-  ...ViewProps
-) = Platform.select({
-  ios: require('../../../../src/private/components/safeareaview/specs/RCTSafeAreaViewNativeComponent')
-    .default,
-  android: UIManager.hasViewManagerConfig('RCTSafeAreaView')
-    ? require('../../../../src/private/components/safeareaview/specs/RCTSafeAreaViewNativeComponent')
-        .default
-    : View,
-  default: View,
-});
+/**
+ * Renders its children within the safe area of the device, by applying the part
+ * of the view that is covered by the system UI as padding.
+ *
+ * This is the internal counterpart of `react-native-safe-area-context`, for the
+ * few surfaces React Native renders itself (LogBox, the element inspector, ...)
+ * which cannot take a dependency on it. Everything else should use the library.
+ */
+component SafeAreaView(
+  ref?: React.RefSetter<HostInstance>,
+  ...props: ViewProps
+) {
+  const {style, onSafeAreaInsetsChange, ...otherProps} = props;
+  const [insets, setInsets] = useState<?SafeAreaInsets>(null);
 
-export default exported;
+  const handleSafeAreaInsetsChange = useCallback(
+    (event: SafeAreaInsetsChangeEvent) => {
+      setInsets(event.nativeEvent.insets);
+      onSafeAreaInsetsChange?.(event);
+    },
+    [onSafeAreaInsetsChange],
+  );
+
+  const paddingStyle = useMemo(
+    () =>
+      insets == null
+        ? null
+        : {
+            paddingTop: insets.top,
+            paddingRight: insets.right,
+            paddingBottom: insets.bottom,
+            paddingLeft: insets.left,
+          },
+    [insets],
+  );
+
+  return (
+    <View
+      {...otherProps}
+      ref={ref}
+      onSafeAreaInsetsChange={handleSafeAreaInsetsChange}
+      style={[style, paddingStyle]}
+    />
+  );
+}
+
+export default SafeAreaView;
