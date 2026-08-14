@@ -779,7 +779,7 @@ static BOOL RCTEdgeInsetsEqualWithThreshold(UIEdgeInsets lhs, UIEdgeInsets rhs, 
   for (NSNotificationName name in RCTSafeAreaInsetsNotificationNames()) {
     if (observesSafeAreaInsets) {
       [NSNotificationCenter.defaultCenter addObserver:self
-                                             selector:@selector(_safeAreaInsetsMayHaveChanged)
+                                             selector:@selector(_scheduleSafeAreaInsetsCheck)
                                                  name:name
                                                object:nil];
     } else {
@@ -789,8 +789,19 @@ static BOOL RCTEdgeInsetsEqualWithThreshold(UIEdgeInsets lhs, UIEdgeInsets rhs, 
 #endif
 
   if (observesSafeAreaInsets) {
-    [self _safeAreaInsetsMayHaveChanged];
+    [self _scheduleSafeAreaInsetsCheck];
   }
+}
+
+// The event is only ever emitted from `layoutSubviews`; everything that might
+// have changed the insets funnels through here and merely marks the view as
+// needing layout. This defers the emit out of arbitrary call contexts — in
+// particular out of `updateProps`, which runs inside the mounting transaction
+// where synchronously re-entering React is not safe — while keeping it in the
+// same frame: the layout pass runs before the frame is displayed.
+- (void)_scheduleSafeAreaInsetsCheck
+{
+  [self setNeedsLayout];
 }
 
 - (void)_safeAreaInsetsMayHaveChanged
@@ -831,16 +842,18 @@ static BOOL RCTEdgeInsetsEqualWithThreshold(UIEdgeInsets lhs, UIEdgeInsets rhs, 
 - (void)safeAreaInsetsDidChange
 {
   [super safeAreaInsetsDidChange];
-  [self _safeAreaInsetsMayHaveChanged];
+  // The ivar is checked here rather than inside the helpers so that views which
+  // do not use the prop only pay for a branch.
+  if (_observesSafeAreaInsets) {
+    [self _scheduleSafeAreaInsetsCheck];
+  }
 }
 
 - (void)didMoveToWindow
 {
   [super didMoveToWindow];
-  // The ivar is checked here rather than inside `_safeAreaInsetsMayHaveChanged`
-  // so that views which do not use the prop only pay for a branch.
   if (_observesSafeAreaInsets) {
-    [self _safeAreaInsetsMayHaveChanged];
+    [self _scheduleSafeAreaInsetsCheck];
   }
 }
 
