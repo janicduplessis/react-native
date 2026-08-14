@@ -130,8 +130,12 @@ internal class SafeAreaInsetsObserver private constructor(private val view: View
     /**
      * The insets of the window that overlap [view], in the view's own coordinate space. A view that
      * does not reach under the system UI has no insets.
+     *
+     * Also used with the window's decor view to report window-level safe area insets through the
+     * `Dimensions` module.
      */
-    private fun getSafeAreaInsets(view: View): Insets? {
+    @JvmStatic
+    fun getSafeAreaInsets(view: View): Insets? {
       // The view has not been laid out yet.
       if (view.width == 0 || view.height == 0) {
         return null

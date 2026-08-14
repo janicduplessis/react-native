@@ -16,7 +16,13 @@ import type {SafeAreaInsetsChangeEvent} from 'react-native/Libraries/Types/CoreE
 import RNTesterText from '../../components/RNTesterText';
 import * as React from 'react';
 import {useCallback, useState} from 'react';
-import {Button, Modal, StyleSheet, View} from 'react-native';
+import {
+  Button,
+  Modal,
+  StyleSheet,
+  View,
+  useWindowDimensions,
+} from 'react-native';
 
 type Insets = SafeAreaInsetsChangeEvent['nativeEvent']['insets'];
 type Frame = SafeAreaInsetsChangeEvent['nativeEvent']['frame'];
@@ -109,6 +115,21 @@ function FullScreenExample(): React.Node {
   );
 }
 
+function WindowInsetsExample(): React.Node {
+  const {width, height, safeAreaInsets} = useWindowDimensions();
+
+  return (
+    <View style={styles.readout}>
+      <RNTesterText>{`window: {width: ${width}, height: ${height}}`}</RNTesterText>
+      <RNTesterText>
+        {safeAreaInsets == null
+          ? 'safeAreaInsets: not available'
+          : `safeAreaInsets: {top: ${safeAreaInsets.top}, right: ${safeAreaInsets.right}, bottom: ${safeAreaInsets.bottom}, left: ${safeAreaInsets.left}}`}
+      </RNTesterText>
+    </View>
+  );
+}
+
 const styles = StyleSheet.create({
   readout: {
     backgroundColor: '#ffaaaa',
@@ -146,5 +167,11 @@ exports.examples = [
     description:
       'A full screen view that pads itself by its own safe area insets.',
     render: (): React.Node => <FullScreenExample />,
+  },
+  {
+    title: 'Window safe area insets from Dimensions',
+    description:
+      'The `Dimensions` module reports the safe area insets of the window, available synchronously at startup.',
+    render: (): React.Node => <WindowInsetsExample />,
   },
 ] as Array<RNTesterModuleExample>;
