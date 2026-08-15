@@ -16,6 +16,7 @@ import type {
 import type {HostInstance} from '../../types/HostInstance';
 
 import View from '../../../../Libraries/Components/View/View';
+import Dimensions from '../../../../Libraries/Utilities/Dimensions';
 import * as React from 'react';
 import {useCallback, useMemo, useState} from 'react';
 
@@ -32,7 +33,13 @@ component SafeAreaView(
   ...props: ViewProps
 ) {
   const {style, onSafeAreaInsetsChange, ...otherProps} = props;
-  const [insets, setInsets] = useState<?SafeAreaInsets>(null);
+  // Seeded with the window insets so the first frame is already padded; the
+  // synchronous event then keeps them correct relative to this view. The seed
+  // is only exact for views aligned with the window edges, which the internal
+  // surfaces using this component (LogBox, the element inspector) are.
+  const [insets, setInsets] = useState<?SafeAreaInsets>(
+    () => Dimensions.get('window').safeAreaInsets,
+  );
 
   const handleSafeAreaInsetsChange = useCallback(
     (event: SafeAreaInsetsChangeEvent) => {
