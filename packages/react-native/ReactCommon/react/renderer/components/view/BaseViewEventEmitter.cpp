@@ -40,32 +40,38 @@ void BaseViewEventEmitter::onSafeAreaInsetsChange(
   // Dispatched synchronously and as a discrete event so that React processes it
   // before the current frame is presented. Both the thread this is called from
   // (the UI thread) and the JavaScript thread are blocked until React has
-  // finished rendering.
-  experimental_flushSync([this, &insets, &frame]() {
-    dispatchEvent(
-        "safeAreaInsetsChange",
-        [insets, frame](jsi::Runtime& runtime) {
-          auto payload = jsi::Object(runtime);
-          {
-            auto insetsPayload = jsi::Object(runtime);
-            insetsPayload.setProperty(runtime, "top", insets.top);
-            insetsPayload.setProperty(runtime, "right", insets.right);
-            insetsPayload.setProperty(runtime, "bottom", insets.bottom);
-            insetsPayload.setProperty(runtime, "left", insets.left);
-            payload.setProperty(runtime, "insets", insetsPayload);
-          }
-          {
-            auto framePayload = jsi::Object(runtime);
-            framePayload.setProperty(runtime, "x", frame.origin.x);
-            framePayload.setProperty(runtime, "y", frame.origin.y);
-            framePayload.setProperty(runtime, "width", frame.size.width);
-            framePayload.setProperty(runtime, "height", frame.size.height);
-            payload.setProperty(runtime, "frame", framePayload);
-          }
-          return payload;
-        },
-        RawEvent::Category::Discrete);
-  });
+  // finished rendering. `immediate` processes the queue at the call site
+  // instead of at the next beat: the emit happens during the layout pass of
+  // the frame, and waiting for the beat would land the resulting mount one
+  // frame late on a freshly mounted view.
+  constexpr bool immediate = true;
+  experimental_flushSync(
+      [this, &insets, &frame]() {
+        dispatchEvent(
+            "safeAreaInsetsChange",
+            [insets, frame](jsi::Runtime& runtime) {
+              auto payload = jsi::Object(runtime);
+              {
+                auto insetsPayload = jsi::Object(runtime);
+                insetsPayload.setProperty(runtime, "top", insets.top);
+                insetsPayload.setProperty(runtime, "right", insets.right);
+                insetsPayload.setProperty(runtime, "bottom", insets.bottom);
+                insetsPayload.setProperty(runtime, "left", insets.left);
+                payload.setProperty(runtime, "insets", insetsPayload);
+              }
+              {
+                auto framePayload = jsi::Object(runtime);
+                framePayload.setProperty(runtime, "x", frame.origin.x);
+                framePayload.setProperty(runtime, "y", frame.origin.y);
+                framePayload.setProperty(runtime, "width", frame.size.width);
+                framePayload.setProperty(runtime, "height", frame.size.height);
+                payload.setProperty(runtime, "frame", framePayload);
+              }
+              return payload;
+            },
+            RawEvent::Category::Discrete);
+      },
+      immediate);
 }
 
 #pragma mark - Layout

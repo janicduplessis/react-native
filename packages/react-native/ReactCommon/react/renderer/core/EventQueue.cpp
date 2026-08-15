@@ -86,8 +86,11 @@ void EventQueue::onEnqueue() const {
   eventBeat_->request();
 }
 
-void EventQueue::experimental_flushSync() const {
+void EventQueue::experimental_flushSync(bool immediate) const {
   eventBeat_->requestSynchronous();
+  if (immediate) {
+    eventBeat_->induce();
+  }
 }
 
 void EventQueue::onBeat(jsi::Runtime& runtime) const {

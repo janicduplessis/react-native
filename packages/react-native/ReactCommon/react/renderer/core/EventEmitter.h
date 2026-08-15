@@ -65,9 +65,12 @@ class EventEmitter {
 
   /*
    * Experimental API that will change in the future.
+   * When `immediate` is true the queue is processed at the call site instead
+   * of at the next beat, so the effects are mounted before the current frame
+   * is presented.
    */
   template <typename Lambda>
-  void experimental_flushSync(Lambda syncFunc) const
+  void experimental_flushSync(Lambda syncFunc, bool immediate = false) const
   {
     auto eventDispatcher = eventDispatcher_.lock();
     if (!eventDispatcher) {
@@ -75,7 +78,7 @@ class EventEmitter {
     }
 
     syncFunc();
-    eventDispatcher->experimental_flushSync();
+    eventDispatcher->experimental_flushSync(immediate);
   }
 
   /*
