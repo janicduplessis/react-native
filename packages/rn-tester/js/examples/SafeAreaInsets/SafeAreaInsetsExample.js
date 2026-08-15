@@ -69,9 +69,45 @@ function InsetsReadoutExample(): React.Node {
   );
 }
 
+function FullScreenModalContent({onClose}: {onClose: () => void}): React.Node {
+  const [insets, , onSafeAreaInsetsChange] = useSafeAreaInsets();
+  const [applied, setApplied] = useState(false);
+
+  return (
+    <View
+      onSafeAreaInsetsChange={applied ? onSafeAreaInsetsChange : undefined}
+      style={[
+        styles.modal,
+        insets == null
+          ? null
+          : {
+              paddingTop: insets.top,
+              paddingRight: insets.right,
+              paddingBottom: insets.bottom,
+              paddingLeft: insets.left,
+            },
+      ]}>
+      <View style={styles.modalContent}>
+        <RNTesterText>
+          {insets == null
+            ? 'Insets not applied: the content extends under the system UI.'
+            : `top: ${insets.top}, right: ${insets.right}, bottom: ${insets.bottom}, left: ${insets.left}`}
+        </RNTesterText>
+        <RNTesterText>
+          Applying the insets and rotating the device both update the padding
+          in the same frame, without the content jumping.
+        </RNTesterText>
+        {!applied ? (
+          <Button onPress={() => setApplied(true)} title="Apply insets" />
+        ) : null}
+        <Button onPress={onClose} title="Close" />
+      </View>
+    </View>
+  );
+}
+
 function FullScreenExample(): React.Node {
   const [modalVisible, setModalVisible] = useState(false);
-  const [insets, , onSafeAreaInsetsChange] = useSafeAreaInsets();
 
   return (
     <View>
@@ -80,32 +116,7 @@ function FullScreenExample(): React.Node {
         onRequestClose={() => setModalVisible(false)}
         animationType="slide"
         supportedOrientations={['portrait', 'landscape']}>
-        <View
-          onSafeAreaInsetsChange={onSafeAreaInsetsChange}
-          style={[
-            styles.modal,
-            insets == null
-              ? null
-              : {
-                  paddingTop: insets.top,
-                  paddingRight: insets.right,
-                  paddingBottom: insets.bottom,
-                  paddingLeft: insets.left,
-                },
-          ]}>
-          <View style={styles.modalContent}>
-            <RNTesterText>
-              {insets == null
-                ? 'Waiting for insets…'
-                : `top: ${insets.top}, right: ${insets.right}, bottom: ${insets.bottom}, left: ${insets.left}`}
-            </RNTesterText>
-            <RNTesterText>
-              Rotate the device: the padding follows the insets in the same
-              frame as the rotation, without the content jumping.
-            </RNTesterText>
-            <Button onPress={() => setModalVisible(false)} title="Close" />
-          </View>
-        </View>
+        <FullScreenModalContent onClose={() => setModalVisible(false)} />
       </Modal>
       <Button
         onPress={() => setModalVisible(true)}
