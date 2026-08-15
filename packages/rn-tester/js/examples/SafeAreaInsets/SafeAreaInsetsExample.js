@@ -73,6 +73,13 @@ function FullScreenModalContent({onClose}: {onClose: () => void}): React.Node {
   const [insets, , onSafeAreaInsetsChange] = useSafeAreaInsets();
   const [applied, setApplied] = useState(false);
 
+  // The view observes the safe area but no event has been received yet. With
+  // synchronous dispatch this state is committed but never displayed: the
+  // event fires while this tree is being mounted and the insets are applied
+  // before the frame is presented. If a frame ever renders in this state, the
+  // dispatch was not synchronous.
+  const waitingForInsets = applied && insets == null;
+
   return (
     <View
       onSafeAreaInsetsChange={applied ? onSafeAreaInsetsChange : undefined}
@@ -87,11 +94,17 @@ function FullScreenModalContent({onClose}: {onClose: () => void}): React.Node {
               paddingLeft: insets.left,
             },
       ]}>
-      <View style={styles.modalContent}>
+      <View
+        style={[
+          styles.modalContent,
+          waitingForInsets && styles.waitingForInsets,
+        ]}>
         <RNTesterText>
-          {insets == null
-            ? 'Insets not applied: the content extends under the system UI.'
-            : `top: ${insets.top}, right: ${insets.right}, bottom: ${insets.bottom}, left: ${insets.left}`}
+          {insets != null
+            ? `top: ${insets.top}, right: ${insets.right}, bottom: ${insets.bottom}, left: ${insets.left}`
+            : waitingForInsets
+              ? 'Observing the safe area, inset event not received yet — this state should never be visible.'
+              : 'Insets not applied: the content extends under the system UI.'}
         </RNTesterText>
         <RNTesterText>
           Applying the insets and rotating the device both update the padding
@@ -157,6 +170,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     rowGap: 8,
     backgroundColor: 'white',
+  },
+  waitingForInsets: {
+    backgroundColor: '#ffd54d',
   },
 });
 
