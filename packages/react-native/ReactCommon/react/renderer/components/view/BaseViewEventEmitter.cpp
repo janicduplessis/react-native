@@ -40,13 +40,8 @@ void BaseViewEventEmitter::onSafeAreaInsetsChange(
   // Dispatched synchronously and as a discrete event so that React processes it
   // before the current frame is presented. Both the thread this is called from
   // (the UI thread) and the JavaScript thread are blocked until React has
-  // finished rendering. `immediate` processes the queue at the call site
-  // instead of at the next beat: the emit happens during the layout pass of
-  // the frame, and waiting for the beat would land the resulting mount one
-  // frame late on a freshly mounted view.
-  constexpr bool immediate = true;
-  experimental_flushSync(
-      [this, &insets, &frame]() {
+  // finished rendering.
+  experimental_flushSync([this, &insets, &frame]() {
         dispatchEvent(
             "safeAreaInsetsChange",
             [insets, frame](jsi::Runtime& runtime) {
@@ -70,8 +65,7 @@ void BaseViewEventEmitter::onSafeAreaInsetsChange(
               return payload;
             },
             RawEvent::Category::Discrete);
-      },
-      immediate);
+  });
 }
 
 #pragma mark - Layout

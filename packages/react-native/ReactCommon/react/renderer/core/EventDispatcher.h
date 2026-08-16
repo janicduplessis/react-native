@@ -44,7 +44,7 @@ class EventDispatcher {
   /*
    * Experimental API exposed to support EventEmitter::experimental_flushSync.
    */
-  void experimental_flushSync(bool immediate = false) const;
+  void experimental_flushSync() const;
 
   /*
    * Dispatches a raw event with asynchronous batched priority. Before the

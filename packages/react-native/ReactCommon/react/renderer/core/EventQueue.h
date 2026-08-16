@@ -60,11 +60,8 @@ class EventQueue {
 
   /*
    * Experimental API exposed to support EventEmitter::experimental_flushSync.
-   * When `immediate` is true the queue is processed at the call site instead
-   * of at the next beat, so the effects are mounted before the current frame
-   * is presented.
    */
-  void experimental_flushSync(bool immediate = false) const;
+  void experimental_flushSync() const;
 
  protected:
   /*
