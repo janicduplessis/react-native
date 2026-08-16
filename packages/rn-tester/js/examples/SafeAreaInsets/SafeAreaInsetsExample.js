@@ -108,8 +108,8 @@ function FullScreenModalContent({onClose}: {onClose: () => void}): React.Node {
               : 'Insets not applied: the content extends under the system UI.'}
         </RNTesterText>
         <RNTesterText>
-          Applying the insets and rotating the device both update the padding
-          in the same frame, without the content jumping.
+          Applying the insets and rotating the device both update the padding in
+          the same frame, without the content jumping.
         </RNTesterText>
         {!applied ? (
           <Button onPress={() => setApplied(true)} title="Apply insets" />
