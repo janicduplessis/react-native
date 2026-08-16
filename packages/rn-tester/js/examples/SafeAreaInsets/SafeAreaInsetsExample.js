@@ -21,6 +21,7 @@ import {
   Modal,
   ScrollView,
   StyleSheet,
+  TextInput,
   View,
   useWindowDimensions,
 } from 'react-native';
@@ -114,6 +115,10 @@ function FullScreenModalContent({onClose}: {onClose: () => void}): React.Node {
         {!applied ? (
           <Button onPress={() => setApplied(true)} title="Apply insets" />
         ) : null}
+        <TextInput
+          placeholder="Focus to show the keyboard"
+          style={styles.keyboardProbe}
+        />
         <Button onPress={onClose} title="Close" />
       </View>
     </View>
@@ -247,6 +252,12 @@ const styles = StyleSheet.create({
   },
   waitingForInsets: {
     backgroundColor: '#ffd54d',
+  },
+  keyboardProbe: {
+    borderWidth: 1,
+    borderColor: '#cccccc',
+    padding: 8,
+    minWidth: 240,
   },
   bench: {
     rowGap: 8,
