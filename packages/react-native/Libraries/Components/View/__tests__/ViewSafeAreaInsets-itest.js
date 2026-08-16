@@ -65,6 +65,28 @@ describe('onSafeAreaInsetsChange', () => {
     ).toEqual(<rn-view />);
   });
 
+  it('prevents the view from being flattened', () => {
+    const root = Fantom.createRoot();
+
+    Fantom.runTask(() => {
+      root.render(
+        // A layout-only view would ordinarily be flattened away; observing the
+        // safe area requires a host view to observe with.
+        <View onSafeAreaInsetsChange={() => {}}>
+          <View collapsable={false} />
+        </View>,
+      );
+    });
+
+    expect(
+      root.getRenderedOutput({props: ['onSafeAreaInsetsChange']}).toJSX(),
+    ).toEqual(
+      <rn-view onSafeAreaInsetsChange="true">
+        <rn-view />
+      </rn-view>,
+    );
+  });
+
   it('is reflected in the props of the view when set', () => {
     const root = Fantom.createRoot();
 

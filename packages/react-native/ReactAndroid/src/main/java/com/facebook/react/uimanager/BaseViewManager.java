@@ -75,6 +75,10 @@ public abstract class BaseViewManager<T extends View, C extends LayoutShadowNode
 
   @Override
   protected @Nullable T prepareToRecycleView(@NonNull ThemedReactContext reactContext, T view) {
+    // Stops safe area observation and clears its tag; the next user of the
+    // view re-enables it through the prop if needed.
+    SafeAreaInsetsObserver.setEnabled(view, false);
+
     // Reset tags
     view.setTag(null);
     view.setTag(R.id.pointer_events, null);

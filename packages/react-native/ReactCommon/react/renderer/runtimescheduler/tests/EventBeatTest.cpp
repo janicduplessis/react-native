@@ -56,18 +56,6 @@ class EventBeatTest : public testing::Test {
     ReactNativeFeatureFlags::dangerouslyReset();
   }
 
-  /*
-   * Drives the stub queue ("JS thread") from a separate thread so that
-   * `executeNowOnTheSameThread` performed by the beat can complete.
-   */
-  void tickOnDriverThread() {
-    std::thread driver([this]() {
-      stubQueue_->waitForTask();
-      stubQueue_->tick();
-    });
-    driver.join();
-  }
-
   std::unique_ptr<facebook::hermes::HermesRuntime> runtime_;
   std::unique_ptr<StubQueue> stubQueue_;
   std::unique_ptr<RuntimeScheduler> runtimeScheduler_;
@@ -97,10 +85,10 @@ TEST_F(EventBeatTest, synchronousRequestIsProcessedAtInduce) {
   eventBeat_->requestSynchronous();
   EXPECT_EQ(beatCount, 0);
 
-  // A consumer that wants the beat processed at the call site (see
-  // `EventQueue::experimental_flushSync` with `immediate`) calls `induce`
-  // right after requesting. The beat callback runs synchronously before
-  // `induce` returns, with both threads blocked.
+  // Platform implementations induce the beat at a point where the effects of
+  // synchronous events can still make the current frame (the display phase on
+  // Apple, before the draw on Android). The beat callback runs synchronously
+  // before `induce` returns, with both threads blocked.
   std::thread driver([this]() {
     stubQueue_->waitForTask();
     stubQueue_->tick();
@@ -116,16 +104,16 @@ TEST_F(EventBeatTest, synchronousRequestIsProcessedAtInduce) {
   EXPECT_EQ(stubQueue_->size(), 0);
 }
 
-TEST_F(EventBeatTest, nestedInduceDuringBeatDoesNotReenter) {
+TEST_F(EventBeatTest, requestMadeDuringBeatIsProcessedByASubsequentInduce) {
   int beatCount = 0;
   eventBeat_->setBeatCallback([&](jsi::Runtime& /*runtime*/) {
     beatCount++;
     if (beatCount == 1) {
-      // An event dispatched from within the beat (e.g. a synchronous event
-      // whose handler causes another synchronous event) must not re-enter the
-      // beat callback.
+      // A synchronous request made from within the beat (e.g. an event whose
+      // handler causes another synchronous event). Platform implementations
+      // defer the induce for it (the display phase flusher on Apple, the next
+      // pre-draw on Android) rather than inducing from within the beat.
       eventBeat_->requestSynchronous();
-      eventBeat_->induce();
     }
   });
 
@@ -139,14 +127,40 @@ TEST_F(EventBeatTest, nestedInduceDuringBeatDoesNotReenter) {
 
   EXPECT_EQ(beatCount, 1);
 
-  // The nested beat is processed on a subsequent request + induce instead.
-  eventBeat_->requestSynchronous();
+  // The request made during the beat is not lost: the next induce processes
+  // it.
   std::thread driver2([this]() {
     stubQueue_->waitForTask();
     stubQueue_->tick();
   });
   eventBeat_->induce();
   driver2.join();
+
+  EXPECT_EQ(beatCount, 2);
+}
+
+TEST_F(EventBeatTest, synchronousRequestIsNotStrandedBehindScheduledBeat) {
+  int beatCount = 0;
+  eventBeat_->setBeatCallback([&beatCount](jsi::Runtime& /*runtime*/) {
+    beatCount++;
+  });
+
+  // An asynchronous beat is scheduled but has not run yet.
+  eventBeat_->request();
+  eventBeat_->induce();
+  EXPECT_EQ(beatCount, 0);
+
+  // A synchronous request arriving now must still be processed by its induce
+  // instead of being silently deferred behind the scheduled beat.
+  eventBeat_->requestSynchronous();
+  std::thread driver([this]() {
+    stubQueue_->waitForTask();
+    stubQueue_->tick();
+    stubQueue_->waitForTask();
+    stubQueue_->tick();
+  });
+  eventBeat_->induce();
+  driver.join();
 
   EXPECT_EQ(beatCount, 2);
 }

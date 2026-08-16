@@ -442,10 +442,10 @@ static BOOL RCTLayerTransformCollapsesAxis(CALayer *layer)
         -newViewProps.hitSlop.right};
   }
 
-  // `onSafeAreaInsetsChange`
-  if (oldViewProps.onSafeAreaInsetsChange != newViewProps.onSafeAreaInsetsChange) {
-    [self _setObservesSafeAreaInsets:newViewProps.onSafeAreaInsetsChange];
-  }
+  // `onSafeAreaInsetsChange`. Compared against the current observation state
+  // rather than `oldViewProps`: recycled views keep their last props, so the
+  // old props of a freshly reused view are not a reliable baseline.
+  [self _setObservesSafeAreaInsets:newViewProps.onSafeAreaInsetsChange];
 
   // `overflow`
   if (oldViewProps.getClipsContentToBounds() != newViewProps.getClipsContentToBounds()) {

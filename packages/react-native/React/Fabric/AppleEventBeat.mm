@@ -48,20 +48,32 @@ namespace facebook::react {
  */
 class AppleEventBeat::DisplayPhaseFlusher {
  public:
-  explicit DisplayPhaseFlusher(std::function<void()> callback)
+  DisplayPhaseFlusher(std::function<void()> callback, std::weak_ptr<const void> weakOwner)
   {
     layer_ = [RCTEventBeatFlusherLayer new];
     layer_.frame = CGRectZero;
     auto sharedCallback = std::make_shared<std::function<void()>>(std::move(callback));
     layer_.onDisplay = ^{
+      // The owner (indirectly) retains the event beat; if it is gone, so is
+      // the beat the callback points into.
+      auto owner = weakOwner.lock();
+      if (!owner) {
+        return;
+      }
       (*sharedCallback)();
     };
   }
 
   ~DisplayPhaseFlusher()
   {
-    layer_.onDisplay = nil;
-    [layer_ removeFromSuperlayer];
+    // The beat can be destroyed on any thread; layer mutations belong on the
+    // main thread. The block only retains the layer, and a display happening
+    // before this executes is made safe by the owner check above.
+    RCTEventBeatFlusherLayer *layer = layer_;
+    RCTExecuteOnMainQueue(^{
+      layer.onDisplay = nil;
+      [layer removeFromSuperlayer];
+    });
   }
 
   /*
@@ -93,7 +105,8 @@ AppleEventBeat::AppleEventBeat(
     RuntimeScheduler& runtimeScheduler)
     : EventBeat(std::move(ownerBox), runtimeScheduler),
       uiRunLoopObserver_(std::move(uiRunLoopObserver)),
-      displayPhaseFlusher_(std::make_unique<DisplayPhaseFlusher>([this]() { induce(); }))
+      displayPhaseFlusher_(
+          std::make_unique<DisplayPhaseFlusher>([this]() { induce(); }, ownerBox_->owner))
 {
   uiRunLoopObserver_->setDelegate(this);
   uiRunLoopObserver_->enable();

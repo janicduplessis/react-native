@@ -16,6 +16,8 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.facebook.react.R
 import com.facebook.react.uimanager.UIManagerHelper
+import com.facebook.react.uimanager.common.UIManagerType
+import com.facebook.react.uimanager.common.ViewUtil
 import com.facebook.react.uimanager.events.SafeAreaInsetsChangeEvent
 import kotlin.math.max
 import kotlin.math.min
@@ -89,10 +91,11 @@ internal class SafeAreaInsetsObserver private constructor(private val view: View
       return
     }
     val frame = getFrame(view) ?: return
-    lastInsets = insets
-
     val eventDispatcher =
         UIManagerHelper.getEventDispatcher(UIManagerHelper.getReactContext(view)) ?: return
+    // Recorded only once the event is actually dispatched, so a failed lookup
+    // above does not permanently swallow this inset value.
+    lastInsets = insets
     eventDispatcher.dispatchEvent(
         SafeAreaInsetsChangeEvent(
             surfaceId = UIManagerHelper.getSurfaceId(view),
@@ -116,6 +119,11 @@ internal class SafeAreaInsetsObserver private constructor(private val view: View
      */
     @JvmStatic
     fun setEnabled(view: View, enabled: Boolean) {
+      if (enabled && ViewUtil.getUIManagerType(view.id) != UIManagerType.FABRIC) {
+        // The event is only registered with, and dispatched synchronously by,
+        // the Fabric renderer.
+        return
+      }
       val existing = view.getTag(R.id.safe_area_insets_observer) as? SafeAreaInsetsObserver
       if (enabled == (existing != null)) {
         return

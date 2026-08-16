@@ -66,13 +66,17 @@ type DirectEventProps = Readonly<{
 
   /**
    * Invoked when the part of this view that is covered by the system UI
-   * (status bar, navigation bar, home indicator, display cutouts, ...) or the
-   * position of this view in the window changes, with:
+   * (status bar, navigation bar, home indicator, display cutouts, ...)
+   * changes, with:
    *
    * `{nativeEvent: {insets: {top, right, bottom, left}, frame: {x, y, width, height}}}`
    *
    * `insets` are relative to this view: an inset is only non-zero for the part
-   * of the view that actually overlaps the system UI.
+   * of the view that actually overlaps the system UI. `frame` is the position
+   * of the view at the time of the event, relative to its enclosing view
+   * controller on iOS and to the window on Android; it does not trigger the
+   * event on its own, so it can be stale while the view moves without its
+   * insets changing.
    *
    * The event is dispatched synchronously, so the rendering it schedules is
    * applied in the same frame the insets changed in.

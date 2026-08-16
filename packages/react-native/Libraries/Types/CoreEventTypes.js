@@ -91,7 +91,9 @@ export type SafeAreaInsetsChangeEvent = NativeSyntheticEvent<
      */
     insets: SafeAreaInsets,
     /**
-     * The frame of the view in window coordinates.
+     * The frame of the view at the time of the event. Relative to the
+     * enclosing view controller on iOS and to the window on Android; only
+     * updated when the insets change.
      */
     frame: LayoutRectangle,
   }>,
