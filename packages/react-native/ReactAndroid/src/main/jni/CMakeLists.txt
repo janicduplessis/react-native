@@ -121,7 +121,6 @@ add_react_common_subdir(react/renderer/components/text)
 add_react_common_subdir(react/renderer/components/unimplementedview)
 add_react_common_subdir(react/renderer/components/modal)
 add_react_common_subdir(react/renderer/components/scrollview)
-add_react_common_subdir(react/renderer/components/safeareaview)
 add_react_common_subdir(react/renderer/leakchecker)
 add_react_common_subdir(react/renderer/observers/events)
 add_react_common_subdir(react/renderer/observers/intersection)
@@ -254,7 +253,6 @@ add_library(reactnative
           $<TARGET_OBJECTS:rrc_native>
           $<TARGET_OBJECTS:rrc_progressbar>
           $<TARGET_OBJECTS:rrc_root>
-          $<TARGET_OBJECTS:rrc_safeareaview>
           $<TARGET_OBJECTS:rrc_scrollview>
           $<TARGET_OBJECTS:rrc_switch>
           $<TARGET_OBJECTS:rrc_text>
@@ -356,7 +354,6 @@ target_include_directories(reactnative
         $<TARGET_PROPERTY:rrc_native,INTERFACE_INCLUDE_DIRECTORIES>
         $<TARGET_PROPERTY:rrc_progressbar,INTERFACE_INCLUDE_DIRECTORIES>
         $<TARGET_PROPERTY:rrc_root,INTERFACE_INCLUDE_DIRECTORIES>
-        $<TARGET_PROPERTY:rrc_safeareaview,INTERFACE_INCLUDE_DIRECTORIES>
         $<TARGET_PROPERTY:rrc_scrollview,INTERFACE_INCLUDE_DIRECTORIES>
         $<TARGET_PROPERTY:rrc_switch,INTERFACE_INCLUDE_DIRECTORIES>
         $<TARGET_PROPERTY:rrc_text,INTERFACE_INCLUDE_DIRECTORIES>
