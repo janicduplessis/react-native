@@ -19,6 +19,7 @@ import {useCallback, useState} from 'react';
 import {
   Button,
   Modal,
+  ScrollView,
   StyleSheet,
   View,
   useWindowDimensions,
@@ -139,6 +140,79 @@ function FullScreenExample(): React.Node {
   );
 }
 
+let benchEventCount = 0;
+
+function BenchRow({
+  observe,
+  index,
+}: {
+  observe: boolean,
+  index: number,
+}): React.Node {
+  const [insets, setInsets] = useState<?Insets>(null);
+  const onSafeAreaInsetsChange = useCallback(
+    (event: SafeAreaInsetsChangeEvent) => {
+      benchEventCount++;
+      setInsets(event.nativeEvent.insets);
+    },
+    [],
+  );
+
+  return (
+    <View
+      onSafeAreaInsetsChange={observe ? onSafeAreaInsetsChange : undefined}
+      style={styles.benchRow}>
+      <RNTesterText>
+        {`Row ${index}${observe ? ' (observing)' : ''}${
+          insets == null
+            ? ''
+            : ` — t:${Math.round(insets.top)} b:${Math.round(insets.bottom)}`
+        }`}
+      </RNTesterText>
+    </View>
+  );
+}
+
+function ScrollBenchmark(): React.Node {
+  const [observerCount, setObserverCount] = useState(0);
+  const [renderCount, setRenderCount] = useState(0);
+  const [eventCount, setEventCount] = useState(0);
+
+  return (
+    <View style={styles.bench}>
+      <View style={styles.benchControls}>
+        {[0, 1, 50].map(count => (
+          <Button
+            key={count}
+            title={`${count} observers`}
+            onPress={() => {
+              benchEventCount = 0;
+              setObserverCount(count);
+            }}
+          />
+        ))}
+        <Button
+          title="Read counters"
+          onPress={() => {
+            setEventCount(benchEventCount);
+            setRenderCount(c => c + 1);
+          }}
+        />
+      </View>
+      <RNTesterText>
+        {`observers: ${observerCount}, inset events since change: ${eventCount} (read ${renderCount})`}
+      </RNTesterText>
+      <View style={styles.benchScrollContainer}>
+        <ScrollView>
+          {Array.from({length: 60}, (_, i) => (
+            <BenchRow key={i} index={i} observe={i < observerCount} />
+          ))}
+        </ScrollView>
+      </View>
+    </View>
+  );
+}
+
 function WindowInsetsExample(): React.Node {
   const {width, height, safeAreaInsets} = useWindowDimensions();
 
@@ -174,6 +248,25 @@ const styles = StyleSheet.create({
   waitingForInsets: {
     backgroundColor: '#ffd54d',
   },
+  bench: {
+    rowGap: 8,
+  },
+  benchControls: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+  },
+  benchScrollContainer: {
+    height: 300,
+    borderWidth: 1,
+    borderColor: '#cccccc',
+  },
+  benchRow: {
+    height: 40,
+    justifyContent: 'center',
+    paddingHorizontal: 12,
+    borderBottomWidth: 1,
+    borderBottomColor: '#eeeeee',
+  },
 });
 
 exports.displayName = undefined as ?string;
@@ -194,6 +287,12 @@ exports.examples = [
     description:
       'A full screen view that pads itself by its own safe area insets.',
     render: (): React.Node => <FullScreenExample />,
+  },
+  {
+    title: 'Scroll benchmark',
+    description:
+      'Rows observing their own insets inside a scroll view. Scrolling moves the rows, so observing rows may emit inset events while crossing safe area boundaries.',
+    render: (): React.Node => <ScrollBenchmark />,
   },
   {
     title: 'Window safe area insets from Dimensions',

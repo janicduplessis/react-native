@@ -126,7 +126,6 @@ static BOOL RCTViewIsInteractiveAccessibilityElement(UIView *view, const ViewPro
   BOOL _observesSafeAreaInsets;
   BOOL _safeAreaInsetsWereSent;
   UIEdgeInsets _lastSafeAreaInsets;
-  CGRect _lastSafeAreaFrame;
 }
 
 #ifdef RCT_DYNAMIC_FRAMEWORKS
@@ -816,18 +815,21 @@ static BOOL RCTEdgeInsetsEqualWithThreshold(UIEdgeInsets lhs, UIEdgeInsets rhs, 
     return;
   }
 
-  UIView *referenceView = RCTParentViewControllerOfView(self).view ?: self.window;
+  // Only a change of the insets triggers an event. The frame is part of the
+  // payload but not of the trigger: a view that moves without its overlap with
+  // the system UI changing stays silent, which is what makes observing views
+  // safe to place inside scroll views.
   UIEdgeInsets insets = self.safeAreaInsets;
-  CGRect frame = [self convertRect:self.bounds toView:referenceView];
-
-  if (_safeAreaInsetsWereSent && CGRectEqualToRect(frame, _lastSafeAreaFrame) &&
+  if (_safeAreaInsetsWereSent &&
       RCTEdgeInsetsEqualWithThreshold(insets, _lastSafeAreaInsets, 1.0 / RCTScreenScale())) {
     return;
   }
 
+  UIView *referenceView = RCTParentViewControllerOfView(self).view ?: self.window;
+  CGRect frame = [self convertRect:self.bounds toView:referenceView];
+
   _safeAreaInsetsWereSent = YES;
   _lastSafeAreaInsets = insets;
-  _lastSafeAreaFrame = frame;
 
   static_cast<const ViewEventEmitter &>(*_eventEmitter)
       .onSafeAreaInsetsChange(

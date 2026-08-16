@@ -31,7 +31,6 @@ internal class SafeAreaInsetsObserver private constructor(private val view: View
     ViewTreeObserver.OnPreDrawListener, View.OnAttachStateChangeListener {
 
   private var lastInsets: Insets? = null
-  private var lastFrame: Rect? = null
   private var isListening = false
 
   private fun start() {
@@ -45,7 +44,6 @@ internal class SafeAreaInsetsObserver private constructor(private val view: View
     view.removeOnAttachStateChangeListener(this)
     stopListening()
     lastInsets = null
-    lastFrame = null
   }
 
   private fun startListening() {
@@ -80,13 +78,18 @@ internal class SafeAreaInsetsObserver private constructor(private val view: View
   }
 
   private fun maybeEmit() {
+    // Only a change of the insets triggers an event. The frame is part of the
+    // payload but not of the trigger: a view that moves (scrolling, layout)
+    // without its overlap with the system UI changing stays silent. This is
+    // what makes observing views safe to place inside scroll views — and it
+    // prevents feedback loops, since the synchronous render caused by an event
+    // produces a new frame, which runs this pre-draw listener again.
     val insets = getSafeAreaInsets(view) ?: return
-    val frame = getFrame(view) ?: return
-    if (insets == lastInsets && frame == lastFrame) {
+    if (insets == lastInsets) {
       return
     }
+    val frame = getFrame(view) ?: return
     lastInsets = insets
-    lastFrame = frame
 
     val eventDispatcher =
         UIManagerHelper.getEventDispatcher(UIManagerHelper.getReactContext(view)) ?: return
@@ -147,7 +150,12 @@ internal class SafeAreaInsetsObserver private constructor(private val view: View
           ) ?: return null
 
       val visibleRect = Rect()
-      view.getGlobalVisibleRect(visibleRect)
+      if (!view.getGlobalVisibleRect(visibleRect)) {
+        // The view is fully clipped by an ancestor (e.g. scrolled out of a
+        // scroll view); the rect is undefined in that case, and a view that is
+        // not visible has no meaningful insets.
+        return null
+      }
       return Insets.of(
           max(windowInsets.left - visibleRect.left, 0),
           max(windowInsets.top - visibleRect.top, 0),
