@@ -16,7 +16,7 @@ import * as Fantom from '@react-native/fantom';
 import * as React from 'react';
 import {createRef} from 'react';
 import {View} from 'react-native';
-import SafeAreaView from 'react-native/src/private/components/safeareaview/SafeAreaView_INTERNAL_DO_NOT_USE';
+import SafeAreaView from 'react-native/src/private/components/safeareaview/SafeAreaView';
 
 const INSETS = {top: 44, right: 0, bottom: 34, left: 0};
 const FRAME = {x: 0, y: 0, width: 390, height: 844};

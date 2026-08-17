@@ -10,7 +10,7 @@
 
 import type {LogLevel} from '../Data/LogBoxLog';
 
-import SafeAreaView from '../../../src/private/components/safeareaview/SafeAreaView_INTERNAL_DO_NOT_USE';
+import SafeAreaView from '../../../src/private/components/safeareaview/SafeAreaView';
 import View from '../../Components/View/View';
 import StyleSheet from '../../StyleSheet/StyleSheet';
 import Text from '../../Text/Text';
