@@ -123,9 +123,11 @@ static BOOL RCTViewIsInteractiveAccessibilityElement(UIView *view, const ViewPro
   NSMutableSet<NSString *> *_accessibilityOrderNativeIDs;
   RCTSwiftUIContainerViewWrapper *_swiftUIWrapper;
   BOOL _focusable;
-  BOOL _observesSafeAreaInsets;
-  BOOL _safeAreaInsetsWereSent;
-  UIEdgeInsets _lastSafeAreaInsets;
+  // The insets sent with the last `onSafeAreaInsetsChange` event, or nil if
+  // none was sent yet. A pointer because almost no view observes the safe
+  // area: the views that do pay for a small box, every other view only for
+  // the pointer.
+  NSValue *_lastSentSafeAreaInsets;
 }
 
 #ifdef RCT_DYNAMIC_FRAMEWORKS
@@ -442,10 +444,14 @@ static BOOL RCTLayerTransformCollapsesAxis(CALayer *layer)
         -newViewProps.hitSlop.right};
   }
 
-  // `onSafeAreaInsetsChange`. Compared against the current observation state
-  // rather than `oldViewProps`: recycled views keep their last props, so the
-  // old props of a freshly reused view are not a reliable baseline.
-  [self _setObservesSafeAreaInsets:newViewProps.onSafeAreaInsetsChange];
+  // `onSafeAreaInsetsChange`. Scheduled whenever the prop is set, not only on
+  // its transitions: recycled views keep their last props, so `oldViewProps`
+  // of a freshly reused view is not a reliable baseline.
+  if (newViewProps.onSafeAreaInsetsChange) {
+    [self setNeedsLayout];
+  } else if (oldViewProps.onSafeAreaInsetsChange) {
+    _lastSentSafeAreaInsets = nil;
+  }
 
   // `overflow`
   if (oldViewProps.getClipsContentToBounds() != newViewProps.getClipsContentToBounds()) {
@@ -731,19 +737,6 @@ static BOOL RCTLayerTransformCollapsesAxis(CALayer *layer)
 
 #pragma mark - Safe area insets
 
-#if !TARGET_OS_TV
-static NSArray<NSNotificationName> *RCTSafeAreaInsetsNotificationNames(void)
-{
-  // The keyboard is part of the safe area on iOS, so its appearance changes the
-  // insets without the view hierarchy itself changing.
-  return @[
-    UIKeyboardDidShowNotification,
-    UIKeyboardDidHideNotification,
-    UIKeyboardDidChangeFrameNotification,
-  ];
-}
-#endif
-
 // The view controller the view is hosted in, which is the coordinate space
 // `frame` is reported in. Modals and other view controllers are positioned
 // independently of the window, so the window is not a usable reference.
@@ -765,47 +758,15 @@ static BOOL RCTEdgeInsetsEqualWithThreshold(UIEdgeInsets lhs, UIEdgeInsets rhs, 
       ABS(lhs.right - rhs.right) <= threshold && ABS(lhs.bottom - rhs.bottom) <= threshold;
 }
 
-- (void)_setObservesSafeAreaInsets:(BOOL)observesSafeAreaInsets
-{
-  if (_observesSafeAreaInsets == observesSafeAreaInsets) {
-    return;
-  }
-
-  _observesSafeAreaInsets = observesSafeAreaInsets;
-  _safeAreaInsetsWereSent = NO;
-
-#if !TARGET_OS_TV
-  for (NSNotificationName name in RCTSafeAreaInsetsNotificationNames()) {
-    if (observesSafeAreaInsets) {
-      [NSNotificationCenter.defaultCenter addObserver:self
-                                             selector:@selector(_scheduleSafeAreaInsetsCheck)
-                                                 name:name
-                                               object:nil];
-    } else {
-      [NSNotificationCenter.defaultCenter removeObserver:self name:name object:nil];
-    }
-  }
-#endif
-
-  if (observesSafeAreaInsets) {
-    [self _scheduleSafeAreaInsetsCheck];
-  }
-}
-
 // The event is only ever emitted from `layoutSubviews`; everything that might
-// have changed the insets funnels through here and merely marks the view as
-// needing layout. This defers the emit out of arbitrary call contexts — in
-// particular out of `updateProps`, which runs inside the mounting transaction
-// where synchronously re-entering React is not safe — while keeping it in the
-// same frame: the layout pass runs before the frame is displayed.
-- (void)_scheduleSafeAreaInsetsCheck
-{
-  [self setNeedsLayout];
-}
-
+// have changed the insets merely marks the view as needing layout. This defers
+// the emit out of arbitrary call contexts — in particular out of
+// `updateProps`, which runs inside the mounting transaction where
+// synchronously re-entering React is not safe — while keeping it in the same
+// frame: the layout pass runs before the frame is displayed.
 - (void)_safeAreaInsetsMayHaveChanged
 {
-  if (!_observesSafeAreaInsets || !_eventEmitter) {
+  if (!_eventEmitter) {
     return;
   }
 
@@ -820,16 +781,15 @@ static BOOL RCTEdgeInsetsEqualWithThreshold(UIEdgeInsets lhs, UIEdgeInsets rhs, 
   // the system UI changing stays silent, which is what makes observing views
   // safe to place inside scroll views.
   UIEdgeInsets insets = self.safeAreaInsets;
-  if (_safeAreaInsetsWereSent &&
-      RCTEdgeInsetsEqualWithThreshold(insets, _lastSafeAreaInsets, 1.0 / RCTScreenScale())) {
+  if (_lastSentSafeAreaInsets != nil &&
+      RCTEdgeInsetsEqualWithThreshold(insets, _lastSentSafeAreaInsets.UIEdgeInsetsValue, 1.0 / RCTScreenScale())) {
     return;
   }
 
   UIView *referenceView = RCTParentViewControllerOfView(self).view ?: self.window;
   CGRect frame = [self convertRect:self.bounds toView:referenceView];
 
-  _safeAreaInsetsWereSent = YES;
-  _lastSafeAreaInsets = insets;
+  _lastSentSafeAreaInsets = [NSValue valueWithUIEdgeInsets:insets];
 
   static_cast<const ViewEventEmitter &>(*_eventEmitter)
       .onSafeAreaInsetsChange(
@@ -841,21 +801,26 @@ static BOOL RCTEdgeInsetsEqualWithThreshold(UIEdgeInsets lhs, UIEdgeInsets rhs, 
           RCTRectFromCGRect(frame));
 }
 
+// The prop is checked here rather than inside the helper so that views which
+// do not use it only pay for a branch on a prop they already have in hand.
+- (BOOL)_observesSafeAreaInsets
+{
+  return static_cast<const ViewProps &>(*_props).onSafeAreaInsetsChange;
+}
+
 - (void)safeAreaInsetsDidChange
 {
   [super safeAreaInsetsDidChange];
-  // The ivar is checked here rather than inside the helpers so that views which
-  // do not use the prop only pay for a branch.
-  if (_observesSafeAreaInsets) {
-    [self _scheduleSafeAreaInsetsCheck];
+  if ([self _observesSafeAreaInsets]) {
+    [self setNeedsLayout];
   }
 }
 
 - (void)didMoveToWindow
 {
   [super didMoveToWindow];
-  if (_observesSafeAreaInsets) {
-    [self _scheduleSafeAreaInsetsCheck];
+  if ([self _observesSafeAreaInsets]) {
+    [self setNeedsLayout];
   }
 }
 
@@ -864,7 +829,7 @@ static BOOL RCTEdgeInsetsEqualWithThreshold(UIEdgeInsets lhs, UIEdgeInsets rhs, 
   [super layoutSubviews];
   // Both the insets and the frame depend on where the view sits in the window,
   // so moving or resizing it changes them without UIKit notifying us.
-  if (_observesSafeAreaInsets) {
+  if ([self _observesSafeAreaInsets]) {
     [self _safeAreaInsetsMayHaveChanged];
   }
 }
@@ -924,8 +889,7 @@ static BOOL RCTEdgeInsetsEqualWithThreshold(UIEdgeInsets lhs, UIEdgeInsets rhs, 
   _filterLayer = nil;
   [self clearExistingBackgroundImageLayers];
 
-  [self _setObservesSafeAreaInsets:NO];
-
+  _lastSentSafeAreaInsets = nil;
   _propKeysManagedByAnimated_DO_NOT_USE_THIS_IS_BROKEN = nil;
   _eventEmitter.reset();
   _isJSResponder = NO;
