@@ -19,8 +19,6 @@ import com.facebook.common.logging.FLog
 import com.facebook.react.R
 import com.facebook.react.common.build.ReactBuildConfig
 import com.facebook.react.uimanager.UIManagerHelper
-import com.facebook.react.uimanager.common.UIManagerType
-import com.facebook.react.uimanager.common.ViewUtil
 import com.facebook.react.uimanager.events.SafeAreaInsetsChangeEvent
 import kotlin.math.max
 import kotlin.math.min
@@ -175,11 +173,6 @@ internal class SafeAreaInsetsObserver private constructor(private val view: View
      */
     @JvmStatic
     fun setEnabled(view: View, enabled: Boolean) {
-      if (enabled && ViewUtil.getUIManagerType(view.id) != UIManagerType.FABRIC) {
-        // The event is only registered with, and dispatched synchronously by,
-        // the Fabric renderer.
-        return
-      }
       val existing = view.getTag(R.id.safe_area_insets_observer) as? SafeAreaInsetsObserver
       if (enabled == (existing != null)) {
         return
