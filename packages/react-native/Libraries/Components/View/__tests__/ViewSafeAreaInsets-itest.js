@@ -21,7 +21,7 @@ import SafeAreaView from 'react-native/src/private/components/safeareaview/SafeA
 const INSETS = {top: 44, right: 0, bottom: 34, left: 0};
 const FRAME = {x: 0, y: 0, width: 390, height: 844};
 
-describe('onSafeAreaInsetsChange', () => {
+describe('experimental_onSafeAreaInsetsChange', () => {
   it('delivers the insets and the frame of the view', () => {
     const root = Fantom.createRoot();
     const nodeRef = createRef<HostInstance>();
@@ -32,7 +32,7 @@ describe('onSafeAreaInsetsChange', () => {
         <View
           collapsable={false}
           ref={nodeRef}
-          onSafeAreaInsetsChange={event => {
+          experimental_onSafeAreaInsetsChange={event => {
             onSafeAreaInsetsChange(event.nativeEvent);
           }}
         />,
@@ -61,7 +61,9 @@ describe('onSafeAreaInsetsChange', () => {
     // The prop is what makes the view observe the safe area, so a view without
     // it is never the target of the event.
     expect(
-      root.getRenderedOutput({props: ['onSafeAreaInsetsChange']}).toJSX(),
+      root
+        .getRenderedOutput({props: ['experimental_onSafeAreaInsetsChange']})
+        .toJSX(),
     ).toEqual(<rn-view />);
   });
 
@@ -72,16 +74,18 @@ describe('onSafeAreaInsetsChange', () => {
       root.render(
         // A layout-only view would ordinarily be flattened away; observing the
         // safe area requires a host view to observe with.
-        <View onSafeAreaInsetsChange={() => {}}>
+        <View experimental_onSafeAreaInsetsChange={() => {}}>
           <View collapsable={false} />
         </View>,
       );
     });
 
     expect(
-      root.getRenderedOutput({props: ['onSafeAreaInsetsChange']}).toJSX(),
+      root
+        .getRenderedOutput({props: ['experimental_onSafeAreaInsetsChange']})
+        .toJSX(),
     ).toEqual(
-      <rn-view onSafeAreaInsetsChange="true">
+      <rn-view experimental_onSafeAreaInsetsChange="true">
         <rn-view />
       </rn-view>,
     );
@@ -92,13 +96,18 @@ describe('onSafeAreaInsetsChange', () => {
 
     Fantom.runTask(() => {
       root.render(
-        <View collapsable={false} onSafeAreaInsetsChange={() => {}} />,
+        <View
+          collapsable={false}
+          experimental_onSafeAreaInsetsChange={() => {}}
+        />,
       );
     });
 
     expect(
-      root.getRenderedOutput({props: ['onSafeAreaInsetsChange']}).toJSX(),
-    ).toEqual(<rn-view onSafeAreaInsetsChange="true" />);
+      root
+        .getRenderedOutput({props: ['experimental_onSafeAreaInsetsChange']})
+        .toJSX(),
+    ).toEqual(<rn-view experimental_onSafeAreaInsetsChange="true" />);
   });
 });
 

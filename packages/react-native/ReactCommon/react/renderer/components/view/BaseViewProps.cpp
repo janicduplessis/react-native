@@ -291,7 +291,7 @@ BaseViewProps::BaseViewProps(
       onSafeAreaInsetsChange(convertRawProp(
           context,
           rawProps,
-          "onSafeAreaInsetsChange",
+          "experimental_onSafeAreaInsetsChange",
           sourceProps.onSafeAreaInsetsChange,
           {})),
       events(convertRawProp(context, rawProps, sourceProps.events, {})),
@@ -361,7 +361,8 @@ void BaseViewProps::setProp(
     RAW_SET_PROP_SWITCH_CASE_BASIC(isolation);
     RAW_SET_PROP_SWITCH_CASE_BASIC(hitSlop);
     RAW_SET_PROP_SWITCH_CASE_BASIC(onLayout);
-    RAW_SET_PROP_SWITCH_CASE_BASIC(onSafeAreaInsetsChange);
+    RAW_SET_PROP_SWITCH_CASE(
+        onSafeAreaInsetsChange, "experimental_onSafeAreaInsetsChange");
     RAW_SET_PROP_SWITCH_CASE_BASIC(collapsable);
     RAW_SET_PROP_SWITCH_CASE_BASIC(collapsableChildren);
     RAW_SET_PROP_SWITCH_CASE_BASIC(removeClippedSubviews);
@@ -599,7 +600,7 @@ SharedDebugStringConvertibleList BaseViewProps::getDebugProps() const {
               backgroundImage,
               defaultBaseViewProps.backgroundImage),
           debugStringConvertibleItem(
-              "onSafeAreaInsetsChange",
+              "experimental_onSafeAreaInsetsChange",
               onSafeAreaInsetsChange,
               defaultBaseViewProps.onSafeAreaInsetsChange),
       };

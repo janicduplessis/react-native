@@ -86,7 +86,9 @@ type DirectEventProps = Readonly<{
    *
    * @experimental
    */
-  onSafeAreaInsetsChange?: ?(event: SafeAreaInsetsChangeEvent) => unknown,
+  experimental_onSafeAreaInsetsChange?: ?(
+    event: SafeAreaInsetsChangeEvent,
+  ) => unknown,
 
   /**
    * When `accessible` is `true`, the system will invoke this function when the

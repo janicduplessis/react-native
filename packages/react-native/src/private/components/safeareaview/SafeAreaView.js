@@ -32,7 +32,7 @@ component SafeAreaView(
   ref?: React.RefSetter<HostInstance>,
   ...props: ViewProps
 ) {
-  const {style, onSafeAreaInsetsChange, ...otherProps} = props;
+  const {style, experimental_onSafeAreaInsetsChange, ...otherProps} = props;
   // Seeded with the window insets so the first frame is already padded; the
   // synchronous event then keeps them correct relative to this view. The seed
   // is only exact for views aligned with the window edges, which the internal
@@ -44,9 +44,9 @@ component SafeAreaView(
   const handleSafeAreaInsetsChange = useCallback(
     (event: SafeAreaInsetsChangeEvent) => {
       setInsets(event.nativeEvent.insets);
-      onSafeAreaInsetsChange?.(event);
+      experimental_onSafeAreaInsetsChange?.(event);
     },
-    [onSafeAreaInsetsChange],
+    [experimental_onSafeAreaInsetsChange],
   );
 
   const paddingStyle = useMemo(
@@ -66,7 +66,7 @@ component SafeAreaView(
     <View
       {...otherProps}
       ref={ref}
-      onSafeAreaInsetsChange={handleSafeAreaInsetsChange}
+      experimental_onSafeAreaInsetsChange={handleSafeAreaInsetsChange}
       style={[style, paddingStyle]}
     />
   );

@@ -52,7 +52,7 @@ function InsetsReadoutExample(): React.Node {
 
   return (
     <View
-      onSafeAreaInsetsChange={onSafeAreaInsetsChange}
+      experimental_onSafeAreaInsetsChange={onSafeAreaInsetsChange}
       style={styles.readout}>
       <RNTesterText>
         {insets == null
@@ -84,7 +84,9 @@ function FullScreenModalContent({onClose}: {onClose: () => void}): React.Node {
 
   return (
     <View
-      onSafeAreaInsetsChange={applied ? onSafeAreaInsetsChange : undefined}
+      experimental_onSafeAreaInsetsChange={
+        applied ? onSafeAreaInsetsChange : undefined
+      }
       style={[
         styles.modal,
         insets == null
@@ -165,7 +167,9 @@ function BenchRow({
 
   return (
     <View
-      onSafeAreaInsetsChange={observe ? onSafeAreaInsetsChange : undefined}
+      experimental_onSafeAreaInsetsChange={
+        observe ? onSafeAreaInsetsChange : undefined
+      }
       style={styles.benchRow}>
       <RNTesterText>
         {`Row ${index}${observe ? ' (observing)' : ''}${
@@ -285,7 +289,7 @@ exports.framework = 'React';
 exports.title = 'Safe area insets';
 exports.category = 'UI';
 exports.description =
-  'The `onSafeAreaInsetsChange` view prop reports the part of a view that is covered by the system UI.';
+  'The `experimental_onSafeAreaInsetsChange` view prop reports the part of a view that is covered by the system UI.';
 exports.examples = [
   {
     title: 'Reading the insets of a view',

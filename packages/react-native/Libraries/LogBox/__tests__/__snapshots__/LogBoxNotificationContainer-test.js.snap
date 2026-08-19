@@ -2,7 +2,7 @@
 
 exports[`LogBoxNotificationContainer should render both an error and warning notification 1`] = `
 <View
-  onSafeAreaInsetsChange={[Function]}
+  experimental_onSafeAreaInsetsChange={[Function]}
   style={
     Array [
       Object {
@@ -118,7 +118,7 @@ exports[`LogBoxNotificationContainer should render selected syntax error even wh
 
 exports[`LogBoxNotificationContainer should render the latest error notification 1`] = `
 <View
-  onSafeAreaInsetsChange={[Function]}
+  experimental_onSafeAreaInsetsChange={[Function]}
   style={
     Array [
       Object {
@@ -181,7 +181,7 @@ exports[`LogBoxNotificationContainer should render the latest error notification
 
 exports[`LogBoxNotificationContainer should render the latest warning notification 1`] = `
 <View
-  onSafeAreaInsetsChange={[Function]}
+  experimental_onSafeAreaInsetsChange={[Function]}
   style={
     Array [
       Object {
