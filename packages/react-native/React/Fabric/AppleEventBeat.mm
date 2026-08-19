@@ -40,20 +40,52 @@
 
 @end
 
+/*
+ * The windows that can commit a Core Animation transaction: the visible ones
+ * of every foreground scene.
+ */
+static NSArray<UIWindow *> *RCTFlushableWindows(void)
+{
+  NSMutableArray<UIWindow *> *windows = [NSMutableArray new];
+  for (UIScene *scene in RCTSharedApplication().connectedScenes) {
+    if (![scene isKindOfClass:[UIWindowScene class]]) {
+      continue;
+    }
+    if (scene.activationState != UISceneActivationStateForegroundActive &&
+        scene.activationState != UISceneActivationStateForegroundInactive) {
+      continue;
+    }
+    for (UIWindow *window in ((UIWindowScene *)scene).windows) {
+      if (!window.hidden) {
+        [windows addObject:window];
+      }
+    }
+  }
+  if (windows.count == 0) {
+    // Apps on the legacy UIApplicationDelegate lifecycle own their window
+    // outside of any scene, so the enumeration above finds nothing.
+    UIWindow *keyWindow = RCTKeyWindow();
+    if (keyWindow != nil) {
+      [windows addObject:keyWindow];
+    }
+  }
+  return windows;
+}
+
 namespace facebook::react {
 
 /*
- * Owns the flusher layer and keeps it attached to the key window's layer so
- * it participates in the current Core Animation commit cycle.
+ * Owns the flusher layers and keeps one attached to every window's layer so
+ * that whichever layer tree is being committed contains one of them.
  */
 class AppleEventBeat::DisplayPhaseFlusher {
  public:
   DisplayPhaseFlusher(std::function<void()> callback, std::weak_ptr<const void> weakOwner)
   {
-    layer_ = [RCTEventBeatFlusherLayer new];
-    layer_.frame = CGRectZero;
+    // Weak keys: a window that goes away takes its own layer with it.
+    layers_ = [NSMapTable weakToStrongObjectsMapTable];
     auto sharedCallback = std::make_shared<std::function<void()>>(std::move(callback));
-    layer_.onDisplay = ^{
+    onDisplay_ = ^{
       // The owner (indirectly) retains the event beat; if it is gone, so is
       // the beat the callback points into.
       auto owner = weakOwner.lock();
@@ -67,46 +99,56 @@ class AppleEventBeat::DisplayPhaseFlusher {
   ~DisplayPhaseFlusher()
   {
     // The beat can be destroyed on any thread; layer mutations belong on the
-    // main thread. The block only retains the layer, and a display happening
+    // main thread. The block only retains the layers, and a display happening
     // before this executes is made safe by the owner check above.
-    RCTEventBeatFlusherLayer *layer = layer_;
+    NSMapTable<UIWindow *, RCTEventBeatFlusherLayer *> *layers = layers_;
     RCTExecuteOnMainQueue(^{
-      layer.onDisplay = nil;
-      [layer removeFromSuperlayer];
+      for (RCTEventBeatFlusherLayer *layer in layers.objectEnumerator) {
+        layer.onDisplay = nil;
+        [layer removeFromSuperlayer];
+      }
+      [layers removeAllObjects];
     });
   }
 
   /*
    * Schedules the callback to run in the display phase of the current (or
    * next) Core Animation commit cycle. Main thread only.
+   *
+   * Every window gets a layer rather than only the key window: the request can
+   * come from any of them — a modal and the LogBox are windows of their own —
+   * and only a layer in a tree that is committed is displayed in this cycle.
+   * The induce the display triggers is coalescing, so the extra layers cost a
+   * dirty zero-sized layer each, not extra beats.
    */
   void schedule() const
   {
-    CALayer *hostLayer = RCTKeyWindow().layer;
-    if (hostLayer == nil) {
-      // No window to participate in a commit with; the run loop observer will
-      // process the request on the next turn instead.
-      return;
+    for (UIWindow *window in RCTFlushableWindows()) {
+      RCTEventBeatFlusherLayer *layer = [layers_ objectForKey:window];
+      if (layer == nil) {
+        layer = [RCTEventBeatFlusherLayer new];
+        layer.frame = CGRectZero;
+        layer.onDisplay = onDisplay_;
+        [layers_ setObject:layer forKey:window];
+      }
+      if (layer.superlayer != window.layer) {
+        [window.layer addSublayer:layer];
+      }
+      [layer setNeedsDisplay];
     }
-    if (layer_.superlayer != hostLayer) {
-      [layer_ removeFromSuperlayer];
-      [hostLayer addSublayer:layer_];
-    }
-    [layer_ setNeedsDisplay];
   }
 
  private:
-  RCTEventBeatFlusherLayer *layer_;
+  NSMapTable<UIWindow *, RCTEventBeatFlusherLayer *> *layers_;
+  void (^onDisplay_)(void);
 };
 
-AppleEventBeat::AppleEventBeat(
-    std::shared_ptr<OwnerBox> ownerBox,
-    std::unique_ptr<const RunLoopObserver> uiRunLoopObserver,
-    RuntimeScheduler& runtimeScheduler)
+AppleEventBeat::AppleEventBeat(std::shared_ptr<OwnerBox> ownerBox,
+                               std::unique_ptr<const RunLoopObserver> uiRunLoopObserver,
+                               RuntimeScheduler &runtimeScheduler)
     : EventBeat(std::move(ownerBox), runtimeScheduler),
       uiRunLoopObserver_(std::move(uiRunLoopObserver)),
-      displayPhaseFlusher_(
-          std::make_unique<DisplayPhaseFlusher>([this]() { induce(); }, ownerBox_->owner))
+      displayPhaseFlusher_(std::make_unique<DisplayPhaseFlusher>([this]() { induce(); }, ownerBox_->owner))
 {
   uiRunLoopObserver_->setDelegate(this);
   uiRunLoopObserver_->enable();
@@ -130,9 +172,8 @@ void AppleEventBeat::requestSynchronous() const
   }
 }
 
-void AppleEventBeat::activityDidChange(
-    const RunLoopObserver::Delegate* delegate,
-    RunLoopObserver::Activity /*activity*/) const noexcept
+void AppleEventBeat::activityDidChange(const RunLoopObserver::Delegate *delegate,
+                                       RunLoopObserver::Activity /*activity*/) const noexcept
 {
   react_native_assert(delegate == this);
   induce();
