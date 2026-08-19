@@ -8,13 +8,16 @@
 package com.facebook.react.uimanager.internal
 
 import android.graphics.Rect
+import android.os.SystemClock
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewTreeObserver
 import androidx.core.graphics.Insets
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.facebook.common.logging.FLog
 import com.facebook.react.R
+import com.facebook.react.common.build.ReactBuildConfig
 import com.facebook.react.uimanager.UIManagerHelper
 import com.facebook.react.uimanager.common.UIManagerType
 import com.facebook.react.uimanager.common.ViewUtil
@@ -32,8 +35,18 @@ import kotlin.math.min
 internal class SafeAreaInsetsObserver private constructor(private val view: View) :
     ViewTreeObserver.OnPreDrawListener, View.OnAttachStateChangeListener {
 
-  private var lastInsets: Insets? = null
+  // Scratch state, reused so that observing a view allocates nothing per frame.
+  private val visibleRect = Rect()
+  private val frameRect = Rect()
+  private val insets = IntArray(4)
+  private val lastInsets = IntArray(4)
+
+  private var hasLastInsets = false
   private var isListening = false
+
+  private var dispatchWindowStart = 0L
+  private var dispatchCount = 0
+  private var didWarnAboutDispatchRate = false
 
   private fun start() {
     view.addOnAttachStateChangeListener(this)
@@ -45,7 +58,7 @@ internal class SafeAreaInsetsObserver private constructor(private val view: View
   private fun stop() {
     view.removeOnAttachStateChangeListener(this)
     stopListening()
-    lastInsets = null
+    hasLastInsets = false
   }
 
   private fun startListening() {
@@ -86,24 +99,30 @@ internal class SafeAreaInsetsObserver private constructor(private val view: View
     // what makes observing views safe to place inside scroll views — and it
     // prevents feedback loops, since the synchronous render caused by an event
     // produces a new frame, which runs this pre-draw listener again.
-    val insets = getSafeAreaInsets(view) ?: return
-    if (insets == lastInsets) {
+    if (!computeSafeAreaInsets(view, visibleRect, insets)) {
       return
     }
-    val frame = getFrame(view) ?: return
+    if (hasLastInsets && insets.contentEquals(lastInsets)) {
+      return
+    }
+    val frame = getFrame(view, frameRect) ?: return
     val eventDispatcher =
         UIManagerHelper.getEventDispatcher(UIManagerHelper.getReactContext(view)) ?: return
     // Recorded only once the event is actually dispatched, so a failed lookup
     // above does not permanently swallow this inset value.
-    lastInsets = insets
+    insets.copyInto(lastInsets)
+    hasLastInsets = true
+    if (ReactBuildConfig.DEBUG) {
+      warnIfDispatchingTooOften()
+    }
     eventDispatcher.dispatchEvent(
         SafeAreaInsetsChangeEvent(
             surfaceId = UIManagerHelper.getSurfaceId(view),
             viewTag = view.id,
-            insetTop = insets.top,
-            insetRight = insets.right,
-            insetBottom = insets.bottom,
-            insetLeft = insets.left,
+            insetTop = insets[TOP],
+            insetRight = insets[RIGHT],
+            insetBottom = insets[BOTTOM],
+            insetLeft = insets[LEFT],
             frameX = frame.left,
             frameY = frame.top,
             frameWidth = frame.width(),
@@ -112,7 +131,44 @@ internal class SafeAreaInsetsObserver private constructor(private val view: View
     )
   }
 
+  /**
+   * The system UI does not move many times a second: a sustained stream of events means the layout
+   * is feeding the insets back into the position of the observed view, and every one of those
+   * events renders synchronously. Development builds say so once, rather than paying for it
+   * silently.
+   */
+  private fun warnIfDispatchingTooOften() {
+    if (didWarnAboutDispatchRate) {
+      return
+    }
+    val now = SystemClock.uptimeMillis()
+    if (now - dispatchWindowStart > DISPATCH_WINDOW_MS) {
+      dispatchWindowStart = now
+      dispatchCount = 0
+    }
+    dispatchCount++
+    if (dispatchCount > MAX_DISPATCHES_PER_WINDOW) {
+      didWarnAboutDispatchRate = true
+      FLog.w(
+          TAG,
+          "onSafeAreaInsetsChange fired more than $MAX_DISPATCHES_PER_WINDOW times in " +
+              "$DISPATCH_WINDOW_MS ms on view ${view.id}. The insets of a view only change when the " +
+              "system UI moves or the view does; a view whose own layout depends on the insets it " +
+              "reports will loop. Each event renders synchronously, so this is costing frames.",
+      )
+    }
+  }
+
   companion object {
+    private const val TAG = "SafeAreaInsetsObserver"
+    private const val DISPATCH_WINDOW_MS = 1000L
+    private const val MAX_DISPATCHES_PER_WINDOW = 10
+
+    private const val TOP = 0
+    private const val RIGHT = 1
+    private const val BOTTOM = 2
+    private const val LEFT = 3
+
     /**
      * Starts or stops observing safe area insets for [view]. Safe to call repeatedly with the same
      * value.
@@ -147,47 +203,59 @@ internal class SafeAreaInsetsObserver private constructor(private val view: View
      */
     @JvmStatic
     fun getSafeAreaInsets(view: View): Insets? {
+      val insets = IntArray(4)
+      if (!computeSafeAreaInsets(view, Rect(), insets)) {
+        return null
+      }
+      return Insets.of(insets[LEFT], insets[TOP], insets[RIGHT], insets[BOTTOM])
+    }
+
+    /**
+     * Writes the insets of [view] into [out], ordered [TOP], [RIGHT], [BOTTOM], [LEFT], using
+     * [visibleRect] as scratch space. Returns false when they cannot be computed, leaving [out]
+     * untouched.
+     */
+    private fun computeSafeAreaInsets(view: View, visibleRect: Rect, out: IntArray): Boolean {
       // The view has not been laid out yet.
       if (view.width == 0 || view.height == 0) {
-        return null
+        return false
       }
       val rootView = view.rootView
       val windowInsets =
           ViewCompat.getRootWindowInsets(rootView)?.getInsets(
               WindowInsetsCompat.Type.systemBars() or WindowInsetsCompat.Type.displayCutout(),
-          ) ?: return null
+          ) ?: return false
 
-      val visibleRect = Rect()
       if (!view.getGlobalVisibleRect(visibleRect)) {
         // The view is fully clipped by an ancestor (e.g. scrolled out of a
         // scroll view); the rect is undefined in that case, and a view that is
         // not visible has no meaningful insets.
-        return null
+        return false
       }
-      return Insets.of(
-          max(windowInsets.left - visibleRect.left, 0),
-          max(windowInsets.top - visibleRect.top, 0),
-          max(min(visibleRect.left + view.width - rootView.width, 0) + windowInsets.right, 0),
-          max(min(visibleRect.top + view.height - rootView.height, 0) + windowInsets.bottom, 0),
-      )
+      out[TOP] = max(windowInsets.top - visibleRect.top, 0)
+      out[RIGHT] =
+          max(min(visibleRect.left + view.width - rootView.width, 0) + windowInsets.right, 0)
+      out[BOTTOM] =
+          max(min(visibleRect.top + view.height - rootView.height, 0) + windowInsets.bottom, 0)
+      out[LEFT] = max(windowInsets.left - visibleRect.left, 0)
+      return true
     }
 
-    /** The frame of [view] in the coordinate space of the window. */
-    private fun getFrame(view: View): Rect? {
+    /** The frame of [view] in the coordinate space of the window, written into [out]. */
+    private fun getFrame(view: View, out: Rect): Rect? {
       val rootView = view.rootView as? ViewGroup ?: return null
       if (view.parent == null) {
         return null
       }
-      val frame = Rect()
-      view.getDrawingRect(frame)
+      view.getDrawingRect(out)
       try {
-        rootView.offsetDescendantRectToMyCoords(view, frame)
+        rootView.offsetDescendantRectToMyCoords(view, out)
       } catch (e: IllegalArgumentException) {
         // Thrown when the view is not a descendant of its own root view, which can happen while it
         // is being unmounted.
         return null
       }
-      return frame
+      return out
     }
   }
 }
