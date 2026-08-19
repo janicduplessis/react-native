@@ -8440,7 +8440,6 @@ struct facebook::react::NativeDeviceInfoDisplayMetricsAndroid {
   public P2 scale;
   public P3 fontScale;
   public P4 densityDpi;
-  public P5 experimental_safeAreaInsets;
   public bool operator==(const facebook::react::NativeDeviceInfoDisplayMetricsAndroid& other) const;
 }
 
@@ -8461,7 +8460,6 @@ struct facebook::react::NativeDeviceInfoDisplayMetrics {
   public P1 height;
   public P2 scale;
   public P3 fontScale;
-  public P4 experimental_safeAreaInsets;
   public bool operator==(const facebook::react::NativeDeviceInfoDisplayMetrics& other) const;
 }
 

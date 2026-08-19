@@ -4211,7 +4211,7 @@ class facebook::react::AppleEventBeat : public facebook::react::EventBeat, publi
   public AppleEventBeat(std::shared_ptr<facebook::react::EventBeat::OwnerBox> ownerBox, std::unique_ptr<const facebook::react::RunLoopObserver> uiRunLoopObserver, facebook::react::RuntimeScheduler& RuntimeScheduler);
   public virtual void activityDidChange(const facebook::react::RunLoopObserver::Delegate* delegate, facebook::react::RunLoopObserver::Activity activity) const noexcept override;
   public virtual void requestSynchronous() const override;
-  public virtual ~AppleEventBeat() override;
+  public ~AppleEventBeat() override;
 }
 
 class facebook::react::AsyncArrayBuffer {
@@ -10253,7 +10253,6 @@ struct facebook::react::NativeDeviceInfoDisplayMetrics {
   public P1 height;
   public P2 scale;
   public P3 fontScale;
-  public P4 experimental_safeAreaInsets;
   public bool operator==(const facebook::react::NativeDeviceInfoDisplayMetrics& other) const;
 }
 
@@ -15418,7 +15417,6 @@ struct JS::NativeDeviceInfo::DisplayMetrics::Builder::Input {
   protected RCTRequired<double> height;
   protected RCTRequired<double> scale;
   protected RCTRequired<double> width;
-  protected std::optional<JS::NativeDeviceInfo::WindowSafeAreaInsets::Builder> experimental_safeAreaInsets;
 }
 
 struct JS::NativeDeviceInfo::WindowSafeAreaInsets {
