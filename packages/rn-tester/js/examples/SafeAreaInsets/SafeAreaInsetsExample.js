@@ -223,7 +223,11 @@ function ScrollBenchmark(): React.Node {
 }
 
 function WindowInsetsExample(): React.Node {
-  const {width, height, safeAreaInsets} = useWindowDimensions();
+  const {
+    width,
+    height,
+    experimental_safeAreaInsets: safeAreaInsets,
+  } = useWindowDimensions();
 
   return (
     <View style={styles.readout}>

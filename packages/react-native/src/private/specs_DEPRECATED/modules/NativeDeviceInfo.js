@@ -25,7 +25,13 @@ export type DisplayMetricsAndroid = {
   scale: number,
   fontScale: number,
   densityDpi: number,
-  readonly safeAreaInsets?: WindowSafeAreaInsets,
+  /**
+   * The part of the window that is covered by the system UI, in physical
+   * pixels. Absent on platforms and versions that cannot report it.
+   *
+   * @experimental
+   */
+  readonly experimental_safeAreaInsets?: WindowSafeAreaInsets,
 };
 
 export type DisplayMetrics = {
@@ -33,7 +39,13 @@ export type DisplayMetrics = {
   height: number,
   scale: number,
   fontScale: number,
-  readonly safeAreaInsets?: WindowSafeAreaInsets,
+  /**
+   * The part of the window that is covered by the system UI, in physical
+   * pixels. Absent on platforms and versions that cannot report it.
+   *
+   * @experimental
+   */
+  readonly experimental_safeAreaInsets?: WindowSafeAreaInsets,
 };
 
 export type DimensionsPayload = {

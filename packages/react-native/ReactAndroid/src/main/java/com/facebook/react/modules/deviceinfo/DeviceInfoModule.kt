@@ -73,7 +73,7 @@ internal class DeviceInfoModule(reactContext: ReactApplicationContext) :
         putMap(
             "windowPhysicalPixels",
             getPhysicalPixelsWritableMap(getWindowDisplayMetrics()).apply {
-              getWindowSafeAreaInsetsWritableMap()?.let { putMap("safeAreaInsets", it) }
+              getWindowSafeAreaInsetsWritableMap()?.let { putMap("experimental_safeAreaInsets", it) }
             },
         )
         putMap(

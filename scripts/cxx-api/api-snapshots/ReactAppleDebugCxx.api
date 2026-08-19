@@ -10436,7 +10436,7 @@ struct facebook::react::NativeDeviceInfoDisplayMetrics {
   public P1 height;
   public P2 scale;
   public P3 fontScale;
-  public P4 safeAreaInsets;
+  public P4 experimental_safeAreaInsets;
   public bool operator==(const facebook::react::NativeDeviceInfoDisplayMetrics& other) const;
 }
 
@@ -11165,7 +11165,7 @@ struct facebook::react::NativeDeviceInfoDisplayMetricsBridging {
   public static double heightToJs(facebook::jsi::Runtime& rt, decltype(types.height) value);
   public static double scaleToJs(facebook::jsi::Runtime& rt, decltype(types.scale) value);
   public static double widthToJs(facebook::jsi::Runtime& rt, decltype(types.width) value);
-  public static facebook::jsi::Object safeAreaInsetsToJs(facebook::jsi::Runtime& rt, decltype(types.safeAreaInsets) value);
+  public static facebook::jsi::Object experimental_safeAreaInsetsToJs(facebook::jsi::Runtime& rt, decltype(types.experimental_safeAreaInsets) value);
   public static facebook::jsi::Object toJs(facebook::jsi::Runtime& rt, const T& value, const std::shared_ptr<facebook::react::CallInvoker>& jsInvoker);
 }
 
@@ -15734,7 +15734,7 @@ struct JS::NativeDeviceInfo::DisplayMetrics::Builder::Input {
   protected RCTRequired<double> height;
   protected RCTRequired<double> scale;
   protected RCTRequired<double> width;
-  protected std::optional<JS::NativeDeviceInfo::WindowSafeAreaInsets::Builder> safeAreaInsets;
+  protected std::optional<JS::NativeDeviceInfo::WindowSafeAreaInsets::Builder> experimental_safeAreaInsets;
 }
 
 struct JS::NativeDeviceInfo::WindowSafeAreaInsets {

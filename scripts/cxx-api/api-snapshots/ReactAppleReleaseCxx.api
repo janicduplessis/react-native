@@ -10427,7 +10427,7 @@ struct facebook::react::NativeDeviceInfoDisplayMetrics {
   public P1 height;
   public P2 scale;
   public P3 fontScale;
-  public P4 safeAreaInsets;
+  public P4 experimental_safeAreaInsets;
   public bool operator==(const facebook::react::NativeDeviceInfoDisplayMetrics& other) const;
 }
 
@@ -15592,7 +15592,7 @@ struct JS::NativeDeviceInfo::DisplayMetrics::Builder::Input {
   protected RCTRequired<double> height;
   protected RCTRequired<double> scale;
   protected RCTRequired<double> width;
-  protected std::optional<JS::NativeDeviceInfo::WindowSafeAreaInsets::Builder> safeAreaInsets;
+  protected std::optional<JS::NativeDeviceInfo::WindowSafeAreaInsets::Builder> experimental_safeAreaInsets;
 }
 
 struct JS::NativeDeviceInfo::WindowSafeAreaInsets {

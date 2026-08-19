@@ -78,13 +78,14 @@ class Dimensions {
     let {screen, window} = dims;
     const {windowPhysicalPixels} = dims;
     if (windowPhysicalPixels) {
-      const {scale, safeAreaInsets} = windowPhysicalPixels;
+      const {scale, experimental_safeAreaInsets: safeAreaInsets} =
+        windowPhysicalPixels;
       window = {
         width: windowPhysicalPixels.width / scale,
         height: windowPhysicalPixels.height / scale,
         scale,
         fontScale: windowPhysicalPixels.fontScale,
-        safeAreaInsets:
+        experimental_safeAreaInsets:
           safeAreaInsets == null
             ? undefined
             : {

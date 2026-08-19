@@ -38,11 +38,11 @@ describe('Dimensions', () => {
         scale: 2,
         densityDpi: 2,
         fontScale: 3,
-        safeAreaInsets: {top: 96, right: 0, bottom: 48, left: 0},
+        experimental_safeAreaInsets: {top: 96, right: 0, bottom: 48, left: 0},
       },
     });
 
-    expect(Dimensions.get('window').safeAreaInsets).toEqual({
+    expect(Dimensions.get('window').experimental_safeAreaInsets).toEqual({
       top: 48,
       right: 0,
       bottom: 24,

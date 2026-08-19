@@ -208,7 +208,7 @@ static NSDictionary *RCTExportedDimensions(CGFloat fontScale)
     @"height" : @(windowSize.height),
     @"scale" : @(screen.scale),
     @"fontScale" : @(fontScale),
-    @"safeAreaInsets" : @{
+    @"experimental_safeAreaInsets" : @{
       @"top" : @(safeAreaInsets.top),
       @"right" : @(safeAreaInsets.right),
       @"bottom" : @(safeAreaInsets.bottom),

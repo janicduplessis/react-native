@@ -38,7 +38,7 @@ component SafeAreaView(
   // is only exact for views aligned with the window edges, which the internal
   // surfaces using this component (LogBox, the element inspector) are.
   const [insets, setInsets] = useState<?SafeAreaInsets>(
-    () => Dimensions.get('window').safeAreaInsets,
+    () => Dimensions.get('window').experimental_safeAreaInsets,
   );
 
   const handleSafeAreaInsetsChange = useCallback(
