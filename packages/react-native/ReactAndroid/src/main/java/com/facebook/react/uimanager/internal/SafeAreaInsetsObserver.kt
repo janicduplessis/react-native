@@ -8,16 +8,13 @@
 package com.facebook.react.uimanager.internal
 
 import android.graphics.Rect
-import android.os.SystemClock
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewTreeObserver
 import androidx.core.graphics.Insets
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.facebook.common.logging.FLog
 import com.facebook.react.R
-import com.facebook.react.common.build.ReactBuildConfig
 import com.facebook.react.uimanager.UIManagerHelper
 import com.facebook.react.uimanager.events.SafeAreaInsetsChangeEvent
 import kotlin.math.max
@@ -41,10 +38,6 @@ internal class SafeAreaInsetsObserver private constructor(private val view: View
 
   private var hasLastInsets = false
   private var isListening = false
-
-  private var dispatchWindowStart = 0L
-  private var dispatchCount = 0
-  private var didWarnAboutDispatchRate = false
 
   private fun start() {
     view.addOnAttachStateChangeListener(this)
@@ -110,9 +103,6 @@ internal class SafeAreaInsetsObserver private constructor(private val view: View
     // above does not permanently swallow this inset value.
     insets.copyInto(lastInsets)
     hasLastInsets = true
-    if (ReactBuildConfig.DEBUG) {
-      warnIfDispatchingTooOften()
-    }
     eventDispatcher.dispatchEvent(
         SafeAreaInsetsChangeEvent(
             surfaceId = UIManagerHelper.getSurfaceId(view),
@@ -129,39 +119,7 @@ internal class SafeAreaInsetsObserver private constructor(private val view: View
     )
   }
 
-  /**
-   * The system UI does not move many times a second: a sustained stream of events means the layout
-   * is feeding the insets back into the position of the observed view, and every one of those
-   * events renders synchronously. Development builds say so once, rather than paying for it
-   * silently.
-   */
-  private fun warnIfDispatchingTooOften() {
-    if (didWarnAboutDispatchRate) {
-      return
-    }
-    val now = SystemClock.uptimeMillis()
-    if (now - dispatchWindowStart > DISPATCH_WINDOW_MS) {
-      dispatchWindowStart = now
-      dispatchCount = 0
-    }
-    dispatchCount++
-    if (dispatchCount > MAX_DISPATCHES_PER_WINDOW) {
-      didWarnAboutDispatchRate = true
-      FLog.w(
-          TAG,
-          "onSafeAreaInsetsChange fired more than $MAX_DISPATCHES_PER_WINDOW times in " +
-              "$DISPATCH_WINDOW_MS ms on view ${view.id}. The insets of a view only change when the " +
-              "system UI moves or the view does; a view whose own layout depends on the insets it " +
-              "reports will loop. Each event renders synchronously, so this is costing frames.",
-      )
-    }
-  }
-
   companion object {
-    private const val TAG = "SafeAreaInsetsObserver"
-    private const val DISPATCH_WINDOW_MS = 1000L
-    private const val MAX_DISPATCHES_PER_WINDOW = 10
-
     private const val TOP = 0
     private const val RIGHT = 1
     private const val BOTTOM = 2
