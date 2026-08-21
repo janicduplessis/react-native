@@ -1155,6 +1155,36 @@ class UtilsTests < Test::Unit::TestCase
         assert_equal("$(inherited) -DNDEBUG", custom_release_config2.build_settings["OTHER_CPLUSPLUSFLAGS"])
         assert_equal("$(inherited) -DNDEBUG", custom_release_config3.build_settings["OTHER_CPLUSPLUSFLAGS"])
     end
+
+    # ================================ #
+    # Test - ccache launcher script    #
+    # ================================ #
+
+    def test_ccacheLauncherScript_embedsResolvedCcachePath
+        # Act
+        script = ReactNativePodsUtils.ccache_launcher_script("clang", "/opt/homebrew/bin/ccache", "/app/rn/scripts/xcode/ccache.conf")
+
+        # Assert
+        assert_equal('exec "/opt/homebrew/bin/ccache" clang "$@"', script.lines.last.chomp)
+    end
+
+    def test_ccacheLauncherScript_embedsResolvedConfigPath
+        # Act
+        script = ReactNativePodsUtils.ccache_launcher_script("clang", "/opt/homebrew/bin/ccache", "/app/rn/scripts/xcode/ccache.conf")
+
+        # Assert
+        assert(script.include?("REACT_NATIVE_CCACHE_CONFIGPATH=/app/rn/scripts/xcode/ccache.conf"))
+        assert(script.include?('${CCACHE_CONFIGPATH:-$REACT_NATIVE_CCACHE_CONFIGPATH}'))
+    end
+
+    def test_ccacheLauncherScript_forCpp_execsClangpp
+        # Act
+        script = ReactNativePodsUtils.ccache_launcher_script("clang++", "/usr/local/bin/ccache", "/tmp/ccache.conf")
+
+        # Assert
+        assert_equal('exec "/usr/local/bin/ccache" clang++ "$@"', script.lines.last.chomp)
+    end
+
 end
 
 # ===== #
