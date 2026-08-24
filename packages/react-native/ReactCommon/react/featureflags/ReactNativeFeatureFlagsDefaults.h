@@ -4,7 +4,7 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  *
- * @generated SignedSource<<9809c179e61abe55f544d6c8227a5c01>>
+ * @generated SignedSource<<0dcc09eb60ab85de9bc72410e93c2a1c>>
  */
 
 /**
@@ -73,10 +73,6 @@ class ReactNativeFeatureFlagsDefaults : public ReactNativeFeatureFlagsProvider {
 
   bool enableAccumulatedUpdatesInRawPropsAndroid() override {
     return false;
-  }
-
-  bool enableAndroidFontWeightAdjustment() override {
-    return true;
   }
 
   bool enableAndroidTextMeasurementOptimizations() override {
@@ -196,6 +192,10 @@ class ReactNativeFeatureFlagsDefaults : public ReactNativeFeatureFlagsProvider {
   }
 
   bool enablePropsUpdateReconciliationAndroid() override {
+    return false;
+  }
+
+  bool enableResizeObserverByDefault() override {
     return false;
   }
 

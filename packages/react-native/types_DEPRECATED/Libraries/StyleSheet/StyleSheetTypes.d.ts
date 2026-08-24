@@ -502,10 +502,14 @@ export interface ViewStyle extends FlexStyle, ShadowStyleIOS, TransformsStyle {
   backgroundImage?: ReadonlyArray<BackgroundImageValue> | string | undefined;
   experimental_backgroundImage?:
     ReadonlyArray<BackgroundImageValue> | string | undefined;
+  backgroundSize?: ReadonlyArray<BackgroundSizeValue> | string | undefined;
   experimental_backgroundSize?:
     ReadonlyArray<BackgroundSizeValue> | string | undefined;
+  backgroundPosition?:
+    ReadonlyArray<BackgroundPositionValue> | string | undefined;
   experimental_backgroundPosition?:
     ReadonlyArray<BackgroundPositionValue> | string | undefined;
+  backgroundRepeat?: ReadonlyArray<BackgroundRepeatValue> | string | undefined;
   experimental_backgroundRepeat?:
     ReadonlyArray<BackgroundRepeatValue> | string | undefined;
 }
@@ -559,6 +563,8 @@ export interface TextStyleAndroid extends ViewStyle {
 }
 
 // @see https://reactnative.dev/docs/text#style
+export type FontVariationSettings = string | Readonly<Record<string, number>>;
+
 export interface TextStyle extends TextStyleIOS, TextStyleAndroid, ViewStyle {
   color?: ColorValue | undefined;
   fontFamily?: string | undefined;
@@ -602,11 +608,12 @@ export interface TextStyle extends TextStyleIOS, TextStyleAndroid, ViewStyle {
     | 'black'
     | undefined;
   /**
-   * Specifies OpenType font variation axis values using CSS syntax. An empty
-   * string resets inherited variation settings. On Android, this requires API
-   * level 26 or later.
+   * Specifies OpenType font variation axis values using CSS syntax or an
+   * object keyed by four-character axis tags. An empty string or object resets
+   * inherited variation settings. On Android, this requires API level 26 or
+   * later.
    */
-  fontVariationSettings?: string | undefined;
+  fontVariationSettings?: FontVariationSettings | undefined;
   letterSpacing?: number | undefined;
   lineHeight?: number | undefined;
   textAlign?:

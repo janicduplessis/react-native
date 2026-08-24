@@ -46,6 +46,11 @@ const {
   uuidComment,
 } = require('./spm-pbxproj');
 const {
+  AUTOLINKED_PACKAGE_NAME,
+  REACT_CODEGEN_APP_PRODUCTS,
+  REACT_CODEGEN_PACKAGE_NAME,
+  REACT_NATIVE_PACKAGE_NAME,
+  REACT_NATIVE_PRODUCTS,
   isValidScriptPhaseId,
   isValidScriptPhaseName,
   makeLogger,
@@ -111,36 +116,21 @@ const GENERATED_SOURCE_FILE_TYPES /*: {[string]: string} */ = {
 // resolve the product dependencies — SPM doesn't expose transitive products.
 const SPM_PRODUCT_PACKAGES /*: Array<{product: string, packagePath: string, packageName: string}> */ =
   [
-    {
-      product: 'ReactHeaders',
+    ...REACT_NATIVE_PRODUCTS.map(product => ({
+      product,
       packagePath: 'build/xcframeworks',
-      packageName: 'ReactNative',
-    },
+      packageName: REACT_NATIVE_PACKAGE_NAME,
+    })),
     {
-      product: 'ReactNativeHeaders',
-      packagePath: 'build/xcframeworks',
-      packageName: 'ReactNative',
-    },
-    {
-      product: 'ReactNativeDependenciesHeaders',
-      packagePath: 'build/xcframeworks',
-      packageName: 'ReactNative',
-    },
-    {
-      product: 'Autolinked',
+      product: AUTOLINKED_PACKAGE_NAME,
       packagePath: 'build/generated/autolinking',
-      packageName: 'Autolinked',
+      packageName: AUTOLINKED_PACKAGE_NAME,
     },
-    {
-      product: 'ReactCodegen',
+    ...REACT_CODEGEN_APP_PRODUCTS.map(product => ({
+      product,
       packagePath: 'build/generated/ios',
-      packageName: 'React-GeneratedCode',
-    },
-    {
-      product: 'ReactAppDependencyProvider',
-      packagePath: 'build/generated/ios',
-      packageName: 'React-GeneratedCode',
-    },
+      packageName: REACT_CODEGEN_PACKAGE_NAME,
+    })),
   ];
 
 /*::
@@ -156,6 +146,11 @@ type BuildSettingChange = {
   // value), e.g. a ${PODS_ROOT}-anchored REACT_NATIVE_PATH that dangles once
   // CocoaPods is deintegrated. Deinit restores the original.
   replacedScalars?: {[string]: string},
+  // Array settings that existed as a SCALAR and were promoted to a `( … )`
+  // array (key → the pre-injection raw value text, quotes included). Deinit
+  // restores that value verbatim; removing the injected members would leave
+  // the promoted array and its `"$(inherited)"` seed behind.
+  promotedArrayScalars?: {[string]: string},
 };
 // An array field injection CREATED (rather than appended to a pre-existing
 // one), so deinit removes the whole field and lands byte-identical.
@@ -1770,6 +1765,7 @@ function mergeReactBuildSettings(
   };
   const createdArrayKeys /*: Array<string> */ = [];
   const appendedArrayValues /*: {[string]: Array<string>} */ = {};
+  const promotedArrayScalars /*: {[string]: string} */ = {};
   const createdScalars /*: Array<string> */ = [];
   const arraySettings = [
     ...INJECTED_ARRAY_SETTINGS,
@@ -1784,6 +1780,14 @@ function mergeReactBuildSettings(
       continue;
     }
     const existing = findField(text, d, key);
+    // Non-null only for a scalar addArrayStringValues would promote to an array
+    // (same array-vs-scalar test it uses). Kept RAW: findField's token for a
+    // bare scalar ends at the `;`, so it carries any whitespace before it, and
+    // deinit has to write those bytes back verbatim.
+    const priorScalar =
+      existing != null && !existing.value.trimStart().startsWith('(')
+        ? existing.value
+        : null;
     if (existing == null) {
       createdArrayKeys.push(key);
     } else {
@@ -1797,9 +1801,20 @@ function mergeReactBuildSettings(
         // has no record of and so could never reverse.
         continue;
       }
-      appendedArrayValues[key] = fresh;
+      if (priorScalar == null) {
+        appendedArrayValues[key] = fresh;
+      }
     }
+    const beforeAdd = text;
     text = addArrayStringValues(text, d, key, values);
+    // Record only a promotion that actually happened: addArrayStringValues
+    // no-ops when `values` is empty or every value is already a member, and a
+    // recorded-but-untouched field would have deinit clobber whatever the user
+    // has there by then. Restoring the scalar subsumes removing the injected
+    // members, so the two records stay mutually exclusive per key.
+    if (priorScalar != null && text !== beforeAdd) {
+      promotedArrayScalars[key] = priorScalar;
+    }
   }
   const replacedScalars /*: {[string]: string} */ = {};
   for (const {key, value} of scalars) {
@@ -1858,6 +1873,9 @@ function mergeReactBuildSettings(
       appendedArrayValues,
       createdScalars,
       replacedScalars,
+      ...(Object.keys(promotedArrayScalars).length > 0
+        ? {promotedArrayScalars}
+        : {}),
     },
   };
 }
@@ -2602,6 +2620,25 @@ function removeRecordedBuildSettings(
           key,
           change.appendedArrayValues[key],
         );
+      }
+    }
+    const promotedArrayScalars /*: {[string]: string} */ =
+      change.promotedArrayScalars ?? {};
+    for (const key of Object.keys(promotedArrayScalars)) {
+      const current = dict();
+      const originalValue = promotedArrayScalars[key];
+      // A field that is gone was deleted by the user after injection; restoring
+      // it would resurrect it, at the top of the dict, matching neither state.
+      if (
+        current != null &&
+        typeof originalValue === 'string' &&
+        findField(text, current, key) != null
+      ) {
+        // Rewriting the whole value is what makes the promotion reversible at
+        // all — its members and its `"$(inherited)"` seed are indistinguishable
+        // from the user's own once folded together. The tradeoff: members the
+        // user hand-added to the promoted array afterwards are discarded.
+        text = setScalarField(text, current, key, originalValue);
       }
     }
     for (const key of change.createdArrayKeys ?? []) {

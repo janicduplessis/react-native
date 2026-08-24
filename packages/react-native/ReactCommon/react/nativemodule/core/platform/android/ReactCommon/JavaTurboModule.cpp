@@ -23,7 +23,7 @@
 #include <react/bridging/Bridging.h>
 #include <react/debug/react_native_assert.h>
 #include <react/featureflags/ReactNativeFeatureFlags.h>
-#include <react/jni/JByteBufferMutableBuffer.h>
+#include <react/jni/JArrayBuffer.h>
 #include <react/jni/JDynamicNative.h>
 #include <react/jni/NativeMap.h>
 #include <react/jni/ReadableNativeMap.h>
@@ -63,6 +63,12 @@ JavaTurboModule::~JavaTurboModule() {
 
 namespace {
 
+// A method whose result is delivered synchronously, so JS-heap bytes passed as
+// arguments stay valid for the duration of the call.
+bool isSyncMethod(TurboModuleMethodValueKind valueKind) {
+  return valueKind != VoidKind && valueKind != PromiseKind;
+}
+
 struct JNIArgs {
   JNIArgs(size_t count) : args(count) {}
   JNIArgs(const JNIArgs&) = delete;
@@ -73,8 +79,19 @@ struct JNIArgs {
 
   std::vector<jvalue> args;
   std::vector<jobject> globalRefs;
+  // ArrayBuffers aliasing JS-heap bytes lent for this call only. Local refs are
+  // enough because bytes are only lent on the synchronous path, where this
+  // JNIArgs is destroyed in the same native frame that created the refs.
+  std::vector<jni::local_ref<JArrayBuffer::javaobject>> borrowedBuffers;
 
   ~JNIArgs() {
+    // Revoke the borrows before the call frame that lent the bytes unwinds, so
+    // a module that retained one cannot read freed or relocated memory. Runs on
+    // the throw path too.
+    for (auto& borrowedBuffer : borrowedBuffers) {
+      borrowedBuffer->cthis()->invalidate();
+    }
+
     JNIEnv* env = jni::Environment::current();
     for (auto globalRef : globalRefs) {
       env->DeleteGlobalRef(globalRef);
@@ -315,8 +332,10 @@ JNIArgs convertJSIArgsToJNIArgs(
   auto& jargs = jniArgs.args;
   auto& globalRefs = jniArgs.globalRefs;
 
+  auto isSyncInvocation = isSyncMethod(valueKind);
+
   auto makeGlobalIfNecessary = [&](jobject obj) {
-    if (valueKind == VoidKind || valueKind == PromiseKind) {
+    if (!isSyncInvocation) {
       jobject globalObj = env->NewGlobalRef(obj);
       globalRefs.push_back(globalObj);
       env->DeleteLocalRef(obj);
@@ -440,18 +459,15 @@ JNIArgs convertJSIArgsToJNIArgs(
       auto dynamicFromValue = jsi::dynamicFromValue(rt, *arg);
       auto jParams = JDynamicNative::newObjectCxxArgs(dynamicFromValue);
       jarg->l = makeGlobalIfNecessary(jParams.release());
-    } else if (type == "Ljava/nio/ByteBuffer;") {
+    } else if (type == "Lcom/facebook/react/bridge/ArrayBuffer;") {
       if (!(arg->isObject() && arg->getObject(rt).isArrayBuffer(rt))) {
         throw JavaTurboModuleArgumentConversionException(
             "ArrayBuffer", argIndex, methodName, arg, &rt);
       }
 
       auto arrayBuffer = arg->getObject(rt).getArrayBuffer(rt);
-      if (arrayBuffer.detached(rt)) {
-        throw jsi::JSError(
-            rt,
-            "JavaTurboModule::convertJSIArgsToJNIArgs: ArrayBuffer is detached.");
-      }
+      AsyncArrayBuffer::throwIfDetached(
+          rt, arrayBuffer, "JavaTurboModule::convertJSIArgsToJNIArgs");
 
       auto size = arrayBuffer.size(rt);
       if (size > static_cast<size_t>(std::numeric_limits<jint>::max())) {
@@ -459,18 +475,42 @@ JNIArgs convertJSIArgsToJNIArgs(
             rt,
             "JavaTurboModule::convertJSIArgsToJNIArgs: ArrayBuffer exceeds maximum size.");
       }
-      auto data = arrayBuffer.data(rt);
-      // ArrayBuffer arguments are always copied into a Java-owned direct
-      // ByteBuffer, so Java fully owns the bytes. Borrowing the JS bytes is
-      // never safe — even on a synchronous call the module may retain the
-      // buffer or hand it to an async method, and JS may garbage-collect the
-      // source ArrayBuffer, leaving Java with a dangling view.
-      auto buffer = jni::JByteBuffer::allocateDirect(static_cast<jint>(size));
-      if (size > 0) {
-        // @lint-ignore CLANGSECURITY facebook-security-vulnerable-memcpy
-        std::memcpy(buffer->getDirectBytes(), data, size);
+
+      // Runtimes without a native buffer for this ArrayBuffer return nullptr,
+      // but the Static Hermes tracing runtime throws instead, and argument
+      // conversion runs outside any std::exception handler. Treat a failed
+      // probe as "no native buffer" so a traced session copies the bytes rather
+      // than aborting the process.
+      std::shared_ptr<jsi::MutableBuffer> mutableBuffer;
+      try {
+        mutableBuffer = arrayBuffer.tryGetMutableBuffer(rt);
+      } catch (const std::exception&) {
+        mutableBuffer = nullptr;
       }
-      jarg->l = makeGlobalIfNecessary(buffer.release());
+
+      bool borrowsJSBytes = false;
+      auto jArrayBuffer = [&]() {
+        // Backed by a native buffer: alias it and retain its owner, so the
+        // bytes stay valid for as long as the module holds the ArrayBuffer.
+        if (mutableBuffer) {
+          return JArrayBuffer::createOwning(std::move(mutableBuffer));
+        }
+
+        // JS heap bytes on a synchronous call: lend them for the duration of
+        // the call.
+        if (isSyncInvocation) {
+          borrowsJSBytes = true;
+          return JArrayBuffer::createUnowned(arrayBuffer.data(rt), size);
+        }
+
+        // JS heap bytes that outlive the call: copy.
+        return JArrayBuffer::createOwned(arrayBuffer.data(rt), size);
+      }();
+
+      if (borrowsJSBytes) {
+        jniArgs.borrowedBuffers.push_back(jni::make_local(jArrayBuffer));
+      }
+      jarg->l = makeGlobalIfNecessary(jArrayBuffer.release());
     } else {
       throw JavaTurboModuleInvalidArgumentTypeException(
           type, argIndex, methodName);
@@ -559,7 +599,7 @@ jsi::Value JavaTurboModule::invokeJavaMethod(
   const char* methodName = methodNameStr.c_str();
   const char* moduleName = name_.c_str();
 
-  bool isMethodSync = valueKind != VoidKind && valueKind != PromiseKind;
+  bool isMethodSync = isSyncMethod(valueKind);
 
   if (isMethodSync) {
     TMPL::syncMethodCallStart(moduleName, methodName);
@@ -1013,22 +1053,20 @@ jsi::Value JavaTurboModule::invokeJavaMethod(
 
       jsi::Value returnValue = jsi::Value::null();
       if (returnObject != nullptr) {
-        auto jByteBuffer = jni::adopt_local(
-            static_cast<jni::JByteBuffer::javaobject>(returnObject));
-
-        if (!jByteBuffer->isDirect()) {
+        auto returnRef = jni::adopt_local(returnObject);
+        if (!returnRef->isInstanceOf(JArrayBuffer::javaClassStatic())) {
           throw jsi::JSError(
               runtime,
-              "Only direct ByteBuffers (ByteBuffer.allocateDirect) can be returned from a TurboModule.");
+              "JavaTurboModule::invokeJavaMethod: expected " + methodNameStr +
+                  " to return a com.facebook.react.bridge.ArrayBuffer.");
         }
-        // Zero-copy: JByteBufferMutableBuffer takes a global reference that
-        // pins the ByteBuffer's memory for the lifetime of the JS ArrayBuffer,
-        // and its destructor attaches the current thread before releasing that
-        // ref, so JS GC finalization on any thread is safe.
-        auto nativeBuffer =
-            std::make_shared<JByteBufferMutableBuffer>(jByteBuffer);
+
+        auto jArrayBuffer =
+            jni::static_ref_cast<JArrayBuffer::javaobject>(returnRef);
         returnValue = {
-            runtime, jsi::ArrayBuffer{runtime, std::move(nativeBuffer)}};
+            runtime,
+            jsi::ArrayBuffer{
+                runtime, JArrayBuffer::toJSBuffer(runtime, jArrayBuffer)}};
       }
 
       TMPL::syncMethodCallReturnConversionEnd(moduleName, methodName);
@@ -1054,12 +1092,20 @@ void JavaTurboModule::configureEventEmitterCallback() {
     FACEBOOK_JNI_THROW_PENDING_EXCEPTION();
   }
 
-  auto callback = JCxxCallbackImpl::newObjectCxxArgs([&](folly::dynamic args) {
-    auto eventName = args.at(0).asString();
-    auto& eventEmitter = static_cast<AsyncEventEmitter<folly::dynamic>&>(
-        *eventEmitterMap_[eventName].get());
-    eventEmitter.emit(args.size() > 1 ? std::move(args).at(1) : nullptr);
-  });
+  // The Java module owns the callback and can outlive this object, so the
+  // lambda captures its own copy of the map rather than referencing
+  // eventEmitterMap_. Callers register every emitter before reaching here;
+  // emitters added afterwards are not visible to this callback.
+  auto callback = JCxxCallbackImpl::newObjectCxxArgs(
+      [eventEmitterMap = eventEmitterMap_](folly::dynamic args) {
+        auto eventName = args.at(0).asString();
+        auto it = eventEmitterMap.find(eventName);
+        if (it == eventEmitterMap.end() || !it->second) {
+          return;
+        }
+        static_cast<AsyncEventEmitter<folly::dynamic>&>(*it->second)
+            .emit(args.size() > 1 ? std::move(args).at(1) : nullptr);
+      });
 
   jvalue args[1];
   args[0].l = callback.release();

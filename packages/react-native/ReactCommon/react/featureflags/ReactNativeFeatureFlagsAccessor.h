@@ -4,7 +4,7 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  *
- * @generated SignedSource<<88dd99a5753390988c878519a0f468c6>>
+ * @generated SignedSource<<c08fb696ba1dc5b90155163ca690f218>>
  */
 
 /**
@@ -44,7 +44,6 @@ class ReactNativeFeatureFlagsAccessor {
   bool disableViewPreallocationAndroid();
   bool enableAccessibilityOrder();
   bool enableAccumulatedUpdatesInRawPropsAndroid();
-  bool enableAndroidFontWeightAdjustment();
   bool enableAndroidTextMeasurementOptimizations();
   bool enableBridgelessArchitecture();
   bool enableCppPropsIteratorSetter();
@@ -75,6 +74,7 @@ class ReactNativeFeatureFlagsAccessor {
   bool enableNativeCSSParsing();
   bool enablePreparedTextLayout();
   bool enablePropsUpdateReconciliationAndroid();
+  bool enableResizeObserverByDefault();
   bool enableRuntimeSchedulerQueueClearingOnError();
   bool enableSchedulerDelegateInvalidation();
   bool enableSwiftUIBasedFilters();
@@ -144,7 +144,6 @@ class ReactNativeFeatureFlagsAccessor {
   std::atomic<std::optional<bool>> disableViewPreallocationAndroid_;
   std::atomic<std::optional<bool>> enableAccessibilityOrder_;
   std::atomic<std::optional<bool>> enableAccumulatedUpdatesInRawPropsAndroid_;
-  std::atomic<std::optional<bool>> enableAndroidFontWeightAdjustment_;
   std::atomic<std::optional<bool>> enableAndroidTextMeasurementOptimizations_;
   std::atomic<std::optional<bool>> enableBridgelessArchitecture_;
   std::atomic<std::optional<bool>> enableCppPropsIteratorSetter_;
@@ -175,6 +174,7 @@ class ReactNativeFeatureFlagsAccessor {
   std::atomic<std::optional<bool>> enableNativeCSSParsing_;
   std::atomic<std::optional<bool>> enablePreparedTextLayout_;
   std::atomic<std::optional<bool>> enablePropsUpdateReconciliationAndroid_;
+  std::atomic<std::optional<bool>> enableResizeObserverByDefault_;
   std::atomic<std::optional<bool>> enableRuntimeSchedulerQueueClearingOnError_;
   std::atomic<std::optional<bool>> enableSchedulerDelegateInvalidation_;
   std::atomic<std::optional<bool>> enableSwiftUIBasedFilters_;

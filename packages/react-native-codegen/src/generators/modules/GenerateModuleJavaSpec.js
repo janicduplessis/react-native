@@ -28,6 +28,7 @@ const {parseValidUnionType, toPascalCase} = require('../Utils');
 const {
   createAliasResolver,
   getModules,
+  throwIfUnsupportedEventEmitterPayload,
   throwIfUnsupportedPromiseArrayBuffer,
 } = require('./Utils');
 
@@ -82,16 +83,25 @@ function EventEmitterTemplate(
   eventEmitter: NativeModuleEventEmitterShape,
   imports: Set<string>,
 ): string {
+  imports.add('com.facebook.react.bridge.CxxCallbackImpl');
+  // mEventEmitterCallback is set from JNI by configureEventEmitterCallback(),
+  // which the generated SpecJSI constructor calls when JS first looks the module
+  // up. Emitting before that would hit a null field, so the emitted code no-ops
+  // instead. The local is for readability: reference reads are already atomic,
+  // and the field is never reset to null.
   return `  protected final void emit${toPascalCase(eventEmitter.name)}(${
     eventEmitter.typeAnnotation.typeAnnotation.type !== 'VoidTypeAnnotation'
       ? `${translateEventEmitterTypeToJavaType(eventEmitter, imports)} value`
       : ''
   }) {
-    mEventEmitterCallback.invoke("${eventEmitter.name}"${
-      eventEmitter.typeAnnotation.typeAnnotation.type !== 'VoidTypeAnnotation'
-        ? ', value'
-        : ''
-    });
+    CxxCallbackImpl eventEmitterCallback = mEventEmitterCallback;
+    if (eventEmitterCallback != null) {
+      eventEmitterCallback.invoke("${eventEmitter.name}"${
+        eventEmitter.typeAnnotation.typeAnnotation.type !== 'VoidTypeAnnotation'
+          ? ', value'
+          : ''
+      });
+    }
   }`;
 }
 
@@ -132,6 +142,9 @@ function translateEventEmitterTypeToJavaType(
   imports: Set<string>,
 ): string {
   const typeAnnotation = eventEmitter.typeAnnotation.typeAnnotation;
+
+  throwIfUnsupportedEventEmitterPayload(eventEmitter.name, typeAnnotation);
+
   switch (typeAnnotation.type) {
     case 'StringTypeAnnotation':
       return 'String';
@@ -170,12 +183,8 @@ function translateEventEmitterTypeToJavaType(
     case 'ArrayTypeAnnotation':
       imports.add('com.facebook.react.bridge.ReadableArray');
       return 'ReadableArray';
-    case 'DoubleTypeAnnotation':
-    case 'FloatTypeAnnotation':
-    case 'Int32TypeAnnotation':
     case 'VoidTypeAnnotation':
-    case 'ArrayBufferTypeAnnotation':
-      // TODO: Add support for these types
+      // Void emitters take no argument, so the caller never asks for a type.
       throw new Error(
         `Unsupported eventType for ${eventEmitter.name}. Found: ${eventEmitter.typeAnnotation.typeAnnotation.type}`,
       );
@@ -273,8 +282,8 @@ function translateFunctionParamToJavaType(
       imports.add('com.facebook.react.bridge.Callback');
       return wrapOptional('Callback', isRequired);
     case 'ArrayBufferTypeAnnotation':
-      imports.add('java.nio.ByteBuffer');
-      return wrapOptional('ByteBuffer', isRequired);
+      imports.add('com.facebook.react.bridge.ArrayBuffer');
+      return wrapOptional('ArrayBuffer', isRequired);
     default:
       realTypeAnnotation.type as 'MixedTypeAnnotation';
       throw new Error(createErrorMessage(realTypeAnnotation.type));
@@ -370,8 +379,8 @@ function translateFunctionReturnTypeToJavaType(
       imports.add('com.facebook.react.bridge.WritableArray');
       return wrapOptional('WritableArray', isRequired);
     case 'ArrayBufferTypeAnnotation':
-      imports.add('java.nio.ByteBuffer');
-      return wrapOptional('ByteBuffer', isRequired);
+      imports.add('com.facebook.react.bridge.ArrayBuffer');
+      return wrapOptional('ArrayBuffer', isRequired);
     default:
       realTypeAnnotation.type as 'MixedTypeAnnotation';
       throw new Error(createErrorMessage(realTypeAnnotation.type));

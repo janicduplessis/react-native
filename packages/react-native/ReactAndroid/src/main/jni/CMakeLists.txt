@@ -125,6 +125,7 @@ add_react_common_subdir(react/renderer/leakchecker)
 add_react_common_subdir(react/renderer/observers/events)
 add_react_common_subdir(react/renderer/observers/intersection)
 add_react_common_subdir(react/renderer/observers/mutation)
+add_react_common_subdir(react/renderer/observers/resize)
 add_react_common_subdir(react/renderer/textlayoutmanager)
 add_react_common_subdir(react/utils)
 add_react_common_subdir(react/bridging)
@@ -137,6 +138,7 @@ add_react_common_subdir(react/nativemodule/microtasks)
 add_react_common_subdir(react/nativemodule/idlecallbacks)
 add_react_common_subdir(react/nativemodule/intersectionobserver)
 add_react_common_subdir(react/nativemodule/mutationobserver)
+add_react_common_subdir(react/nativemodule/resizeobserver)
 add_react_common_subdir(react/nativemodule/viewtransition)
 add_react_common_subdir(react/nativemodule/webperformance)
 add_react_common_subdir(react/networking)
@@ -209,6 +211,7 @@ add_library(reactnative
           $<TARGET_OBJECTS:react_nativemodule_intersectionobserver>
           $<TARGET_OBJECTS:react_nativemodule_microtasks>
           $<TARGET_OBJECTS:react_nativemodule_mutationobserver>
+          $<TARGET_OBJECTS:react_nativemodule_resizeobserver>
           $<TARGET_OBJECTS:react_nativemodule_viewtransition>
           $<TARGET_OBJECTS:react_nativemodule_webperformance>
           $<TARGET_OBJECTS:react_networking>
@@ -233,6 +236,7 @@ add_library(reactnative
           $<TARGET_OBJECTS:react_renderer_observers_events>
           $<TARGET_OBJECTS:react_renderer_observers_intersection>
           $<TARGET_OBJECTS:react_renderer_observers_mutation>
+          $<TARGET_OBJECTS:react_renderer_observers_resize>
           $<TARGET_OBJECTS:react_renderer_runtimescheduler>
           $<TARGET_OBJECTS:react_renderer_scheduler>
           $<TARGET_OBJECTS:react_renderer_telemetry>
@@ -308,6 +312,7 @@ target_include_directories(reactnative
         $<TARGET_PROPERTY:react_nativemodule_intersectionobserver,INTERFACE_INCLUDE_DIRECTORIES>
         $<TARGET_PROPERTY:react_nativemodule_microtasks,INTERFACE_INCLUDE_DIRECTORIES>
         $<TARGET_PROPERTY:react_nativemodule_mutationobserver,INTERFACE_INCLUDE_DIRECTORIES>
+        $<TARGET_PROPERTY:react_nativemodule_resizeobserver,INTERFACE_INCLUDE_DIRECTORIES>
         $<TARGET_PROPERTY:react_nativemodule_viewtransition,INTERFACE_INCLUDE_DIRECTORIES>
         $<TARGET_PROPERTY:react_nativemodule_webperformance,INTERFACE_INCLUDE_DIRECTORIES>
         $<TARGET_PROPERTY:react_networking,INTERFACE_INCLUDE_DIRECTORIES>
@@ -334,6 +339,7 @@ target_include_directories(reactnative
         $<TARGET_PROPERTY:react_renderer_observers_events,INTERFACE_INCLUDE_DIRECTORIES>
         $<TARGET_PROPERTY:react_renderer_observers_intersection,INTERFACE_INCLUDE_DIRECTORIES>
         $<TARGET_PROPERTY:react_renderer_observers_mutation,INTERFACE_INCLUDE_DIRECTORIES>
+        $<TARGET_PROPERTY:react_renderer_observers_resize,INTERFACE_INCLUDE_DIRECTORIES>
         $<TARGET_PROPERTY:react_renderer_runtimescheduler,INTERFACE_INCLUDE_DIRECTORIES>
         $<TARGET_PROPERTY:react_renderer_scheduler,INTERFACE_INCLUDE_DIRECTORIES>
         $<TARGET_PROPERTY:react_renderer_telemetry,INTERFACE_INCLUDE_DIRECTORIES>

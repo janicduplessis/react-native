@@ -180,17 +180,6 @@ const definitions: FeatureFlagDefinitions = {
       },
       ossReleaseStage: 'none',
     },
-    enableAndroidFontWeightAdjustment: {
-      defaultValue: true,
-      metadata: {
-        dateAdded: '2026-06-29',
-        description:
-          'When enabled, Android Text measurement and rendering respects the system Bold text accessibility setting via `Configuration.fontWeightAdjustment`.',
-        expectedReleaseValue: true,
-        purpose: 'experimentation',
-      },
-      ossReleaseStage: 'none',
-    },
     enableAndroidTextMeasurementOptimizations: {
       defaultValue: false,
       metadata: {
@@ -504,6 +493,15 @@ const definitions: FeatureFlagDefinitions = {
           'When enabled, Android will receive prop updates based on the differences between the last rendered shadow node and the last committed shadow node.',
         expectedReleaseValue: true,
         purpose: 'experimentation',
+      },
+      ossReleaseStage: 'none',
+    },
+    enableResizeObserverByDefault: {
+      defaultValue: false,
+      metadata: {
+        description: 'Enables the ResizeObserver Web API in React Native.',
+        expectedReleaseValue: true,
+        purpose: 'release',
       },
       ossReleaseStage: 'none',
     },
@@ -998,6 +996,17 @@ const definitions: FeatureFlagDefinitions = {
         dateAdded: '2026-06-10',
         description:
           'When enabled, forces `useNativeDriver` to `true` for all Animated animations and events, overriding the config (including an explicit `false`). Has no effect unless the shared animated backend is enabled, which is required to support native driver for all props.',
+        expectedReleaseValue: true,
+        purpose: 'experimentation',
+      },
+      ossReleaseStage: 'none',
+    },
+    animatedKeepListenersOnDetach: {
+      defaultValue: true,
+      metadata: {
+        dateAdded: '2026-08-14',
+        description:
+          'When enabled, detaching an animated node from the graph retains listeners registered with `addListener` instead of removing them, so an `Animated.Value` that outlives the components using it still notifies them once it is attached again.',
         expectedReleaseValue: true,
         purpose: 'experimentation',
       },

@@ -893,9 +893,12 @@ export type ____ViewStyle_InternalBase = Readonly<{
   mixBlendMode?: ____BlendMode_Internal,
   backgroundImage?: ReadonlyArray<BackgroundImageValue> | string,
   experimental_backgroundImage?: ReadonlyArray<BackgroundImageValue> | string,
+  backgroundSize?: ReadonlyArray<BackgroundSizeValue> | string,
   experimental_backgroundSize?: ReadonlyArray<BackgroundSizeValue> | string,
+  backgroundPosition?: ReadonlyArray<BackgroundPositionValue> | string,
   experimental_backgroundPosition?:
     ReadonlyArray<BackgroundPositionValue> | string,
+  backgroundRepeat?: ReadonlyArray<BackgroundRepeatValue> | string,
   experimental_backgroundRepeat?: ReadonlyArray<BackgroundRepeatValue> | string,
   isolation?: 'auto' | 'isolate',
 }>;
@@ -999,6 +1002,9 @@ export type ____FontVariant_Internal =
 export type ____FontVariantArray_Internal =
   ReadonlyArray<____FontVariant_Internal>;
 
+export type ____FontVariationSettings_Internal =
+  string | Readonly<{[axis: string]: number}>;
+
 type ____TextStyle_InternalBase = Readonly<{
   color?: ____ColorValue_Internal,
   fontFamily?: string,
@@ -1012,11 +1018,12 @@ type ____TextStyle_InternalBase = Readonly<{
   fontWeight?: ____FontWeight_Internal,
   fontVariant?: ____FontVariantArray_Internal | string,
   /**
-   * Specifies OpenType font variation axis values using CSS syntax. An empty
-   * string resets inherited variation settings. On Android, this requires API
-   * level 26 or later.
+   * Specifies OpenType font variation axis values using CSS syntax or an
+   * object keyed by four-character axis tags. An empty string or object resets
+   * inherited variation settings. On Android, this requires API level 26 or
+   * later.
    */
-  fontVariationSettings?: string,
+  fontVariationSettings?: ____FontVariationSettings_Internal,
   textShadowOffset?: Readonly<{
     width: number,
     height: number,

@@ -537,6 +537,28 @@ public final class com/facebook/react/bridge/Arguments {
 	public static final fun toList (Lcom/facebook/react/bridge/ReadableArray;)Ljava/util/ArrayList;
 }
 
+public final class com/facebook/react/bridge/ArrayBuffer : com/facebook/jni/HybridClassBase {
+	public static final field Companion Lcom/facebook/react/bridge/ArrayBuffer$Companion;
+	public fun <init> (I)V
+	public synthetic fun <init> (Ljava/nio/ByteBuffer;ZLkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public static final fun arrayBufferWithCopiedBytes (Lcom/facebook/react/bridge/ArrayBuffer;)Lcom/facebook/react/bridge/ArrayBuffer;
+	public static final fun arrayBufferWithCopiedBytes (Ljava/nio/ByteBuffer;)Lcom/facebook/react/bridge/ArrayBuffer;
+	public static final fun arrayBufferWithCopiedBytes ([B)Lcom/facebook/react/bridge/ArrayBuffer;
+	public static final fun arrayBufferWithLength (I)Lcom/facebook/react/bridge/ArrayBuffer;
+	public static final fun arrayBufferWithOwnedBytes (Ljava/nio/ByteBuffer;)Lcom/facebook/react/bridge/ArrayBuffer;
+	public final fun getBytes ()Ljava/nio/ByteBuffer;
+	public final fun getSize ()I
+	public final fun isOwningBytes ()Z
+}
+
+public final class com/facebook/react/bridge/ArrayBuffer$Companion {
+	public final fun arrayBufferWithCopiedBytes (Lcom/facebook/react/bridge/ArrayBuffer;)Lcom/facebook/react/bridge/ArrayBuffer;
+	public final fun arrayBufferWithCopiedBytes (Ljava/nio/ByteBuffer;)Lcom/facebook/react/bridge/ArrayBuffer;
+	public final fun arrayBufferWithCopiedBytes ([B)Lcom/facebook/react/bridge/ArrayBuffer;
+	public final fun arrayBufferWithLength (I)Lcom/facebook/react/bridge/ArrayBuffer;
+	public final fun arrayBufferWithOwnedBytes (Ljava/nio/ByteBuffer;)Lcom/facebook/react/bridge/ArrayBuffer;
+}
+
 public final class com/facebook/react/bridge/AssertionException : java/lang/RuntimeException {
 	public fun <init> (Ljava/lang/String;)V
 }
@@ -4534,6 +4556,9 @@ public final class com/facebook/react/uimanager/ViewProps {
 	public static final field ENABLED Ljava/lang/String;
 	public static final field END Ljava/lang/String;
 	public static final field EXPERIMENTAL_BACKGROUND_IMAGE Ljava/lang/String;
+	public static final field EXPERIMENTAL_BACKGROUND_POSITION Ljava/lang/String;
+	public static final field EXPERIMENTAL_BACKGROUND_REPEAT Ljava/lang/String;
+	public static final field EXPERIMENTAL_BACKGROUND_SIZE Ljava/lang/String;
 	public static final field FILTER Ljava/lang/String;
 	public static final field FLEX Ljava/lang/String;
 	public static final field FLEX_BASIS Ljava/lang/String;
@@ -6527,6 +6552,9 @@ public class com/facebook/react/views/view/ReactViewManager : com/facebook/react
 	public fun setCollapsable (Lcom/facebook/react/views/view/ReactViewGroup;Z)V
 	public fun setCollapsableChildren (Lcom/facebook/react/views/view/ReactViewGroup;Z)V
 	public fun setExperimentalBackgroundImage (Lcom/facebook/react/views/view/ReactViewGroup;Lcom/facebook/react/bridge/ReadableArray;)V
+	public fun setExperimentalBackgroundPosition (Lcom/facebook/react/views/view/ReactViewGroup;Lcom/facebook/react/bridge/ReadableArray;)V
+	public fun setExperimentalBackgroundRepeat (Lcom/facebook/react/views/view/ReactViewGroup;Lcom/facebook/react/bridge/ReadableArray;)V
+	public fun setExperimentalBackgroundSize (Lcom/facebook/react/views/view/ReactViewGroup;Lcom/facebook/react/bridge/ReadableArray;)V
 	public fun setFocusable (Lcom/facebook/react/views/view/ReactViewGroup;Z)V
 	public fun setHitSlop (Lcom/facebook/react/views/view/ReactViewGroup;Lcom/facebook/react/bridge/Dynamic;)V
 	public fun setNativeBackground (Lcom/facebook/react/views/view/ReactViewGroup;Lcom/facebook/react/bridge/ReadableMap;)V

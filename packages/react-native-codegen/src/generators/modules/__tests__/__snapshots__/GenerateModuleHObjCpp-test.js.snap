@@ -27,6 +27,7 @@ Map {
 #import <RCTRequired/RCTRequired.h>
 #import <RCTTypeSafety/RCTConvertHelpers.h>
 #import <RCTTypeSafety/RCTTypedModuleConstants.h>
+#import <React/RCTArrayBuffer.h>
 #import <React/RCTBridgeModule.h>
 #import <React/RCTCxxConvert.h>
 #import <React/RCTManagedPointer.h>
@@ -92,6 +93,7 @@ Map {
 #import <RCTRequired/RCTRequired.h>
 #import <RCTTypeSafety/RCTConvertHelpers.h>
 #import <RCTTypeSafety/RCTTypedModuleConstants.h>
+#import <React/RCTArrayBuffer.h>
 #import <React/RCTBridgeModule.h>
 #import <React/RCTCxxConvert.h>
 #import <React/RCTManagedPointer.h>
@@ -102,9 +104,9 @@ Map {
 
 @protocol NativeSampleTurboModuleSpec <RCTBridgeModule, RCTTurboModule>
 
-- (NSMutableData *)getArrayBuffer;
-- (void)voidArrayBuffer:(NSData *)arg;
-- (void)voidNullableArrayBuffer:(NSData * _Nullable)arg;
+- (RCTArrayBuffer *)getArrayBuffer;
+- (void)voidArrayBuffer:(RCTArrayBuffer *)arg;
+- (void)voidNullableArrayBuffer:(RCTArrayBuffer * _Nullable)arg;
 
 @end
 
@@ -159,6 +161,7 @@ Map {
 #import <RCTRequired/RCTRequired.h>
 #import <RCTTypeSafety/RCTConvertHelpers.h>
 #import <RCTTypeSafety/RCTTypedModuleConstants.h>
+#import <React/RCTArrayBuffer.h>
 #import <React/RCTBridgeModule.h>
 #import <React/RCTCxxConvert.h>
 #import <React/RCTManagedPointer.h>
@@ -200,6 +203,7 @@ Map {
 #import <RCTRequired/RCTRequired.h>
 #import <RCTTypeSafety/RCTConvertHelpers.h>
 #import <RCTTypeSafety/RCTTypedModuleConstants.h>
+#import <React/RCTArrayBuffer.h>
 #import <React/RCTBridgeModule.h>
 #import <React/RCTCxxConvert.h>
 #import <React/RCTManagedPointer.h>
@@ -475,6 +479,7 @@ Map {
 #import <RCTRequired/RCTRequired.h>
 #import <RCTTypeSafety/RCTConvertHelpers.h>
 #import <RCTTypeSafety/RCTTypedModuleConstants.h>
+#import <React/RCTArrayBuffer.h>
 #import <React/RCTBridgeModule.h>
 #import <React/RCTCxxConvert.h>
 #import <React/RCTManagedPointer.h>
@@ -516,6 +521,7 @@ Map {
 #import <RCTRequired/RCTRequired.h>
 #import <RCTTypeSafety/RCTConvertHelpers.h>
 #import <RCTTypeSafety/RCTTypedModuleConstants.h>
+#import <React/RCTArrayBuffer.h>
 #import <React/RCTBridgeModule.h>
 #import <React/RCTCxxConvert.h>
 #import <React/RCTManagedPointer.h>
@@ -581,6 +587,7 @@ Map {
 #import <RCTRequired/RCTRequired.h>
 #import <RCTTypeSafety/RCTConvertHelpers.h>
 #import <RCTTypeSafety/RCTTypedModuleConstants.h>
+#import <React/RCTArrayBuffer.h>
 #import <React/RCTBridgeModule.h>
 #import <React/RCTCxxConvert.h>
 #import <React/RCTManagedPointer.h>
@@ -607,6 +614,9 @@ facebook::react::EventEmitterCallback _eventEmitterCallback;
 - (void)emitOnEvent4:(BOOL)value;
 - (void)emitOnEvent5:(NSDictionary *)value;
 - (void)emitOnEvent6:(NSArray<id<NSObject>> *)value;
+- (void)emitOnEvent7:(NSNumber *_Nonnull)value;
+- (void)emitOnEvent8:(NSNumber *_Nonnull)value;
+- (void)emitOnEvent9:(NSNumber *_Nonnull)value;
 @end
 
 namespace facebook::react {
@@ -651,6 +661,7 @@ Map {
 #import <RCTRequired/RCTRequired.h>
 #import <RCTTypeSafety/RCTConvertHelpers.h>
 #import <RCTTypeSafety/RCTTypedModuleConstants.h>
+#import <React/RCTArrayBuffer.h>
 #import <React/RCTBridgeModule.h>
 #import <React/RCTCxxConvert.h>
 #import <React/RCTManagedPointer.h>
@@ -836,6 +847,7 @@ Map {
 #import <RCTRequired/RCTRequired.h>
 #import <RCTTypeSafety/RCTConvertHelpers.h>
 #import <RCTTypeSafety/RCTTypedModuleConstants.h>
+#import <React/RCTArrayBuffer.h>
 #import <React/RCTBridgeModule.h>
 #import <React/RCTCxxConvert.h>
 #import <React/RCTManagedPointer.h>
@@ -1104,6 +1116,7 @@ Map {
 #import <RCTRequired/RCTRequired.h>
 #import <RCTTypeSafety/RCTConvertHelpers.h>
 #import <RCTTypeSafety/RCTTypedModuleConstants.h>
+#import <React/RCTArrayBuffer.h>
 #import <React/RCTBridgeModule.h>
 #import <React/RCTCxxConvert.h>
 #import <React/RCTManagedPointer.h>
@@ -1233,6 +1246,7 @@ Map {
 #import <RCTRequired/RCTRequired.h>
 #import <RCTTypeSafety/RCTConvertHelpers.h>
 #import <RCTTypeSafety/RCTTypedModuleConstants.h>
+#import <React/RCTArrayBuffer.h>
 #import <React/RCTBridgeModule.h>
 #import <React/RCTCxxConvert.h>
 #import <React/RCTManagedPointer.h>
@@ -1298,6 +1312,7 @@ Map {
 #import <RCTRequired/RCTRequired.h>
 #import <RCTTypeSafety/RCTConvertHelpers.h>
 #import <RCTTypeSafety/RCTTypedModuleConstants.h>
+#import <React/RCTArrayBuffer.h>
 #import <React/RCTBridgeModule.h>
 #import <React/RCTCxxConvert.h>
 #import <React/RCTManagedPointer.h>
@@ -1389,6 +1404,7 @@ Map {
 #import <RCTRequired/RCTRequired.h>
 #import <RCTTypeSafety/RCTConvertHelpers.h>
 #import <RCTTypeSafety/RCTTypedModuleConstants.h>
+#import <React/RCTArrayBuffer.h>
 #import <React/RCTBridgeModule.h>
 #import <React/RCTCxxConvert.h>
 #import <React/RCTManagedPointer.h>

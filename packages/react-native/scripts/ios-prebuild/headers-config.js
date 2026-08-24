@@ -101,8 +101,17 @@ const PodspecExceptions /*: {[key: string]: PodSpecConfiguration} */ = {
           {
             name: 'root',
             headerPatterns: ['react/renderer/components/root/**/*.h'],
-            excludePatterns: ['react/renderer/components/root/tests'],
+            excludePatterns: [
+              'react/renderer/components/root/tests',
+              'react/renderer/components/root/React',
+            ],
             headerDir: 'react/renderer/components/root',
+          },
+
+          {
+            name: 'rootUmbrella',
+            headerPatterns: ['react/renderer/components/root/React/*.h'],
+            headerDir: 'React',
           },
           {
             name: 'view',
@@ -114,13 +123,26 @@ const PodspecExceptions /*: {[key: string]: PodSpecConfiguration} */ = {
           },
 
           {
+            name: 'viewUmbrella',
+            headerPatterns: ['react/renderer/components/view/React/*.h'],
+            headerDir: 'React',
+          },
+
+          {
             name: 'scrollview',
             headerPatterns: ['react/renderer/components/scrollview/**/*.h'],
             headerDir: 'react/renderer/components/scrollview',
             excludePatterns: [
               'react/renderer/components/scrollview/tests',
               'react/renderer/components/scrollview/platform/android',
+              'react/renderer/components/scrollview/React',
             ],
+          },
+
+          {
+            name: 'scrollviewUmbrella',
+            headerPatterns: ['react/renderer/components/scrollview/React/*.h'],
+            headerDir: 'React',
           },
 
           {
@@ -207,6 +229,12 @@ const PodspecExceptions /*: {[key: string]: PodSpecConfiguration} */ = {
 
         headerPatterns: ['react/renderer/uimanager/*.h'],
         headerDir: 'react/renderer/uimanager',
+      },
+
+      {
+        name: 'uimanagerUmbrella',
+        headerPatterns: ['react/renderer/uimanager/React/*.h'],
+        headerDir: 'React',
       },
 
       {
@@ -327,6 +355,12 @@ const PodspecExceptions /*: {[key: string]: PodSpecConfiguration} */ = {
           },
 
           {
+            name: 'modalUmbrella',
+            headerPatterns: ['react/renderer/components/modal/React/*.h'],
+            headerDir: 'React',
+          },
+
+          {
             name: 'scrollview',
             headerPatterns: [
               'react/renderer/components/scrollview/*.h',
@@ -343,6 +377,12 @@ const PodspecExceptions /*: {[key: string]: PodSpecConfiguration} */ = {
               'react/renderer/components/text/platform/cxx/**/*.h',
             ],
             headerDir: 'react/renderer/components/text',
+          },
+
+          {
+            name: 'textUmbrella',
+            headerPatterns: ['react/renderer/components/text/React/*.h'],
+            headerDir: 'React',
           },
 
           {
@@ -422,6 +462,38 @@ const PodspecExceptions /*: {[key: string]: PodSpecConfiguration} */ = {
           'react/renderer/textlayoutmanager/platform/cxx',
         ],
         headerDir: 'react/renderer/textlayoutmanager',
+      },
+    ],
+  },
+  'ReactCommon/React-Mapbuffer.podspec': {
+    name: 'React-Mapbuffer',
+    headerPatterns: ['react/renderer/mapbuffer/**/*.h'],
+    excludePatterns: [
+      'react/renderer/mapbuffer/tests',
+      'react/renderer/mapbuffer/React',
+    ],
+    headerDir: 'react/renderer/mapbuffer',
+    subSpecs: [
+      {
+        name: 'MapBufferUmbrella',
+        headerPatterns: ['react/renderer/mapbuffer/React/*.h'],
+        headerDir: 'React',
+      },
+    ],
+  },
+  'ReactCommon/React-FabricImage.podspec': {
+    name: 'React-FabricImage',
+    headerPatterns: ['react/renderer/components/image/**/*.h'],
+    excludePatterns: [
+      'react/renderer/components/image/tests',
+      'react/renderer/components/image/React',
+    ],
+    headerDir: 'react/renderer/components/image',
+    subSpecs: [
+      {
+        name: 'ImageUmbrella',
+        headerPatterns: ['react/renderer/components/image/React/*.h'],
+        headerDir: 'React',
       },
     ],
   },

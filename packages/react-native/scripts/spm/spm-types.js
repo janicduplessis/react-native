@@ -168,7 +168,6 @@ export type SpmModuleConfig = {
   name: string,
   path: string,
   exclude?: Array<string>,
-  publicHeadersPath?: ?string,
   // Optional CocoaPods-style glob allowlist (analog of s.source_files).
   // When set, replaces auto source discovery for the module — only files
   // matching one of these patterns are passed to SPM via `sources:`.
@@ -482,10 +481,13 @@ export type SpmScaffoldSpec = {
   // Bucketed dependency references — pre-computed by the translation layer.
   // `coreReactNative` is true when ANY React-* / RCT* / RCT-Folly / glog
   // dep is present (so we add React's invariant header products).
-  // `siblingNames` are npm names that match other autolinked deps — resolved
-  // to Swift names by the scaffold orchestrator before emit.
+  // `siblingNames` are npm names that match other autolinked deps.
+  // `siblingSwiftNames` carries each one's resolved Swift name (honoring the
+  // sibling's `spm.name`); a sibling absent from it falls back to
+  // toSwiftName(npmName) at emit time.
   coreReactNative: boolean,
   siblingNames: Array<string>,
+  siblingSwiftNames?: {[npmName: string]: string},
   // Extra frameworks beyond the autolinker's default UIKit/Foundation/CoreGraphics
   // set. Merged with the defaults at emit time.
   extraFrameworks: Array<string>,

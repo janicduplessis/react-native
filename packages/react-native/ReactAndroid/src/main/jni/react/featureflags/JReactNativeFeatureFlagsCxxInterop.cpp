@@ -4,7 +4,7 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  *
- * @generated SignedSource<<28de1e205f30135e96d5cb94a902faec>>
+ * @generated SignedSource<<7513432f85b9832654814f381b13fe97>>
  */
 
 /**
@@ -108,12 +108,6 @@ class ReactNativeFeatureFlagsJavaProvider
   bool enableAccumulatedUpdatesInRawPropsAndroid() override {
     static const auto method =
         getReactNativeFeatureFlagsProviderJavaClass()->getMethod<jboolean()>("enableAccumulatedUpdatesInRawPropsAndroid");
-    return method(javaProvider_);
-  }
-
-  bool enableAndroidFontWeightAdjustment() override {
-    static const auto method =
-        getReactNativeFeatureFlagsProviderJavaClass()->getMethod<jboolean()>("enableAndroidFontWeightAdjustment");
     return method(javaProvider_);
   }
 
@@ -294,6 +288,12 @@ class ReactNativeFeatureFlagsJavaProvider
   bool enablePropsUpdateReconciliationAndroid() override {
     static const auto method =
         getReactNativeFeatureFlagsProviderJavaClass()->getMethod<jboolean()>("enablePropsUpdateReconciliationAndroid");
+    return method(javaProvider_);
+  }
+
+  bool enableResizeObserverByDefault() override {
+    static const auto method =
+        getReactNativeFeatureFlagsProviderJavaClass()->getMethod<jboolean()>("enableResizeObserverByDefault");
     return method(javaProvider_);
   }
 
@@ -625,11 +625,6 @@ bool JReactNativeFeatureFlagsCxxInterop::enableAccumulatedUpdatesInRawPropsAndro
   return ReactNativeFeatureFlags::enableAccumulatedUpdatesInRawPropsAndroid();
 }
 
-bool JReactNativeFeatureFlagsCxxInterop::enableAndroidFontWeightAdjustment(
-    facebook::jni::alias_ref<JReactNativeFeatureFlagsCxxInterop> /*unused*/) {
-  return ReactNativeFeatureFlags::enableAndroidFontWeightAdjustment();
-}
-
 bool JReactNativeFeatureFlagsCxxInterop::enableAndroidTextMeasurementOptimizations(
     facebook::jni::alias_ref<JReactNativeFeatureFlagsCxxInterop> /*unused*/) {
   return ReactNativeFeatureFlags::enableAndroidTextMeasurementOptimizations();
@@ -778,6 +773,11 @@ bool JReactNativeFeatureFlagsCxxInterop::enablePreparedTextLayout(
 bool JReactNativeFeatureFlagsCxxInterop::enablePropsUpdateReconciliationAndroid(
     facebook::jni::alias_ref<JReactNativeFeatureFlagsCxxInterop> /*unused*/) {
   return ReactNativeFeatureFlags::enablePropsUpdateReconciliationAndroid();
+}
+
+bool JReactNativeFeatureFlagsCxxInterop::enableResizeObserverByDefault(
+    facebook::jni::alias_ref<JReactNativeFeatureFlagsCxxInterop> /*unused*/) {
+  return ReactNativeFeatureFlags::enableResizeObserverByDefault();
 }
 
 bool JReactNativeFeatureFlagsCxxInterop::enableRuntimeSchedulerQueueClearingOnError(
@@ -1068,9 +1068,6 @@ void JReactNativeFeatureFlagsCxxInterop::registerNatives() {
         "enableAccumulatedUpdatesInRawPropsAndroid",
         JReactNativeFeatureFlagsCxxInterop::enableAccumulatedUpdatesInRawPropsAndroid),
       makeNativeMethod(
-        "enableAndroidFontWeightAdjustment",
-        JReactNativeFeatureFlagsCxxInterop::enableAndroidFontWeightAdjustment),
-      makeNativeMethod(
         "enableAndroidTextMeasurementOptimizations",
         JReactNativeFeatureFlagsCxxInterop::enableAndroidTextMeasurementOptimizations),
       makeNativeMethod(
@@ -1160,6 +1157,9 @@ void JReactNativeFeatureFlagsCxxInterop::registerNatives() {
       makeNativeMethod(
         "enablePropsUpdateReconciliationAndroid",
         JReactNativeFeatureFlagsCxxInterop::enablePropsUpdateReconciliationAndroid),
+      makeNativeMethod(
+        "enableResizeObserverByDefault",
+        JReactNativeFeatureFlagsCxxInterop::enableResizeObserverByDefault),
       makeNativeMethod(
         "enableRuntimeSchedulerQueueClearingOnError",
         JReactNativeFeatureFlagsCxxInterop::enableRuntimeSchedulerQueueClearingOnError),

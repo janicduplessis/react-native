@@ -65,6 +65,11 @@ const {
 } = require('./expand-spm-dependencies');
 const {readPodspec} = require('./read-podspec');
 const {
+  AUTOLINKED_PACKAGE_NAME,
+  REACT_CODEGEN_PACKAGE_NAME,
+  REACT_CODEGEN_PRODUCTS,
+  REACT_NATIVE_PACKAGE_NAME,
+  REACT_NATIVE_PRODUCTS,
   RemoteVersionError,
   findProjectRoot,
   makeLogger,
@@ -90,7 +95,7 @@ const {log, warn} = makeLogger('generate-spm-autolinking');
 let remoteCfg /*: ?{url: string, version: string, identity: string} */ = null;
 
 function reactNativePackageLabel() /*: string */ {
-  return remoteCfg != null ? remoteCfg.identity : 'ReactNative';
+  return remoteCfg != null ? remoteCfg.identity : REACT_NATIVE_PACKAGE_NAME;
 }
 function reactNativePackageDecl(localDecl /*: string */) /*: string */ {
   return remoteCfg != null
@@ -105,10 +110,11 @@ function reactNativePackageDecl(localDecl /*: string */) /*: string */ {
 function reactProducts() /*: Array<{name: string, package: string}> */ {
   const rn = reactNativePackageLabel();
   return [
-    {name: 'ReactHeaders', package: rn},
-    {name: 'ReactNativeHeaders', package: rn},
-    {name: 'ReactNativeDependenciesHeaders', package: rn},
-    {name: 'ReactAppHeaders', package: 'React-GeneratedCode'},
+    ...REACT_NATIVE_PRODUCTS.map(name => ({name, package: rn})),
+    ...REACT_CODEGEN_PRODUCTS.map(name => ({
+      name,
+      package: REACT_CODEGEN_PACKAGE_NAME,
+    })),
   ];
 }
 function reactProductDeps() /*: string */ {
@@ -147,7 +153,7 @@ function reactDescriptor(
     };
   } else if (absXcframeworks != null) {
     packageRef = {
-      name: 'ReactNative',
+      name: REACT_NATIVE_PACKAGE_NAME,
       path: toPosix(absXcframeworks),
       relPath:
         xcframeworksRelPath != null ? toPosix(xcframeworksRelPath) : undefined,
@@ -156,7 +162,7 @@ function reactDescriptor(
     return null;
   }
   const products = reactProducts().filter(
-    p => p.package !== 'React-GeneratedCode' || codegenPackageExists,
+    p => p.package !== REACT_CODEGEN_PACKAGE_NAME || codegenPackageExists,
   );
   return {packageRef, products};
 }
@@ -232,7 +238,6 @@ function readAutolinkingJson(
  *         name: "MyNativeModule",
  *         path: "ios/MyNativeModule",            // relative to appRoot
  *         exclude: ["*.js", "*.podspec"],        // optional
- *         publicHeadersPath: ".",                // optional
  *       }
  *     ]
  *   }
@@ -900,12 +905,14 @@ function generateAutolinkedPackageSwift(
   ) {
     packageDeps.push(
       reactNativePackageDecl(
-        `.package(name: "ReactNative", path: "${xcframeworksRelPath}")`,
+        `.package(name: "${REACT_NATIVE_PACKAGE_NAME}", path: "${xcframeworksRelPath}")`,
       ),
     );
     // Per-app generated headers come from the ReactAppHeaders product in
     // the codegen package (sibling of the autolinking dir).
-    packageDeps.push(`.package(name: "React-GeneratedCode", path: "../ios")`);
+    packageDeps.push(
+      `.package(name: "${REACT_CODEGEN_PACKAGE_NAME}", path: "../ios")`,
+    );
   }
 
   // AutolinkedAggregate's target dependencies: .product(...) for npm sub-package
@@ -1008,10 +1015,10 @@ import PackageDescription
 import Foundation
 
 ${guardBlock}let package = Package(
-    name: "Autolinked",
+    name: "${AUTOLINKED_PACKAGE_NAME}",
     platforms: [.iOS(.v15)],
     products: [
-        .library(name: "Autolinked", targets: ["AutolinkedAggregate"]),
+        .library(name: "${AUTOLINKED_PACKAGE_NAME}", targets: ["AutolinkedAggregate"]),
     ],
 ${packageDepsBlock}    targets: [
         .target(
@@ -1075,13 +1082,13 @@ function generateSynthPackageSwift(spec /*: SynthPackageSpec */) /*: string */ {
       spec.codegenPackagePath ?? '../../../ios';
     packageDeps.push(
       reactNativePackageDecl(
-        `.package(name: "ReactNative", path: "${reactNativePackagePath}")`,
+        `.package(name: "${REACT_NATIVE_PACKAGE_NAME}", path: "${reactNativePackagePath}")`,
       ),
     );
     // Per-app generated headers come from the ReactAppHeaders product in
     // the codegen package.
     packageDeps.push(
-      `.package(name: "React-GeneratedCode", path: "${codegenPackagePath}")`,
+      `.package(name: "${REACT_CODEGEN_PACKAGE_NAME}", path: "${codegenPackagePath}")`,
     );
   }
   for (const dep of spmDependencies) {
@@ -1288,8 +1295,39 @@ function main(argv /*:: ?: Array<string> */) /*: void */ {
       discoveredPlugins.map(p => p.depName),
     );
 
+    // Skipped means no sibling package is created for the host either, so a
+    // dep declaring it in `spm.dependencies` gets a package reference to a
+    // path this run never writes — SPM then reports only the missing path.
+    // Only manifests React Native emits can carry that reference: a dep
+    // shipping its own Package.swift declares its package references itself,
+    // and the classification loop below would treat it as self-managed.
+    const pluginHostDependents /*: Map<string, Array<string>> */ = new Map();
+    for (const dep of allDeps) {
+      const declaredHosts = (dep.spmDependencies ?? []).filter(name =>
+        pluginHostDeps.has(name),
+      );
+      if (declaredHosts.length === 0) {
+        continue;
+      }
+      const sourceDir = dep.platforms.ios.sourceDir ?? dep.root;
+      if (sourceDir == null || findSelfManagedPackageDir(sourceDir) != null) {
+        continue;
+      }
+      for (const host of declaredHosts) {
+        const dependents = pluginHostDependents.get(host) ?? [];
+        dependents.push(dep.name);
+        pluginHostDependents.set(host, dependents);
+      }
+    }
+
     for (const dep of allDeps) {
       if (pluginHostDeps.has(dep.name)) {
+        const dependents = pluginHostDependents.get(dep.name);
+        if (dependents != null) {
+          throw new Error(
+            `react-native autolinking: '${dep.name}' ships an SPM autolinking plugin, which owns its native contribution — so React Native does not build it as a sibling target for anything to depend on. It is declared in 'spm.dependencies' by ${dependents.map(name => `'${name}'`).join(', ')}. Remove it there; nothing is lost. Its plugin links its products into the app and resolves its own ecosystem's dependencies, so a library that builds against it does not declare it here.`,
+          );
+        }
         log(
           `Skipping ${dep.name} target generation — provided by its SPM autolinking plugin`,
         );
@@ -1334,7 +1372,9 @@ function main(argv /*:: ?: Array<string> */) /*: void */ {
         name: mod.name,
         path: relPath,
         exclude: mod.exclude ?? [],
-        publicHeadersPath: mod.publicHeadersPath ?? null,
+        // The synth wrapper owns the module's public interface: it declares
+        // publicHeadersPath: "include", a symlink to the module's header tree.
+        publicHeadersPath: null,
         sources: userSources,
       },
       origin: 'spmModule',
