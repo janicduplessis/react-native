@@ -1707,9 +1707,6 @@ interface RCTRootViewFactoryConfiguration : public NSObject {
   public virtual instancetype initWithBundleURLBlock:newArchEnabled:turboModuleEnabled:bridgelessEnabled:(RCTBundleURLBlock bundleURLBlock, BOOL newArchEnabled, BOOL turboModuleEnabled, BOOL bridgelessEnabled);
 }
 
-interface RCTSafeAreaViewComponentView : public RCTViewComponentView {
-}
-
 interface RCTScheduler : public NSObject {
   public @property (assign, readonly) const std::shared_ptr<facebook::react::UIManager> uiManager;
   public @property (weak) id<RCTSchedulerDelegate> delegate;
@@ -3004,9 +3001,6 @@ protocol RCTRootViewDelegate : public NSObject {
   public virtual void rootViewDidChangeIntrinsicSize:(RCTRootView* rootView);
 }
 
-protocol RCTSafeAreaViewViewProtocol : public NSObject {
-}
-
 protocol RCTSchedulerDelegate {
   public virtual void schedulerDidDispatchCommand:commandName:args:(const facebook::react::ShadowView& shadowView, const std::string& commandName, const folly::dynamic& args);
   public virtual void schedulerDidFinishTransaction:(std::shared_ptr<const facebook::react::MountingCoordinator> mountingCoordinator);
@@ -3405,7 +3399,6 @@ const char facebook::react::ParagraphComponentName[];
 const char facebook::react::RawTextComponentName[];
 const char facebook::react::RootComponentName[];
 const char facebook::react::RuntimeSchedulerKey[];
-const char facebook::react::SafeAreaViewComponentName[];
 const char facebook::react::ScrollViewComponentName[];
 const char facebook::react::TextComponentName[];
 const char facebook::react::TextEffectComponentName[];
@@ -6765,24 +6758,6 @@ class facebook::react::RuntimeScheduler_Modern : public facebook::react::Runtime
   public virtual void setResizeObserverDelegate(facebook::react::RuntimeSchedulerResizeObserverDelegate* resizeObserverDelegate) override;
   public virtual void setShadowTreeRevisionConsistencyManager(facebook::react::ShadowTreeRevisionConsistencyManager* shadowTreeRevisionConsistencyManager) override;
   public virtual void unregisterTaskQueueSource(uint64_t sourceId) override;
-}
-
-class facebook::react::SafeAreaViewComponentDescriptor : public facebook::react::ConcreteComponentDescriptor<facebook::react::SafeAreaViewShadowNode> {
-}
-
-class facebook::react::SafeAreaViewEventEmitter : public facebook::react::BaseViewEventEmitter {
-}
-
-class facebook::react::SafeAreaViewProps : public facebook::react::HostPlatformViewProps {
-  public SafeAreaViewProps() = default;
-  public SafeAreaViewProps(const facebook::react::PropsParserContext& context, const facebook::react::SafeAreaViewProps& sourceProps, const facebook::react::RawProps& rawProps);
-}
-
-class facebook::react::SafeAreaViewShadowNode : public facebook::react::ConcreteViewShadowNode<facebook::react::SafeAreaViewComponentName, facebook::react::SafeAreaViewProps, facebook::react::ViewEventEmitter, facebook::react::SafeAreaViewState> {
-}
-
-class facebook::react::SafeAreaViewState {
-  public facebook::react::EdgeInsets padding;
 }
 
 class facebook::react::Scheduler : public facebook::react::UIManagerDelegate {
