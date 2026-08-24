@@ -1157,32 +1157,24 @@ class UtilsTests < Test::Unit::TestCase
     end
 
     # ================================ #
-    # Test - ccache launcher script    #
+    # Test - ccache launcher env       #
     # ================================ #
 
-    def test_ccacheLauncherScript_embedsResolvedCcachePath
+    def test_ccacheLauncherEnv_exportsResolvedPaths
         # Act
-        script = ReactNativePodsUtils.ccache_launcher_script("clang", "/opt/homebrew/bin/ccache", "/app/rn/scripts/xcode/ccache.conf")
+        env = ReactNativePodsUtils.ccache_launcher_env("/opt/homebrew/bin/ccache", "/app/rn/scripts/xcode/ccache.conf")
 
         # Assert
-        assert_equal('exec "/opt/homebrew/bin/ccache" clang "$@"', script.lines.last.chomp)
+        assert(env.include?("REACT_NATIVE_CCACHE_BINARY=/opt/homebrew/bin/ccache\n"))
+        assert(env.include?("REACT_NATIVE_CCACHE_CONFIGPATH=/app/rn/scripts/xcode/ccache.conf\n"))
     end
 
-    def test_ccacheLauncherScript_embedsResolvedConfigPath
+    def test_ccacheLauncherEnv_escapesPathsWithSpaces
         # Act
-        script = ReactNativePodsUtils.ccache_launcher_script("clang", "/opt/homebrew/bin/ccache", "/app/rn/scripts/xcode/ccache.conf")
+        env = ReactNativePodsUtils.ccache_launcher_env("/opt/homebrew/bin/ccache", "/Users/me/My App/rn/ccache.conf")
 
         # Assert
-        assert(script.include?("REACT_NATIVE_CCACHE_CONFIGPATH=/app/rn/scripts/xcode/ccache.conf"))
-        assert(script.include?('${CCACHE_CONFIGPATH:-$REACT_NATIVE_CCACHE_CONFIGPATH}'))
-    end
-
-    def test_ccacheLauncherScript_forCpp_execsClangpp
-        # Act
-        script = ReactNativePodsUtils.ccache_launcher_script("clang++", "/usr/local/bin/ccache", "/tmp/ccache.conf")
-
-        # Assert
-        assert_equal('exec "/usr/local/bin/ccache" clang++ "$@"', script.lines.last.chomp)
+        assert(env.include?("REACT_NATIVE_CCACHE_CONFIGPATH=/Users/me/My\\ App/rn/ccache.conf\n"))
     end
 
 end
