@@ -167,6 +167,15 @@ class ReactNativePodsUtils
         ENVFILE
     end
 
+    # Older React Native versions pointed the build settings at the copy of the
+    # launcher shipped in node_modules, so both paths have to be recognized.
+    def self.remove_ccache_launcher(value, launcher_name)
+        [
+            File.join("$(PODS_ROOT)", launcher_name),
+            File.join("$(REACT_NATIVE_PATH)", 'scripts', 'xcode', launcher_name)
+        ].reduce(value) { |result, path| result.gsub(path, '') }
+    end
+
     def self.generate_ccache_launchers(installer, react_native_path, ccache_path)
         pods_root = installer.sandbox.root.to_s
         config_path = File.expand_path(
@@ -217,20 +226,24 @@ class ReactNativePodsUtils
             end
 
             self.generate_ccache_launchers(installer, react_native_path, ccache_path)
-        elsif ccache_available and !ccache_enabled
-            Pod::UI.puts("#{message_prefix}: Pass ':ccache_enabled => true' to 'react_native_post_install' in your Podfile or set environment variable 'USE_CCACHE=1' to increase the speed of subsequent builds")
-        elsif !ccache_available and ccache_enabled
-            Pod::UI.warn("#{message_prefix}: Install ccache or ensure your neither passing ':ccache_enabled => true' nor setting environment variable 'USE_CCACHE=1'")
         else
-            Pod::UI.puts("#{message_prefix}: Removing Ccache from CC, LD, CXX & LDPLUSPLUS build settings")
+            if ccache_available and !ccache_enabled
+                Pod::UI.puts("#{message_prefix}: Pass ':ccache_enabled => true' to 'react_native_post_install' in your Podfile or set environment variable 'USE_CCACHE=1' to increase the speed of subsequent builds")
+            elsif !ccache_available and ccache_enabled
+                Pod::UI.warn("#{message_prefix}: Install ccache or ensure your neither passing ':ccache_enabled => true' nor setting environment variable 'USE_CCACHE=1'")
+            else
+                Pod::UI.puts("#{message_prefix}: Removing Ccache from CC, LD, CXX & LDPLUSPLUS build settings")
+            end
 
+            # The launchers only exist when this install created them, so the
+            # settings cannot be left behind in any of these cases.
             projects.each do |project|
                 project.build_configurations.each do |config|
                     # Using the un-qualified names means you can swap in different implementations, for example ccache
-                    config.build_settings["CC"] = config.build_settings["CC"].gsub(/#{Regexp.escape(ccache_clang_sh)}/, '') if config.build_settings["CC"]
-                    config.build_settings["LD"] = config.build_settings["LD"].gsub(/#{Regexp.escape(ccache_clang_sh)}/, "") if config.build_settings["LD"]
-                    config.build_settings["CXX"] = config.build_settings["CXX"].gsub(/#{Regexp.escape(ccache_clangpp_sh)}/, "") if config.build_settings["CXX"]
-                    config.build_settings["LDPLUSPLUS"] = config.build_settings["LDPLUSPLUS"].gsub(/#{Regexp.escape(ccache_clangpp_sh)}/, "") if config.build_settings["LDPLUSPLUS"]
+                    config.build_settings["CC"] = self.remove_ccache_launcher(config.build_settings["CC"], 'ccache-clang.sh') if config.build_settings["CC"]
+                    config.build_settings["LD"] = self.remove_ccache_launcher(config.build_settings["LD"], 'ccache-clang.sh') if config.build_settings["LD"]
+                    config.build_settings["CXX"] = self.remove_ccache_launcher(config.build_settings["CXX"], 'ccache-clang++.sh') if config.build_settings["CXX"]
+                    config.build_settings["LDPLUSPLUS"] = self.remove_ccache_launcher(config.build_settings["LDPLUSPLUS"], 'ccache-clang++.sh') if config.build_settings["LDPLUSPLUS"]
                 end
 
                 project.save()
