@@ -86,6 +86,32 @@ static void (^sOnInit)(void);
 
 @end
 
+@interface FakeDevSettings : FakeEagerModule
+- (void)setupHMRClientWithBundleURL:(NSURL *)bundleURL;
+@end
+
+@implementation FakeDevSettings
+
+static NSString *const FakeDevSettingsInitialize = @"DevSettings.initialize";
+
++ (NSString *)moduleName
+{
+  return @"DevSettings";
+}
+
+- (void)initialize
+{
+  @synchronized([FakeDevSettings initCounts]) {
+    [[FakeDevSettings initCounts] addObject:FakeDevSettingsInitialize];
+  }
+}
+
+- (void)setupHMRClientWithBundleURL:(__unused NSURL *)bundleURL
+{
+}
+
+@end
+
 @interface RCTInstanceTests : XCTestCase
 @end
 
@@ -108,8 +134,12 @@ static void (^sOnInit)(void);
   OCMStub([_mockTMMDelegate getModuleClassFromName:nullptr]).ignoringNonObjectArgs().andDo(^(NSInvocation *invocation) {
     const char *requestedName = nullptr;
     [invocation getArgument:&requestedName atIndex:2];
-    Class result =
-        (requestedName != nullptr && strcmp(requestedName, "FakeEagerModule") == 0) ? [FakeEagerModule class] : Nil;
+    Class result = Nil;
+    if (requestedName != nullptr && strcmp(requestedName, "FakeEagerModule") == 0) {
+      result = [FakeEagerModule class];
+    } else if (requestedName != nullptr && strcmp(requestedName, "DevSettings") == 0) {
+      result = [FakeDevSettings class];
+    }
     [invocation setReturnValue:&result];
   });
 }
@@ -170,6 +200,25 @@ static void (^sOnInit)(void);
       @"FakeEagerModule should have been constructed exactly once during eager setup");
 
   [instance invalidate];
+}
+
+- (void)testInitializesDevSettingsBeforeLoadingBundle
+{
+  OCMStub([_mockDelegate unstableModulesRequiringMainQueueSetup]).andReturn(@[]);
+
+  XCTestExpectation *loadStarted = [self expectationWithDescription:@"bundle load started"];
+  __block NSUInteger initializeCountAtBundleLoad = 0;
+  OCMStub([_mockDelegate loadBundleAtURL:[OCMArg any] onProgress:[OCMArg any] onComplete:[OCMArg any]])
+      .andDo(^(NSInvocation *_) {
+        initializeCountAtBundleLoad = [FakeDevSettings.initCounts countForObject:FakeDevSettingsInitialize];
+        [loadStarted fulfill];
+      });
+
+  RCTInstance *instance = [self makeInstance];
+  [self waitForExpectations:@[ loadStarted ] timeout:5.0];
+  [instance invalidate];
+
+  XCTAssertEqual(initializeCountAtBundleLoad, 1u);
 }
 
 - (void)testBundleLoadAwaitsMainQueueModuleSetup

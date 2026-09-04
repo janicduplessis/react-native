@@ -543,6 +543,8 @@ __attribute__((deprecated(
   }
 #endif
 
+  RCTDevSettings *const devSettings = (RCTDevSettings *)[_turboModuleManager moduleForName:"DevSettings"];
+
   __weak __typeof(self) weakSelf = self;
   [_delegate loadBundleAtURL:sourceURL
       onProgress:^(RCTLoadingProgress *progressData) {
@@ -567,9 +569,6 @@ __attribute__((deprecated(
           [strongSelf handleBundleLoadingError:error];
           return;
         }
-        // DevSettings module is needed by _loadScriptFromSource's callback so prior initialization is required
-        RCTDevSettings *const devSettings =
-            (RCTDevSettings *)[strongSelf->_turboModuleManager moduleForName:"DevSettings"];
         [strongSelf _loadScriptFromSource:source];
         // Set up hot module reloading in Dev only.
         [strongSelf->_performanceLogger markStopForTag:RCTPLScriptDownload];
