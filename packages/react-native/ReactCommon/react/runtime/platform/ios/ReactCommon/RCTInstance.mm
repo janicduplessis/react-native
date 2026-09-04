@@ -521,6 +521,7 @@ __attribute__((deprecated(
     return;
   }
 
+  [_turboModuleManager moduleForName:"DevSettings"];
   RCTRedBox *redBox = [_turboModuleManager moduleForName:"RedBox"];
 
   RCTExecuteOnMainQueue(^{
@@ -563,12 +564,12 @@ __attribute__((deprecated(
           return;
         }
 
-        RCTDevSettings *const devSettings =
-            (RCTDevSettings *)[strongSelf->_turboModuleManager moduleForName:"DevSettings"];
         if (error) {
           [strongSelf handleBundleLoadingError:error];
           return;
         }
+        RCTDevSettings *const devSettings =
+            (RCTDevSettings *)[strongSelf->_turboModuleManager moduleForName:"DevSettings"];
         [strongSelf _loadScriptFromSource:source];
         // Set up hot module reloading in Dev only.
         [strongSelf->_performanceLogger markStopForTag:RCTPLScriptDownload];

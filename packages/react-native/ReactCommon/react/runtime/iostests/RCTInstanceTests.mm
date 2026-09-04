@@ -18,10 +18,6 @@
 
 using namespace facebook::react;
 
-@interface RCTInstance (RCTInstanceTests)
-- (void)handleBundleLoadingError:(NSError *)error;
-@end
-
 @interface FakeEagerModule : NSObject <RCTBridgeModule, RCTTurboModule>
 @property (class, readonly) NSCountedSet<NSString *> *initCounts;
 @property (class, nullable) void (^onInit)(void);
@@ -225,14 +221,34 @@ static NSString *const FakeDevSettingsInitialize = @"DevSettings.initialize";
 
   XCTAssertEqual([FakeDevSettings.initCounts countForObject:FakeDevSettingsInitialize], 0u);
 
-  id instanceMock = OCMPartialMock(instance);
-  OCMStub([instanceMock handleBundleLoadingError:[OCMArg any]]);
   loadComplete([NSError errorWithDomain:@"RCTInstanceTests" code:1 userInfo:nil], nil);
 
   XCTAssertEqual([FakeDevSettings.initCounts countForObject:FakeDevSettingsInitialize], 1u);
 
-  [instanceMock stopMocking];
   [instance invalidate];
+}
+
+- (void)testDoesNotInitializeDevSettingsAfterInvalidation
+{
+  OCMStub([_mockDelegate unstableModulesRequiringMainQueueSetup]).andReturn(@[]);
+
+  XCTestExpectation *loadStarted = [self expectationWithDescription:@"bundle load started"];
+  __block RCTSourceLoadBlock loadComplete;
+  OCMStub([_mockDelegate loadBundleAtURL:[OCMArg any] onProgress:[OCMArg any] onComplete:[OCMArg any]])
+      .andDo(^(NSInvocation *invocation) {
+        __unsafe_unretained RCTSourceLoadBlock completion;
+        [invocation getArgument:&completion atIndex:4];
+        loadComplete = [completion copy];
+        [loadStarted fulfill];
+      });
+
+  RCTInstance *instance = [self makeInstance];
+  [self waitForExpectations:@[ loadStarted ] timeout:5.0];
+  [instance invalidate];
+
+  loadComplete([NSError errorWithDomain:@"RCTInstanceTests" code:1 userInfo:nil], nil);
+
+  XCTAssertEqual([FakeDevSettings.initCounts countForObject:FakeDevSettingsInitialize], 0u);
 }
 
 - (void)testBundleLoadAwaitsMainQueueModuleSetup
