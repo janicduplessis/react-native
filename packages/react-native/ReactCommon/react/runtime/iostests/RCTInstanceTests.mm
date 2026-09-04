@@ -13,6 +13,7 @@
 #import <React/RCTJavaScriptLoader.h>
 #import <ReactCommon/RCTHermesInstance.h>
 #import <ReactCommon/RCTInstance.h>
+#import <ReactCommon/RCTJSThreadManager.h>
 #import <ReactCommon/RCTTurboModule.h>
 #import <ReactCommon/RCTTurboModuleManager.h>
 
@@ -244,11 +245,22 @@ static NSString *const FakeDevSettingsInitialize = @"DevSettings.initialize";
 
   RCTInstance *instance = [self makeInstance];
   [self waitForExpectations:@[ loadStarted ] timeout:5.0];
+
+  dispatch_semaphore_t jsThreadBlocked = dispatch_semaphore_create(0);
+  dispatch_semaphore_t releaseJsThread = dispatch_semaphore_create(0);
+  RCTJSThreadManager *jsThreadManager = [instance valueForKey:@"jsThreadManager"];
+  [jsThreadManager dispatchToJSThread:^{
+    dispatch_semaphore_signal(jsThreadBlocked);
+    dispatch_semaphore_wait(releaseJsThread, DISPATCH_TIME_FOREVER);
+  }];
+  XCTAssertEqual(dispatch_semaphore_wait(jsThreadBlocked, dispatch_time(DISPATCH_TIME_NOW, 5 * NSEC_PER_SEC)), 0);
+
   [instance invalidate];
 
   loadComplete([NSError errorWithDomain:@"RCTInstanceTests" code:1 userInfo:nil], nil);
 
   XCTAssertEqual([FakeDevSettings.initCounts countForObject:FakeDevSettingsInitialize], 0u);
+  dispatch_semaphore_signal(releaseJsThread);
 }
 
 - (void)testBundleLoadAwaitsMainQueueModuleSetup
