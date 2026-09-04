@@ -543,8 +543,6 @@ __attribute__((deprecated(
   }
 #endif
 
-  RCTDevSettings *const devSettings = (RCTDevSettings *)[_turboModuleManager moduleForName:"DevSettings"];
-
   __weak __typeof(self) weakSelf = self;
   [_delegate loadBundleAtURL:sourceURL
       onProgress:^(RCTLoadingProgress *progressData) {
@@ -565,6 +563,8 @@ __attribute__((deprecated(
           return;
         }
 
+        RCTDevSettings *const devSettings =
+            (RCTDevSettings *)[strongSelf->_turboModuleManager moduleForName:"DevSettings"];
         if (error) {
           [strongSelf handleBundleLoadingError:error];
           return;

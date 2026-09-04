@@ -8,6 +8,7 @@
 #import <XCTest/XCTest.h>
 
 #import <OCMock/OCMock.h>
+#import <React/RCTAssert.h>
 #import <React/RCTBridgeModule.h>
 #import <React/RCTBundleManager.h>
 #import <React/RCTJavaScriptLoader.h>
@@ -202,23 +203,34 @@ static NSString *const FakeDevSettingsInitialize = @"DevSettings.initialize";
   [instance invalidate];
 }
 
-- (void)testInitializesDevSettingsBeforeLoadingBundle
+- (void)testInitializesDevSettingsAfterBundleLoadFailure
 {
   OCMStub([_mockDelegate unstableModulesRequiringMainQueueSetup]).andReturn(@[]);
 
   XCTestExpectation *loadStarted = [self expectationWithDescription:@"bundle load started"];
-  __block NSUInteger initializeCountAtBundleLoad = 0;
+  __block RCTSourceLoadBlock loadComplete;
   OCMStub([_mockDelegate loadBundleAtURL:[OCMArg any] onProgress:[OCMArg any] onComplete:[OCMArg any]])
-      .andDo(^(NSInvocation *_) {
-        initializeCountAtBundleLoad = [FakeDevSettings.initCounts countForObject:FakeDevSettingsInitialize];
+      .andDo(^(NSInvocation *invocation) {
+        __unsafe_unretained RCTSourceLoadBlock completion;
+        [invocation getArgument:&completion atIndex:4];
+        loadComplete = [completion copy];
         [loadStarted fulfill];
       });
 
   RCTInstance *instance = [self makeInstance];
   [self waitForExpectations:@[ loadStarted ] timeout:5.0];
-  [instance invalidate];
 
-  XCTAssertEqual(initializeCountAtBundleLoad, 1u);
+  XCTAssertEqual([FakeDevSettings.initCounts countForObject:FakeDevSettingsInitialize], 0u);
+
+  RCTFatalHandler previousFatalHandler = RCTGetFatalHandler();
+  RCTSetFatalHandler(^(__unused NSError *error){
+  });
+  loadComplete([NSError errorWithDomain:@"RCTInstanceTests" code:1 userInfo:nil], nil);
+  RCTSetFatalHandler(previousFatalHandler);
+
+  XCTAssertEqual([FakeDevSettings.initCounts countForObject:FakeDevSettingsInitialize], 1u);
+
+  [instance invalidate];
 }
 
 - (void)testBundleLoadAwaitsMainQueueModuleSetup
