@@ -8,7 +8,6 @@
 #import <XCTest/XCTest.h>
 
 #import <OCMock/OCMock.h>
-#import <React/RCTAssert.h>
 #import <React/RCTBridgeModule.h>
 #import <React/RCTBundleManager.h>
 #import <React/RCTJavaScriptLoader.h>
@@ -18,6 +17,10 @@
 #import <ReactCommon/RCTTurboModuleManager.h>
 
 using namespace facebook::react;
+
+@interface RCTInstance (RCTInstanceTests)
+- (void)handleBundleLoadingError:(NSError *)error;
+@end
 
 @interface FakeEagerModule : NSObject <RCTBridgeModule, RCTTurboModule>
 @property (class, readonly) NSCountedSet<NSString *> *initCounts;
@@ -222,14 +225,13 @@ static NSString *const FakeDevSettingsInitialize = @"DevSettings.initialize";
 
   XCTAssertEqual([FakeDevSettings.initCounts countForObject:FakeDevSettingsInitialize], 0u);
 
-  RCTFatalHandler previousFatalHandler = RCTGetFatalHandler();
-  RCTSetFatalHandler(^(__unused NSError *error){
-  });
+  id instanceMock = OCMPartialMock(instance);
+  OCMStub([instanceMock handleBundleLoadingError:[OCMArg any]]);
   loadComplete([NSError errorWithDomain:@"RCTInstanceTests" code:1 userInfo:nil], nil);
-  RCTSetFatalHandler(previousFatalHandler);
 
   XCTAssertEqual([FakeDevSettings.initCounts countForObject:FakeDevSettingsInitialize], 1u);
 
+  [instanceMock stopMocking];
   [instance invalidate];
 }
 
