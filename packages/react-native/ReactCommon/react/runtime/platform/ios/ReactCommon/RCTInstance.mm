@@ -521,7 +521,6 @@ __attribute__((deprecated(
     return;
   }
 
-  [_turboModuleManager moduleForName:"DevSettings"];
   RCTRedBox *redBox = [_turboModuleManager moduleForName:"RedBox"];
 
   RCTExecuteOnMainQueue(^{
@@ -536,6 +535,9 @@ __attribute__((deprecated(
 
 - (void)_loadJSBundle:(NSURL *)sourceURL
 {
+  // Initialize DevSettings before the request so Metro can reload after an initial bundle failure.
+  [_turboModuleManager moduleForName:"DevSettings"];
+
 #if RCT_DEV_MENU && __has_include(<React/RCTDevLoadingViewProtocol.h>)
   {
     id<RCTDevLoadingViewProtocol> loadingView =

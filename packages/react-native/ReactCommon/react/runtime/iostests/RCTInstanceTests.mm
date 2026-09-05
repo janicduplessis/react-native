@@ -13,7 +13,6 @@
 #import <React/RCTJavaScriptLoader.h>
 #import <ReactCommon/RCTHermesInstance.h>
 #import <ReactCommon/RCTInstance.h>
-#import <ReactCommon/RCTJSThreadManager.h>
 #import <ReactCommon/RCTTurboModule.h>
 #import <ReactCommon/RCTTurboModuleManager.h>
 
@@ -87,32 +86,6 @@ static void (^sOnInit)(void);
 
 @end
 
-@interface FakeDevSettings : FakeEagerModule
-- (void)setupHMRClientWithBundleURL:(NSURL *)bundleURL;
-@end
-
-@implementation FakeDevSettings
-
-static NSString *const FakeDevSettingsInitialize = @"DevSettings.initialize";
-
-+ (NSString *)moduleName
-{
-  return @"DevSettings";
-}
-
-- (void)initialize
-{
-  @synchronized([FakeDevSettings initCounts]) {
-    [[FakeDevSettings initCounts] addObject:FakeDevSettingsInitialize];
-  }
-}
-
-- (void)setupHMRClientWithBundleURL:(__unused NSURL *)bundleURL
-{
-}
-
-@end
-
 @interface RCTInstanceTests : XCTestCase
 @end
 
@@ -135,12 +108,8 @@ static NSString *const FakeDevSettingsInitialize = @"DevSettings.initialize";
   OCMStub([_mockTMMDelegate getModuleClassFromName:nullptr]).ignoringNonObjectArgs().andDo(^(NSInvocation *invocation) {
     const char *requestedName = nullptr;
     [invocation getArgument:&requestedName atIndex:2];
-    Class result = Nil;
-    if (requestedName != nullptr && strcmp(requestedName, "FakeEagerModule") == 0) {
-      result = [FakeEagerModule class];
-    } else if (requestedName != nullptr && strcmp(requestedName, "DevSettings") == 0) {
-      result = [FakeDevSettings class];
-    }
+    Class result =
+        (requestedName != nullptr && strcmp(requestedName, "FakeEagerModule") == 0) ? [FakeEagerModule class] : Nil;
     [invocation setReturnValue:&result];
   });
 }
@@ -201,66 +170,6 @@ static NSString *const FakeDevSettingsInitialize = @"DevSettings.initialize";
       @"FakeEagerModule should have been constructed exactly once during eager setup");
 
   [instance invalidate];
-}
-
-- (void)testInitializesDevSettingsAfterBundleLoadFailure
-{
-  OCMStub([_mockDelegate unstableModulesRequiringMainQueueSetup]).andReturn(@[]);
-
-  XCTestExpectation *loadStarted = [self expectationWithDescription:@"bundle load started"];
-  __block RCTSourceLoadBlock loadComplete;
-  OCMStub([_mockDelegate loadBundleAtURL:[OCMArg any] onProgress:[OCMArg any] onComplete:[OCMArg any]])
-      .andDo(^(NSInvocation *invocation) {
-        __unsafe_unretained RCTSourceLoadBlock completion;
-        [invocation getArgument:&completion atIndex:4];
-        loadComplete = [completion copy];
-        [loadStarted fulfill];
-      });
-
-  RCTInstance *instance = [self makeInstance];
-  [self waitForExpectations:@[ loadStarted ] timeout:5.0];
-
-  XCTAssertEqual([FakeDevSettings.initCounts countForObject:FakeDevSettingsInitialize], 0u);
-
-  loadComplete([NSError errorWithDomain:@"RCTInstanceTests" code:1 userInfo:nil], nil);
-
-  XCTAssertEqual([FakeDevSettings.initCounts countForObject:FakeDevSettingsInitialize], 1u);
-
-  [instance invalidate];
-}
-
-- (void)testDoesNotInitializeDevSettingsAfterInvalidation
-{
-  OCMStub([_mockDelegate unstableModulesRequiringMainQueueSetup]).andReturn(@[]);
-
-  XCTestExpectation *loadStarted = [self expectationWithDescription:@"bundle load started"];
-  __block RCTSourceLoadBlock loadComplete;
-  OCMStub([_mockDelegate loadBundleAtURL:[OCMArg any] onProgress:[OCMArg any] onComplete:[OCMArg any]])
-      .andDo(^(NSInvocation *invocation) {
-        __unsafe_unretained RCTSourceLoadBlock completion;
-        [invocation getArgument:&completion atIndex:4];
-        loadComplete = [completion copy];
-        [loadStarted fulfill];
-      });
-
-  RCTInstance *instance = [self makeInstance];
-  [self waitForExpectations:@[ loadStarted ] timeout:5.0];
-
-  dispatch_semaphore_t jsThreadBlocked = dispatch_semaphore_create(0);
-  dispatch_semaphore_t releaseJsThread = dispatch_semaphore_create(0);
-  RCTJSThreadManager *jsThreadManager = [instance valueForKey:@"jsThreadManager"];
-  [jsThreadManager dispatchToJSThread:^{
-    dispatch_semaphore_signal(jsThreadBlocked);
-    dispatch_semaphore_wait(releaseJsThread, DISPATCH_TIME_FOREVER);
-  }];
-  XCTAssertEqual(dispatch_semaphore_wait(jsThreadBlocked, dispatch_time(DISPATCH_TIME_NOW, 5 * NSEC_PER_SEC)), 0);
-
-  [instance invalidate];
-
-  loadComplete([NSError errorWithDomain:@"RCTInstanceTests" code:1 userInfo:nil], nil);
-
-  XCTAssertEqual([FakeDevSettings.initCounts countForObject:FakeDevSettingsInitialize], 0u);
-  dispatch_semaphore_signal(releaseJsThread);
 }
 
 - (void)testBundleLoadAwaitsMainQueueModuleSetup
