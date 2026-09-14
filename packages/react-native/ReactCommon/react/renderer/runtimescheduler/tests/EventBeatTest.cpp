@@ -153,16 +153,26 @@ TEST_F(EventBeatTest, synchronousRequestIsNotStrandedBehindScheduledBeat) {
   // A synchronous request arriving now must still be processed by its induce
   // instead of being silently deferred behind the scheduled beat.
   eventBeat_->requestSynchronous();
-  std::thread driver([this]() {
-    stubQueue_->waitForTask();
-    stubQueue_->tick();
-    stubQueue_->waitForTask();
-    stubQueue_->tick();
-  });
-  eventBeat_->induce();
-  driver.join();
+  std::thread inducer([this]() { eventBeat_->induce(); });
 
+  // Wait until the synchronous access request joins the already-queued work
+  // item, so that the tick order below is deterministic.
+  stubQueue_->waitForTasks(2);
+
+  // The scheduled beat's work item yields to the pending synchronous access
+  // without executing.
+  stubQueue_->tick();
+  EXPECT_EQ(beatCount, 0);
+
+  // The synchronous access processes the beat within its induce.
+  stubQueue_->tick();
+  inducer.join();
+  EXPECT_EQ(beatCount, 1);
+
+  // The beat that yielded resumes afterwards; it was not lost.
+  stubQueue_->tick();
   EXPECT_EQ(beatCount, 2);
+  EXPECT_EQ(stubQueue_->size(), 0);
 }
 
 } // namespace facebook::react
