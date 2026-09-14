@@ -25,7 +25,8 @@ void EventBeat::request() const {
   isEventBeatRequested_ = true;
 }
 
-void EventBeat::requestSynchronous() const {
+void EventBeat::requestSynchronous(
+    std::optional<SurfaceId> /*surfaceId*/) const {
   react_native_assert(
       beatCallback_ &&
       "Unexpected state: EventBeat::setBeatCallback was not called before EventBeat::requestSynchronous.");

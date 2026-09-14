@@ -7,6 +7,8 @@
 
 #include "EventEmitter.h"
 
+#include <react/renderer/core/ShadowNodeFamily.h>
+
 #include <cxxreact/TraceSection.h>
 #include <folly/dynamic.h>
 #include <jsi/jsi.h>
@@ -227,6 +229,14 @@ void EventEmitter::setEnabled(bool enabled) {
       eventTarget_.reset();
     }
   }
+}
+
+std::optional<SurfaceId> EventEmitter::getSurfaceId() const {
+  std::scoped_lock lock(DispatchMutex());
+  if (auto shadowNodeFamily = shadowNodeFamily_.lock()) {
+    return shadowNodeFamily->getSurfaceId();
+  }
+  return std::nullopt;
 }
 
 void EventEmitter::setShadowNodeFamily(

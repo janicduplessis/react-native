@@ -7,6 +7,7 @@
 
 #pragma once
 
+#include <optional>
 #include <memory>
 #include <mutex>
 
@@ -64,6 +65,11 @@ class EventEmitter {
   const SharedEventTarget &getEventTarget() const;
 
   /*
+   * The surface of the corresponding ShadowNodeFamily, when one is attached.
+   */
+  std::optional<SurfaceId> getSurfaceId() const;
+
+  /*
    * Experimental API that will change in the future.
    */
   template <typename Lambda>
@@ -74,8 +80,10 @@ class EventEmitter {
       return;
     }
 
+    auto surfaceId = getSurfaceId();
+
     syncFunc();
-    eventDispatcher->experimental_flushSync();
+    eventDispatcher->experimental_flushSync(surfaceId);
   }
 
   /*

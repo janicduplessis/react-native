@@ -86,8 +86,9 @@ void EventQueue::onEnqueue() const {
   eventBeat_->request();
 }
 
-void EventQueue::experimental_flushSync() const {
-  eventBeat_->requestSynchronous();
+void EventQueue::experimental_flushSync(
+    std::optional<SurfaceId> surfaceId) const {
+  eventBeat_->requestSynchronous(surfaceId);
 }
 
 void EventQueue::onBeat(jsi::Runtime& runtime) const {

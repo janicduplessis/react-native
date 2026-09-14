@@ -292,11 +292,18 @@ class ReactRevisionMergeRunLoopObserverDelegate final : public RunLoopObserver::
   toolbox.runtimeExecutor = runtimeExecutor;
   toolbox.bridgelessBindingsExecutor = _bridgelessBindingsExecutor;
 
-  toolbox.eventBeatFactory =
-      [runtimeScheduler](std::shared_ptr<EventBeat::OwnerBox> ownerBox) -> std::unique_ptr<EventBeat> {
+  RCTSurfaceRegistry *surfaceRegistry = _surfaceRegistry;
+  toolbox.eventBeatFactory = [runtimeScheduler,
+                              surfaceRegistry](std::shared_ptr<EventBeat::OwnerBox> ownerBox) -> std::unique_ptr<EventBeat> {
     auto runLoopObserver =
         std::make_unique<const MainRunLoopObserver>(RunLoopObserver::Activity::BeforeWaiting, ownerBox->owner);
-    return std::make_unique<AppleEventBeat>(std::move(ownerBox), std::move(runLoopObserver), *runtimeScheduler);
+    // The registry is thread-safe, but the resolver is only called on the
+    // main thread from the display-phase flusher.
+    auto surfaceLayerResolver = [surfaceRegistry](SurfaceId surfaceId) -> CALayer * {
+      return [surfaceRegistry surfaceForRootTag:surfaceId].view.layer;
+    };
+    return std::make_unique<AppleEventBeat>(
+        std::move(ownerBox), std::move(runLoopObserver), *runtimeScheduler, std::move(surfaceLayerResolver));
   };
 
   RCTScheduler *scheduler = [[RCTScheduler alloc] initWithToolbox:toolbox];

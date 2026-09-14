@@ -40,49 +40,25 @@
 
 @end
 
-/*
- * The windows that can commit a Core Animation transaction: the visible ones
- * of every foreground scene.
- */
-static NSArray<UIWindow *> *RCTFlushableWindows(void)
-{
-  NSMutableArray<UIWindow *> *windows = [NSMutableArray new];
-  for (UIScene *scene in RCTSharedApplication().connectedScenes) {
-    if (![scene isKindOfClass:[UIWindowScene class]]) {
-      continue;
-    }
-    if (scene.activationState != UISceneActivationStateForegroundActive &&
-        scene.activationState != UISceneActivationStateForegroundInactive) {
-      continue;
-    }
-    for (UIWindow *window in ((UIWindowScene *)scene).windows) {
-      if (!window.hidden) {
-        [windows addObject:window];
-      }
-    }
-  }
-  if (windows.count == 0) {
-    // Apps on the legacy UIApplicationDelegate lifecycle own their window
-    // outside of any scene, so the enumeration above finds nothing.
-    UIWindow *keyWindow = RCTKeyWindow();
-    if (keyWindow != nil) {
-      [windows addObject:keyWindow];
-    }
-  }
-  return windows;
-}
-
 namespace facebook::react {
 
 /*
- * Owns the flusher layers and keeps one attached to every window's layer so
- * that whichever layer tree is being committed contains one of them.
+ * Owns the flusher layers, one per surface that has made a synchronous
+ * request, attached to the layer of that surface's root view. A request made
+ * from layout runs inside the commit of exactly that tree, so its layer is
+ * guaranteed a display phase in the current cycle — no assumption about
+ * which window is key or about all windows committing together.
  */
 class AppleEventBeat::DisplayPhaseFlusher {
  public:
-  DisplayPhaseFlusher(std::function<void()> callback, std::weak_ptr<const void> weakOwner)
+  DisplayPhaseFlusher(
+      std::function<void()> callback,
+      std::weak_ptr<const void> weakOwner,
+      SurfaceLayerResolver surfaceLayerResolver)
+      : surfaceLayerResolver_(std::move(surfaceLayerResolver))
   {
-    // Weak keys: a window that goes away takes its own layer with it.
+    // Weak keys: a root view that goes away takes its own flusher layer with
+    // it.
     layers_ = [NSMapTable weakToStrongObjectsMapTable];
     auto sharedCallback = std::make_shared<std::function<void()>>(std::move(callback));
     onDisplay_ = ^{
@@ -101,7 +77,7 @@ class AppleEventBeat::DisplayPhaseFlusher {
     // The beat can be destroyed on any thread; layer mutations belong on the
     // main thread. The block only retains the layers, and a display happening
     // before this executes is made safe by the owner check above.
-    NSMapTable<UIWindow *, RCTEventBeatFlusherLayer *> *layers = layers_;
+    NSMapTable<CALayer *, RCTEventBeatFlusherLayer *> *layers = layers_;
     RCTExecuteOnMainQueue(^{
       for (RCTEventBeatFlusherLayer *layer in layers.objectEnumerator) {
         layer.onDisplay = nil;
@@ -113,42 +89,47 @@ class AppleEventBeat::DisplayPhaseFlusher {
 
   /*
    * Schedules the callback to run in the display phase of the current (or
-   * next) Core Animation commit cycle. Main thread only.
-   *
-   * Every window gets a layer rather than only the key window: the request can
-   * come from any of them — a modal and the LogBox are windows of their own —
-   * and only a layer in a tree that is committed is displayed in this cycle.
-   * The induce the display triggers is coalescing, so the extra layers cost a
-   * dirty zero-sized layer each, not extra beats.
+   * next) Core Animation commit cycle, on the layer tree of the surface's
+   * root view. Main thread only. Does nothing when the surface has no mounted
+   * view; the run loop observer then processes the request on its ordinary
+   * schedule instead.
    */
-  void schedule() const
+  void schedule(SurfaceId surfaceId) const
   {
-    for (UIWindow *window in RCTFlushableWindows()) {
-      RCTEventBeatFlusherLayer *layer = [layers_ objectForKey:window];
-      if (layer == nil) {
-        layer = [RCTEventBeatFlusherLayer new];
-        layer.frame = CGRectZero;
-        layer.onDisplay = onDisplay_;
-        [layers_ setObject:layer forKey:window];
-      }
-      if (layer.superlayer != window.layer) {
-        [window.layer addSublayer:layer];
-      }
-      [layer setNeedsDisplay];
+    CALayer *hostLayer = surfaceLayerResolver_ ? surfaceLayerResolver_(surfaceId) : nil;
+    if (hostLayer == nil) {
+      return;
     }
+    RCTEventBeatFlusherLayer *layer = [layers_ objectForKey:hostLayer];
+    if (layer == nil) {
+      layer = [RCTEventBeatFlusherLayer new];
+      layer.frame = CGRectZero;
+      layer.onDisplay = onDisplay_;
+      [layers_ setObject:layer forKey:hostLayer];
+    }
+    if (layer.superlayer != hostLayer) {
+      [layer removeFromSuperlayer];
+      [hostLayer addSublayer:layer];
+    }
+    [layer setNeedsDisplay];
   }
 
  private:
-  NSMapTable<UIWindow *, RCTEventBeatFlusherLayer *> *layers_;
+  SurfaceLayerResolver surfaceLayerResolver_;
+  NSMapTable<CALayer *, RCTEventBeatFlusherLayer *> *layers_;
   void (^onDisplay_)(void);
 };
 
 AppleEventBeat::AppleEventBeat(std::shared_ptr<OwnerBox> ownerBox,
                                std::unique_ptr<const RunLoopObserver> uiRunLoopObserver,
-                               RuntimeScheduler &runtimeScheduler)
+                               RuntimeScheduler &runtimeScheduler,
+                               SurfaceLayerResolver surfaceLayerResolver)
     : EventBeat(std::move(ownerBox), runtimeScheduler),
       uiRunLoopObserver_(std::move(uiRunLoopObserver)),
-      displayPhaseFlusher_(std::make_unique<DisplayPhaseFlusher>([this]() { induce(); }, ownerBox_->owner))
+      displayPhaseFlusher_(std::make_unique<DisplayPhaseFlusher>(
+          [this]() { induce(); },
+          ownerBox_->owner,
+          std::move(surfaceLayerResolver)))
 {
   uiRunLoopObserver_->setDelegate(this);
   uiRunLoopObserver_->enable();
@@ -156,9 +137,9 @@ AppleEventBeat::AppleEventBeat(std::shared_ptr<OwnerBox> ownerBox,
 
 AppleEventBeat::~AppleEventBeat() = default;
 
-void AppleEventBeat::requestSynchronous() const
+void AppleEventBeat::requestSynchronous(std::optional<SurfaceId> surfaceId) const
 {
-  EventBeat::requestSynchronous();
+  EventBeat::requestSynchronous(surfaceId);
 
   // The run loop observer that ordinarily induces the beat runs before Core
   // Animation commits the frame. A synchronous request made while Core
@@ -167,8 +148,8 @@ void AppleEventBeat::requestSynchronous() const
   // Scheduling an induce in the display phase of the current commit cycle
   // processes it before this frame is presented. Multiple requests within one
   // cycle coalesce into a single induce.
-  if (RCTIsMainQueue()) {
-    displayPhaseFlusher_->schedule();
+  if (surfaceId.has_value() && RCTIsMainQueue()) {
+    displayPhaseFlusher_->schedule(*surfaceId);
   }
 }
 
