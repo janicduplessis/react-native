@@ -16,6 +16,7 @@ import type {
 import type {HostInstance} from '../../types/HostInstance';
 
 import View from '../../../../Libraries/Components/View/View';
+import I18nManager from '../../../../Libraries/ReactNative/I18nManager';
 import Dimensions from '../../../../Libraries/Utilities/Dimensions';
 import * as React from 'react';
 import {useCallback, useMemo, useState} from 'react';
@@ -49,18 +50,23 @@ component SafeAreaView(
     [experimental_onSafeAreaInsetsChange],
   );
 
-  const paddingStyle = useMemo(
-    () =>
-      insets == null
-        ? null
-        : {
-            paddingTop: insets.top,
-            paddingRight: insets.right,
-            paddingBottom: insets.bottom,
-            paddingLeft: insets.left,
-          },
-    [insets],
-  );
+  const paddingStyle = useMemo(() => {
+    if (insets == null) {
+      return null;
+    }
+    // Insets are physical edges, but Yoga remaps paddingLeft/paddingRight to
+    // start/end when I18nManager's swapLeftAndRightInRTL is on, which would
+    // pad the mirror-image edge in RTL. Swap the values so the physical edge
+    // keeps its inset.
+    const {isRTL, doLeftAndRightSwapInRTL} = I18nManager.getConstants();
+    const swap = isRTL && doLeftAndRightSwapInRTL;
+    return {
+      paddingTop: insets.top,
+      paddingRight: swap ? insets.left : insets.right,
+      paddingBottom: insets.bottom,
+      paddingLeft: swap ? insets.right : insets.left,
+    };
+  }, [insets]);
 
   return (
     <View
