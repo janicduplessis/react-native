@@ -201,20 +201,25 @@ static NSDictionary *RCTExportedDimensions(CGFloat fontScale)
 
   // We fallback to screen size if a key window is not found.
   CGSize windowSize = mainWindow != nil ? mainWindow.bounds.size : screenSize;
-  UIEdgeInsets safeAreaInsets = mainWindow != nil ? mainWindow.safeAreaInsets : UIEdgeInsetsZero;
 
-  NSDictionary<NSString *, id> *dimsWindow = @{
+  NSMutableDictionary<NSString *, id> *dimsWindow = [@{
     @"width" : @(windowSize.width),
     @"height" : @(windowSize.height),
     @"scale" : @(screen.scale),
     @"fontScale" : @(fontScale),
-    @"experimental_safeAreaInsets" : @{
+  } mutableCopy];
+  // The field is documented as absent when it cannot be measured; without a
+  // window there are no insets to report, and zero would read as a
+  // measurement.
+  if (mainWindow != nil) {
+    UIEdgeInsets safeAreaInsets = mainWindow.safeAreaInsets;
+    dimsWindow[@"experimental_safeAreaInsets"] = @{
       @"top" : @(safeAreaInsets.top),
       @"right" : @(safeAreaInsets.right),
       @"bottom" : @(safeAreaInsets.bottom),
       @"left" : @(safeAreaInsets.left)
-    }
-  };
+    };
+  }
 
   NSDictionary<NSString *, NSNumber *> *dimsScreen = @{
     @"width" : @(screenSize.width),
