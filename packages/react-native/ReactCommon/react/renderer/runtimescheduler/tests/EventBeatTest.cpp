@@ -25,6 +25,16 @@ class EventBeatTestFeatureFlags : public ReactNativeFeatureFlagsDefaults {
   }
 };
 
+/*
+ * `induce` is protected: production code induces from platform beat
+ * subclasses. The tests drive it directly, standing in for the platform.
+ */
+class TestEventBeat : public EventBeat {
+ public:
+  using EventBeat::EventBeat;
+  using EventBeat::induce;
+};
+
 class EventBeatTest : public testing::Test {
  protected:
   void SetUp() override {
@@ -49,7 +59,7 @@ class EventBeatTest : public testing::Test {
     ownerBox_ = std::make_shared<EventBeat::OwnerBox>();
     owner_ = std::make_shared<int>(0);
     ownerBox_->owner = owner_;
-    eventBeat_ = std::make_unique<EventBeat>(ownerBox_, *runtimeScheduler_);
+    eventBeat_ = std::make_unique<TestEventBeat>(ownerBox_, *runtimeScheduler_);
   }
 
   void TearDown() override {
@@ -61,7 +71,7 @@ class EventBeatTest : public testing::Test {
   std::unique_ptr<RuntimeScheduler> runtimeScheduler_;
   std::shared_ptr<EventBeat::OwnerBox> ownerBox_;
   std::shared_ptr<int> owner_;
-  std::unique_ptr<EventBeat> eventBeat_;
+  std::unique_ptr<TestEventBeat> eventBeat_;
 };
 
 TEST_F(EventBeatTest, induceWithoutRequestIsNoop) {
