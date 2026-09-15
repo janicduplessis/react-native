@@ -111,15 +111,6 @@ class EventBeat {
    */
   virtual void requestSynchronous() const;
 
-  /*
-   * Induces the next beat to happen as soon as possible.
-   * Receiver might ignore the call if a beat was not requested.
-   *
-   * Ordinarily called by the platform once per frame; also callable by a
-   * consumer right after `requestSynchronous` to process the queue immediately
-   * at the call site instead of at the next frame boundary.
-   */
-  void induce() const;
 
   /*
    * The callback will be executed once a consumer (for example EventQueue)
@@ -138,6 +129,16 @@ class EventBeat {
   void unstable_setInduceCallback(std::function<void()> callback);
 
  protected:
+  /*
+   * Induces the next beat to happen as soon as possible.
+   * Receiver might ignore the call if a beat was not requested.
+   *
+   * Called by platform implementations once per frame, and additionally
+   * right after a synchronous request to process the queue at the call
+   * site instead of at the next frame boundary.
+   */
+  void induce() const;
+
   BeatCallback beatCallback_;
   std::function<void()> induceCallback_;
   std::shared_ptr<OwnerBox> ownerBox_;
