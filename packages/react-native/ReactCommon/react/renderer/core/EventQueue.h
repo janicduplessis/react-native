@@ -7,6 +7,8 @@
 
 #pragma once
 
+#include <optional>
+#include <react/renderer/core/ReactPrimitives.h>
 #include <memory>
 #include <mutex>
 #include <vector>
@@ -61,7 +63,7 @@ class EventQueue {
   /*
    * Experimental API exposed to support EventEmitter::experimental_flushSync.
    */
-  void experimental_flushSync() const;
+  void experimental_flushSync(std::optional<Tag> tag) const;
 
  protected:
   /*

@@ -292,11 +292,19 @@ class ReactRevisionMergeRunLoopObserverDelegate final : public RunLoopObserver::
   toolbox.runtimeExecutor = runtimeExecutor;
   toolbox.bridgelessBindingsExecutor = _bridgelessBindingsExecutor;
 
-  toolbox.eventBeatFactory =
-      [runtimeScheduler](std::shared_ptr<EventBeat::OwnerBox> ownerBox) -> std::unique_ptr<EventBeat> {
+  RCTMountingManager *mountingManager = _mountingManager;
+  toolbox.eventBeatFactory = [runtimeScheduler,
+                              mountingManager](std::shared_ptr<EventBeat::OwnerBox> ownerBox) -> std::unique_ptr<EventBeat> {
     auto runLoopObserver =
         std::make_unique<const MainRunLoopObserver>(RunLoopObserver::Activity::BeforeWaiting, ownerBox->owner);
-    return std::make_unique<AppleEventBeat>(std::move(ownerBox), std::move(runLoopObserver), *runtimeScheduler);
+    // Main thread only (the flusher is scheduled from the main thread, and
+    // the registry lookup asserts it). findComponentViewWithTag: never
+    // creates views; an unmounted tag resolves to nil.
+    auto windowLayerResolver = [mountingManager](Tag tag) -> CALayer * {
+      return [mountingManager.componentViewRegistry findComponentViewWithTag:tag].window.layer;
+    };
+    return std::make_unique<AppleEventBeat>(
+        std::move(ownerBox), std::move(runLoopObserver), *runtimeScheduler, std::move(windowLayerResolver));
   };
 
   RCTScheduler *scheduler = [[RCTScheduler alloc] initWithToolbox:toolbox];

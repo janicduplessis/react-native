@@ -7,6 +7,7 @@
 
 #pragma once
 
+#include <optional>
 #include <memory>
 #include <mutex>
 
@@ -64,6 +65,12 @@ class EventEmitter {
   const SharedEventTarget &getEventTarget() const;
 
   /*
+   * The tag of the view this emitter belongs to, when it has an event target.
+   * Reads an immutable member of the target; takes no lock.
+   */
+  std::optional<Tag> getTag() const;
+
+  /*
    * Experimental API that will change in the future.
    */
   template <typename Lambda>
@@ -74,8 +81,10 @@ class EventEmitter {
       return;
     }
 
+    auto tag = getTag();
+
     syncFunc();
-    eventDispatcher->experimental_flushSync();
+    eventDispatcher->experimental_flushSync(tag);
   }
 
   /*

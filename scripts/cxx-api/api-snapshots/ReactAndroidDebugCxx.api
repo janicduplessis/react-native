@@ -2224,9 +2224,10 @@ class facebook::react::EventBeat {
   public using BeatCallback = std::function<void(facebook::jsi::Runtime& runtime)>;
   public using Factory = std::function<std::unique_ptr<facebook::react::EventBeat>(std::shared_ptr<facebook::react::EventBeat::OwnerBox> ownerBox)>;
   public virtual void request() const;
-  public virtual void requestSynchronous() const;
+  public virtual void requestSynchronous(std::optional<facebook::react::Tag> tag) const;
   public virtual ~EventBeat() = default;
   public void induce() const;
+  public void requestSynchronous() const;
   public void setBeatCallback(facebook::react::EventBeat::BeatCallback beatCallback);
 }
 
@@ -2263,6 +2264,7 @@ class facebook::react::EventEmitter {
   public static facebook::react::ValueFactory defaultPayloadFactory();
   public static std::mutex& DispatchMutex();
   public static std::string normalizeEventType(std::string type);
+  public std::optional<facebook::react::Tag> getTag() const;
   public using Shared = std::shared_ptr<facebook::react::EventEmitter>;
   public virtual ~EventEmitter() = default;
   public void dispatchEvent(std::string type, const facebook::react::ValueFactory& payloadFactory = facebook::react::EventEmitter::defaultPayloadFactory(), facebook::react::RawEvent::Category category = facebook::react::RawEvent::Category::Unspecified) const;

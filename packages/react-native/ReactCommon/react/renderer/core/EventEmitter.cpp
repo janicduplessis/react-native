@@ -229,6 +229,13 @@ void EventEmitter::setEnabled(bool enabled) {
   }
 }
 
+std::optional<Tag> EventEmitter::getTag() const {
+  if (eventTarget_ != nullptr) {
+    return eventTarget_->getTag();
+  }
+  return std::nullopt;
+}
+
 void EventEmitter::setShadowNodeFamily(
     std::weak_ptr<const ShadowNodeFamily> shadowNodeFamily) {
   shadowNodeFamily_ = std::move(shadowNodeFamily);

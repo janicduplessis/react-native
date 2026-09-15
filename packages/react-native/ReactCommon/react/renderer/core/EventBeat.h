@@ -7,6 +7,8 @@
 
 #pragma once
 
+#include <optional>
+#include <react/renderer/core/ReactPrimitives.h>
 #include <atomic>
 #include <functional>
 #include <memory>
@@ -109,7 +111,17 @@ class EventBeat {
    *                            Both JS and UI thread are
    *                            blocked.
    */
-  virtual void requestSynchronous() const;
+  /*
+   * The view the synchronous request originates from, when known, lets
+   * platform implementations schedule an induce where that view renders.
+   * Without it the induce follows the platform's ordinary beat timing.
+   */
+  virtual void requestSynchronous(std::optional<Tag> tag) const;
+
+  /*
+   * Convenience for requesters with no view attribution.
+   */
+  void requestSynchronous() const;
 
   /*
    * Induces the next beat to happen as soon as possible.

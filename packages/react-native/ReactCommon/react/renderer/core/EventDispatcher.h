@@ -7,6 +7,8 @@
 
 #pragma once
 
+#include <optional>
+#include <react/renderer/core/ReactPrimitives.h>
 #include <react/renderer/core/EventBeat.h>
 #include <react/renderer/core/EventListener.h>
 #include <react/renderer/core/EventLogger.h>
@@ -44,7 +46,7 @@ class EventDispatcher {
   /*
    * Experimental API exposed to support EventEmitter::experimental_flushSync.
    */
-  void experimental_flushSync() const;
+  void experimental_flushSync(std::optional<Tag> tag) const;
 
   /*
    * Dispatches a raw event with asynchronous batched priority. Before the

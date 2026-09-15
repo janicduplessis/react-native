@@ -26,6 +26,10 @@ void EventBeat::request() const {
 }
 
 void EventBeat::requestSynchronous() const {
+  requestSynchronous(std::nullopt);
+}
+
+void EventBeat::requestSynchronous(std::optional<Tag> /*tag*/) const {
   react_native_assert(
       beatCallback_ &&
       "Unexpected state: EventBeat::setBeatCallback was not called before EventBeat::requestSynchronous.");
