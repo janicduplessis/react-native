@@ -132,10 +132,6 @@ class EventBeat {
   /*
    * Induces the next beat to happen as soon as possible.
    * Receiver might ignore the call if a beat was not requested.
-   *
-   * Called by platform implementations once per frame, and additionally
-   * right after a synchronous request to process the queue at the call
-   * site instead of at the next frame boundary.
    */
   void induce() const;
 
