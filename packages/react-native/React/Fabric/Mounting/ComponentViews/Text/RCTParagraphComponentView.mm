@@ -137,7 +137,6 @@ using namespace facebook::react;
 {
   _textView.state = std::static_pointer_cast<const ParagraphShadowNode::ConcreteState>(state);
   [_textView setNeedsDisplay];
-  [self setNeedsLayout];
 
   // If the attributed string has changed, we need to notify the accessibility system that something changed,
   // otherwise it may hold on to stale values (this happens most often when an element is updated async)
@@ -158,9 +157,18 @@ using namespace facebook::react;
   // re-applying individual sub-values which weren't changed.
   [super updateLayoutMetrics:layoutMetrics oldLayoutMetrics:_layoutMetrics];
   _textView.layoutMetrics = _layoutMetrics;
-  _textLayoutFrame = RCTCGRectFromRect(_layoutMetrics.getContentFrame());
   [_textView setNeedsDisplay];
-  [self setNeedsLayout];
+}
+
+- (void)finalizeUpdates:(RNComponentViewUpdateMask)updateMask
+{
+  [super finalizeUpdates:updateMask];
+  // Computed here rather than in `layoutSubviews`: a mount can run inside Core
+  // Animation's display phase, after this transaction's layout pass, and the
+  // text view would then draw with the previous frame.
+  if (updateMask & (RNComponentViewUpdateMaskState | RNComponentViewUpdateMaskLayoutMetrics)) {
+    [self _updateTextViewFrame];
+  }
 }
 
 - (void)prepareForRecycle
@@ -170,10 +178,8 @@ using namespace facebook::react;
   _accessibilityProvider = nil;
 }
 
-- (void)layoutSubviews
+- (void)_updateTextViewFrame
 {
-  [super layoutSubviews];
-
   CGRect textViewFrame = self.bounds;
   CGRect drawingFrame = RCTCGRectFromRect(_layoutMetrics.getContentFrame());
 
