@@ -313,14 +313,14 @@ RCT_EXPORT_MODULE()
           return;
         }
         [items addObject:data];
-      } else if (message != nullptr) {
+      } else if (message != nullptr && !URL.fileURL) {
         // On Copy, UIKit writes each activity item to its own pasteboard item, and a plain-text
         // paste (including through Universal Clipboard) only reads the first one.
-        items[0] = [[RCTShareActivityItemSource alloc] initWithItem:message pasteboardItem:nil subject:subject];
         NSString *pasteboardText = [NSString stringWithFormat:@"%@ %@", message, URL.absoluteString];
-        [items addObject:[[RCTShareActivityItemSource alloc] initWithItem:URL
-                                                           pasteboardItem:pasteboardText
-                                                                  subject:subject]];
+        items[0] = [[RCTShareActivityItemSource alloc] initWithItem:message
+                                                     pasteboardItem:pasteboardText
+                                                            subject:subject];
+        [items addObject:[[RCTShareActivityItemSource alloc] initWithItem:URL pasteboardItem:nil subject:subject]];
       } else {
         [items addObject:URL];
       }
