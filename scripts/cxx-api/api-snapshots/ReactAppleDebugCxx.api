@@ -17,11 +17,6 @@ category RCTBridge(RCTImageLoader) {
   public @property (assign, readonly) RCTImageLoader* imageLoader;
 }
 
-category RCTBridge(RCTSurfacePresenterStub) {
-  public virtual id<RCTSurfacePresenterStub> surfacePresenter();
-  public virtual void setSurfacePresenter:(id<RCTSurfacePresenterStub> presenter);
-}
-
 category RCTBridge(RCTUIManager) {
   public @property (assign, readonly) RCTUIManager* uiManager;
 }
